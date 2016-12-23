@@ -1,0 +1,695 @@
+/*
+First define the basic page style
+*/
+
+html
+	{
+	}
+
+body
+	{
+	background-color: #cccccc;
+	background-image: url('/images/background.gif');
+	margin: 0px;
+	overflow: hidden;
+	font-family:sans-serif, Helvetica, Tahoma, Verdana, Arial;
+	font-size: 12px;
+	}
+
+form
+	{
+	margin: 0px;
+	font-family:sans-serif, Helvetica, Tahoma, Verdana, Arial;
+	font-size: 11px;
+	}
+input
+        {
+        outline: none;
+        }
+input[type="text"]
+	{
+	border: solid 1px #fff;
+	border-bottom: dotted 1px #bbb;
+	background-color: #f9f9f9;
+	font-family:sans-serif, Helvetica, Tahoma, Verdana, Arial;
+	font-size: 11px;
+	}
+input[type="text"]:focus
+	{
+	border: solid 1px #bbb;
+	background-color: #ffffff;
+	}
+input[type="password"]
+	{
+	border: solid 1px #fff;
+	border-bottom: dotted 1px #bbb;
+	background-color: #f9f9f9;
+	font-family:sans-serif, Helvetica, Tahoma, Verdana, Arial;
+	font-size: 11px;
+	}
+input[type="password"]:focus
+	{
+	border: solid 1px #bbb;
+	background-color: #ffffff;
+	}
+input[type="button"]
+	{
+	border: solid 1px #bbb;
+	background-image: url('/images/button_bg.gif');
+	background-repeat: repeat-x;
+	height: 22px;
+	font-family:sans-serif, Helvetica, Tahoma, Verdana, Arial;
+	font-size: 11px;
+	font-weight: bold;
+	}
+input[type="button"]:hover
+	{
+	border: solid 1px #888;
+	background-image: url('/images/button_bg_on.gif');
+	background-repeat: repeat-x;
+	}
+input[type="submit"]
+	{
+	border: solid 1px #bbb;
+	background-image: url('/images/button_bg.gif');
+	background-repeat: repeat-x;
+	height: 22px;
+	font-family:sans-serif, Helvetica, Tahoma, Verdana, Arial;
+	font-size: 11px;
+	font-weight: bold;
+	}
+input[type="submit"]:hover
+	{
+	border: solid 1px #888;
+	background-image: url('/images/button_bg_on.gif');
+	background-repeat: repeat-x;
+	}
+input[type="reset"]
+	{
+	border: solid 1px #bbb;
+	background-image: url('/images/button_bg.gif');
+	background-repeat: repeat-x;
+	height: 22px;
+	font-family:sans-serif, Helvetica, Tahoma, Verdana, Arial;
+	font-size: 11px;
+	font-weight: bold;
+	}
+input[type="reset"]:hover
+	{
+	border: solid 1px #888;
+	background-image: url('/images/button_bg_on.gif');
+	background-repeat: repeat-x;
+	}
+
+select
+	{
+	border: solid 1px #bbb;
+	background-color: #f9f9f9;
+	font-family:sans-serif, Helvetica, Tahoma, Verdana, Arial;
+	font-size: 11px;
+	}
+
+a:link
+	{
+	color: #273d93;
+	/* color: #fc6c6f; */
+	text-decoration: underline;
+	}
+a:visited
+	{
+	color: #273d93;
+	text-decoration: underline;
+	}
+a:hover
+	{
+	color: #FF0000;
+	text-decoration: underline;
+	}
+a:active
+	{
+	color: #000000;
+	text-decoration: underline;
+	}
+
+a.tbTextSmall:link
+	{
+	font-weight:bold;
+	color: #273d93;
+	text-decoration: none;
+	}
+a.tbTextSmall:visited
+	{
+	font-weight:bold;
+	color: #273d93;
+	text-decoration: none;
+	}
+a.tbTextSmall:hover
+	{
+	font-weight:bold;
+	color: #b00;
+	text-decoration: none;
+	}
+a.tbTextSmall:active
+	{
+	font-weight:bold;
+	color: #00d;
+	text-decoration: none;
+	}
+
+/*
+Definition of the text formats
+*/
+
+.normalText
+	{
+	font-weight:normal;
+	font-size:12px;
+	color:#464646;
+	}
+
+.normalTextSmall
+	{
+	font-weight:normal;
+	font-size:11px;
+	color:#464646;
+	}
+
+.normalTextBig
+	{
+	font-weight:normal;
+	font-size:14px;
+	color:#464646;
+	}
+
+.boldText
+	{
+	font-weight:bold;
+	font-size:12px;
+	color:#464646;
+	}
+
+.boldTextBig
+	{
+	font-weight:bold;
+	font-size:14px;
+	color:#464646;
+	}
+
+.errorText
+	{
+	font-weight:bold;
+	color:#bb0000;
+	}
+
+.boldTextSmall
+	{
+	font-weight:bold;
+	font-size:11px;
+	color:#464646;
+	}
+
+.selectedDocOutline
+	{
+	clear: left;
+	width: 62px;
+	height: 91px;
+	border: solid 1px #273d93;
+	}
+
+.selectedDoc
+	{
+	clear: left;
+	width: 64px;
+	height: 3px;
+	background-color: #273d93;
+	margin-top: 1px;
+	}
+
+.copyright
+	{
+	font-weight:bold;
+	font-size:11px;
+	color:#555555;
+	}
+
+
+/*
+Definition of the form elements
+*/
+
+.normalForm
+	{
+	margin: 0px;
+	}
+	
+.normalTextField
+	{
+	width: 130px;
+	height: 19px;
+	border: solid 1px #464646;
+	font-weight:bold;
+	font-size:11px;
+	color:#888888;
+	}
+
+
+/*
+Definition of the text DIVs
+*/
+.scrollingContainer
+	{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	/* padding-top: 40px; */
+	}
+
+.mainContainer
+	{
+	width: 100%;
+	height: 100%;
+	z-index: -1; 
+	}
+	
+.subContainer
+	{
+	width: 970px;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 5px;
+    	}
+
+.subHeader
+	{
+	clear: left;
+	width: 970px;
+	height: 88px;
+	background-image: url('/images/header.jpg');
+	background-repeat: repeat;
+	}
+
+.suiteMember
+	{
+	clear: left;
+	width: 970px;
+	height: 18px;
+	padding-left: 743px;
+	background-image: url('/images/middle.jpg');
+	background-repeat: repeat-y;
+	font-weight:bold;
+	font-size:11px;
+	color:#464646;
+	}
+ 
+.pageTitle
+ 	{
+ 	clear: left;
+	width: auto;
+	height: 30px;
+	padding: 0px;
+	font-weight:bold;
+	font-size: 26px;
+	color:#464646;
+	}
+ 	
+.subFooter
+	{
+	clear: left;
+	width: 970px;
+	height: 88px;
+	background-image: url('/images/footer.jpg');
+	background-repeat: repeat;
+	}
+		
+.subContents
+	{
+	clear: left;
+	background-color: #ffffff;
+	background-image: url('/images/middle.jpg');
+	background-repeat: repeat-y;
+	padding-left: 22px;
+	padding-right: 20px;
+	}
+
+.fieldTitle
+	{
+	clear: left;
+	float: left;
+	width: 145px;
+	height: 22px;
+	padding-top: 3px;
+	font-weight:bold;
+	font-size:12px;
+	text-align: right;
+	}
+
+.fieldSelf
+	{
+	float: left;
+	width: 100px;
+	height: 16px;
+	text-align: left;
+	}
+
+.overviewHeader
+	{
+	clear: left;
+	width: auto;
+	height: 20px;
+	background-image: url('/images/title_bg.gif');
+	background-repeat: repeat-x;
+	border: solid 1px #ccc;
+	font-weight: bold;
+	font-size: 11px;
+	text-align: left;
+	}
+.overviewList
+	{
+	clear: left;
+	width: auto;
+	height: auto;
+	border-bottom: dotted 1px #ccc;
+	background-color: #fff;
+	border-left: solid 1px #ccc;
+	border-right: solid 1px #ccc;
+	font-size: 11px;
+	text-align: left;
+	}
+	
+.createNew
+	{
+	text-align: right;
+	font-size: 11px;
+	}
+
+.toolbarCellLeft
+	{
+	float: left;
+	width: auto;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 5px;
+	margin-top: 2px;
+	}
+
+.toolbarCellRight
+	{
+	float: right;
+	width: auto;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 5px;
+	margin-top: 2px;
+	}
+
+.toolbarCell1
+	{
+	clear: left;
+	float: left;
+	width: auto;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 5px;
+	margin-top: 2px;
+	}
+
+.tbDividerLeft
+	{
+	float: left;
+	width: 1px;
+	height: 29px;
+	margin-top: 0px;
+	background-color: #aaa;
+	}
+.tbDividerLeftShadow
+	{
+	float: left;
+	width: 1px;
+	height: 29px;
+	margin-top: 0px;
+	background-color: #ddd;
+	}
+
+.tbDividerRight
+	{
+	float: right;
+	width: 1px;
+	height: 29px;
+	margin-top: 0px;
+	background-color: #aaa;
+	}
+.tbDividerRightShadow
+	{
+	float: right;
+	width: 1px;
+	height: 29px;
+	margin-top: 0px;
+	background-color: #ddd;
+	}
+
+.tbMenuItems
+	{
+	font-weight: bold;
+	clear: left;
+	width: auto;
+	height: 19px;
+	border-bottom: solid 1px #eee;
+	padding: 5px 0 2px 25px;
+	cursor: auto;
+	background: none;
+	color: #273d93;
+	}
+.tbMenuItems:hover
+	{
+	cursor: pointer;
+	background-color: #555;
+	color: #fff;
+	}
+
+.tbMenuItemsWithIcon
+	{
+	font-weight: bold;
+	clear: left;
+	width: auto;
+	height: 19px;
+	border-bottom: solid 1px #eee;
+	padding: 5px 0 2px 25px;
+	cursor: auto;
+	background-image: url('/images/home_small.png');
+	background-repeat: no-repeat;
+	background-color: none;
+	color: #273d93;
+	}
+.tbMenuItemsWithIcon:hover
+	{
+	cursor: pointer;
+	background-color: #555;
+	color: #fff;
+	}
+
+.listHeaders
+	{
+	clear: left;
+	width: 950px;
+	height: 21px;
+	background-color: #ccc;
+	background-image: url('/images/header_bg.gif');
+	background-repeat: repeat-x;
+	}
+.listRowsLeftCB
+	{
+	clear: left;
+	float: left;
+	width: 30px;
+	text-align: center;
+	padding-top: 1px;
+	}	
+.listRowsLeft
+	{
+	clear: left;
+	float: left;
+	text-align: center;
+	padding-top: 1px;
+	}	
+.listRowsMain1
+	{
+	clear: left;
+	width: 950px;
+	height: auto;
+	cursor: auto;
+	background-color: #f5f5f5;
+	}
+.listRowsMain1:hover
+	{
+	background-color: #cce;
+	cursor: default;
+	}
+.listRowsMain2
+	{
+	clear: left;
+	width: 950px;
+	height: auto;
+	cursor: auto;
+	background-color: #ededed;
+	}
+.listRowsMain2:hover
+	{
+	background-color: #cce;
+	cursor: default;
+	}
+.listRows
+	{
+	float: left;
+	padding-left: 2px; 
+	padding-top: 2px;
+	}
+.listColDivider
+	{
+	float: left;
+	width: 1px;
+	height: auto;
+	min-height: 21px;
+	margin-bottom: 0px;
+	background-color: #fff;
+	}	
+
+.liveChat
+	{
+	float: right;
+	padding-right: 5px;
+	padding-top: 25px;
+	color: #f00;
+	font-weight: bold;
+	cursor: auto;
+	}
+.liveChat:hover
+	{
+	cursor: pointer;
+	color: #b00;
+	}
+
+.buff1
+	{
+	clear: left;
+	width: 1px;
+	height: 1px;
+	}
+	
+.buff2
+	{
+	clear: left;
+	width: 1px;
+	height: 2px;
+	}
+	
+.buff3
+	{
+	clear: left;
+	width: 1px;
+	height: 3px;
+	}
+	
+.buff5
+	{
+	clear: left;
+	width: 1px;
+	height: 5px;
+	}
+
+.buff10
+	{
+	clear: left;
+	width: 1px;
+	height: 10px;
+	}
+
+/*
+
+fixes 
+line break in submit buttons:  &#10; 
+overflow: visible; IE fix for 
+
+*/
+.infiniteCarousel {
+  width: 445px;
+  position: absolute;
+}
+
+.infiniteCarousel .wrapper {
+  width: 430px; /* .infiniteCarousel width - (.wrapper margin-left + .wrapper margin-right) */
+  overflow: auto;
+  height: 105px;
+  margin: 0 40px;
+  position: absolute;
+  top: 0;
+}
+
+.infiniteCarousel .wrapper ul {
+  width: 1px; /* single item * n */
+  list-style-image:none;
+  list-style-position:outside;
+  list-style-type:none;
+  margin:0;
+  padding:0;
+  position: absolute;
+  top: 0;
+}
+
+.infiniteCarousel ul li {
+  display:block;
+  float:left;
+  padding: 10px;
+  height: 85px;
+  width: 190px;
+}
+
+.infiniteCarousel ul li img {
+    -webkit-transition: border-color 400ms;
+}
+
+.infiniteCarousel ul:hover li img {
+  border-color: #000;
+}
+
+.infiniteCarousel ul:hover li:hover img {
+  border-color: #333;
+}
+
+.infiniteCarousel ul li a img {
+  display:block;
+}
+
+.infiniteCarousel .arrow {
+  display: block;
+  height: 36px;
+  width: 37px;
+  background: url(images/arrow.png) no-repeat 0 0;
+  text-indent: -999px;
+  position: absolute;
+  top: 25px;
+  cursor: pointer;
+  outline: 0;
+}
+
+.infiniteCarousel .forward {
+  background-position: 0 0;
+  right: 0;
+}
+
+.infiniteCarousel .back {
+  background-position: 0 -72px;
+  left: 0;
+}
+
+.infiniteCarousel .forward:hover {
+  background-position: 0 -36px;
+}
+
+.infiniteCarousel .back:hover {
+  background-position: 0 -108px;
+}
