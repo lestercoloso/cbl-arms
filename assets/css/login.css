@@ -46,3 +46,11 @@
 		width: 120px;
 		border: solid black 1px;
 	} 
+
+	.loader{
+		display: none;
+		width: 100%;
+		text-align: center;
+		position: relative;
+		top: 20%;
+	}

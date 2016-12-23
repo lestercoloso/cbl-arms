@@ -1,4 +1,15 @@
+
+
+
+toastr.options = {
+  "preventDuplicates": true,
+  "positionClass": "toast-top-center"
+}
+
+
+
 $(document).ready(function(){
+
 	var usr;
 	var pss;
 	$( document ).tooltip({
@@ -20,32 +31,58 @@ $(document).ready(function(){
 
 	};
 
+	function relocate(){
+
+		window.location="homepage.php";
+	}
+
 	var subValidation = function(){
-
+							
 		$('#sub').bind({
-			click:function(){
+			click:function(e){
+			e.preventDefault();
 			//Do some validation here for txtFields
-			$.post('login.php',{usr:$('#usrname').val(),pss:$('#usrpass').val()},function(data){
+			var usr = $('#usrname').val();
+			var pas = $('#usrpass').val();
+			var error = '';
+				if(usr.trim()==''){
+					error +="Username must not be empty!<br>";
+				}
+				if(pas.trim()==''){
+					error +="Password must not be empty!";
+				}
 
-				
-				var a; 
-				$.each(data,function(index,value){
-					a = data.feedstatus;
-				});
-					if(a==0){
-						alert('User Account does not exist.');
-					}else if(a==1){
-						alert("The Password you entered was incorrect.");
-					}else if(a==2){
-						window.location="homepage.php";
-					}else{
-						alert('Invalid username or password.');
-					}
+				if(error!=''){
+					toastr["error"](error);
+				}else{
+					$('.loader').show();
+					$('#loginForm').hide();
+					$.post('login.php',{usr:usr,pss:pas},function(data){
+						var a; 
+						$.each(data,function(index,value){
+							a = data.feedstatus;
+						});
+							if(a==0){
+								toastr["error"]("User Account does not exist.");
+							}else if(a==1){
+								toastr["error"]("The Password you entered was incorrect.");
+							}else if(a==2){									
+									toastr["success"]("successfully logged in!");
+									setTimeout(relocate, 2000);
+							}else{
+								toastr["error"]("Invalid username or password.");
+							}
+							$('.loader').hide();
+							$('#loginForm').show();
+					},"json");
 
-			},"json");
+				}
+
+
 			},
 			mouseenter:function(){
 				$(this).css({"cursor":"pointer"});
 			}
 		});
 	}
+
