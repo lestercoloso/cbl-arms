@@ -35,7 +35,7 @@ class Login {
 	public function validateData(){
 
 			$this->usrpass = md5($this->usrpass);
-			$this->connection = new MySQLi("localhost", "root", "121586", "cblarms");
+			$this->connection = new MySQLi("localhost", "root", "", "cblarms");
 			$this->valRet= array();
 			
 			//validate user and password and  then Get USER PROFILE + Save on Session.

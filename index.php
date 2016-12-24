@@ -1,46 +1,295 @@
-<head>
-<link rel="stylesheet" href="./libraries/styles.css" type="text/css" />
-<link rel="stylesheet" href="/bower_components/jquery-ui/themes/ui-lightness/jquery-ui.css" />
-<link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css" />
-<link rel="stylesheet" href="/bower_components/toastr/toastr.min.css" />
-<link rel="stylesheet" href="/assets/css/login.css" type="text/css" />
-</head>
-<body style="background-color: #cccccc;">
-	<div id="mainBody">
-		<div id="subBody">
-			<div id="logBody">
-				<img src="./img/login_header.png" style="width:inherit;">
+<?php
 
-				<div class="loader">
-					<i class="fa fa-spinner fa-spin" style="font-size:24px"></i><em>Loading...</em>
-				</div>
+session_start();
+$_SESSION['page']="home";
 
-				<form id="loginForm">
-					<div style="padding-top:20px;padding-left: 20%">
-						<div><span style="	padding-left: 20px;
-    										padding-right: 10px;"> User ID</span><input class="txtField" id="usrname" name="login" type="text"></div>
-						<div style=" 		padding-top: 5px;"><span style="	padding-right: 17px;"> Password</span><input class="txtField" id="usrpass" name="pass" type="password" ></div>
-						<div><button id="sub" style="border-color: white;
-    										background: white;
-    										margin-left: 130px;
-    										border: none;"><a><img src="./img/button_login.gif"></a></button></div>
-					</div>
-					<p style="padding-left: 20%;"><a href="#" id="loginFormForgotPassword" title="Please contact CBL System Administrator for Change in Password.">Forgot Password?</a>
-				</form>
-				
-			</div> 
-			<p style="margin-left:12px;margin-top:110px;font-weight:bolder; bottom:85; left:0; z-index: 50; font-size:11px; color:black;">© Copyright 2010 - 2016 CBL Freight Forwarder and Courier Express Int'l, Inc. All rights reserved.</p>
-			<img id="footimg" src="./img/login_footer.jpg">
-		</div>
+
+require_once('header.php');
+require_once('db_connect.php');
+
+
+class Homepage extends Database{
+
+
+	public $_conn;
+	public $name;
+	public $time;
+
+	public function __construct(){
 		
+	//	$this->_conn=$this->getConnection();
 
+	}
+
+	public function getTime(){
+
+		$this->time = date("Y-m-d");
+		return $this->time;
+	}
+
+}
+$homepage = new Homepage();
+?>
+
+
+
+<head>
+
+<style type="text/css">
+
+	.con{
+
+    border: solid #7d7d7d 8px;
+    width: 205px;
+    height: 207px;
+    float: left;
+    margin: 5px;
+    border-radius: 29px;
+    color: #7d7d7d;
+    cursor: pointer;
+
+	}
+	.con2{
+
+    border: solid #7d7d7d 8px;
+    width: 205px;
+    height: 207px;
+    float: left;
+    margin: 5px;
+    border-radius: 29px;
+    color: #7d7d7d;
+    cursor: pointer;
+
+	}
+	.con3{
+
+    border: solid #7d7d7d 8px;
+    width: 205px;
+    height: 207px;
+    float: left;
+    margin: 50px;
+    border-radius: 29px;
+    color: #7d7d7d;
+    cursor: pointer;
+
+	}	
+	
+	#img{
+		background-color: white;
+	}
+	#cellsID{
+    		margin-top: 5%;
+	}
+	#cellsID2{
+
+			margin-left: 3%;
+	}
+
+	
+
+
+</style>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+	
+
+	Date.prototype.addMinutes = function(minutes) {
+    var copiedDate = new Date(this.getTime());
+    return new Date(copiedDate.getTime() + minutes * 60000);
+}
+	var a = new Date();
+	var year = a.getFullYear();
+	var day = a.getDate();
+	var month = a.getMonth();
+	var fullthis= '2017/'+month+'/'+day;
+
+
+
+	fetchCells();
+
+	$('#view1').on('click',function(){
+
+		window.location.assign('view1.php');
+	});
+
+	$('#view2').on('click',function(){
+
+		window.location.assign('inbound.php');
+	});
+		$('#view3').on('click',function(){
+
+		window.location.assign('outbound.php');
+	});
+
+
+
+
+	$( ".onHover" )
+  		.on( "mouseenter", function() {
+    $( this ).css({
+      "background-color": "#cc0000",
+      "font-weight": "bolder",
+      "color": "white"
+    });
+  })
+  .on( "mouseleave", function() {
+    var styles = {
+      backgroundColor : "",
+      fontWeight: "",
+      color: "#7d7d7d"
+    };
+    $( this ).css( styles );
+  });
+
+});
+$(function(){
+
+	
+
+	$("#view-dialog").dialog({
+    modal: true,
+    autoOpen: false,
+    draggable: false,
+    resizable: false,
+    show: {
+    		effect:'blind'
+    },
+    hide: {
+    		effect:'blind'
+    },
+    width: 1100,
+    height: 500,
+    buttons: {
+       
+        "Close Dialog": function() {
+            $(this).dialog("close");
+        }
+
+    }
+});
+
+
+	/*$('#view1').click(function(){
+
+		window.location.replace('view1.php');
+	});*/
+
+})
+	
+
+var fetchCells = function(){
+
+		$.post('fetchCells.php',function(data){
+
+			var a = 1;
+			$.each(data,function(index,value){
+
+				var img;
+				
+				if (value.Selimg=="Reports") {
+					img = "./img/"+value.Selimg+".jpg";
+				}else{img = "./img/"+value.Selimg+".png";}
+
+				$("#cellsID2").append("<div id="+value.Selimg+" class='con2' style='background-image: url("+img+");background-size: 110px 112px;background-repeat: no-repeat;background-position: center 25px;'><h3 style='text-align: -webkit-center;margin-top: 77%;font-weight: 700;'>"+value.SelName+"</h3>");
+				$("#cellsID2").append("</div>");
+
+
+
+			$('#'+value.Selimg).click(function(){
+
+					if (value.Selimg=="Warehouse") {
+						$("#view-dialog").dialog("open");
+					}else if(value.Selimg=="Customer_Info"){
+
+						location.href="customerInfo.php";
+
+					}else{
+						alert("Not Warehouse");
+					};
+				});
+			}) 
+		},"json");
+	}
+</script>
+
+</head>
+
+
+<body onResize="updateToolbarPos();">
+
+
+	<div class="scrollingContainer">
+	<div class="subContainer">
+		<div class="buff10"><!-- --></div>
+		<div class="buff10"><!-- --></div>
+		<div class="buff10"><!-- --></div>
+		<div class="buff10"><!-- --></div>
+		<div style="clear: left; float: left;"><a href="homepage.php"><img src="./img/CBL.png" alt="" title="" border=0></a></div>
+ 		<div style="clear: left; padding-left: 5px; height: 30px;" class="normalTextSmall">
+
+ 			Welcome!
+			<br>
+ 			<div style="clear: left; float: left; width: 250px;">
+			System Date/Time: <span id="systemTimeContent"><? echo $system_time ;?></span>
+			</div>
+			<div style="float: left;">
+			
+			Your session will expire in <span id="timerContent"></span>
+			
+			</div>
+ 		</div>
+
+ 		<div style="clear: left; width: 970px; height: 550px; background-color: #fff; border: solid 1px #999;">
+
+ 			<div id="cellsID"></div>
+ 			<div id="cellsID2"></div>
+ 			<!--<br style="clear:left;">-->
+
+ 		</div>
+
+
+
+	<div id="view-dialog" title="Pick view">
+    <div style="margin-left: 23px;">
+
+    	<div id="viewPoints" style="margin-left: 29px;
+    								margin-top: 50px;">
+    		<div id="view1" class='con3' style='background-size: 110px 112px;background-repeat: no-repeat;background-position: center 25px;'><h2 style='text-align: -webkit-center;margin-top: 77%;font-weight: 700;'>WAREHOUSE</h2></div>
+    		<div id="view2" class='con3' style='background-size: 110px 112px;background-repeat: no-repeat;background-position: center 25px;'><h2 style='text-align: -webkit-center;margin-top: 77%;font-weight: 700;'>INBOUND SHIPMENT</h2></div>
+    		<div id="view3" class='con3' style='background-size: 110px 112px;background-repeat: no-repeat;background-position: center 25px;'><h2 style='text-align: -webkit-center;margin-top: 77%;font-weight: 700;'>OUTBOUND SHIPMENT</h2></div>
+
+    	</div>
+    	
+
+    </div>
 	</div>
 
 
-<script src="/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="/bower_components/jquery-ui/jquery-ui.min.js"></script>
-<script src="/bower_components/toastr/toastr.min.js"></script>
-<script src="/assets/js/login.js"></script>
-
+ 	   		<div style="clear: both; width: 10px; height: 1px;"></div>
+ 		</div>
+   		<div class="buff10"><!-- --></div>
+   		<div class="buff10"><!-- --></div>
+		<?
+		// get the copyright text from the database
+		
+		$endtime = microtime();
+		$endarray = explode(" ", $endtime);
+		$endtime = $endarray[1] + $endarray[0];
+		$totaltime = $endtime - $starttime;
+		$totaltime = round($totaltime,5);
+		?>
+		<div style="clear: both; text-align: center;" class="normalTextSmall">
+		Page loaded in <? echo $totaltime ?> seconds.<br />
+		© Copyright 2010 - 2016 CBL Freight Forwarder and Courier Express Int'l, Inc. All rights reserved.<br />
+		
+		Powered by <!-- <a href="http://www.entuitivesolutions.com" target="_blank"> -->Komodo`Alil<!-- </a> -->
+		</div>
+   		<div class="buff10"><!-- --></div>
+	</div>
+</div>
 
 </body>

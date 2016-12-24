@@ -1,4 +1,5 @@
 <?php
+
 error_reporting("E_ALL");
 error_reporting( E_ERROR );
 
@@ -16,7 +17,17 @@ $systime_hour = date ("H");
 $systime_minute = date ("i");
 $systime_second = date ("s");
 session_start();
- $usr_type = $_SESSION['profilestats'];
+
+
+//check if logged-in
+ if(empty($_SESSION['profilestats'])){
+ 	header('Location: user_login.php');
+ }
+
+
+
+
+ $usr_type 		= $_SESSION['profilestats'];
  $fname			= $_SESSION['accfname'];
  $mname			= $_SESSION['accmname'];
  $lname			= $_SESSION['acclname'];
@@ -226,7 +237,7 @@ document.write('		<div class="toolbarCellLeft" title="" onMouseOver="showTools(\
 document.write('		<div class="tbDividerLeft"><!-- --></div>');
 document.write('		<div class="tbDividerLeftShadow"><!-- --></div>');
 
-document.write('		<div class="toolbarCellRight" title="Logout from the SM Trade Portal"><a href="index.php" class="tbTextSmall" style="color: #b00;">Logout</a></div>');
+document.write('		<div class="toolbarCellRight" title="Logout from the SM Trade Portal"><a href="logout.php" class="tbTextSmall" style="color: #b00;">Logout</a></div>');
 document.write('		<div class="tbDividerRightShadow"><!-- --></div>');
 document.write('		<div class="tbDividerRight"><!-- --></div>');
 document.write('	</div>');

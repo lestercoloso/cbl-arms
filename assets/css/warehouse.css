@@ -1,0 +1,126 @@
+	#mainBody{
+		width: 1000px;
+		height: 700px;
+		background-color: white;
+		margin: auto;
+		margin-top: 35px;
+		box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		padding-top: 20px;
+	}
+
+	.list{
+		border:solid 1px;
+	}
+
+	.items .ui-selected {
+	    background: red;
+	    color: white;
+	    font-weight: bold;
+	}
+ 
+	.items {
+	    list-style-type: none;
+	    margin-left: 10px;
+	    padding: 0;
+	    width: 100px;
+	    float: left;
+	}
+ 
+ 
+  	#blockA 
+  	{ 
+  		width: 500px; 
+  		height: 200px;
+  		border: 
+  		solid 1px; 
+  	}
+  	.ui-resizable-helper { 
+  		border: .2px dotted #b00; 
+  	}
+
+  	#blockB { 
+  		width: 500px; 
+  		height: 300px;
+  		border: solid 1px; 
+  	}
+
+  	#sortable { 
+  		list-style-type: none; 
+  		margin: 0; padding: 0; 
+  		width: 450px; 
+  	}
+
+  	#sortable li { 
+  		margin: 3px 3px 3px 0; 
+  		padding: 1px; 
+  		float: left; 
+  		width: 100px; 
+  		height: 90px; 
+  		font-size: 4em; 
+  		text-align: center; 
+  	}
+
+  	#sampleA{
+	    height: 98%;
+  	}
+
+  	.button-class {
+  		width: 70%;
+  		margin: inherit;
+	    background-color: #cc0000; /* Green */
+	    border: none;
+	    color: white;
+	    padding: 15px 32px;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 16px;
+}
+.button-class-s {
+  		width: 40%;
+  		margin: inherit;
+	    background-color: #cc0000; /* Green */
+	    border: none;
+	    color: white;
+	    padding: 15px 32px;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 16px;
+}
+	  	.button-class1 {
+  		margin: 20px;
+	    background-color: #cc0000; /* Green */
+	    border: none;
+	    color: white;
+	    padding: 6px 30px;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 16px;
+	    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+	.ware-tab{
+		margin-top: 3%;
+		float: left;
+		width: 70%;
+		margin-left: 3%;
+		height: 80%;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+
+	.draggableDiv{
+		width:200px;
+		height:100px;
+		background: aqua;
+	}
