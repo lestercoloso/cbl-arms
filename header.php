@@ -37,6 +37,7 @@ session_start();
 ?>
 <head>
 <link rel="stylesheet" href="./libraries/styles.css" type="text/css" />
+<!-- <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" /> -->
 <script src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/blitzer/jquery-ui.css" />

@@ -25,6 +25,7 @@
     clip-path: polygon(0% 0%, 0% 0%, 70% 0%, 75% 100%, 0% 80%);
 }
 .warehouse_border {
+	margin: 20px auto;
     width: 453px;
     height: 452px;
     background: #000;

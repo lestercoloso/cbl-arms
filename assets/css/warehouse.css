@@ -124,3 +124,68 @@ input[type=text] {
 		height:100px;
 		background: aqua;
 	}
+.warehouse_container {
+	position: relative;
+	top: 3px;
+	left: 3px;
+    width: 495px;
+    height: 495px;
+    background: #fff;
+    -webkit-clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+    clip-path: polygon(0% 0%, 0% 0%, 97% 0%, 100% 100%, 0% 80%);
+}
+.warehouse_border {
+	margin: 20px auto;
+    width: 501px;
+    height: 501px;
+    background: #333;
+    -webkit-clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+    clip-path: polygon(0% 0%, 0% 0%, 97% 0%, 100% 100%, 0% 80%);
+}
+
+.warehouse_gate {
+	border: 1px solid #333;
+    width: 210px;
+    height: 130px;
+    position: absolute;
+    top: 114px;
+    left: -1px;
+}
+
+.area{
+	cursor: -webkit-zoom-in; cursor: zoom-in;
+	width: 239px;
+	height: 112px;
+	position: absolute;
+	/*border: 1px solid #333;*/
+}
+.area:hover{
+	border: 1px solid #333;
+}
+.area em{
+	margin: 5px;
+}
+.block_a{
+	top: 0px;
+	left: 0px;
+	width: 479px;
+	height: 80px
+}
+.block_b{
+    top: 114px;
+    left: 243px;
+    height: 100px;
+}
+
+.block_c{
+	top: 245px;
+	left: 243px;
+	height: 80px;
+}
+
+.freezer{
+	top: 234px;
+	left: 240px;
+	height: 132px;
+}
+
