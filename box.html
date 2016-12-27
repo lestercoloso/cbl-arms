@@ -1,0 +1,128 @@
+﻿<head>
+ <style>
+
+            .cube {
+                margin: auto;
+                position: relative;
+                height: 200px;
+                width: 200px;
+                transform-style: preserve-3d;
+                                    transition: transform 0.2s ease-in;
+            }
+
+                .cube div {
+                    position: absolute;
+                    padding: 10px;
+                    box-sizing: border-box;
+                    height: 100%;
+                    width: 100%;
+                    opacity: 0.9;
+                    background-color: #000;
+                    border: solid 1px #eee;
+                    color: #fff;
+                    font: 10px arial;
+                    transition: transform 2s;
+                }
+
+            .front {
+                transform: translateZ(100px);
+            }
+
+            .back {
+                transform: translateZ(-100px) rotateY(180deg);
+            }
+
+            .right {
+                transform: rotateY(-270deg) translateX(100px);
+                transform-origin: top right;
+            }
+
+            .left {
+                transform: rotateY(270deg) translateX(-100px);
+                transform-origin: center left;
+            }
+
+            .top {
+                transform: rotateX(-270deg) translateY(-100px);
+                transform-origin: top center;
+            }
+
+            .bottom {
+                transform: rotateX(270deg) translateY(100px);
+                transform-origin: bottom center;
+            }
+
+
+
+
+        </style>
+</head>
+
+<body>
+<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <!-- <script src="/bower_components/prefixfree/prefixfree.min.js" type="text/javascript"></script> -->
+
+
+
+
+            <div class="cube"  draggable="true">
+                <div class="front">
+                    <h2>Front side</h2>
+                </div>
+                <div class="back">
+                    <h2>Back side</h2>
+                </div>
+                <div class="top">
+                    <h2>Top side</h2>
+                </div>
+                <div class="bottom">
+                    <h2>Bottom side</h2>
+                </div>
+                <div class="left">
+                    <h2>Left side</h2>
+                </div>
+                <div class="right">
+                    <h2>Right side</h2>
+                </div>
+            </div>
+
+       
+    <script>
+var xAngle = 0, yAngle = 0;
+document.addEventListener('keydown', function(e) {
+  switch(e.keyCode) {
+
+    case 37: // left
+      yAngle -= 15;
+      break;
+
+    case 38: // up
+      xAngle += 15;
+      break;
+
+    case 39: // right
+      yAngle += 15;
+      break;
+
+    case 40: // down
+      xAngle -= 15;
+      break;
+  };
+
+  $('.cube').css({
+    "webkitTransform":"rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)" 
+    });
+  // $('.cube').style.webkitTransform = 'rotateX('+xAngle+'deg) rotateY('+yAngle+'deg)';
+
+}, false);
+
+ $( function() {
+    $( ".cube" ).draggable();
+  } );
+
+    </script>
+
+
+</body>
+</html>
