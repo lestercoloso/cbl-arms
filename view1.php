@@ -86,10 +86,14 @@ require_once('header.php');
 		</div>
 		</div>
 		</div>
-		<div id="zoom_block" title="Block"></div>
+		<div id="zoom_block" title="Block">
+			<button id="add_shelf" class="button-class-s" style="width: 135px;">Add Shelf</button>
+
+
+		</div>
 
 
 
-<script src="/assets/js/warehouse.js"></script>
+<script src="/assets/js/warehouse.js?<?php echo rand();?>"></script>
 
 </body>

@@ -2,12 +2,13 @@
  <style>
 
             .cube {
-                margin: auto;
+                /*margin: auto;*/
                 position: relative;
                 height: 200px;
                 width: 200px;
                 transform-style: preserve-3d;
-                                    transition: transform 0.2s ease-in;
+                transition: transform 0.2s ease-in;
+                float: left;
             }
 
                 .cube div {
@@ -65,28 +66,36 @@
 
 
 
+<div id="shelves" >
 
-            <div class="cube"  draggable="true">
-                <div class="front">
-                    <h2>Front side</h2>
-                </div>
-                <div class="back">
-                    <h2>Back side</h2>
-                </div>
-                <div class="top">
-                    <h2>Top side</h2>
-                </div>
-                <div class="bottom">
-                    <h2>Bottom side</h2>
-                </div>
-                <div class="left">
-                    <h2>Left side</h2>
-                </div>
-                <div class="right">
-                    <h2>Right side</h2>
-                </div>
-            </div>
+</div>
 
+<div class="cube_container" style="background: gray; height: 300px;">
+                <div class="cube"  draggable="true">
+                    <div class="front">
+                        <h2>Front side</h2>
+                    </div>
+                    <div class="back">
+                        <h2>Back side</h2>
+                    </div>
+                    <div class="top">
+                        <h2>Top side</h2>
+                    </div>
+                    <div class="bottom">
+                        <h2>Bottom side</h2>
+                    </div>
+                    <div class="left">
+                        <h2>Left side</h2>
+                    </div>
+                    <div class="right">
+                        <h2>Right side</h2>
+                    </div>
+                </div>
+
+</div>
+<div class="cube_container2" style="background: #464646; height: 300px;">
+               
+</div>
        
     <script>
 var xAngle = 0, yAngle = 0;
@@ -94,7 +103,7 @@ document.addEventListener('keydown', function(e) {
   switch(e.keyCode) {
 
     case 37: // left
-      yAngle -= 15;
+      yAngle -= 30;
       break;
 
     case 38: // up
@@ -102,7 +111,7 @@ document.addEventListener('keydown', function(e) {
       break;
 
     case 39: // right
-      yAngle += 15;
+      yAngle += 30;
       break;
 
     case 40: // down
@@ -110,15 +119,23 @@ document.addEventListener('keydown', function(e) {
       break;
   };
 
-  $('.cube').css({
+  $('.cube, .cube_container').css({
     "webkitTransform":"rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)" 
     });
   // $('.cube').style.webkitTransform = 'rotateX('+xAngle+'deg) rotateY('+yAngle+'deg)';
 
 }, false);
 
- $( function() {
-    $( ".cube" ).draggable();
+$( function() {
+    $( ".cube_container2" ).sortable({
+      revert: true
+    });
+    $( ".cube" ).draggable({
+      connectToSortable: ".cube_container2",
+      helper: "clone",
+      revert: "invalid"
+    });
+    $( "div" ).disableSelection();
   } );
 
     </script>

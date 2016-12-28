@@ -22,14 +22,14 @@ $(document).ready(function(){
 //end of alil's js
 
 function editBlock(){
+	$( "#zoom_block" ).dialog('destroy');
 	$( "#zoom_block" ).dialog({
 	      autoOpen: true,
 	      width: 850,
 	      modal: true,
 	 	  resizable: false,
 	 	  movable: false,
-	 	  draggable: false,
-	 	  close: function( event, ui ) { $( "#zoom_block" ).dialog('destroy');}
+	 	  draggable: false
 	});	
 }
 
@@ -39,3 +39,5 @@ $('.area').click(function(){
 	$( "#zoom_block" ).attr('title', title);
 	editBlock();
 });
+
+$( "#zoom_block" ).dialog({autoOpen: false});	
