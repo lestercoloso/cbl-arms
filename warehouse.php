@@ -36,15 +36,16 @@ require_once('header.php');
 				  </ul>
 				  <div id="tabs-1" style="display: none;">
 				  	<div id="tab1-div1" style="margin-top: 3%;width: 25%;float:left">
-				  		<div style="display: none;">
-				  		<button id="storView" class="button-class hide">STORAGE VIEW</button>
-				  		<button id="storView" class="button-class hide">SHELVES VIEW</button><br/><br/><br/><br/><br/><br/><br/><br/>
+				  		<div style="float: left;width: 100%;">				  		
+				  			<button id="addStorage" class="button-class">ADD STORAGE</button>
 				  		</div>
+				  		<div style="float: left;">
 				  		<label for="sbox"><b>Search Bill of Lading no.:</b></label>
 				  		<input type="text" id="sbox" name="sbox"><br/><br/>
 				  		<label for="nbox"><b>Search Customer Name:</b></label>
 				  		<input type="text" id="nbox" name="nbox">
-				  		<button id="search" class="button-class-s" style="">Search</button>
+				  		<button id="search" class="button-class" style="">Search</button>
+				  		</div>
 				  	</div>
 				  	<div id="warehouse" class="ware-tab" style="">
 
@@ -86,10 +87,9 @@ require_once('header.php');
 		</div>
 		</div>
 		</div>
-		<div id="zoom_block" title="Block">
+
+		<div id="add_storage" title="Block">
 			<button id="add_shelf" class="button-class-s" style="width: 135px;">Add Shelf</button>
-
-
 		</div>
 
 

@@ -21,11 +21,11 @@ $(document).ready(function(){
 	});
 //end of alil's js
 
-function editBlock(){
-	$( "#zoom_block" ).dialog('destroy');
-	$( "#zoom_block" ).dialog({
+function addStorage(){
+	$( "#add_storage" ).dialog('destroy');
+	$( "#add_storage" ).dialog({
 	      autoOpen: true,
-	      width: 850,
+	      width: 550,
 	      modal: true,
 	 	  resizable: false,
 	 	  movable: false,
@@ -34,10 +34,10 @@ function editBlock(){
 }
 
 
-$('.area').click(function(){
-	var title = $(this).find('em').html();
-	$( "#zoom_block" ).attr('title', title);
-	editBlock();
+$('#addStorage').click(function(){
+	// var title = $(this).find('em').html();
+	// $( "#add_storage" ).attr('title', title);
+	addStorage();
 });
 
-$( "#zoom_block" ).dialog({autoOpen: false});	
+$( "#add_storage" ).dialog({autoOpen: false});	

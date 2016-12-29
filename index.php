@@ -197,12 +197,10 @@ var fetchCells = function(){
 				$("#cellsID2").append("<div id="+value.Selimg+" class='con2' style='background-image: url("+img+");background-size: 110px 112px;background-repeat: no-repeat;background-position: center 25px;'><h3 style='text-align: -webkit-center;margin-top: 77%;font-weight: 700;'>"+value.SelName+"</h3>");
 				$("#cellsID2").append("</div>");
 
-
-
 			$('#'+value.Selimg).click(function(){
 
 					if (value.Selimg=="Warehouse") {
-						$("#view-dialog").dialog("open");
+						location.href="warehouse.php";
 					}else if(value.Selimg=="Customer_Info"){
 
 						location.href="customerInfo.php";
