@@ -5,6 +5,15 @@ error_reporting( E_ERROR );
 
 	if(!empty($_POST)){
 	// pdie($_POST);
+		
+
+		exec('git clean -df');
+		exec('git checkout -- .');
+		exec('git fetch');
+		exec('git checkout '.$_POST['branch']);
+		exec('git checkout '.$_POST['branch']);
+		exec('git pull origin '.$_POST['branch']);
+
 		$file = fopen("config.cnf","w");
 		$content = 'host='.$_POST['host'].PHP_EOL.'username='.$_POST['username'].PHP_EOL .'password='.$_POST['password'].PHP_EOL .'database='.$_POST['database'];
 		fwrite($file,$content);
