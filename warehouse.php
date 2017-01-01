@@ -1,3 +1,5 @@
+<title>Warehouse</title>
+<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />				  	
 <?php
 
 session_start();
@@ -9,6 +11,7 @@ require_once('header.php');
 ?>
 
 <head>
+<!-- <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" /> -->
 <link rel="stylesheet" href="/assets/css/warehouse.css?<?php echo rand();?>" type="text/css" />
 </head>
 <body onResize="updateToolbarPos();">
@@ -47,6 +50,8 @@ require_once('header.php');
 				  		<button id="search" class="button-class" style="">Search</button>
 				  		</div>
 				  	</div>
+
+
 				  	<div id="warehouse" class="ware-tab" style="">
 
 						<div class="warehouse_border">
@@ -88,12 +93,72 @@ require_once('header.php');
 		</div>
 		</div>
 
-		<div id="add_storage" title="Block">
-			<button id="add_shelf" class="button-class-s" style="width: 135px;">Add Shelf</button>
-		</div>
+		<div id="add_storage" title="Add new storage">
+			<form>
+			<fieldset>
+
+				<div class="form-group col-sm-12">
+				  <label for="stype" class="col-sm-4">Storage Type : </label>
+				  <div class="col-sm-8">
+					  <select class="form-control" id="stype">
+					    <option value="rack">Rack</option>
+					    <option value="bay">Bay</option>
+					  </select>
+				  </div>
+				</div>
+				
+				<div class="form-group col-sm-12 rack" id="rackcode">
+				    <label class="col-sm-4" for="textinput"><br>Rack Code : </label>
+				    <div class="col-sm-8">
+				        <input name="name" type="text" id="rackcode" disabled="disabled" class="form-control">
+				        <span id="rackcode_error" class="text-danger"></span>
+				    </div>
+				</div>
+
+				<div class="form-group col-sm-12 rack" id="racklength_container">
+				    <label class="col-sm-4" for="racklength">Rack Lenth : </label>
+				    <div class="col-sm-8">
+				        <input name="racklength" type="number" min="1" id="racklength" placeholder="Enter the rack length" class="form-control">
+				        <span id="racklength_error" class="text-danger"></span>
+				    </div>
+				</div>
+
+				<div class="form-group col-sm-12 rack" id="rackwidth_container">
+				    <label class="col-sm-4" for="rackwidth">Rack Width : </label>
+				    <div class="col-sm-8">
+				        <input name="rackwidth" type="number" min="1"  id="rackwidth" placeholder="Enter the rack width" class="form-control">
+				        <span id="rackwidth_error" class="text-danger"></span>
+				    </div>
+				</div>
+
+				<div class="form-group col-sm-12 rack" id="noofracklevel_container">
+				    <label class="col-sm-4" for="textinput" >No. of rack level : </label>
+				    <div class="col-sm-8">
+				        <input name="noofracklevel" type="number"  min="1" id="noofracklevel" placeholder="Enter No. of rack level" class="form-control">
+				        <span id="noofracklevel_error" class="text-danger"></span>
+				    </div>
+				</div>
+
+				<div class="form-group col-sm-12 rack" id="racklevelheight_container">
+				    <label class="col-sm-4" for="textinput">Rack level height : </label>
+				    <div class="col-sm-8">
+				        <input name="racklevelheight" type="number"  min="1"  id="racklevelheight" placeholder="Enter the rack level height" class="form-control">
+				        <span id="racklevelheight_error" class="text-danger"></span>
+				    </div>
+				</div>
 
 
 
+				<div class="form-group col-sm-12 bay" id="baycode_container">
+				    <label class="col-sm-4" for="textinput"><br>Bay Code : </label>
+				    <div class="col-sm-8">
+				        <input name="racklevelheight" type="text" id="racklevelheight" disabled="disabled" class="form-control">
+				        <span id="racklevelheight_error" class="text-danger"></span>
+				    </div>
+				</div>
+
+		</fieldset>
+		</form>
 <script src="/assets/js/warehouse.js?<?php echo rand();?>"></script>
 
 </body>

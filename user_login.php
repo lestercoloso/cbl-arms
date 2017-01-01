@@ -1,4 +1,6 @@
 <head>
+<title>User Login</title>
+<meta charset="utf-8">
 <link rel="stylesheet" href="./libraries/styles.css" type="text/css" />
 <link rel="stylesheet" href="/bower_components/jquery-ui/themes/ui-lightness/jquery-ui.css" />
 <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css" />
@@ -29,7 +31,10 @@
 				</form>
 				
 			</div> 
-			<p style="margin-left:12px;margin-top:110px;font-weight:bolder; bottom:85; left:0; z-index: 50; font-size:11px; color:black;">© Copyright 2010 - 2016 CBL Freight Forwarder and Courier Express Int'l, Inc. All rights reserved.</p>
+			<p style="margin-left:12px;margin-top:110px;font-weight:bolder; bottom:85; left:0; z-index: 50; font-size:11px; color:black;"> 
+			© Copyright 2010 - 2016 CBL Freight Forwarder and Courier Express Int'l, Inc. All rights reserved.</p>
+
+
 			<img id="footimg" src="./img/login_footer.jpg">
 		</div>
 		

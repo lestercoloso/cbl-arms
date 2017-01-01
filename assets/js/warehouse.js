@@ -25,11 +25,22 @@ function addStorage(){
 	$( "#add_storage" ).dialog('destroy');
 	$( "#add_storage" ).dialog({
 	      autoOpen: true,
-	      width: 550,
+	      width: 400,
 	      modal: true,
 	 	  resizable: false,
 	 	  movable: false,
-	 	  draggable: false
+	 	  draggable: false, 
+	 	  buttons: {
+			        Save: function() {
+			          $( this ).dialog( "close" );
+			        },			        
+			        Clear: function() {
+			          $( this ).dialog( "close" );
+			        },
+			        Cancel: function() {
+			          $( this ).dialog( "close" );
+			        }
+      	  }
 	});	
 }
 
@@ -39,5 +50,13 @@ $('#addStorage').click(function(){
 	// $( "#add_storage" ).attr('title', title);
 	addStorage();
 });
+
+
+$('#stype').change(function(){
+	$('.rack').hide();
+	$('.bay').hide();
+	$('.'+$(this).val()).show();
+});
+
 
 $( "#add_storage" ).dialog({autoOpen: false});	

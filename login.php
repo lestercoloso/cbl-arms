@@ -7,7 +7,7 @@ error_reporting( E_ERROR );
 ini_set( 'display_errors' , 'On' );
 session_start();
 date_default_timezone_set("Asia/Manila");
-class Login {
+class Login extends Database {
 
 	public  $usrname;
 	public  $usrpass;
@@ -35,7 +35,9 @@ class Login {
 	public function validateData(){
 
 			$this->usrpass = md5($this->usrpass);
-			$this->connection = new MySQLi("localhost", "root", "121586", "cblarms");
+			
+			$dbconfig = get_config('config.cnf');
+			$this->connection = new MySQLi(trim($dbconfig['host']), trim($dbconfig['username']), trim($dbconfig['password']), trim($dbconfig['database']));
 			$this->valRet= array();
 			
 			//validate user and password and  then Get USER PROFILE + Save on Session.
