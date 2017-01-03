@@ -26,7 +26,12 @@ error_reporting( E_ERROR );
 				$sql = "SELECT `version` FROM `version` where description='database'";
 				$result = $this->_connection->query($sql);
 				$row = $result->num_rows;
-				return $this->resultArray($result);
+				if($row>0){
+					return $this->resultArray($result)['version'];
+				}else{
+					return '0.00';
+				}
+
 		}
 
 	}
@@ -40,7 +45,7 @@ error_reporting( E_ERROR );
 		}else{
 			$connection_status = "<b style='color: #348c34;'>Connected</b>";
 			$version = new Version;
-			$version = $version->getDBVersion()['version'];
+			$version = $version->getDBVersion();
 		}
 
 
