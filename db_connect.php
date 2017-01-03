@@ -9,7 +9,7 @@
 * Mysql database class - only one connection alowed
 */
 
-require_once('/helper/utility_helper.php');
+require_once(dirname(__file__).'/helper/utility_helper.php');
 
 class Database {
 
@@ -24,8 +24,8 @@ class Database {
 
 	// Constructor
 	public function __construct() {
-
-		$dbconfig = get_config('config.cnf');
+		// die(dirname(__file__).'/config.cnf');
+		$dbconfig = get_config(dirname(__file__).'/config.cnf');
 		$this->_connection = new MySQLi(trim($dbconfig['host']), trim($dbconfig['username']), trim($dbconfig['password']), trim($dbconfig['database']));
 	
 		// Error handling
@@ -50,6 +50,10 @@ class Database {
 		}
 
 		return $array;
+	}
+
+	public function test(){
+		die('test');
 	}
 
 
