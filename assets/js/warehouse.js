@@ -35,7 +35,7 @@ function addStorage(){
 			          $( this ).dialog( "close" );
 			        },			        
 			        Clear: function() {
-			          $( this ).dialog( "close" );
+			          cleardata();
 			        },
 			        Cancel: function() {
 			          $( this ).dialog( "close" );
@@ -46,9 +46,14 @@ function addStorage(){
 
 
 $('#addStorage').click(function(){
-	// var title = $(this).find('em').html();
-	// $( "#add_storage" ).attr('title', title);
 	addStorage();
+	cleardata();
+	checkifexist('rack');
+});
+
+$('#stype').change(function(){
+	cleardata();
+	checkifexist($('#stype').val());
 });
 
 
@@ -60,3 +65,20 @@ $('#stype').change(function(){
 
 
 $( "#add_storage" ).dialog({autoOpen: false});	
+
+function getcode(type){
+	$.get("backstage/warehouse/getcode/"+type,function(data){
+		$('#'+type+'code').val(data);
+	});
+}
+
+function cleardata(){
+	$('#add_storage input[type="number"]').val('');
+}
+
+function checkifexist(type){
+	var t = $('#'+type+'code').val();
+	if(t==''){
+		getcode(type);
+	}
+}

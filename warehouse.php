@@ -107,7 +107,7 @@ require_once('header.php');
 				  </div>
 				</div>
 				
-				<div class="form-group col-sm-12 rack" id="rackcode">
+				<div class="form-group col-sm-12 rack" id="rackcode_container">
 				    <label class="col-sm-4" for="textinput"><br>Rack Code : </label>
 				    <div class="col-sm-8">
 				        <input name="name" type="text" id="rackcode" disabled="disabled" class="form-control">
@@ -152,8 +152,8 @@ require_once('header.php');
 				<div class="form-group col-sm-12 bay" id="baycode_container">
 				    <label class="col-sm-4" for="textinput"><br>Bay Code : </label>
 				    <div class="col-sm-8">
-				        <input name="racklevelheight" type="text" id="racklevelheight" disabled="disabled" class="form-control">
-				        <span id="racklevelheight_error" class="text-danger"></span>
+				        <input name="racklevelheight" type="text" id="baycode" disabled="disabled" class="form-control">
+				        <span id="baycode_error" class="text-danger"></span>
 				    </div>
 				</div>
 
