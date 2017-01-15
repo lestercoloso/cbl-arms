@@ -157,6 +157,23 @@ require_once('header.php');
 				    </div>
 				</div>
 
+				<div class="form-group col-sm-12 bay" id="bay_length_container">
+				    <label class="col-sm-4" for="textinput">Bay Length : </label>
+				    <div class="col-sm-8">
+				        <input name="bay_length" type="number"  min="1"  id="bay_length" placeholder="Enter the bay length" class="form-control">
+				        <span id="bay_length_error" class="text-danger"></span>
+				    </div>
+				</div>
+
+				<div class="form-group col-sm-12 bay" id="bay_width_container">
+				    <label class="col-sm-4" for="textinput">Bay Width : </label>
+				    <div class="col-sm-8">
+				        <input name="bay_width" type="number"  min="1"  id="bay_width" placeholder="Enter the bay width" class="form-control">
+				        <span id="bay_width_error" class="text-danger"></span>
+				    </div>
+				</div>
+
+
 		</fieldset>
 		</form>
 <script src="/assets/js/warehouse.js?<?php echo rand();?>"></script>
