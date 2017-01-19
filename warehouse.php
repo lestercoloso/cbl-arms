@@ -53,7 +53,7 @@ $bays = $db->select('select * from bay_storage where status=1' );
 				  		<div style="float: left;width: 100%;">				  		
 				  			<button id="addStorage" class="button-class">ADD STORAGE</button>
 				  		</div>
-				  		<div id="warehousesearch">
+				  		<div id="warehousesearch" style="text-align: center;">
 					  		<label for="sbox"><b>Search Bill of Lading no.:</b></label>
 					  		<input type="text" id="sbox" name="sbox"><br/><br/>
 					  		<label for="nbox"><b>Search Customer Name:</b></label>
