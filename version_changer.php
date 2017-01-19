@@ -45,7 +45,7 @@ error_reporting( E_ERROR );
 
 
 	
-
+	exec('git fetch');
 	exec('git branch -r', $gitresult);
 	unset($gitresult[0]);
 	$gitresult;

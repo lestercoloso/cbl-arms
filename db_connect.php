@@ -86,8 +86,19 @@ class Database {
 	}
 
 
-	public function test(){
-		die('test');
+	public function update($table,$data=[],$where=''){
+		$where = !empty($where) ? ' where '.$where : '';
+		$array = [];
+		foreach($data as $col=>$val){
+			$array[] = "`$col`='$val'";
+		}
+
+		$sql = "update $table set ".implode($array, ',')." $where";
+		if ($this->_connection->query($sql) === TRUE) {
+			return 1;
+		} else {
+			return "Error: " . $sql . "<br>" . $this->_connection->error;
+		}
 	}
 
 

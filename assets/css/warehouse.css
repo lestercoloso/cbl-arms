@@ -70,7 +70,7 @@
 	    background-color: #cc0000; /* Green */
 	    border: none;
 	    color: white;
-	    padding: 15px 32px;
+	    padding: 10px 15px;
 	    text-align: center;
 	    text-decoration: none;
 	    display: inline-block;
@@ -104,7 +104,7 @@
 }
 input[type=text] {
     width: 100%;
-    padding: 12px 20px;
+    padding: 5px 10px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
@@ -117,7 +117,7 @@ input[type=text] {
 		float: left;
 		width: 70%;
 		margin-left: 3%;
-		height: 80%;
+		height: 90%;
 		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	}
 
@@ -208,4 +208,37 @@ input[type=number]::-webkit-outer-spin-button {
 
 .bay{
 	display: none;
+}
+
+.rackStorage{
+	 border: solid 2px;
+	 height: 100px;
+	 width: 100px; 
+	 cursor:move;
+	 background: #d44949;
+}
+.bayStorage{
+	background: #5050d8;
+	 border: solid 2px;
+	 height: 100px;
+	 width: 100px;
+	 cursor:move; 
+}
+
+#warehousesearch{
+	float: left;
+	border: solid 1px;
+	padding: 20px 20px 10px 20px;
+	border: solid 1px #d3d3d3;
+}
+.custombutton{
+	    padding: 5px 10px;
+	    width: 49%;
+}
+#savewarehouse{
+	float: right;
+	    width: 35%;
+    padding: 10px;
+    position: relative;
+    bottom: 25px;
 }

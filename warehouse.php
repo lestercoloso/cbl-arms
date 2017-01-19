@@ -6,13 +6,24 @@ session_start();
 $_SESSION['page']="view1";
 
 require_once('header.php');
-
+require_once("db_connect.php");
+$db = new database();
+$racks = $db->select('select * from rack_storage where status=1' );
+$bays = $db->select('select * from bay_storage where status=1' );
 
 ?>
+
+
+<script>
+	var racksjsondata = '<?php echo json_encode($racks['data']);?>';
+	var baysjsondata  = '<?php echo json_encode($bays['data']);?>';
+
+</script>
 
 <head>
 <!-- <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" /> -->
 <link rel="stylesheet" href="/assets/css/warehouse.css?<?php echo rand();?>" type="text/css" />
+<link rel="stylesheet" href="/bower_components/toastr/toastr.min.css" />
 </head>
 <body onResize="updateToolbarPos();">
 
@@ -42,17 +53,18 @@ require_once('header.php');
 				  		<div style="float: left;width: 100%;">				  		
 				  			<button id="addStorage" class="button-class">ADD STORAGE</button>
 				  		</div>
-				  		<div style="float: left;">
-				  		<label for="sbox"><b>Search Bill of Lading no.:</b></label>
-				  		<input type="text" id="sbox" name="sbox"><br/><br/>
-				  		<label for="nbox"><b>Search Customer Name:</b></label>
-				  		<input type="text" id="nbox" name="nbox">
-				  		<button id="search" class="button-class" style="">Search</button>
+				  		<div id="warehousesearch">
+					  		<label for="sbox"><b>Search Bill of Lading no.:</b></label>
+					  		<input type="text" id="sbox" name="sbox"><br/><br/>
+					  		<label for="nbox"><b>Search Customer Name:</b></label>
+					  		<input type="text" id="nbox" name="nbox">
+					  		<button id="search" class="button-class custombutton" >Search</button>
+					  		<button id="clearsearch" class="button-class custombutton" >Clear</button>
 				  		</div>
 				  	</div>
 
 
-				  	<div id="warehouse" class="ware-tab" style="">
+				  	<div id="warehouse" class="ware-tab">
 
 						<div class="warehouse_border">
 						<div class="warehouse_container">
@@ -65,9 +77,26 @@ require_once('header.php');
 							<div class="area block_c"><em>Block C</em></div>
 							<div class="freezer"></div>
 
-						</div>
-						</div>
+				<?php
+					// foreach($racks['data'] as $rack){
+					// 	echo '<div class="rackStorage" data-racklevel="" data-racklevelheight="" id="rack-'.$rack['id'].'" style="height:'.$rack['rack_length'].';width:'.$rack['rack_width'].';'.$rack['style'].'"></div>';
+					// }
+					// foreach($bays['data'] as $bay){
+					// 	echo '<div class="bayStorage" id="bay-'.$bay['id'].'" style="height:'.$bay['bay_length'].';width:'.$bay['bay_width'].';'.$bay['style'].'"></div>';
+					// }
 
+				?>
+
+
+
+
+
+						</div>
+						</div>
+						<div id="savewarehouse">
+							<button id="saveOrder" class="button-class custombutton" >Save</button>
+							<button id="cancelOrderStorage" class="button-class custombutton" >Cancel</button>
+						</div>
 
 				  	</div>
 				  	<div style="clear:both"></div>
@@ -110,7 +139,7 @@ require_once('header.php');
 				<div class="form-group col-sm-12 rack" id="rackcode_container">
 				    <label class="col-sm-4" for="textinput"><br>Rack Code : </label>
 				    <div class="col-sm-8">
-				        <input name="name" type="text" id="rackcode" disabled="disabled" class="form-control">
+				        <input name="name" type="text" id="rackcode" col="code" disabled="disabled" class="form-control">
 				        <span id="rackcode_error" class="text-danger"></span>
 				    </div>
 				</div>
@@ -118,7 +147,7 @@ require_once('header.php');
 				<div class="form-group col-sm-12 rack" id="racklength_container">
 				    <label class="col-sm-4" for="racklength">Rack Lenth : </label>
 				    <div class="col-sm-8">
-				        <input name="racklength" type="number" min="1" id="racklength" placeholder="Enter the rack length" class="form-control">
+				        <input name="racklength" type="number" col="rack_length" min="1" id="racklength" placeholder="Enter the rack length" class="form-control">
 				        <span id="racklength_error" class="text-danger"></span>
 				    </div>
 				</div>
@@ -126,7 +155,7 @@ require_once('header.php');
 				<div class="form-group col-sm-12 rack" id="rackwidth_container">
 				    <label class="col-sm-4" for="rackwidth">Rack Width : </label>
 				    <div class="col-sm-8">
-				        <input name="rackwidth" type="number" min="1"  id="rackwidth" placeholder="Enter the rack width" class="form-control">
+				        <input name="rackwidth" type="number" col="rack_width" min="1"  id="rackwidth" placeholder="Enter the rack width" class="form-control">
 				        <span id="rackwidth_error" class="text-danger"></span>
 				    </div>
 				</div>
@@ -134,7 +163,7 @@ require_once('header.php');
 				<div class="form-group col-sm-12 rack" id="noofracklevel_container">
 				    <label class="col-sm-4" for="textinput" >No. of rack level : </label>
 				    <div class="col-sm-8">
-				        <input name="noofracklevel" type="number"  min="1" id="noofracklevel" placeholder="Enter No. of rack level" class="form-control">
+				        <input name="noofracklevel" type="number" col="no_rack_level" min="1" id="noofracklevel" placeholder="Enter No. of rack level" class="form-control">
 				        <span id="noofracklevel_error" class="text-danger"></span>
 				    </div>
 				</div>
@@ -142,7 +171,7 @@ require_once('header.php');
 				<div class="form-group col-sm-12 rack" id="racklevelheight_container">
 				    <label class="col-sm-4" for="textinput">Rack level height : </label>
 				    <div class="col-sm-8">
-				        <input name="racklevelheight" type="number"  min="1"  id="racklevelheight" placeholder="Enter the rack level height" class="form-control">
+				        <input name="racklevelheight" type="number"  min="1" col="rack_level_height"  id="racklevelheight" placeholder="Enter the rack level height" class="form-control">
 				        <span id="racklevelheight_error" class="text-danger"></span>
 				    </div>
 				</div>
@@ -152,7 +181,7 @@ require_once('header.php');
 				<div class="form-group col-sm-12 bay" id="baycode_container">
 				    <label class="col-sm-4" for="textinput"><br>Bay Code : </label>
 				    <div class="col-sm-8">
-				        <input name="racklevelheight" type="text" id="baycode" disabled="disabled" class="form-control">
+				        <input name="racklevelheight" col="code" type="text" id="baycode" disabled="disabled" class="form-control">
 				        <span id="baycode_error" class="text-danger"></span>
 				    </div>
 				</div>
@@ -160,7 +189,7 @@ require_once('header.php');
 				<div class="form-group col-sm-12 bay" id="bay_length_container">
 				    <label class="col-sm-4" for="textinput">Bay Length : </label>
 				    <div class="col-sm-8">
-				        <input name="bay_length" type="number"  min="1"  id="bay_length" placeholder="Enter the bay length" class="form-control">
+				        <input name="bay_length" type="number"  min="1" col="bay_length" id="bay_length" placeholder="Enter the bay length" class="form-control">
 				        <span id="bay_length_error" class="text-danger"></span>
 				    </div>
 				</div>
@@ -168,7 +197,7 @@ require_once('header.php');
 				<div class="form-group col-sm-12 bay" id="bay_width_container">
 				    <label class="col-sm-4" for="textinput">Bay Width : </label>
 				    <div class="col-sm-8">
-				        <input name="bay_width" type="number"  min="1"  id="bay_width" placeholder="Enter the bay width" class="form-control">
+				        <input name="bay_width" type="number"  min="1"  col="bay_width" id="bay_width" placeholder="Enter the bay width" class="form-control">
 				        <span id="bay_width_error" class="text-danger"></span>
 				    </div>
 				</div>
@@ -176,6 +205,9 @@ require_once('header.php');
 
 		</fieldset>
 		</form>
+
+<script src="/bower_components/toastr/toastr.min.js"></script>
+<script src="/assets/js/main.js?<?php echo rand();?>"></script>
 <script src="/assets/js/warehouse.js?<?php echo rand();?>"></script>
 
 </body>
