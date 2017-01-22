@@ -1,24 +1,21 @@
 <title>Warehouse</title>
-<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />				  	
+<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />		
+<link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css" />		  	
 <?php
 
 session_start();
 $_SESSION['page']="view1";
 
 require_once('header.php');
-require_once("db_connect.php");
-$db = new database();
-$racks = $db->select('select * from rack_storage where status=1' );
-$bays = $db->select('select * from bay_storage where status=1' );
+// require_once("db_connect.php");
+// $db = new database();
+// $racks = $db->select('select * from rack_storage where status=1' );
+// $bays = $db->select('select * from bay_storage where status=1' );
 
 ?>
 
 
-<script>
-	var racksjsondata = '<?php echo json_encode($racks['data']);?>';
-	var baysjsondata  = '<?php echo json_encode($bays['data']);?>';
 
-</script>
 
 <head>
 <!-- <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" /> -->
@@ -64,38 +61,61 @@ $bays = $db->select('select * from bay_storage where status=1' );
 				  	</div>
 
 
-				  	<div id="warehouse" class="ware-tab">
+				  	<div  class="ware-tab">
 
-						<div class="warehouse_border">
-						<div class="warehouse_container">
-							
-							<div class="warehouse_gate">
+
+				  		<div id="warehouse">
+							<div class="warehouse_border">
+							<div class="warehouse_container">
+								
+								<div class="warehouse_gate">
+								</div>
+
+								<div class="area block_a"><em>Block A</em></div>
+								<div class="area block_b"><em>Block B</em></div>
+								<div class="area block_c"><em>Block C</em></div>
+								<div class="freezer"></div>
+
+							</div>
+							</div>
+							<div id="savewarehouse">
+								<button id="saveOrder" class="button-class custombutton" >Save</button>
+								<button id="cancelOrderStorage" class="button-class custombutton" >Cancel</button>
+							</div>
+						</div>
+
+
+						<div id="shelves">
+							<div class="shelves-text">
+								<span>Available Slots: </span>
+								<span style="float: right;text-decoration: underline;">View Packing List </span>
+							</div>							
+
+
+							<div class="function-button">
+								<button id="editAddRackLevel" class="button-class custombutton" style="width: 150px;margin: 0px;" >Add Rack Level</button>
 							</div>
 
-							<div class="area block_a"><em>Block A</em></div>
-							<div class="area block_b"><em>Block B</em></div>
-							<div class="area block_c"><em>Block C</em></div>
-							<div class="freezer"></div>
+								<div id="shelf_container">
 
-				<?php
-					// foreach($racks['data'] as $rack){
-					// 	echo '<div class="rackStorage" data-racklevel="" data-racklevelheight="" id="rack-'.$rack['id'].'" style="height:'.$rack['rack_length'].';width:'.$rack['rack_width'].';'.$rack['style'].'"></div>';
-					// }
-					// foreach($bays['data'] as $bay){
-					// 	echo '<div class="bayStorage" id="bay-'.$bay['id'].'" style="height:'.$bay['bay_length'].';width:'.$bay['bay_width'].';'.$bay['style'].'"></div>';
-					// }
-
-				?>
-
+									<div class="rack-level">
+										<div class="support-left"></div>
+										<div class="support-bottom"></div>
+										<div class="support-right"></div>
+									</div>
+									
+									<div class="rack-level">
+										<div class="support-left"></div>
+										<div class="support-bottom"></div>
+										<div class="support-right"></div>
+									</div>
 
 
-
-
-						</div>
-						</div>
-						<div id="savewarehouse">
-							<button id="saveOrder" class="button-class custombutton" >Save</button>
-							<button id="cancelOrderStorage" class="button-class custombutton" >Cancel</button>
+								</div>
+								<div id="saveshelf">
+									<button id="saveShelves" class="button-class custombutton" >Save</button>
+									<button id="cancelShelves" class="button-class custombutton" >Cancel</button>
+								</div>
 						</div>
 
 				  	</div>

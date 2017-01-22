@@ -77,6 +77,18 @@ class Database {
 		}
 
 		$sql = "insert into `$table` (".implode(',',$column).") values (".implode(',',$value).")";
+		return $this->CheckResult($sql);
+	}
+
+	public function delete($table='', $where=''){
+		$where = !empty($where) ? ' where '.$where : '';
+		$sql = "delete from $table $where";
+
+		return $this->CheckResult($sql);
+
+	}
+
+	public function CheckResult($sql){
 		if ($this->_connection->query($sql) === TRUE) {
 			return 1;
 		} else {

@@ -7,6 +7,18 @@ class Warehouse{
 
 	}
 
+	public function getStorage(){
+
+
+		$datas = $this->db->select('select * from rack_storage where status=1' );
+		$return['rack'] = $datas['data'];
+
+		$datas = $this->db->select('select * from bay_storage where status=1' );
+		$return['bay'] = $datas['data'];
+
+		jdie($return);
+	}
+
 	public function getcode($type){
 		$select = $this->db->select_one('select max(code) as newcode from '.$type.'_storage limit 1' );
 		$newcode = !empty($select['newcode']) ? $select['newcode'] : 0;
@@ -15,6 +27,7 @@ class Warehouse{
 
 	public function saveStorage($t){
 		$data = json_decode($_POST['d'], TRUE);
+
 		$return['status'] = 100;
 		if($this->db->insert($t."_storage",$data)){
 			$return['status'] = 200;
@@ -37,14 +50,15 @@ class Warehouse{
 			}
 		}
 
-		$datas = $this->db->select('select * from rack_storage where status=1' );
-		$return['rack'] = $datas['data'];
-
-		$datas = $this->db->select('select * from bay_storage where status=1' );
-		$return['bay'] = $datas['data'];
 
 		jdie($return);
 
+	}
+
+	public function deleteStorage($del=''){
+		$del = explode('-', $del);
+		$data['status'] = $this->db->delete($del[0].'_storage','id='.$del[1] );
+		jdie($data);
 	}
 
 

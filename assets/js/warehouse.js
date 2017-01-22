@@ -57,21 +57,22 @@ function addStorage(){
 		$('.rackStorage').remove();
 		$('.bayStorage').remove();
 
-
+		var deletebutton = '<button type="button" class="btn btn-danger deletethis" title="remove this storage"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span></button>';
 		var content = '';
 		$.each(rdatas, function( index, value ) {
 
 			// var style = value.style.replace(/(width:([0-9]+)px;)|(height:([0-9]+)px;)/g, "");
-			content +='<div class="rackStorage" data-racklevel="" data-racklevelheight="" id="rack-'+value.id+'" style="height:'+value.rack_length.trim()+'px;width:'+value.rack_width+'px;'+value.style+'"></div>';
+			content +='<div id="rack-'+value.id+'" class="rackStorage" data-rackwidth="'+value.rack_width+'" data-racklength="'+value.rack_length+'"  data-racklevel="'+value.no_rack_level+'" data-racklevelheight="'+value.rack_level_height+'" style="height:'+value.rack_length.trim()+'px;width:'+value.rack_width+'px;'+value.style+'">'+deletebutton+'</div>';
 		});		
 
 		$.each(bdatas, function( index, value ) {
-			content +='<div class="bayStorage" id="bay-'+value.id+'" style="height:'+value.bay_length+'px;width:'+value.bay_width+'px;'+value.style+'"></div>';
+			content +='<div class="bayStorage" id="bay-'+value.id+'" style="height:'+value.bay_length+'px;width:'+value.bay_width+'px;'+value.style+'">'+deletebutton+'</div>';
 		});
 
 		$('.warehouse_container').append(content);
 		$( ".rackStorage, .bayStorage" ).draggable({ containment: "parent" });
-		$( ".rackStorage, .bayStorage" ).dblclick(function() {alert( this.id );});
+		$( ".rackStorage, .bayStorage" ).dblclick(function() {openShelves( this.id );});
+		addFunctionToStorage();
 	}
 
 	function getcode(type){
@@ -122,6 +123,36 @@ function addStorage(){
 	}
 
 
+function openShelves(id){
+	$('#warehouse').hide();
+	$('#shelves').show();
+	var d = $('#'+id);
+	var content = '';
+	if(d.hasClass('rackStorage')){
+		var nrl = d.data('racklevel'); 
+		var rlh = d.data('racklevelheight'); 
+		var rl = d.data('racklength'); 
+		var rw = d.data('rackwidth'); 
+
+		for (i = 1; i <= nrl; i++) { 
+			content += '<div class="rack-level" style="width:'+rw+'px;height:'+rlh+'px;"><div class="support-left" style="height:'+(rlh+15)+'px;"></div><div class="support-bottom"></div><div class="support-right" style="height:'+(rlh+15)+'px;"></div></div>';
+		}
+		$('#shelf_container').html(content);
+
+	}else{
+
+	}
+
+
+}
+
+
+function cancelShelves(){
+	$('#warehouse').show();
+	$('#shelves').hide();
+}
+
+// openShelves();
 function saveOrder(){
 		var array = new Object();	
 		
@@ -137,8 +168,7 @@ function saveOrder(){
 		$.post("backstage/warehouse/saveOrder/", {d:data},function(data){
 			if(data.status==200){
 				toastr["success"]("Successfully saved.");	
-				racksjsondata = JSON.stringify(data.rack);
-				baysjsondata = JSON.stringify(data.bay);
+				getStorage();
 			}else{
 				toastr["error"]("Failed to save.");	
 			}
@@ -148,8 +178,47 @@ function saveOrder(){
 
 }
 
+function getStorage(){
+
+	$.post("backstage/warehouse/getStorage", {},function(data){
+		racksjsondata = JSON.stringify(data.rack);
+		baysjsondata = JSON.stringify(data.bay);
+		rearrangeshelves();
+	}).fail(function(){
+		toastr["error"]("Failed to load.");
+	});
+}
+
+function deleteStorage(id){
+
+	if(confirm('Are you sure you want to delete this storage?')){
+		$.post("backstage/warehouse/deleteStorage/"+id, {},function(data){
+			toastr["success"]("Successfully deleted.");	
+			getStorage();	
+		}).fail(function(){
+			toastr["error"]("Failed to load.");
+		});
+	}
 
 
+}
+
+function addFunctionToStorage(){
+	//reveal functions
+	$( ".rackStorage, .bayStorage" ).hover(function() {
+		$( ".rackStorage .btn, .bayStorage .btn" ).hide();
+		$( this ).find( '.btn' ).show();
+	});
+
+	// $( ".rackStorage, .bayStorage" ).on( "mouseleave", function() {
+	// 	$( ".rackStorage .btn, .bayStorage .btn" ).hide();
+	// });
+
+	$(".deletethis").click(function(){
+		deleteStorage($(this).parent().attr('id'));
+	});
+
+}
 
 $('#addStorage').click(function(){
 	addStorage();
@@ -168,6 +237,9 @@ $('#stype').change(function(){
 	$('.'+$(this).val()).show();
 });
 
+$('#cancelShelves').click(function(){
+	cancelShelves();
+});
 $('#saveOrder').click(function(){
 	saveOrder();
 });
@@ -178,4 +250,4 @@ $('#cancelOrderStorage').click(function(){
 
 
 $( "#add_storage" ).dialog({autoOpen: false});	
-rearrangeshelves();
+getStorage();

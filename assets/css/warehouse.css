@@ -117,7 +117,7 @@ input[type=text] {
 		float: left;
 		width: 70%;
 		margin-left: 3%;
-		height: 90%;
+		height: 85%;
 		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	}
 
@@ -211,6 +211,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .rackStorage{
+	text-align: right;
 	 border: solid 2px;
 	 height: 100px;
 	 width: 100px; 
@@ -218,6 +219,7 @@ input[type=number]::-webkit-outer-spin-button {
 	 background: #d44949;
 }
 .bayStorage{
+	text-align: right;
 	background: #5050d8;
 	 border: solid 2px;
 	 height: 100px;
@@ -234,11 +236,99 @@ input[type=number]::-webkit-outer-spin-button {
 .custombutton{
 	    padding: 5px 10px;
 	    width: 45%;
+	    border: solid 1px #adadad;
+    background: none;
+    color: #cc0000;
+    border-radius: 4px;
 }
 #savewarehouse{
 	float: right;
-	    width: 35%;
+	width: 35%;
     padding: 10px;
     position: relative;
+    bottom: 50px;
+}
+#saveshelf{
+    float: right;
+    width: 35%;
+    padding: 10px;
     bottom: 25px;
+    position: relative;
+}
+.rackStorage .btn, .bayStorage .btn{
+	position: relative;
+	bottom: 10px;
+	left: 15px;
+	border-radius: 10px;
+	padding: 4px;
+	display: none;
+	    z-index: 200;
+}
+
+
+#shelves{
+	display: none;
+}
+#shelf_container{
+border: solid 1px #d3d3d3;
+    margin: 20px;
+    height: 400px;
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+    width: 94%;
+    top: 15px;
+    overflow-x: auto;
+}
+.function-button{
+		float: right;
+		margin: 0px 20px;
+		width: 150px;
+}
+.shelves-text{
+	margin: 20px;
+	color: #cc0000;
+}
+
+.rack-level{
+	height: 30px;
+	width: 300px;
+	/*border: solid 1px black;*/
+	position: relative;
+	top: 15%;
+	transform: translateY(-50%);
+	margin: auto;
+}
+.rack-level .support-left{
+		background-color: #53876e;
+		height: 110%;
+		width: 10px;
+		position: absolute;
+		left: -10px;
+		border-left: solid 1px #191c18;
+		border-right: solid 1px #191c18;
+	    left: -10px;
+}
+.rack-level .support-right{
+		background-color: #53876e;
+		height: 110%;
+		width: 10px;
+		position: absolute;
+		border-left: solid 1px #191c18;
+		border-right: solid 1px #191c18;
+	    right: -10px;
+}
+.rack-level .support-bottom{
+    background-color: #ff8d52;
+    width: 100%;
+    position: absolute;
+    border: solid 1px #191c18;
+    bottom: -10px;
+    height: 10px;
+}
+.rack-level:hover{
+    background:  rgba(251, 127, 127, 0.63);;
+       cursor: -moz-zoom-in; 
+    cursor: -webkit-zoom-in; 
+    cursor: zoom-in;
 }
