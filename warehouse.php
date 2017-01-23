@@ -21,6 +21,12 @@ require_once('header.php');
 <!-- <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" /> -->
 <link rel="stylesheet" href="/assets/css/warehouse.css?<?php echo rand();?>" type="text/css" />
 <link rel="stylesheet" href="/bower_components/toastr/toastr.min.css" />
+
+<!-- for inbound/outbound -->
+<link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+<link rel="stylesheet" href="/bower_components/chosen/chosen.css" />
+<!-- end  -->
+
 </head>
 <body onResize="updateToolbarPos();">
 
@@ -103,7 +109,7 @@ require_once('header.php');
 										<div class="support-bottom"></div>
 										<div class="support-right"></div>
 									</div>
-									
+
 									<div class="rack-level">
 										<div class="support-left"></div>
 										<div class="support-bottom"></div>
@@ -122,15 +128,14 @@ require_once('header.php');
 				  	<div style="clear:both"></div>
 				  	<div></div>
 				  	<div></div>
-				  	<div id="tab1-div2">
-	
-
-
-
-				  	</div>
+				  	
 				  </div>
-				  <div id="tabs-2">  
-				   </div>
+				  
+				  <div id="tabs-2">
+				 	<?php require_once('inbound2.php');?>
+  
+				  </div>
+				  
 				  <div id="tabs-3">
 				  </div>
 				  <div id="tabs-4">
@@ -230,4 +235,10 @@ require_once('header.php');
 <script src="/assets/js/main.js?<?php echo rand();?>"></script>
 <script src="/assets/js/warehouse.js?<?php echo rand();?>"></script>
 
+<!-- for inbound/outbound -->
+<script src="/js/moment.js"></script>
+<script src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/bower_components/chosen/chosen.jquery.js"></script>
+<script src="/assets/js/inbound.js?<?php echo rand();?>"></script>
+<!-- end -->
 </body>
