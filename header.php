@@ -36,6 +36,7 @@ session_start();
  $usrname		= $_SESSION['accusrname'];
 ?>
 <head>
+<meta charset="UTF-8">
 <link rel="stylesheet" href="./libraries/styles.css" type="text/css" />
 <!-- <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" /> -->
 <!-- <script src="http://code.jquery.com/jquery-1.12.1.min.js"></script>

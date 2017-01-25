@@ -162,7 +162,7 @@ require_once('header.php');
 				</div>
 				
 				<div class="form-group col-sm-12 rack" id="rackcode_container">
-				    <label class="col-sm-4" for="textinput"><br>Rack Code : </label>
+				    <label class="col-sm-4" for="textinput">Rack Code : </label>
 				    <div class="col-sm-8">
 				        <input name="name" type="text" id="rackcode" col="code" disabled="disabled" class="form-control">
 				        <span id="rackcode_error" class="text-danger"></span>
@@ -204,7 +204,7 @@ require_once('header.php');
 
 
 				<div class="form-group col-sm-12 bay" id="baycode_container">
-				    <label class="col-sm-4" for="textinput"><br>Bay Code : </label>
+				    <label class="col-sm-4" for="textinput">Bay Code : </label>
 				    <div class="col-sm-8">
 				        <input name="racklevelheight" col="code" type="text" id="baycode" disabled="disabled" class="form-control">
 				        <span id="baycode_error" class="text-danger"></span>
@@ -230,6 +230,7 @@ require_once('header.php');
 
 		</fieldset>
 		</form>
+		</div>
 
 <script src="/bower_components/toastr/toastr.min.js"></script>
 <script src="/assets/js/main.js?<?php echo rand();?>"></script>
