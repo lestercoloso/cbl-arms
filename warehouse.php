@@ -47,7 +47,7 @@ require_once('header.php');
 				<div id="tabs">
 				  <ul>
 				    <li><a href="#tabs-1">WAREHOUSE</a></li>
-				    <li><a href="#tabs-2">INBOUND</a></li>
+				    <li><a href="inbound.php">INBOUND</a></li>
 				    <li><a href="#tabs-3">OUTBOUND</a></li>
 				    <li><a href="#tabs-4">LOCATION MANAGEMENT</a></li>
 				  </ul>
@@ -130,16 +130,6 @@ require_once('header.php');
 				  	<div></div>
 				  	
 				  </div>
-				  
-				  <div id="tabs-2">
-				 	<?php require_once('inbound2.php');?>
-  
-				  </div>
-				  
-				  <div id="tabs-3">
-				  </div>
-				  <div id="tabs-4">
-				  </div>
 				</div>
 
 			</div>
@@ -147,10 +137,17 @@ require_once('header.php');
 		</div>
 		</div>
 
-		<div id="add_storage" title="Add new storage">
+		<div class="modal fade" id="add_storage" role="dialog">
+    	<div class="modal-dialog custom-class2">
+		<div class="modal-content">
+		
+		<div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add New Storage</h4>
+        </div>
+		<div class="modal-body">
 			<form>
 			<fieldset>
-
 				<div class="form-group col-sm-12">
 				  <label for="stype" class="col-sm-4">Storage Type : </label>
 				  <div class="col-sm-8">
@@ -226,13 +223,24 @@ require_once('header.php');
 				        <span id="bay_width_error" class="text-danger"></span>
 				    </div>
 				</div>
-
-
 		</fieldset>
 		</form>
 		</div>
 
+		 <div class="modal-footer">
+          <button type="button" class="btn btn-default" onclick="saveStorage();">Save</button>
+          <button type="button" class="btn btn-default" onclick="cleardata();">Clear</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+
+        </div>
+        </div>
+		
+
+		</div>
+
 <script src="/bower_components/toastr/toastr.min.js"></script>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/assets/js/main.js?<?php echo rand();?>"></script>
 <script src="/assets/js/warehouse.js?<?php echo rand();?>"></script>
 
@@ -240,6 +248,5 @@ require_once('header.php');
 <script src="/js/moment.js"></script>
 <script src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 <script src="/bower_components/chosen/chosen.jquery.js"></script>
-<script src="/assets/js/inbound.js?<?php echo rand();?>"></script>
 <!-- end -->
 </body>

@@ -1,3 +1,5 @@
+            
+$( "#tabs" ).tabs({ active: 1 });
             $(function () {
                $('#exdate_group, #endate_group, #pudate_group, .create-date').datetimepicker({
                  format: 'MM/DD/YYYY'
@@ -11,26 +13,26 @@
 
 
 function addShipment(){
-	$( "#add_shipment" ).dialog('destroy');
-	$( "#add_shipment" ).dialog({
-	      autoOpen: true,
-	      width: 1100,
-	      modal: true,
-	 	  resizable: false,
-	 	  movable: false,
-	 	  draggable: false, 
-	 	  buttons: {
-			        Save: function() {
-			          saveStorage(this);
-			        },			        
-			        Clear: function() {
-			          cleardata();
-			        },
-			        Cancel: function() {
-			          $( this ).dialog( "close" );
-			        }
-      	  }
-	});	
+	// $( "#add_shipment" ).dialog('destroy');
+	// $( "#add_shipment" ).dialog({
+	//       autoOpen: true,
+	//       width: 1100,
+	//       modal: true,
+	//  	  resizable: false,
+	//  	  movable: false,
+	//  	  draggable: false, 
+	//  	  buttons: {
+	// 		        Save: function() {
+	// 		          saveStorage(this);
+	// 		        },			        
+	// 		        Clear: function() {
+	// 		          cleardata();
+	// 		        },
+	// 		        Cancel: function() {
+	// 		          $( this ).dialog( "close" );
+	// 		        }
+ //      	  }
+	// });	
 }
 
 function getInbound(){
@@ -71,5 +73,5 @@ $('#addnewshipment').click( function(){
 });
 
 
-$( "#add_shipment" ).dialog({autoOpen: false});	
+// $( "#add_shipment" ).dialog({autoOpen: false});	
 getInbound();

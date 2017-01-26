@@ -2,22 +2,16 @@
 //alil js
 $(document).ready(function(){
 	$( "#tabs" ).tabs();
-	$(function () {
-		$("#storView").click(function(){
-			var a = true;
-			$.post("storeView.php",function(data){
+	
+		$('.ui-tab').click(function(e){
 
-				if(a===true){
-				$("#tab1-div2").html(data);
-				a=false;
-			}else{
-					alert("You are on storage View");
-
-				}
-			})
-		});
+			$(this).attr('aria-controls','');
+			window.location.href=$(this).find('.ui-tabs-anchor').attr('href');
 		});
 
+		$('.ui-tab').each(function(e){
+			$(this).attr('aria-controls','');
+		});
 	});
 //end of alil's js
 
@@ -26,26 +20,26 @@ $(document).ready(function(){
 
 
 function addStorage(){
-	$( "#add_storage" ).dialog('destroy');
-	$( "#add_storage" ).dialog({
-	      autoOpen: true,
-	      width: 400,
-	      modal: true,
-	 	  resizable: false,
-	 	  movable: false,
-	 	  draggable: false, 
-	 	  buttons: {
-			        Save: function() {
-			          saveStorage(this);
-			        },			        
-			        Clear: function() {
-			          cleardata();
-			        },
-			        Cancel: function() {
-			          $( this ).dialog( "close" );
-			        }
-      	  }
-	});	
+	$( "#add_storage" ).modal();
+	// $( "#add_storage" ).dialog({
+	//       autoOpen: true,
+	//       width: 400,
+	//       modal: true,
+	//  	  resizable: false,
+	//  	  movable: false,
+	//  	  draggable: false, 
+	//  	  buttons: {
+	// 		        Save: function() {
+	// 		          saveStorage(this);
+	// 		        },			        
+	// 		        Clear: function() {
+	// 		          cleardata();
+	// 		        },
+	// 		        Cancel: function() {
+	// 		          $( this ).dialog( "close" );
+	// 		        }
+ //      	  }
+	// });	
 }
 
 
@@ -112,7 +106,7 @@ function addStorage(){
 					toastr["success"](t.toUpperCase()+' storage successfully created.');
 					cleardata();
 				}
-				$( dialog ).dialog( "close" );
+				$( '#add_storage' ).modal('toggle');
 			}).fail(function(){
 				toastr["error"]("Failed to load.");
 			});
@@ -249,5 +243,5 @@ $('#cancelOrderStorage').click(function(){
 });
 
 
-$( "#add_storage" ).dialog({autoOpen: false});	
+// $( "#add_storage" ).dialog({autoOpen: false});	
 getStorage();

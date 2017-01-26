@@ -222,3 +222,13 @@ input[type="text"]{
 .bootstrap-datetimepicker-widget{
 	z-index: 999999;
 }
+
+@media screen and (min-width: 768px) {
+    .custom-class {
+    	margin-top: 7%;
+        width: 75%; /* either % (e.g. 60%) or px (400px) */
+    }
+}
+.modal-header .close{
+	    font-size: 2em;
+}

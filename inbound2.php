@@ -12,17 +12,17 @@
 	</div>
 	<div class="col-sm-4">	
 
-				<input name="billoflandingno" placeholder="Pallet Code" type="text" class="form-control search-text">
+				<input name="search_pallet_code" placeholder="Pallet Code" type="text" class="form-control search-text">
 				
 				<select class="form-control chosen-select" id="s-type" data-placeholder="Storage Type">
-						<option></option>
+					<option value=""></option>
 					    <option value="rack">Rack</option>
 					    <option value="bay">Bay</option>
 				</select>
 
-				<select class="form-control chosen-select" id="si-type" data-placeholder="Sub-inventory Location Type">
+			<!-- 	<select class="form-control chosen-select" id="si-type" data-placeholder="Sub-inventory Location Type">
 				 		<option><option>
-				</select>
+				</select> -->
 
 		
 

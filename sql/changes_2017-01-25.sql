@@ -33,6 +33,6 @@ ALTER TABLE `inbound_list`
 ADD COLUMN `code` INT(45) NULL AFTER `invoice_no`;
 
 ALTER TABLE `inbound_list` 
-ADD COLUMN `code` INT(45) NULL AFTER `invoice_no`;
+ADD COLUMN `rack_level` INT(45) NULL AFTER `code`;
 
 
