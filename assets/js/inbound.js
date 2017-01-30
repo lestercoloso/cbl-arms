@@ -2,7 +2,8 @@
 $( "#tabs" ).tabs({ active: 1 });
             $(function () {
                $('#exdate_group, #endate_group, #pudate_group, .create-date').datetimepicker({
-                 format: 'MM/DD/YYYY'
+                 format: 'MM/DD/YYYY',
+                 useCurrent: false
            		});
 
                 $('#s-type, #si-type').chosen({
@@ -13,6 +14,7 @@ $( "#tabs" ).tabs({ active: 1 });
 
 
 function addShipment(){
+	$('#add_shipment').modal();
 	// $( "#add_shipment" ).dialog('destroy');
 	// $( "#add_shipment" ).dialog({
 	//       autoOpen: true,
@@ -38,7 +40,7 @@ function addShipment(){
 function getInbound(){
 
 
-$.post("backstage/warehouse/getInbound/", {},function(data){
+$.post("backstage/inbound/getInbound/", {},function(data){
 	var content = '';
 	console.log(data);
 	$.each(data.data, function( index, value ) {
@@ -68,10 +70,126 @@ $.post("backstage/warehouse/getInbound/", {},function(data){
 }
 
 
-$('#addnewshipment').click( function(){
-	addShipment();
-});
+
+function getCustomers(){
+	var bill_of_lading = "";
+	$.post("backstage/inbound/billoflading/", {},function(data){
+		$('#addnew_billoflading').val(data);
+	});
+}
+
+
+
 
 
 // $( "#add_shipment" ).dialog({autoOpen: false});	
 getInbound();
+
+
+//search function 
+var search = {
+    init: function() {
+		$('#clearInbound').click( function(){
+			search.cleardata();
+		});
+    },
+    cleardata: function(){
+    	$('.search-filter input, .search-filter select').val('');
+		$('#s-type, #si-type').chosen('destroy');
+		$('#s-type, #si-type').chosen({no_results_text: "Oops, nothing found!"});
+
+    }
+
+
+}
+
+var createshipment = {
+    init: function() {
+		$('#addnewshipment').click( function(){
+			createshipment.addShipment();
+		});
+		$('#addshipment_storage').change( function(){
+			$('.addshipment_rack').hide();
+			$('.addshipment_bay').hide();
+			$('.addshipment_'+$(this).val()).show();
+			createshipment.getstoragecode($(this).val());
+		});
+
+		$('.addshipment_bay').hide();
+
+
+
+    },
+    cleardata: function(){
+
+
+    }, 
+    getNewBillOfLading: function(){
+		var bill_of_lading = "";
+		$.post("backstage/inbound/billoflading/", {},function(data){
+			$('#addnew_billoflading').val(data);
+		});
+	},
+	addShipment: function(){
+		$('#add_shipment').modal();
+		
+		if($('#addnew_billoflading').val()==''){
+			createshipment.getNewBillOfLading();	
+		}	
+		createshipment.getstoragecode('rack');	
+		
+		$('#rack_code').change(function(){
+			var rack_level = $('#'+this.id+' :selected').data('racklevel');
+			var content = '';
+			for (i = 1; i <= rack_level; i++) { content +='<option value="'+i+'">'+i+'</option>';}
+			$('#rack_level').html(content);
+		});
+
+		createshipment.customer_name();
+
+	},
+	getstoragecode: function(t){
+		var d = $('#'+t+'_code');
+		if(d.html().trim()==''){
+			$.post("backstage/inbound/getcode/"+t, {},function(data){
+				var content = "<option></option>";
+				$.each(data.data, function( index, value ) {
+					if(t=='rack'){
+						var add = 'data-racklevel="'+value.no_rack_level+'"';	
+					}
+					content +='<option value="'+value.code+'" '+add+'>'+value.code+'</option>';
+				});
+
+				d.html(content);
+				d.chosen('destroy');
+				setTimeout(function(){ 
+					d.chosen();
+				}, 300);
+			});
+		}
+	}
+,
+	customer_name: function(){
+		var d = $('#shipment_customer_name');
+		if(d.html().trim()==''){
+			$.post("backstage/inbound/customer", {},function(data){
+				var content = "<option></option>";
+				$.each(data.data, function( index, value ) {
+					content +='<option value="'+value.id+'">'+value.customer_name+'</option>';
+				});
+
+				d.html(content);
+				d.chosen('destroy');
+				setTimeout(function(){ 
+					d.chosen();
+				}, 300);
+			});
+		}
+	}
+
+
+
+}
+
+createshipment.init();
+search.init();

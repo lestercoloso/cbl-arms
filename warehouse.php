@@ -12,6 +12,8 @@ require_once('header.php');
 // $racks = $db->select('select * from rack_storage where status=1' );
 // $bays = $db->select('select * from bay_storage where status=1' );
 
+$version =rand();
+
 ?>
 
 
@@ -19,7 +21,7 @@ require_once('header.php');
 
 <head>
 <!-- <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" /> -->
-<link rel="stylesheet" href="/assets/css/warehouse.css?<?php echo rand();?>" type="text/css" />
+<link rel="stylesheet" href="/assets/css/warehouse.css?<?php echo $version;?>" type="text/css" />
 <link rel="stylesheet" href="/bower_components/toastr/toastr.min.css" />
 
 <!-- for inbound/outbound -->
@@ -53,10 +55,20 @@ require_once('header.php');
 				  </ul>
 				  <div id="tabs-1" style="display: none;">
 				  	<div id="tab1-div1" style="margin-top: 3%;width: 25%;float:left">
+
+						<div id="shelfinfo">
+
+						</div>
+
+						<div class="left-container">
+							<button id="" class="button-class custombutton" >Edit</button>
+							<button id="" class="button-class custombutton" >Cancel</button>
+						</div>
+
 				  		<div style="float: left;width: 100%;">				  		
 				  			<button id="addStorage" class="button-class">ADD STORAGE</button>
 				  		</div>
-				  		<div id="warehousesearch" style="text-align: center;">
+				  		<div class="left-container">
 					  		<label for="sbox"><b>Search Bill of Lading no.:</b></label>
 					  		<input type="text" id="sbox" name="sbox"><br/><br/>
 					  		<label for="nbox"><b>Search Customer Name:</b></label>
@@ -241,8 +253,8 @@ require_once('header.php');
 
 <script src="/bower_components/toastr/toastr.min.js"></script>
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/assets/js/main.js?<?php echo rand();?>"></script>
-<script src="/assets/js/warehouse.js?<?php echo rand();?>"></script>
+<script src="/assets/js/main.js?<?php echo $version;?>"></script>
+<script src="/assets/js/warehouse.js?<?php echo $version;?>"></script>
 
 <!-- for inbound/outbound -->
 <script src="/js/moment.js"></script>

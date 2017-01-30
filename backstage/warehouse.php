@@ -61,25 +61,7 @@ class Warehouse{
 		jdie($data);
 	}
 
-	public function getInbound(){
 
-
-		$data = $this->db->select("select 
-			(select `customer_name` from customer_information where id=a.client_id) as customer_name, 
-			LPAD(`bill_of_lading`, 8, '0') as bill_of_lading, 
-			LPAD(`delivery_receipt`, 8, '0') as delivery_receipt, 
-			LPAD(`pallet_code`, 8, '0') as pallet_code, 
-			quantity, 
-			description, 
-			storage_type, 
-			inventory_type, 
-			DATE_FORMAT(`ex_date`,'%y-%m-%d') as ex_date,
-			DATE_FORMAT(`en_date`,'%y-%m-%d') as en_date,
-			DATE_FORMAT(`pu_date`,'%y-%m-%d') as pu_date
-			from inbound_list a where status=1" );
-		jdie($data);
-
-	}
 
 
 }

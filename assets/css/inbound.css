@@ -167,6 +167,7 @@ input[type="text"]{
 .date input{    margin: 0px 0; }
 .date { margin:8px 0; }
 .chosen-container{margin: 0px 0 8px 0;}
+#add_shipment .chosen-container{margin: 0px 0 0px 0;}
 
 .inbound-search-btn{
 	    position: relative;
@@ -231,4 +232,13 @@ input[type="text"]{
 }
 .modal-header .close{
 	    font-size: 2em;
+}
+
+#add_shipment .chosen-single span{
+	font-weight: 700;
+    font-size: 11px;
+    line-height: 2;
+}
+#add_shipment .chosen-results li{
+	font-size: 11px;
 }

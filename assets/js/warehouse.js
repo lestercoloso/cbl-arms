@@ -1,3 +1,6 @@
+	var adjust = 3;
+
+
 
 //alil js
 $(document).ready(function(){
@@ -52,15 +55,25 @@ function addStorage(){
 		$('.bayStorage').remove();
 
 		var deletebutton = '<button type="button" class="btn btn-danger deletethis" title="remove this storage"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span></button>';
+		var rotateright = '<button type="button" class="btn btn-primary rotateright"><i class="fa fa-rotate-right" aria-hidden="true"></i><span class="hidden-xs"> </span></button>';
+		var rotateleft = '<button type="button" class="btn btn-primary rotateleft"><i class="fa fa-rotate-left" aria-hidden="true"></i><span class="hidden-xs"> </span></button>';
+		var rotate = '<div class="rotate">'+rotateleft+rotateright+'</div>';
+		// var rotate = '';
+
 		var content = '';
 		$.each(rdatas, function( index, value ) {
-
 			// var style = value.style.replace(/(width:([0-9]+)px;)|(height:([0-9]+)px;)/g, "");
-			content +='<div id="rack-'+value.id+'" class="rackStorage" data-rackwidth="'+value.rack_width+'" data-racklength="'+value.rack_length+'"  data-racklevel="'+value.no_rack_level+'" data-racklevelheight="'+value.rack_level_height+'" style="height:'+value.rack_length.trim()+'px;width:'+value.rack_width+'px;'+value.style+'">'+deletebutton+'</div>';
+			// if(value.style==''){
+			// 	value.style = 'transform: rotate(0deg)';
+			// }
+			content +='<div id="rack-'+value.id+'" class="rackStorage" data-rackwidth="'+value.rack_width+'" data-racklength="'+value.rack_length+'"  data-racklevel="'+value.no_rack_level+'" data-racklevelheight="'+value.rack_level_height+'" style="height:'+value.rack_length.trim()+'px;width:'+value.rack_width+'px;'+value.style+'">'+deletebutton+rotate+'</div>';
 		});		
 
 		$.each(bdatas, function( index, value ) {
-			content +='<div class="bayStorage" id="bay-'+value.id+'" style="height:'+value.bay_length+'px;width:'+value.bay_width+'px;'+value.style+'">'+deletebutton+'</div>';
+			if(value.style==''){
+				value.style = 'transform: rotate(0deg)';
+			}
+			content +='<div class="bayStorage" id="bay-'+value.id+'" style="height:'+value.bay_length+'px;width:'+value.bay_width+'px;'+value.style+'">'+deletebutton+rotate+'</div>';
 		});
 
 		$('.warehouse_container').append(content);
@@ -193,16 +206,39 @@ function deleteStorage(id){
 			toastr["error"]("Failed to load.");
 		});
 	}
+}
+
+function getAngle(d){
+	var tr = d.css('transform');
+	var angle = 0;
+	if(tr!='none'){
+		var values = tr.split('(')[1],
+	    values = values.split(')')[0],
+	    values = values.split(',');
+		var a = values[0]; // 0.866025
+		var b = values[1]; // 0.5
+		var c = values[2]; // -0.5
+		var d = values[3]; // 0.866025
+		angle = Math.round(Math.asin(b) * (180/Math.PI));
+	}
 
 
+	return angle;
+}
+
+function rotate(d,angl){
+	var angle = getAngle(d)+parseInt(angl);
+	d.css({ WebkitTransform: 'rotate('+angle+'deg)'});
 }
 
 function addFunctionToStorage(){
 	//reveal functions
-	$( ".rackStorage, .bayStorage" ).hover(function() {
+	$( ".rackStorage, .bayStorage" ).click(function() {
 		$( ".rackStorage .btn, .bayStorage .btn" ).hide();
 		$( this ).find( '.btn' ).show();
 	});
+
+
 
 	// $( ".rackStorage, .bayStorage" ).on( "mouseleave", function() {
 	// 	$( ".rackStorage .btn, .bayStorage .btn" ).hide();
@@ -210,6 +246,13 @@ function addFunctionToStorage(){
 
 	$(".deletethis").click(function(){
 		deleteStorage($(this).parent().attr('id'));
+	});
+
+	$(".rotate .rotateright").click(function(){
+		rotate($(this).parent().parent(),'+'+adjust);
+	});
+	$(".rotate .rotateleft").click(function(){
+		rotate($(this).parent().parent(),'-'+adjust);
 	});
 
 }
