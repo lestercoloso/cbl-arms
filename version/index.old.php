@@ -1,7 +1,7 @@
 <br>
-<link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-<link rel="stylesheet" type="text/css" href="../bower_components/font-awesome/css/font-awesome.min.css"/>
-<link rel="stylesheet" type="text/css" href="../bower_components/chosen/chosen.css"/>
+<link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/bower_components/font-awesome/css/font-awesome.min.css"/>
+<link rel="stylesheet" type="text/css" href="/bower_components/chosen/chosen.css"/>
 
 
 <style>
@@ -32,8 +32,7 @@ label{ float: left; }
 }
 
 </style>
-<link rel="stylesheet" type="text/css" href="includes/chosen.bootstrap.css"/>
-<link rel="stylesheet" type="text/css" href="includes/jquery-ui.css"/>
+<link rel="stylesheet" type="text/css" href="/includes/chosen.bootstrap.css?2131"/>
 <body>
 <?php
 
@@ -48,7 +47,7 @@ $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
 ?>
 <div class="container col-sm-6">
 
-	<div class="form-group col-sm-12 hide">
+	<div class="form-group col-sm-12">
 		  <div class="col-sm-6">
 			 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#login-modal">Store your Github</button>
 			 <button type="button" class="btn btn-default" data-toggle="modal" id="updatebutton">
@@ -58,6 +57,13 @@ $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
 
 
 	
+	<div class="form-group col-sm-12" id="application_path_container">
+	    <label class="col-sm-4" for="application_path">Application Path : </label>
+	    <div class="col-sm-8">
+	        <input name="application_path" type="text" id="application_path" autocomplete="off" placeholder="Place your application path here" value="<?php echo $_COOKIE['server_path']?>" class="form-control">
+	        <span id="application_path_error" class="text-danger"></span>
+	    </div>
+	</div>	
 
 	<div class="form-group col-sm-12">
 		  <label for="stype" class="col-sm-4" >Application Branch : </label>
@@ -92,38 +98,44 @@ $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
 
 
 
+	<div class="form-group col-sm-12">
+		  <label for="stype" class="col-sm-4" >Sitecode : </label>
+		  <div class="col-sm-5">
+			<input type="text" id="sitecode" placeholder="Enter Site Code" value="<?php echo $dbhost; ?>" class="form-control">
+		  </div>
+	</div>
 
 	<div class="form-group col-sm-12">
 		  <label for="stype" class="col-sm-4" >Host : </label>
 		  <div class="col-sm-5">
-			<input type="text" id="host" placeholder="Enter host" class="form-control">
+			<input type="text" id="host" placeholder="Enter host" value="<?php echo $dbhost; ?>" class="form-control">
 		  </div>
 	</div>
 
 	<div class="form-group col-sm-12">
 		  <label for="stype" class="col-sm-4" >Database : </label>
 		  <div class="col-sm-5">
-			 <input type="text" id="database" placeholder="Enter database" class="form-control">
+			 <input type="text" id="database" placeholder="Enter database" value="<?php echo $db; ?>" class="form-control">
 		  </div>
 	</div>
 
 	<div class="form-group col-sm-12">
 		  <label for="stype" class="col-sm-4" >Username : </label>
 		  <div class="col-sm-5">
-			 <input type="text" id="usr-config" placeholder="Enter username" class="form-control">
+			 <input type="text" id="username" placeholder="Enter username" value="<?php echo $dbusr; ?>" class="form-control">
 		  </div>
 	</div>
 
 	<div class="form-group col-sm-12">
 		  <label for="stype" class="col-sm-4" >Password : </label>
 		  <div class="col-sm-5">
-			 <input type="password" id="pss-config" placeholder="Enter password" class="form-control">
+			 <input type="password" id="password" placeholder="Enter password" value="<?php echo $dbpss; ?>" class="form-control">
 		  </div>
 	</div>
 
 	<div class="form-group col-sm-12">
 		  <div class="col-sm-6">
-			 <button type="button" class="btn btn-success chngdb">Change Config</button>
+			 <button type="button" class="btn btn-success chngdb">Change Database</button>
 		  </div>
 	</div>
 
@@ -162,11 +174,9 @@ $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
 
 
 
-<script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../bower_components/chosen/chosen.jquery.js"></script>
-<script type="text/javascript" src="includes/jquery-ui.js"></script>
-
+<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="bower_components/chosen/chosen.jquery.js"></script>
 
 <script>
 	function getbranch(){
@@ -177,24 +187,7 @@ $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
 		var select = '';
 		$('#branch').chosen('destroy');
 		$.post("backend/getbranch",{path:path}, function(data){
-		
-		if(data.config){
-			$('#host').val(data.config.host);
-			$('#database').val(data.config.database);
-			$('#usr-config').val(data.config.username);
-			$('#pss-config').val(data.config.password);
-			useDb();	
-		}else{
-			$('#host').val('');
-			$('#database').val('');
-			$('#usr-config').val('');
-			$('#pss-config').val('');	
-		}
-		
-
 			if(data.status==200){
-
-
 				$.each(data.data, function( index, value ) {
 					if(data.current_branch==value){
 						select = 'selected';
@@ -214,12 +207,11 @@ $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
 				error = '';
 			}
 			gitResult(data.git);
-			useDb();
 			$('#application_version').html("<b>"+data.version+"</b>");
 			$('#application_path_error').html(error);
 			$('#branch').html(content);
 			$('#branch_container .loader').hide();
-			$('#branch').chosen({search_contains: true, no_results_text: "add?"});
+			$('#branch').chosen({search_contains: true});
 		});
 	}
 
@@ -228,33 +220,26 @@ $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
 		var path = $('#application_path').val();
 		$('#branch_container .loader').show();
 		$.post("backend/changeBranch",{branch:branch, path:path}, function(data){
-			
-			$('#host').val(data.config.host);
-			$('#database').val(data.config.database);
-			$('#usr-config').val(data.config.username);
-			$('#pss-config').val(data.config.password);
-
 			gitResult(data.data);
 			$('#application_version').html("<b>"+data.version+"</b>");
 			$('#branch_container .loader').hide();
-			checkUpdates();
 			useDb();
+			checkUpdates();
 		});
 	}
 
-	function useDb(t){
+	function useDb(){
 		var host 	 = $('#host').val();
 		var database = $('#database').val();
-		var username = $('#usr-config').val();
-		var password = $('#pss-config').val();
+		var username = $('#username').val();
+		var password = $('#password').val();
 
-		// document.cookie = "dbhost="+host;
-		// document.cookie = "db="+database;
-		// document.cookie = "dbusr="+username;
-		// document.cookie = "dbpss="+password;
-		var path = $('#application_path').val();
-		$('.db_status').html('<b style="color: #348c34;">Connecting...</b>');
-		$.post("backend/changeConfig",{t:t, path:path, host:host, database:database, username:username, password:password}, function(data){
+		document.cookie = "dbhost="+host;
+		document.cookie = "db="+database;
+		document.cookie = "dbusr="+username;
+		document.cookie = "dbpss="+password;
+
+		$.post("backend/changeConfig",{}, function(data){
 			$('.db_status').html(data);
 			console.log(data);
 		});
@@ -286,7 +271,6 @@ $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
 			}
 			$('#updatebutton span').hide();
 			checkUpdates();
-			useDb();
 		});
 	}
 
@@ -306,17 +290,13 @@ $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
 	});
 
 	$('.chngdb').click(function(){
-		useDb('change');
+		useDb();
 	});
 	$('#updatebutton').click(function(){
 		gitUpdate();
 	});
 	$('#updatebutton span').hide();
-	// useDb();
+	useDb();
 	checkUpdates();
 	getbranch();
-
-
-
-
 </script>
