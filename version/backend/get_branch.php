@@ -82,14 +82,19 @@ function changeConfig(){
 		fclose($file);
 	}
 
-
+		$status['version'] = '0.00';
 		$conn = new MySQLi(trim($dbhost), trim($dbusr), trim($dbpss), trim($db));
-		$status = '<b style="color:#b41011;">Not Connected</b>';
+			$status['status'] = '<b style="color:#b41011;">Not Connected</b>';
 		if(!mysqli_connect_error()) {
-			$status = '<b style="color: #348c34;">Connected</b>';
+			$status['status'] = '<b style="color: #348c34;">Connected</b>';
+
+			$result = $conn->query("select `version` from version where description='database'");
+			$return['count'] = $result->num_rows;
+			$row = $result->fetch_assoc();
+			$status['version'] = $row['version'];
 		}
 
-		die($status);
+		jdie($status);
 
 }
 
@@ -121,6 +126,12 @@ function changeConfig(){
 
 	}
 
+	function getpatcher(){
+		$server_path = dirname(dirname(dirname(__FILE__)));
+		chdir($server_path."/sql");
+		$patch = glob('*');
+		jdie($patch);
+	}
 
 
 

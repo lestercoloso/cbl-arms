@@ -64,16 +64,21 @@ $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
 		  <div class="col-sm-8" id="branch_container">
 			  <div class="col-sm-10 row"><select class="form-control" id="branch" placeholder="Select a branch" ></select></div>
 			  <div class="col-sm-2 loader"> <i class="fa fa-circle-o-notch fa-spin" style="font-size:24px;position: relative;top: 4px;"></i></div>
-			 
 		  </div>
 	</div>
 
 	<div class="form-group col-sm-12">
-		  <label for="stype" class="col-sm-4" >Application Web Version : </label>
-		  <div class="col-sm-6" id="application_version">
-			  <b>0.00</b>
+		  <label for="stype" class="col-sm-4" >Database Patcher : </label>
+		  <div class="col-sm-5" id="branch_container">
+			  <div class="col-sm-10 row"><select class="form-control" id="patcher" placeholder="Select a version" ></select></div>
+			 <div class="col-sm-2" >
+		  	 	<button type="button" class="btn btn-success">Patch!</button>
+		  	 </div>
 		  </div>
+
 	</div>
+
+
 
 	<div class="col-sm-12" style="border-bottom:1px solid black;"">
 	</div>
@@ -91,7 +96,12 @@ $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
 
 
 
-
+	<div class="form-group col-sm-12">
+		  <label for="stype" class="col-sm-4" >Database Version : </label>
+		  <div class="col-sm-6" id="database_version">
+			  <b>0.00</b>
+		  </div>
+	</div>
 
 	<div class="form-group col-sm-12">
 		  <label for="stype" class="col-sm-4" >Host : </label>
@@ -255,8 +265,10 @@ $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
 		var path = $('#application_path').val();
 		$('.db_status').html('<b style="color: #348c34;">Connecting...</b>');
 		$.post("backend/changeConfig",{t:t, path:path, host:host, database:database, username:username, password:password}, function(data){
-			$('.db_status').html(data);
-			console.log(data);
+			$('.db_status').html(data.status);
+			$('#database_version b').html(data.version);
+			// console.log(data);
+			getpatcher();
 		});
 
 	}
@@ -287,6 +299,21 @@ $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
 			$('#updatebutton span').hide();
 			checkUpdates();
 			useDb();
+		});
+	}
+
+	function getpatcher(){
+		var version = $('#database_version b').html();
+		var content = '';
+		$.post("backend/getpatcher",{version:version}, function(data){
+			$.each(data, function( index, value ) {
+					var select = '';
+				if(version==value){
+					select = 'selected';
+				}
+				content += '<option value"'+value+'" '+select+'>'+value+'</option>';
+			});
+			$('#patcher').html(content);
 		});
 	}
 
