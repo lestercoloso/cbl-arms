@@ -6,6 +6,11 @@ function pdie($array){
 	die();
 }
 
+function jdie($array){
+	header('Content-Type: application/json');
+	die(json_encode($array));
+}
+
 
 function get_config($file){
 	$configfile = fopen($file, "r") or die("Unable to open file!");

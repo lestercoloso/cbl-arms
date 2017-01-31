@@ -9,7 +9,7 @@
 * Mysql database class - only one connection alowed
 */
 
-require_once('/helper/utility_helper.php');
+require_once(dirname(__file__).'/helper/utility_helper.php');
 
 class Database {
 
@@ -20,12 +20,12 @@ class Database {
 	public $_password = "";
 	public $_database = "cblarms";
 
-
-
 	// Constructor
 	public function __construct() {
 
-		$dbconfig = get_config('config.cnf');
+
+		// die(dirname(__file__).'/config.cnf');
+		$dbconfig = get_config(dirname(__file__).'/config.cnf');
 		$this->_connection = new MySQLi(trim($dbconfig['host']), trim($dbconfig['username']), trim($dbconfig['password']), trim($dbconfig['database']));
 	
 		// Error handling
@@ -46,10 +46,71 @@ class Database {
 	public function resultArray($result){
 		$array = [];
 		while($row = $result->fetch_assoc()) {
-			$array = $row;
+			$array[] = $row;
 		}
 
 		return $array;
+	}
+
+	public function select_one($sql=''){
+		//$sql = "SELECT * FROM user_account";
+		$result = $this->_connection->query($sql);
+		$return = $result->fetch_assoc();
+		return $return;
+
+	}
+
+	public function select($sql=''){
+		//$sql = "SELECT * FROM user_account";
+		$result = $this->_connection->query($sql);
+		$return['count'] = $result->num_rows;
+		$return['data'] = $this->resultArray($result);
+		return $return;
+
+	}
+
+	public function insert($table='', $columns=[]){
+		foreach($columns as $col => $val){
+			$column[] = "`".$col."`";
+			$value[] = "'".$val."'";
+
+		}
+
+		$sql = "insert into `$table` (".implode(',',$column).") values (".implode(',',$value).")";
+		return $this->CheckResult($sql);
+	}
+
+	public function delete($table='', $where=''){
+		$where = !empty($where) ? ' where '.$where : '';
+		$sql = "delete from $table $where";
+
+		return $this->CheckResult($sql);
+
+	}
+
+	public function CheckResult($sql){
+		if ($this->_connection->query($sql) === TRUE) {
+			return 1;
+		} else {
+			return "Error: " . $sql . "<br>" . $this->_connection->error;
+		}
+
+	}
+
+
+	public function update($table,$data=[],$where=''){
+		$where = !empty($where) ? ' where '.$where : '';
+		$array = [];
+		foreach($data as $col=>$val){
+			$array[] = "`$col`='$val'";
+		}
+
+		$sql = "update $table set ".implode($array, ',')." $where";
+		if ($this->_connection->query($sql) === TRUE) {
+			return 1;
+		} else {
+			return "Error: " . $sql . "<br>" . $this->_connection->error;
+		}
 	}
 
 
