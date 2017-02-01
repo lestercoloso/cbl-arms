@@ -242,3 +242,6 @@ input[type="text"]{
 #add_shipment .chosen-results li{
 	font-size: 11px;
 }
+.has-error a.chosen-default{
+	border-color: #a94442 !important;
+}

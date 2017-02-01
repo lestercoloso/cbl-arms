@@ -32,15 +32,20 @@ function createPostData(classused){
 			array['error'] = '';
 			$('div').removeClass('has-error');	
 		
-	$('.'+classused+' input').each(function( data ) {
+	$('.'+classused+' input, .'+classused+' select').each(function( data ) {
 			var c = $(this).attr('col');
 			var v = $(this).val();
 
-			array2[c] = v;
 
-			if(!v){
-				$('#'+this.id+'_container').addClass('has-error');
-				array['error'] = 'Complete the fields';
+			// if(c==undefined){
+			// 	console.log(this);
+			// }
+			if(c!=undefined){
+				array2[c] = v;
+				if(!v || v==''){
+					$('#'+this.id+'_container').addClass('has-error');
+					array['error'] = 'Complete the fields';
+				}
 			}
 	});
 	array['data'] = array2;
@@ -48,3 +53,9 @@ function createPostData(classused){
 // 
 }
 
+
+function resetchosen(id){	
+	$('#'+id).chosen('destroy');
+	$('#'+id).val('');
+	$('#'+id).chosen();
+}

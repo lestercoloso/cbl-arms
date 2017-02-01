@@ -28,11 +28,21 @@ CREATE TABLE `customer_information` (
 ALTER TABLE `inbound_list` 
 ADD COLUMN `invoice_no` INT(45) NULL AFTER `delivery_receipt`;
 
+ALTER TABLE `inbound_list` 
+ADD COLUMN `location` varchar(255) NULL AFTER `delivery_receipt`;
+
 
 ALTER TABLE `inbound_list` 
 ADD COLUMN `code` INT(45) NULL AFTER `invoice_no`;
 
 ALTER TABLE `inbound_list` 
 ADD COLUMN `rack_level` INT(45) NULL AFTER `code`;
+
+
+ALTER TABLE `inbound_list` 
+CHANGE COLUMN `ex_date` `ex_date` DATE NULL DEFAULT NULL ,
+CHANGE COLUMN `en_date` `en_date` DATE NULL DEFAULT NULL ,
+CHANGE COLUMN `pu_date` `pu_date` DATE NULL DEFAULT NULL ;
+
 
 

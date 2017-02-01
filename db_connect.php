@@ -77,6 +77,7 @@ class Database {
 		}
 
 		$sql = "insert into `$table` (".implode(',',$column).") values (".implode(',',$value).")";
+		// die($sql);
 		return $this->CheckResult($sql);
 	}
 

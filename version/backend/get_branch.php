@@ -70,7 +70,7 @@ function changeConfig(){
 	$dbhost = !empty($_POST['host']) ? $_POST['host'] : '';
 	$db = !empty($_POST['database']) ? $_POST['database'] : '';
 	$dbusr = !empty($_POST['username']) ? $_POST['username'] : '1';
-	$dbpss = !empty($_POST['password']) ? $_POST['password'] : '1';
+	$dbpss = !empty($_POST['password']) ? $_POST['password'] : '';
 	$t = !empty($_POST['t']) ? $_POST['t'] : '';
 
 

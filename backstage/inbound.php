@@ -48,6 +48,23 @@ class Inbound{
 		jdie($select);
 	}
 
+	public function save(){
+
+		$data = json_decode($_POST['d'], TRUE);
+		$data['bill_of_lading'] = (int) $data['bill_of_lading'];
+		$data['ex_date'] = date('Y-m-d', strtotime($data['ex_date']));
+		$data['en_date'] = date('Y-m-d', strtotime($data['en_date']));
+		$data['pu_date'] = date('Y-m-d', strtotime($data['pu_date']));
+
+
+		$return['status'] = 100;
+		if($this->db->insert("inbound_list",$data)){
+			$return['status'] = 200;
+		}
+		jdie($return);
+
+
+	}
 	
 }
 
