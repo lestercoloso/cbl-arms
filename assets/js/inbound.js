@@ -37,10 +37,10 @@ function addShipment(){
 	// });	
 }
 
-function getInbound(){
+function getInbound(page=1){
 
 
-$.post("backstage/inbound/getInbound/", {},function(data){
+$.post("backstage/inbound/getInbound/"+page, {},function(data){
 	var content = '';
 	// console.log(data);
 	$.each(data.data, function( index, value ) {
@@ -61,8 +61,11 @@ $.post("backstage/inbound/getInbound/", {},function(data){
 		content +='</tr>';
 	});
 
+	$('#pagination-container').html(data.pagination);
 	$('#inbound-list tbody').html(content);
-
+	$('.pagenumber').click(function(){
+		getInbound($(this).data('page'));
+	});
 }).fail(function(){
 	toastr["error"]("Failed to load the inbound list.");
 });

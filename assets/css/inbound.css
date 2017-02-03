@@ -204,9 +204,12 @@ input[type="text"]{
 
 .pagination>li>a, .pagination>li>span {
     color: #cc0000;
+    cursor: pointer;
 }
 .pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover {
-    color: #cc0000;
+	background-color: #cc0000;
+	color: white;
+	border-color: #cc0000;
 }
 
 #add_shipment .row{

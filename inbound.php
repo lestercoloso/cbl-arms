@@ -121,9 +121,9 @@ require_once('header.php');
 
 </div>
 
-
+<div id="pagination-container">
 <ul class="pagination"><li class="active"><a href="#">1</a></li><li><a href="/wilson/?&amp;page=2" data-ci-pagination-page="2">2</a></li><li><a href="/wilson/?&amp;page=3" data-ci-pagination-page="3">3</a></li><li><a href="/wilson/?&amp;page=2" data-ci-pagination-page="2" rel="next">»</a></li></ul>
-
+</div>
 	<div>
 		<!-- <button id="addnewshipment" class="button-class custombutton"  data-toggle="modal" data-target="#add_shipment" >Add Shipment</button> -->
 		<button id="addnewshipment" class="button-class custombutton" >Add Shipment</button>
