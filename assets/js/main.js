@@ -42,7 +42,10 @@ function createPostData(classused){
 			// }
 			if(c!=undefined){
 				array2[c] = v;
-				if(!v || v==''){
+
+				if($(this).hasClass('not_mandatory')){
+
+				}else if((!v || v=='')){
 					$('#'+this.id+'_container').addClass('has-error');
 					array['error'] = 'Complete the fields';
 				}

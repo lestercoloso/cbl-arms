@@ -62,18 +62,23 @@ $(document).ready(function(){
 						$.each(data,function(index,value){
 							a = data.feedstatus;
 						});
+
+							$('.loader').hide();
+							$('#loginForm').show();
 							if(a==0){
 								toastr["error"]("User Account does not exist.");
 							}else if(a==1){
 								toastr["error"]("The Password you entered was incorrect.");
 							}else if(a==2){									
 									toastr["success"]("successfully logged in!");
+									$('.loader').show();
+									$('.loader').html('Redirecting...');
+									$('#loginForm').hide();
 									setTimeout(relocate, 2000);
 							}else{
 								toastr["error"]("Invalid username or password.");
 							}
-							$('.loader').hide();
-							$('#loginForm').show();
+
 					},"json");
 
 				}

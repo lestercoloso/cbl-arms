@@ -4,7 +4,6 @@
 
 //alil js
 $(document).ready(function(){
-	$( "#tabs" ).tabs();
 	
 		$('.ui-tab').click(function(e){
 

@@ -7,13 +7,15 @@ session_start();
 $_SESSION['page']="view1";
 
 require_once('header.php');
-// require_once("db_connect.php");
+require_once("helper/utility_helper.php");
 // $db = new database();
 // $racks = $db->select('select * from rack_storage where status=1' );
 // $bays = $db->select('select * from bay_storage where status=1' );
-
+require_once('config/add_shipment_forms.php');
 ?>
 
+
+	    
 
 
 
@@ -48,7 +50,7 @@ require_once('header.php');
 				  <ul>
 				    <li><a href="warehouse.php">WAREHOUSE</a></li>
 				    <li><a href="#tabs-2">INBOUND</a></li>
-				    <li><a href="#tabs-3">OUTBOUND</a></li>
+				    <li><a href="outbound.php">OUTBOUND</a></li>
 				    <li><a href="#tabs-4">LOCATION MANAGEMENT</a></li>
 				  </ul>
 				  <div id="tabs-1" style="display: none;">				  	
@@ -60,49 +62,61 @@ require_once('header.php');
 <h2>Inbound Shipment</h2>
 <div class="search-filter row" >
 	<br>
-	<div class="col-sm-4">	
+	<div class="col-sm-4 searchdata">	
 
-			<input name="billoflandingno" placeholder="Bill of Lading No." type="text" class="form-control search-text">
-			<input name="customername" placeholder="Customer Name" type="text" class="form-control search-text">
-			<input name="deliveryreceipt" placeholder="Delivery Receipt" type="text" class="form-control search-text">
+			<input name="billoflandingno" id="search_bill_of_lading" placeholder="Bill of Lading No." col="bill_of_lading" type="text" class="form-control search-text not_mandatory">
+			<input name="customername"  id="search_customer_name"  placeholder="Customer Name" type="text"  col="customer_name" class="form-control search-text not_mandatory">
+			<input name="deliveryreceipt"  id="search_delivery_receipt"  col="delivery_receipt" placeholder="Delivery Receipt" type="text" class="form-control search-text not_mandatory">
 
 	</div>
-	<div class="col-sm-4">	
+	<div class="col-sm-4 searchdata">	
 
-				<input name="search_pallet_code" placeholder="Pallet Code" type="text" class="form-control search-text">
+				<input name="search_pallet_code"  id="search_pallet_code"  col="pallet_code" placeholder="Pallet Code" type="text" class="form-control search-text not_mandatory">
 				
-				<select class="form-control chosen-select" id="s-type" data-placeholder="Storage Type">
-						<option value=""></option>
-					    <option value="rack">Rack</option>
-					    <option value="bay">Bay</option>
+				<select class="form-control chosen-select not_mandatory" id="s-type" col="storage_type" data-placeholder="Storage Type">
+							<option><option>
+						<?php
+							foreach($config['storage_type'] as $key=>$tos){
+								if($key!=''){
+									echo "<option value='$key'>$tos<option>";									
+								}
+							}
+						?>
 				</select>
 
-				<select class="form-control chosen-select" id="si-type" data-placeholder="Sub-inventory Location Type">
+				<select class="form-control chosen-select not_mandatory" id="si-type" col="inventory_type" data-placeholder="Sub-inventory Location Type">
 				 		<option><option>
+						<?php
+							foreach($config['subinventory_type'] as $key=>$tos){
+								if($key!=''){
+									echo "<option value='$key'>$tos<option>";									
+								}
+							}
+						?>
 				</select>
 
 		
 
 	</div>
-	<div class="col-sm-4">	
+	<div class="col-sm-4 searchdata">	
 
 
 			    <div class='input-group date' id='exdate_group'>
-			        <input type='text' class="form-control"  name="exdate" id="exdate" placeholder="Expiration Date"/>
+			        <input type='text' class="form-control not_mandatory" col="ex_date" name="exdate" id="exdate" placeholder="Expiration Date"/>
 			        <span class="input-group-addon">
 			            <span class="fa fa-calendar"></span>
 			        </span>
 			    </div>
 
 			    <div class='input-group date' id='endate_group'>
-			        <input type='text' class="form-control"  name="endate" id="endate" placeholder="Entry Date"/>
+			        <input type='text' class="form-control not_mandatory" col="en_date" name="endate" id="endate" placeholder="Entry Date"/>
 			        <span class="input-group-addon">
 			            <span class="fa fa-calendar"></span>
 			        </span>
 			    </div>
 	
 			    <div class='input-group date' id='pudate_group'>
-			        <input type='text' class="form-control" name="pudate" id="pudate" placeholder="Pickup Date" />
+			        <input type='text' class="form-control not_mandatory" col="pu_date" name="pudate" id="pudate" placeholder="Pickup Date" />
 			        <span class="input-group-addon">
 			            <span class="fa fa-calendar"></span>
 			        </span>
@@ -162,15 +176,6 @@ require_once('header.php');
 </table>
 
 
-
-
-
-
-
-
-
-
-
 <div id="add_shipment" class="modal fade" role="dialog">
 	<div class="modal-dialog custom-class">
 	 <div class="modal-content">
@@ -184,160 +189,16 @@ require_once('header.php');
 	<form>
 	<fieldset>
 
-	<div class="col-sm-4 row" id="">
-		
-		<div class="form-group col-sm-12 addship" id="" >
-		<label class="col-sm-4" for="textinput">Bill of Lading: </label>
-		<div class="col-sm-8">
-		<input name="bill_of_lading" type="text"  min="1" col="bill_of_lading" id="addnew_billoflading"  class="form-control" value="" placeholder="autogenerated" disabled="disabled">
-		</div>
-		</div>
 
-		<div class="form-group col-sm-12 addship" id="shipment_customer_name_container">
-		<label class="col-sm-4  chosen-select" for="textinput" >Customer Name: </label>
-		<div class="col-sm-8">
-			<select class="form-control" id="shipment_customer_name" col="client_id"  data-placeholder="Input Customer Name">
-			</select>
-		<span id="customer_name_error" class="text-danger"></span>	
-		</div>
-		</div>		
+		<?php
+			foreach($config['add_shipment'] as $forms){
+				echo '<div class="col-sm-4 row" id="">';
+				echo construct_form($forms);				
+				echo '</div>';
+			}
 
+		?>	
 
-
-		<div class="form-group col-sm-12 addship" id="delivery_receipt_shipment_container">
-		<label class="col-sm-4" for="textinput">Delivery Receipt: </label>
-		<div class="col-sm-8">
-		<input name="delivery_receipt" type="text"  min="1" col="delivery_receipt" id="delivery_receipt_shipment"  class="form-control">
-		<span id="delivery_receipt_error" class="text-danger"></span>
-		</div>
-		</div>
-
-		<div class="form-group col-sm-12 addship" id="invoice_no_shipment_container">
-		<label class="col-sm-4" for="textinput">Invoice No.: </label>
-		<div class="col-sm-8">
-		<input name="invoice_no" type="text"  min="1" col="invoice_no" id="invoice_no_shipment"  class="form-control">
-		<span id="invoice_no_error" class="text-danger"></span>
-		</div>
-		</div>
-
-		<div class="form-group col-sm-12 addship" id="pallet_code_container">
-		<label class="col-sm-4" for="textinput">Pallet Code: </label>
-		<div class="col-sm-8">
-		<input name="bill_of_lading" type="text"  min="1" col="pallet_code" id="pallet_code_shipment"  class="form-control" value="This is autogenerated" disabled="disabled">
-		<span id="pallet_code_error" class="text-danger"></span>
-		</div>
-		</div>
-
-
-
-	</div>		
-
-	<div class="col-sm-4 row" id="">
-
-			<div class="form-group col-sm-12 addship" id="quantity_container">
-			<label class="col-sm-4" for="textinput">Quantity: </label>
-			<div class="col-sm-8">
-			<input name="quantity" type="number"  min="1" col="quantity" id="quantity"  class="form-control">
-			<span id="quantity_error" class="text-danger"></span>
-			</div>
-			</div>
-
-			<div class="form-group col-sm-12 addship">
-			<label for="stype" class="col-sm-4">Storage: </label>
-			<div class="col-sm-8">
-			<select class="form-control" id="addshipment_storage" col="storage_type">
-			<option value="rack">Rack</option>
-			<option value="bay">Bay</option>
-			</select>
-			</div>
-			</div>
-
-			<div class="form-group col-sm-12 addshipment_rack addship" id="rack_code_container">
-			<label class="col-sm-4  chosen-select" for="textinput" >Rack Code: </label>
-			<div class="col-sm-8">
-				<select class="form-control" id="rack_code" col="code" data-placeholder="Input rack code">
-				</select>
-			</div>
-			</div>
-			
-			<div class="form-group col-sm-12 addshipment_rack addship" id="rack_level_container">
-			<label class="col-sm-4" for="textinput">Rack Level: </label>
-			<div class="col-sm-8">
-			<select class="form-control" id="rack_level" col="rack_level">
-			</select>
-			</div>
-			</div>
-			
-			<div class="form-group col-sm-12 addshipment_bay" id="bay_code_container">
-			<label class="col-sm-4" for="textinput" >Bay Code: </label>
-			<div class="col-sm-8">
-				<select class="form-control" id="bay_code" col="code" data-placeholder="Input bay code">
-				</select>
-			</div>
-			</div>
-
-			<div class="form-group col-sm-12 addship" id="subinventorylocation_type_container">
-			<label class="col-sm-4" for="textinput">Sub-inventory Location Type: </label>
-			<div class="col-sm-8">
-			<select class="form-control" id="subinventorylocation_type" col="inventory_type">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			</select>
-			</div>
-			</div>
-	    
-	</div>
-
-		<div class="col-sm-4 row" id="">
-
-			<div class="form-group col-sm-12 addship" id="description_container">
-			<label class="col-sm-4" for="textinput">Description: </label>
-			<div class="col-sm-8">
-			<input name="description" type="text"  min="1" col="description" id="description"  class="form-control">
-			<span id="description_error" class="text-danger"></span>
-			</div>
-			</div>
-
-			<div class="form-group col-sm-12 addship" id="location_container">
-			<label class="col-sm-4" for="textinput">Location: </label>
-			<div class="col-sm-8">
-			<input name="location" type="text"  min="1" col="location" id="location"  class="form-control">
-			<span id="location_error" class="text-danger"></span>
-			</div>
-			</div>
-
-			<div class="form-group col-sm-12 addship" id="ex_date_container">
-			<label class="col-sm-4" for="textinput">Expiration Date: </label>
-			<div class="input-group date  col-sm-8  create-date">
-			<input type="text" class="form-control" name="ex_date" col="ex_date" id="ex_date">
-			<span class="input-group-addon">
-			<span class="fa fa-calendar"></span>
-			</span>
-			</div>
-			</div>
-
-			<div class="form-group col-sm-12 addship" id="en_date_container">
-			<label class="col-sm-4" for="textinput">Entry Date: </label>
-			<div class="input-group date  col-sm-8 create-date">
-			<input type="text" class="form-control" name="en_date" col="en_date" id="en_date">
-			<span class="input-group-addon">
-			<span class="fa fa-calendar"></span>
-			</span>
-			</div>
-			</div>
-
-			<div class="form-group col-sm-12 addship" id="pu_date_container">
-			<label class="col-sm-4" for="textinput">Expiration Date: </label>
-			<div class="input-group date  col-sm-8 create-date" >
-			<input type="text" class="form-control" name="pu_date" col="pu_date" id="pu_date">
-			<span class="input-group-addon">
-			<span class="fa fa-calendar"></span>
-			</span>
-			</div>
-			</div>
-
-
-		</div>
 				
 
 		</fieldset>
@@ -345,6 +206,7 @@ require_once('header.php');
 
 		</div>
 		<div class="modal-footer">
+          <button type="button" class="btn btn-default" id="updateshipment"><i class="fa fa-circle-o-notch fa-spin hide" style=""></i> Update</button>
           <button type="button" class="btn btn-default" id="savenewshipment"><i class="fa fa-circle-o-notch fa-spin hide" style=""></i> Save</button>
           <button type="button" class="btn btn-default" id="clearnewshipment">Clear</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -367,7 +229,9 @@ require_once('header.php');
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/assets/js/main.js?<?php echo rand();?>"></script>
 <script src="/assets/js/warehouse.js?<?php echo rand();?>"></script>
-
+<script type="text/javascript">
+	$( "#tabs" ).tabs({ active: 1 });
+</script>
 <!-- for inbound/outbound -->
 <script src="/js/moment.js"></script>
 <script src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>

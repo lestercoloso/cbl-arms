@@ -50,7 +50,7 @@ $version =rand();
 				  <ul>
 				    <li><a href="#tabs-1">WAREHOUSE</a></li>
 				    <li><a href="inbound.php">INBOUND</a></li>
-				    <li><a href="#tabs-3">OUTBOUND</a></li>
+				    <li><a href="outbound.php">OUTBOUND</a></li>
 				    <li><a href="#tabs-4">LOCATION MANAGEMENT</a></li>
 				  </ul>
 				  <div id="tabs-1" style="display: none;">
@@ -60,7 +60,7 @@ $version =rand();
 
 						</div>
 
-						<div class="left-container">
+						<div class="left-container hide">
 							<button id="" class="button-class custombutton" >Edit</button>
 							<button id="" class="button-class custombutton" >Cancel</button>
 						</div>
@@ -256,6 +256,10 @@ $version =rand();
 <script src="/assets/js/main.js?<?php echo $version;?>"></script>
 <script src="/assets/js/warehouse.js?<?php echo $version;?>"></script>
 
+
+<script type="text/javascript">
+	$( "#tabs" ).tabs({ active: 0 });
+</script>
 <!-- for inbound/outbound -->
 <script src="/js/moment.js"></script>
 <script src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>

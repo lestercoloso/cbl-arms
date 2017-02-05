@@ -265,10 +265,18 @@ $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
 		var path = $('#application_path').val();
 		$('.db_status').html('<b style="color: #348c34;">Connecting...</b>');
 		$.post("backend/changeConfig",{t:t, path:path, host:host, database:database, username:username, password:password}, function(data){
-			$('.db_status').html(data.status);
-			$('#database_version b').html(data.version);
-			// console.log(data);
-			getpatcher();
+			
+			if(data){
+				$('.db_status').html(data.status);
+				$('#database_version b').html(data.version);
+			}else{
+				$('.db_status').html('<b style="color: #348c34;">Incompatible</b>');
+				$('#database_version b').html('0.00');
+			}
+				getpatcher();		
+		}).fail(function(){
+			$('.db_status').html('<b style="color: #348c34;">Incompatible</b>');
+			$('#database_version b').html('0.00');
 		});
 
 	}
@@ -311,7 +319,9 @@ $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
 				if(version==value){
 					select = 'selected';
 				}
-				content += '<option value"'+value+'" '+select+'>'+value+'</option>';
+				if(value>=version){
+					content += '<option value"'+value+'" '+select+'>'+value+'</option>';
+				}
 			});
 			$('#patcher').html(content);
 		});

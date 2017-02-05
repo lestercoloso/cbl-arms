@@ -82,7 +82,7 @@ function changeConfig(){
 		fclose($file);
 	}
 
-		$status['version'] = '0.00';
+		$status['version'] = '-';
 		$conn = new MySQLi(trim($dbhost), trim($dbusr), trim($dbpss), trim($db));
 			$status['status'] = '<b style="color:#b41011;">Not Connected</b>';
 		if(!mysqli_connect_error()) {

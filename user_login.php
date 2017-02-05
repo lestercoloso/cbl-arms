@@ -45,7 +45,7 @@
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <script src="/bower_components/toastr/toastr.min.js"></script>
-<script src="/assets/js/login.js"></script>
+<script src="/assets/js/login.js?232"></script>
 
 
 </body>

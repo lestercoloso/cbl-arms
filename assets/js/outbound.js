@@ -36,12 +36,10 @@ function addShipment(){
 	// });	
 }
 
-var searchdata = "";
-
 function getInbound(page=1){
 
 
-$.post("backstage/inbound/getInbound/"+page, {searchdata: searchdata},function(data){
+$.post("backstage/inbound/getInbound/"+page, {},function(data){
 	var content = '';
 	// console.log(data);
 	$.each(data.data, function( index, value ) {
@@ -105,24 +103,16 @@ var search = {
     init: function() {
 		$('#clearInbound').click( function(){
 			search.cleardata();
-			search.execute();
-		});
-
-		$('#searchInbound').click( function(){
-			search.execute();
 		});
     },
     cleardata: function(){
     	$('.search-filter input, .search-filter select').val('');
 		$('#s-type, #si-type').chosen('destroy');
 		$('#s-type, #si-type').chosen({no_results_text: "Oops, nothing found!"});
-    },
-    execute: function(){
-		var arr = createPostData('searchdata');
-		searchdata = JSON.stringify(arr['data']);
-		console.log(searchdata);
-		getInbound();
+
     }
+
+
 }
 
 var shipment = {

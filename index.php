@@ -1,9 +1,13 @@
 <?php
-
+// 	$method = isset($_GET['method']) ? $_GET['method'] : "";		
+// if(!empty($method)){
+// 	unset($_GET['method']);
+// 	$method = explode('/', $method);
+// 	require_once($method[0].'.php');
+// 	die;	
+// }
 session_start();
 $_SESSION['page']="home";
-
-
 require_once('header.php');
 require_once('db_connect.php');
 
@@ -198,15 +202,16 @@ var fetchCells = function(){
 				$("#cellsID2").append("</div>");
 
 			$('#'+value.Selimg).click(function(){
-
-					if (value.Selimg=="Warehouse") {
+					if(value.Selimg=='Bill_of_Lading'){
+						location.href="bill_of_lading.php";
+					}else if(value.Selimg=="Warehouse") {
 						location.href="warehouse.php";
 					}else if(value.Selimg=="Customer_Info"){
 
 						location.href="customerInfo.php";
 
 					}else{
-						alert("Not Warehouse");
+						alert("Not available");
 					};
 				});
 			}) 

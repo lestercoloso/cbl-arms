@@ -23,7 +23,7 @@ class Database {
 	// Constructor
 	public function __construct() {
 
-
+		$this->where_search = "";
 		// die(dirname(__file__).'/config.cnf');
 		$dbconfig = get_config(dirname(__file__).'/config.cnf');
 		$this->_connection = new MySQLi(trim($dbconfig['host']), trim($dbconfig['username']), trim($dbconfig['password']), trim($dbconfig['database']));
@@ -112,6 +112,19 @@ class Database {
 		} else {
 			return "Error: " . $sql . "<br>" . $this->_connection->error;
 		}
+	}
+
+	public function where_search($array = []){
+
+		foreach ($array as $key => $value) {
+			if(!empty($value)){
+				$data = " `".$key."`='".mysql_real_escape_string($value)."'";
+				$this->where_search .= (!empty($this->where_search)) ? " and ".$data : " where ".$data;				
+			}
+		}
+
+		return $this->where_search;
+
 	}
 
 
