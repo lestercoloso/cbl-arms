@@ -133,6 +133,32 @@ function changeConfig(){
 		jdie($patch);
 	}
 
+	function patch($version){
+		$server_path = dirname(dirname(dirname(__FILE__)));
+		chdir($server_path."/sql/".$version);
+		$sqls = glob('*');
+			foreach ($sqls as $key => $sql) {
+				$patch .= file_get_contents($sql);
+			}
+			
+			$getconfig = getversion('');
+			$db = $getconfig['config'];
+			
+			$conn = new MySQLi(trim($db['host']), trim($db['username']), trim($db['password']), trim($db['database']));
+			$conn->query("update `version` set `version`='$version' where `description`='database'");
+			if(!mysqli_connect_error()) {
+				if(mysqli_multi_query($conn,$patch)){
+					
+					jdie('success');						
+					
+
+				}
+			}
+
+			
+
+	}
+
 
 
 }
