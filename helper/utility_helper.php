@@ -28,12 +28,16 @@ function construct_form($arr){
 	foreach ($arr as $data){
 		$return .='<div class="'.$data['parent_class'].'" id="'.$data['id'].'_container" >';
 		
-		if(empty($data['label_class'])){
-			$return	.='<label class="col-sm-4">'.$data['label'].'</label>';	
-		}else{
-			$return	.='<label class="'.$data['label_class'].'">'.$data['label'].'</label>';	
+		if(!empty($data['label'])){
+			if(empty($data['label_class'])){
+				$return	.='<label class="col-sm-4">'.$data['label'].'</label>';	
+			}else{
+				$return	.='<label class="'.$data['label_class'].'">'.$data['label'].'</label>';	
+			}
 		}
-		$return .= '<div class="col-sm-8">';		
+
+		$data['subparent_class'] = !empty($data['subparent_class']) ? $data['subparent_class'] : 'col-sm-8';
+		$return .= '<div class="'.$data['subparent_class'].'">';		
 		
 		if($data['type']=='select'){
 			$return .='<select class="'.$data['form_class'].'" name="'.$data['col'].'" id="'.$data['id'].'" col="'.$data['col'].'"  data-placeholder="'.$data['placeholder'].'">';
@@ -59,10 +63,37 @@ function construct_form($arr){
 			<span class="fa fa-calendar"></span>
 			</span></div>';
 
-		}else{
+		}else if($data['type']=='checkbox'){
+
+			if(!empty($data['options'])){
+				foreach ($data['options'] as $key => $option){
+					$return .='<div class="checkbox">
+							  		<label><input type="checkbox" value="'.$key.'" name="'.$data['col'].'"><span>'.$option.'</span></label>
+							   </div>';
+				}
+			}
+		}else if($data['type']=='radio'){
+
+			if(!empty($data['options'])){
+				foreach ($data['options'] as $key => $option){
+
+					$return .='<label class="radio-inline">
+								<input type="radio"  value="'.$key.'" name="'.$data['col'].'">'.$option.'
+								</label>';
+				}
+			}
+		}else if($data['type']=='normal'){
 			$return .='<input name="'.$data['col'].'" type="text" '.$data['additionals'].' col="'.$data['col'].'" id="'.$data['id'].'"  class="'.$data['form_class'].'" disabled="disabled">';
 		}
-		$return .='</div></div>';
+
+		
+		$return .='</div>';
+		
+		if(!empty($data['extra'])){
+			$return .= '<div class="col-sm-2">'.$data['extra'].'</div>';
+		}
+
+		$return .='</div>';
 
 	}
 

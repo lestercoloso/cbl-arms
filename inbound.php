@@ -163,7 +163,7 @@ require_once('config/add_shipment_forms.php');
   </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
+      <td scope="row" class="centered">1</td>
       <td>test</td>
       <td>test</td>
       <td>test</td>

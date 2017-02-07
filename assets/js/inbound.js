@@ -51,7 +51,7 @@ $.post("backstage/inbound/getInbound/"+page, {searchdata: searchdata},function(d
 		action += ' <button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
 		
 		content +='<tr id="inbound-'+value.id+'">';
-		content +='<td>'+value.bill_of_lading+'</td>';
+		content +='<td class="centered">'+value.bill_of_lading+'</td>';
 		content +='<td>'+value.customer_name+'</td>';
 		content +='<td>'+value.delivery_receipt+'</td>';
 		content +='<td>'+value.pallet_code+'</td>';

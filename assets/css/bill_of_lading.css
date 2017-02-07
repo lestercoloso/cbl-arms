@@ -1,0 +1,50 @@
+#create_bill_of_lading .modal-dialog{
+	width: 1000px;
+}
+#create_bill_of_lading .modal-body{
+	height: 75%;
+	overflow: auto;
+}
+.bordered{
+	padding: 10px;
+	font-size: 11px;
+	margin: 5px 0px 5px 0px;
+}
+.bordered div{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#create_bill_of_lading input[type=text], #create_bill_of_lading select, #create_bill_of_lading input[type=number] {
+	padding: 5px 5px;
+	border-radius: 2px;
+	height: 20px;
+	font-size: 11px;
+ }
+
+.bordered .col-sm-4{
+	padding: 0px;
+}
+
+.bordered .form-group {
+    margin-bottom: 5px;
+}
+
+.bordered .checkbox, .radio {
+     margin-top: 0px; 
+     margin-bottom: 0px; 
+}
+.bordered label{
+	font-weight: 700;
+}
+
+.no-pad{
+	padding: 0px;
+	    padding-right: 10px;
+}
+.no-wrap{
+	white-space: nowrap;
+}
+.no-margin{
+	margin: 0px !important;
+}

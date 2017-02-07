@@ -192,25 +192,7 @@ input[type="text"]{
     margin: 8px 0;
 }
 
-.pagination{
-	position: absolute;
-	margin: 29px 0;
-}
 
-.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
-    background-color: #cc0000;
-    border-color: #cc0000;
-}
-
-.pagination>li>a, .pagination>li>span {
-    color: #cc0000;
-    cursor: pointer;
-}
-.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover {
-	background-color: #cc0000;
-	color: white;
-	border-color: #cc0000;
-}
 
 #add_shipment .row{
 	padding: 0px;
