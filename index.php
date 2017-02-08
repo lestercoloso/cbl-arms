@@ -207,9 +207,9 @@ var fetchCells = function(){
 					}else if(value.Selimg=="Warehouse") {
 						location.href="warehouse.php";
 					}else if(value.Selimg=="Customer_Info"){
-
 						location.href="customerInfo.php";
-
+					}else if(value.Selimg=="Booking"){
+						location.href="booking.php";
 					}else{
 						alert("Not available");
 					};

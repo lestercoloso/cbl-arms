@@ -2,8 +2,8 @@
 	width: 1100px;
 }
 #create_bill_of_lading .modal-body{
-	height: 75%;
-	overflow: auto;
+    height: 70%;
+    overflow: auto;
 }
 .bordered{
 	padding: 10px;
@@ -47,4 +47,21 @@
 }
 .no-margin{
 	margin: 0px !important;
+}
+#add_billing_container_5{
+	top: 382px;
+    position: absolute;
+    width: 32.333333%;
+}
+#add_billing_container_6{
+	position: absolute;
+    top: 420px;
+    left: 33.933333%;
+    width: 32.3333333333333%;
+}
+#add_billing_container_6 .bordered{
+	    height: 376px;
+}
+#add_billing_container_5 .bordered{
+	    height: 414px;
 }
