@@ -213,7 +213,7 @@ $config['add_shipment']['Charges'] = [
 
 						];
 
-$config['add_shipment']['Recipient Information'] = [
+$config['add_shipment']['Additional Changes'] = [
 								
 								0=>['type' 			=> 'Input',
 								'label'				=> 'Recipient Name',
@@ -277,7 +277,7 @@ $config['add_shipment']['Recipient Information'] = [
 							
 						];						
 
-$config['add_shipment']['Recipient Informatio2'] = [
+$config['add_shipment']['Recipient Information'] = [
 								
 								0=>['type' 			=> 'Input',
 								'label'				=> 'Recipient Name',
