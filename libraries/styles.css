@@ -1024,3 +1024,7 @@ td.centered{
 .bordered{
 	border: solid 1px #d3d3d3;
 }
+
+.has-error label{
+	color: #a94442;
+}

@@ -151,7 +151,7 @@ Your session will expire in <span id="timerContent"><?php echo "NEED HEADER HERE
 $i = 0;
 foreach($config['add_shipment'] as $label => $forms){
 	$i++;
-	echo '<div class="col-sm-4 no-pad" id="add_billing_container_'.$i.'">';
+	echo '<div class="col-sm-4 no-pad form_'.$i.'" id="add_billing_container_'.$i.'">';
 	echo '<div class="col-sm-12 bordered">';
 	echo "<label>$label</label>";
 	echo construct_form($forms);				

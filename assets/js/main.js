@@ -30,16 +30,12 @@ function createPostData(classused){
 		var array = new Object();	
 		var array2 = new Object();	
 			array['error'] = '';
-			$('div').removeClass('has-error');	
+			$('.'+classused+' div').removeClass('has-error');	
+			$('.'+classused).removeClass('has-error');	
 		
 	$('.'+classused+' input, .'+classused+' select').each(function( data ) {
 			var c = $(this).attr('col');
 			var v = $(this).val();
-
-
-			// if(c==undefined){
-			// 	console.log(this);
-			// }
 			if(c!=undefined){
 				array2[c] = v;
 
@@ -48,6 +44,16 @@ function createPostData(classused){
 				}else if((!v || v=='')){
 					$('#'+this.id+'_container').addClass('has-error');
 					array['error'] = 'Complete the fields';
+				}
+			}
+	});	
+
+	$('.'+classused+' input[type="radio"]').each(function( data ) {
+			var c = $(this).attr('col');
+			var v = $(this).val();
+			if(c!=undefined){
+				if($(this).is(':checked')){
+					array2[c] = v;					
 				}
 			}
 	});

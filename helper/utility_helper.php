@@ -75,10 +75,18 @@ function construct_form($arr){
 		}else if($data['type']=='radio'){
 
 			if(!empty($data['options'])){
+				$line=0;					
 				foreach ($data['options'] as $key => $option){
+					$line++;
+					$checked = '';
+					$cls = '';
+					if($line==1){
+						$checked = 'checked';
+						$cls = 'first';
+					}
 
 					$return .='<label class="radio-inline">
-								<input type="radio"  value="'.$key.'" name="'.$data['col'].'">'.$option.'
+								<input type="radio"  value="'.$key.'" class="'.$cls.'" col="'.$data['col'].'" name="'.$data['col'].'" '.$checked.'>'.$option.'
 								</label>';
 				}
 			}

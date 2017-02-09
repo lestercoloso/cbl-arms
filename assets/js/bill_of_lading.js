@@ -34,11 +34,46 @@ var billoflading = {
 			billoflading.createBillOfLading();
 		});		
 
+		//clear new bill of lading 
+		$('#clearnewbilling').click(function(){
+			billoflading.clear();
+		});		
+		//save new bill of lading 
+		$('#savenewbilling').click(function(){
+			billoflading.save();
+		});		
+
 	},
 
 	createBillOfLading: function(){
 		$('#create_bill_of_lading').modal();
+		billoflading.clear();
+	},
+
+	save: function(){
+		createPostData('form_1');
+		createPostData('form_2');
+		createPostData('form_3');
+		createPostData('form_4');
+		createPostData('form_5');
+		createPostData('form_6');
+	},
+	clear: function(){
+		billoflading.form('form_1');
+		billoflading.form('form_2');
+		billoflading.form('form_3');
+		billoflading.form('form_4');
+		billoflading.form('form_5');
+		billoflading.form('form_6');
+		$(".first").prop("checked", true)
+
+	},
+	form: function(classused){
+		$('.'+classused+' div').removeClass('has-error');	
+		$('.'+classused).removeClass('has-error');	
+		$('.'+classused+' input, .'+classused+' select').val('');
 	}
+
 
 
 
