@@ -118,11 +118,11 @@ function changeConfig(){
 		chdir($server_path);
 		$gitusr = isset($_COOKIE['gitusr']) ? $_COOKIE['gitusr'] : '';
 		$gitpss = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
-		$repo = 'https://'.$gitusr.':'.$gitpss.'@github.com/nelsoft/nelsoft_inventory.git';	
+		// $repo = 'https://'.$gitusr.':'.$gitpss.'@github.com/nelsoft/nelsoft_inventory.git';	
 		exec('git clean -df');
 		exec('git checkout -- .');	
-		exec('git fetch '.$repo, $data1);
-		exec('git pull '.$repo.' '.$_POST['branch'], $data2);
+		exec('git fetch ', $data1);
+		exec('git pull '.$_POST['branch'], $data2);
 		jdie(array_merge($data1,$data2));
 
 	}
