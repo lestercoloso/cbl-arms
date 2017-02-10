@@ -17,6 +17,7 @@ function getbranch(){
 	
 
 		chdir(dirname(dirname(dirname(__FILE__))));
+		exec("git fetch" , $status);
 		exec("git branch -r" , $output);
 		exec('git rev-parse --abbrev-ref HEAD', $currbranch);
 		exec('git status', $status);
