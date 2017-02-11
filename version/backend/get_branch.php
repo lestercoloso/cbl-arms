@@ -122,7 +122,7 @@ function changeConfig(){
 		exec('git clean -df');
 		exec('git checkout -- .');	
 		exec('git fetch ', $data1);
-		exec('git pull '.$_POST['branch'], $data2);
+		exec('git pull origin'.$_POST['branch'], $data2);
 		jdie(array_merge($data1,$data2));
 
 	}
