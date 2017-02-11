@@ -23,6 +23,37 @@ function get_config($file){
 	return $dbconfig;
 }
 
+function stylessheet($path){
+	$stylepath = '/assets/css/';
+	return $stylepath.$path."?".rand();
+}
+
+function javascript($path){
+	$jspath = '/assets/js/';
+	return $jspath.$path."?".rand();
+}
+
+function bowerpath($path){
+	$origin = '/bower_components/';
+	return $origin.$path;
+}
+
+function construct_style($array = []){
+	$return = '';
+	foreach($array as $styles){
+		echo '<link rel="stylesheet" href="'.$styles.'" />'.PHP_EOL;		
+	}
+
+}
+function construct_js($array = []){
+	$return = '';
+	foreach($array as $js){
+		echo '<script src="'.$js.'"></script>'.PHP_EOL;		
+	}
+
+}
+
+
 function construct_form($arr){
 	$return = '';
 	foreach ($arr as $data){

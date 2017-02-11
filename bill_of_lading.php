@@ -1,20 +1,19 @@
 <title>Bill of Lading</title>
-<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />		
-<link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css" />		  	
-
 <?php
-
-	require_once('header.php');
 	require_once("helper/utility_helper.php");
+
+	$css = [ bowerpath('bootstrap/dist/css/bootstrap.min.css'),bowerpath('font-awesome/css/font-awesome.min.css')];
+	construct_style($css);
+	
+	require_once('header.php');	
+	
+	$css = [bowerpath('toastr/toastr.min.css'),
+			bowerpath('eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'),
+			bowerpath('chosen/chosen.css'),
+			stylessheet('bill_of_lading.css')];
+	construct_style($css);
 	require_once('config/bill_of_lading.php');
-
 ?>
-
-
-<link rel="stylesheet" href="/bower_components/toastr/toastr.min.css" />
-<link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
-<link rel="stylesheet" href="/bower_components/chosen/chosen.css" />
-<link rel="stylesheet" href="/assets/css/bill_of_lading.css?<?php echo rand();?>" type="text/css" />
 
 
 <body onResize="updateToolbarPos();">
@@ -75,8 +74,11 @@ Your session will expire in <span id="timerContent"><?php echo "NEED HEADER HERE
 	<div class="col-sm-4 searchdata">	
 				<select class="form-control not_mandatory" id="search_status" col="status">
 				 		<option value="">Select status</option>
-				 		<option value="1">Reviewed</option>
-				 		<option value="2">Approved</option>
+				 		<?php
+				 			foreach($config['status'] as $key => $option){
+				 				echo "<option value='$key'>$option</option>";		
+				 			}
+				 		?>
 				</select>
 	</div>	
 
@@ -93,13 +95,13 @@ Your session will expire in <span id="timerContent"><?php echo "NEED HEADER HERE
 </div>
 
 	<div class="side-btn">
-		<button id="generate_billing_report" class="button-class custombutton">Generate Billing Report</button>
 		<button id="add_bill_of_lading" class="button-class custombutton">Add Bill of Lading</button>
+		<button id="generate_billing_report" class="button-class custombutton">Generate Billing Report</button>
 	</div>
 
 
 
-<table class="table table-bordered table-striped table-list" id="bill_of_lading-list">
+<table class="table table-bordered table-striped table-list" id="search_result_list">
   <thead>
     <tr>
       <th><input type="checkbox" value=""></th>
@@ -179,15 +181,17 @@ foreach($config['add_shipment'] as $label => $forms){
 
 
 
-
-<script src="/bower_components/toastr/toastr.min.js"></script>
-<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/assets/js/main.js?<?php echo rand();?>"></script>
-<script src="/js/moment.js"></script>
-<script src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-<script src="/bower_components/chosen/chosen.jquery.js"></script>
-<script src="/assets/js/bill_of_lading.js?<?php echo rand();?>"></script>
-
+<?php
+	$js = [ bowerpath('toastr/toastr.min.js'),
+			bowerpath('bootstrap/dist/js/bootstrap.min.js'),
+			javascript('main.js'),
+			'/js/moment.js',
+			bowerpath('eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'),
+			bowerpath('chosen/chosen.jquery.js'),
+			javascript('bill_of_lading.js')
+			];
+	construct_js($js);
+?>
 <!-- END of page -->
 
 </div>

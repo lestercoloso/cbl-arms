@@ -3,6 +3,7 @@ $config['charges']  = ['DHL'=>'DHL', 'FEDEX'=>'FEDEX', 'LBC'=>'LBC', 'AIR21'=>'A
 $config['packaging_type']['document'] 	= ['Small'=>'Small', 'Large'=>'Large'];
 $config['packaging_type']['parcel'] 	= ['Own'=>'Own', 'Others'=>'Others'];
 $config['packaging_type']['crafting'] 	= ['Skeletal'=>'Skeletal', 'Close'=>'Close'];
+$config['status'] = ['1'=>'Reviewed', '2'=>'Approved'];
 // $config['subinventory_type'] = [''=>'Please Select', '1'=>'test1', '2'=>'test2'];
 
 $config['add_shipment']['Shipper Information'] = [

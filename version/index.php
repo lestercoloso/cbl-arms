@@ -48,9 +48,9 @@ $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
 ?>
 <div class="container col-sm-6">
 
-	<div class="form-group col-sm-12 hide">
+	<div class="form-group col-sm-12 ">
 		  <div class="col-sm-6">
-			 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#login-modal">Store your Github</button>
+			 <button type="button" class="btn btn-default hide" data-toggle="modal" data-target="#login-modal">Store your Github</button>
 			 <button type="button" class="btn btn-default" data-toggle="modal" id="updatebutton">
 			 <span class="glyphicon glyphicon-repeat fast-right-spinner fa-spin"> </span>Update <em></em></button>
 		  </div>

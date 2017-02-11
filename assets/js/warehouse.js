@@ -61,10 +61,9 @@ function addStorage(){
 
 		var content = '';
 		$.each(rdatas, function( index, value ) {
-			// var style = value.style.replace(/(width:([0-9]+)px;)|(height:([0-9]+)px;)/g, "");
-			// if(value.style==''){
-			// 	value.style = 'transform: rotate(0deg)';
-			// }
+			if(value.style==null){
+				value.style = 'position:absolute;';
+			}
 			content +='<div id="rack-'+value.id+'" class="rackStorage" data-rackwidth="'+value.rack_width+'" data-racklength="'+value.rack_length+'"  data-racklevel="'+value.no_rack_level+'" data-racklevelheight="'+value.rack_level_height+'" style="height:'+value.rack_length.trim()+'px;width:'+value.rack_width+'px;'+value.style+'">'+deletebutton+rotate+'</div>';
 		});		
 

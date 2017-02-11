@@ -38,6 +38,7 @@ session_start();
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="./libraries/styles.css?<?php echo rand();?>" type="text/css" />
+<link rel="stylesheet" href="./assets/css/main.css?<?php echo rand();?>" type="text/css" />
 <!-- <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" /> -->
 <!-- <script src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> -->
