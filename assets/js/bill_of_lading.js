@@ -51,12 +51,16 @@ var billoflading = {
 	},
 
 	save: function(){
-		createPostData('form_1');
-		createPostData('form_2');
-		createPostData('form_3');
-		createPostData('form_4');
-		createPostData('form_5');
-		createPostData('form_6');
+		var form1 = createPostData('form_1');
+		var form2 = createPostData('form_2');
+		var form3 = createPostData('form_3');
+		var form4 = createPostData('form_4');
+		var form5 = createPostData('form_5');
+		var form6 = createPostData('form_6');
+
+		if(form1['error'] || form2['error'] || form3['error'] || form4['error'] || form5['error'] || form6['error']){
+			toastr["error"]('Complete the fields');
+		}
 	},
 	clear: function(){
 		billoflading.form('form_1');

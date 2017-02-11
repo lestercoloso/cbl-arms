@@ -57,6 +57,12 @@ function construct_js($array = []){
 function construct_form($arr){
 	$return = '';
 	foreach ($arr as $data){
+		if($data['type']=='hide'){
+			$return .='<input name="'.$data['col'].'" col="'.$data['col'].'" type="hidden"  id="'.$data['id'].'">';
+			continue;
+		}
+
+
 		$return .='<div class="'.$data['parent_class'].'" id="'.$data['id'].'_container" >';
 		
 		if(!empty($data['label'])){
@@ -94,6 +100,13 @@ function construct_form($arr){
 			<span class="fa fa-calendar"></span>
 			</span></div>';
 
+		}else if($data['type']=='time'){
+		$return .='<div class="input-group date  col-sm-12  create-date">
+			<input type="text" class="'.$data['form_class'].'" name="'.$data['col'].'" col="'.$data['col'].'" id="'.$data['id'].'"  placeholder="'.$data['placeholder'].'">
+			<span class="input-group-addon">
+			<span class="glyphicon glyphicon-time"></span>
+			</span></div>';
+
 		}else if($data['type']=='checkbox'){
 
 			if(!empty($data['options'])){
@@ -122,7 +135,7 @@ function construct_form($arr){
 				}
 			}
 		}else if($data['type']=='normal'){
-			$return .='<input name="'.$data['col'].'" type="text" '.$data['additionals'].' col="'.$data['col'].'" id="'.$data['id'].'"  class="'.$data['form_class'].'" disabled="disabled">';
+			$return .='<input name="'.$data['col'].'" type="text" '.$data['additionals'].' col="'.$data['col'].'" id="'.$data['id'].'"  class="'.$data['form_class'].'" disabled="disabled" value="'.$data['value'].'">';
 		}
 
 		

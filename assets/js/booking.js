@@ -25,29 +25,29 @@ var search = {
 
 }
 
-var billoflading = {
+var booking = {
 
 	init: function(){
 
 		//add new bill of lading modal
-		$('#add_bill_of_lading').click(function(){
-			billoflading.createBillOfLading();
+		$('#book_shipment').click(function(){
+			booking.createbooking();
 		});		
 
 		//clear new bill of lading 
 		$('#clearnewbilling').click(function(){
-			billoflading.clear();
+			booking.clear();
 		});		
 		//save new bill of lading 
 		$('#savenewbilling').click(function(){
-			billoflading.save();
+			booking.save();
 		});		
 
 	},
 
-	createBillOfLading: function(){
-		$('#create_bill_of_lading').modal();
-		billoflading.clear();
+	createbooking: function(){
+		$('#create_modal').modal();
+		booking.clear();
 	},
 
 	save: function(){
@@ -59,12 +59,12 @@ var billoflading = {
 		createPostData('form_6');
 	},
 	clear: function(){
-		billoflading.form('form_1');
-		billoflading.form('form_2');
-		billoflading.form('form_3');
-		billoflading.form('form_4');
-		billoflading.form('form_5');
-		billoflading.form('form_6');
+		booking.form('form_1');
+		booking.form('form_2');
+		booking.form('form_3');
+		booking.form('form_4');
+		booking.form('form_5');
+		booking.form('form_6');
 		$(".first").prop("checked", true)
 
 	},
@@ -82,4 +82,4 @@ var billoflading = {
 
 
 search.init();
-billoflading.init();
+booking.init();

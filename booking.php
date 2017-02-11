@@ -60,7 +60,21 @@ Your session will expire in <span id="timerContent"><?php echo "NEED HEADER HERE
 
 	</div>
 	<div class="col-sm-4 searchdata">	
+			    <div class="input-group date" id="search_booking_date_from">
+			        <input type="text" class="form-control not_mandatory" col="date" id="search_date_from" placeholder="Booking Date From">
+			        <span class="input-group-addon">
+			            <span class="fa fa-calendar"></span>
+			        </span>
+			    </div>
 
+			    <div class="input-group date" id="search_booking_date_to">
+			        <input type="text" class="form-control not_mandatory" col="date" id="search_date_to" placeholder="Booking Date To">
+			        <span class="input-group-addon">
+			            <span class="fa fa-calendar"></span>
+			        </span>
+			    </div>
+	</div>
+	<div class="col-sm-4 searchdata">	
 					<select class="form-control not_mandatory" id="search_status" col="status">
 				 		<option value="">Select Mode of shipment</option>
 				 		<?php
@@ -77,26 +91,7 @@ Your session will expire in <span id="timerContent"><?php echo "NEED HEADER HERE
 				 				echo "<option value='$key'>$option</option>";		
 				 			}
 				 		?>
-
 					</select>
-	</div>
-	<div class="col-sm-4 searchdata">	
-
-
-			    <div class="input-group date" id="search_booking_date_from">
-			        <input type="text" class="form-control not_mandatory" col="date" id="search_date_from" placeholder="Booking Date From">
-			        <span class="input-group-addon">
-			            <span class="fa fa-calendar"></span>
-			        </span>
-			    </div>
-
-			    <div class="input-group date" id="search_booking_date_to">
-			        <input type="text" class="form-control not_mandatory" col="date" id="search_date_to" placeholder="Booking Date To">
-			        <span class="input-group-addon">
-			            <span class="fa fa-calendar"></span>
-			        </span>
-			    </div>
-
 	</div>	
 
 
@@ -149,42 +144,30 @@ Your session will expire in <span id="timerContent"><?php echo "NEED HEADER HERE
 
 
 
-		<div id="create_bill_of_lading" class="modal fade col-sm-12 " role="dialog">
+		<div id="create_modal" class="modal fade col-sm-12 " role="dialog">
 		<div class="modal-dialog custom-class">
 		<div class="modal-content">
 
 		<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h4 class="modal-title">Add Bill of Lading</h4>
+		<h4 class="modal-title">Book Shipment</h4>
 		</div>
 
 		<div class="modal-body">
-			<div class="col-sm-12 bordered">
-				<div class="col-sm-8">Bill of Lading No.</div> 
-				<div class="col-sm-4">Booking No.</div>
-				<div class="col-sm-8">Delivery Status</div> 
-			</div>
+
+	<form>
+	<fieldset>
 
 
 <?php
-$i = 0;
-foreach($config['add_shipment'] as $label => $forms){
-	$i++;
-	echo '<div class="col-sm-4 no-pad" id="add_billing_container_'.$i.'">';
-	echo '<div class="col-sm-12 bordered">';
-	echo "<label>$label</label>";
+foreach($config['book_shipment'] as $forms){
+	echo '<div class="col-sm-4 row" id="">';
 	echo construct_form($forms);				
 	echo '</div>';
-	echo '</div>';
 }
-
 ?>	
-
-			<div class="col-sm-12 bordered">
-				<div class="col-sm-4">Created By:</div> 
-				<div class="col-sm-4">Reviewed By:</div>
-				<div class="col-sm-4">Approved By:</div> 
-			</div>
+</fieldset>
+</form>
 
 		</div>
 		<div class="modal-footer">

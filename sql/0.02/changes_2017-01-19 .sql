@@ -1,6 +1,6 @@
-ALTER TABLE `cblarms`.`rack_storage` 
+ALTER TABLE `rack_storage` 
 ADD COLUMN `style` VARCHAR(255) NULL AFTER `status`;
 
 
-ALTER TABLE `cblarms`.`bay_storage` 
+ALTER TABLE `bay_storage` 
 ADD COLUMN `style` VARCHAR(255) NULL AFTER `status`;

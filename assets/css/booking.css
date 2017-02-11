@@ -1,0 +1,22 @@
+.form-group {
+    margin-bottom: 5px;
+}
+#create_modal .row .col-sm-8 {
+    padding: 0px;
+}
+
+@media screen and (min-width: 768px) {
+    .custom-class {
+        margin-top: 7%;
+        width: 75%; /* either % (e.g. 60%) or px (400px) */
+    }
+}
+
+#create_modal select{
+    font-family: Arial,sans-serif;
+    font-size: 11px;
+}
+
+.date {
+    margin: 0;
+}
