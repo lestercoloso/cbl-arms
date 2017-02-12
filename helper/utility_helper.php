@@ -142,7 +142,7 @@ function construct_form($arr){
 		$return .='</div>';
 		
 		if(!empty($data['extra'])){
-			$return .= '<div class="col-sm-2">'.$data['extra'].'</div>';
+			$return .= '<div class="col-sm-2 extra">'.$data['extra'].'</div>';
 		}
 
 		$return .='</div>';

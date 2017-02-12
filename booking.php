@@ -161,7 +161,7 @@ Your session will expire in <span id="timerContent"><?php echo "NEED HEADER HERE
 
 <?php
 foreach($config['book_shipment'] as $forms){
-	echo '<div class="col-sm-4 row" id="">';
+	echo '<div class="col-sm-4 create_shippment" id="">';
 	echo construct_form($forms);				
 	echo '</div>';
 }
@@ -171,15 +171,18 @@ foreach($config['book_shipment'] as $forms){
 
 		</div>
 		<div class="modal-footer">
-		<button type="button" class="btn btn-default" id="savenewbilling"><i class="fa fa-circle-o-notch fa-spin hide" style=""></i> Save</button>
-		<button type="button" class="btn btn-default" id="clearnewbilling">Clear</button>
+		<button type="button" class="btn btn-default" id="savecreate"><i class="fa fa-circle-o-notch fa-spin hide" style=""></i> Save</button>
+		<button type="button" class="btn btn-default" id="clearecreate">Clear</button>
 		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		</div>
 		</div>
 		</div>
 		</div>
 
+<script>
+	var datetoday = '<?php echo date('m/d/Y');?>';
 
+</script>
 
 <?php
 	$js = [ bowerpath('toastr/toastr.min.js'),

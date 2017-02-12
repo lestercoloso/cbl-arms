@@ -68,3 +68,17 @@ function resetchosen(id){
 	$('#'+id).val('');
 	$('#'+id).chosen();
 }
+
+function dateformat(object){
+
+    $(object).keyup(function(e){
+        if (e.keyCode != 8){    
+            if ($(this).val().length == 2){
+                $(this).val($(this).val() + "/");
+            }else if ($(this).val().length == 5){
+                $(this).val($(this).val() + "/");
+            }
+        }
+    }); 
+
+}

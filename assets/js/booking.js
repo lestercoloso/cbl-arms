@@ -8,6 +8,16 @@ var search = {
 			useCurrent: false
 		});
 
+		$('#create_datetime_ready_container .create-date').datetimepicker({
+			format: 'MM/DD/YYYY LT',
+			useCurrent: false
+        });
+
+		$('#create_time_called_container .create-date').datetimepicker({
+			format: 'LT',
+			// useCurrent: false
+        });
+
 		$("#search_booking_date_from").on("dp.change", function (e) {
 			$('#search_booking_date_to').data("DateTimePicker").minDate(e.date);
 		});
@@ -35,11 +45,11 @@ var booking = {
 		});		
 
 		//clear new bill of lading 
-		$('#clearnewbilling').click(function(){
+		$('#clearecreate').click(function(){
 			booking.clear();
 		});		
 		//save new bill of lading 
-		$('#savenewbilling').click(function(){
+		$('#savecreate').click(function(){
 			booking.save();
 		});		
 
@@ -51,27 +61,30 @@ var booking = {
 	},
 
 	save: function(){
-		createPostData('form_1');
-		createPostData('form_2');
-		createPostData('form_3');
-		createPostData('form_4');
-		createPostData('form_5');
-		createPostData('form_6');
+		var arr = createPostData('create_shippment');
+
+		if(arr['error']){
+    		toastr["error"](arr['error']);
+    	}else{
+
+    	}
+
 	},
 	clear: function(){
-		booking.form('form_1');
-		booking.form('form_2');
-		booking.form('form_3');
-		booking.form('form_4');
-		booking.form('form_5');
-		booking.form('form_6');
-		$(".first").prop("checked", true)
+		booking.form('create_shippment');
+		booking.getbooking();
+		$('#create_booking_date').val(datetoday);
 
 	},
 	form: function(classused){
 		$('.'+classused+' div').removeClass('has-error');	
 		$('.'+classused).removeClass('has-error');	
 		$('.'+classused+' input, .'+classused+' select').val('');
+	},
+	getbooking: function(){
+		$.post("backstage/booking/getbookingno/", {},function(data){
+			$('#create_booking_no').val(data);
+		});
 	}
 
 

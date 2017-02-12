@@ -1,5 +1,5 @@
 <?php
-$config['mode_of_shipment']  = ['1'=>'Sea Freight', '2'=>'Air Freight'];
+$config['mode_of_shipment']  = ['1'=>'Land Trip','2'=>'Sea Freight', '3'=>'Air Freight'];
 $config['status']  = ['1'=>'Cancelled Pick Up', '2'=>'For Monitoring'];
 $config['book_shipment'][] = [
 								
@@ -17,7 +17,6 @@ $config['book_shipment'][] = [
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
 								'form_class'		=> 'form-control',
-								'value'				=> date('m/d/Y'),
 								'id'				=> 'create_booking_date',
 								],
 
@@ -48,7 +47,7 @@ $config['book_shipment'][] = [
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_are',
-								'col'				=> 'are',
+								'col'				=> 'area',
 								'form_class'		=> 'form-control'
 								],
 
@@ -134,7 +133,80 @@ $config['book_shipment'][] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_time_called',
 								'col'				=> 'time_called',
-								'form_class'		=> 'form-control']
+								'form_class'		=> 'form-control'],
+								
+								['type' 			=> 'date',
+								'label'				=> 'Date Time Ready',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_datetime_ready',
+								'col'				=> 'date_ready',
+								'form_class'		=> 'form-control'],
+							];
+
+$config['book_shipment'][] = [
+								
+								['type' 			=> 'input',
+								'label'				=> 'Document / Parcel',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'col'				=> 'document',
+								'id'				=> 'create_document',
+								],
+								
+								['type'		 		=> 'number',
+								'label'				=> 'Weight',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-6',
+								'id'				=> 'create_weight',
+								'col'				=> 'weight',
+								'extra'				=> 'cm.',
+								'form_class'		=> 'form-control',
+								],
+
+								
+								['type'		 		=> 'number',
+								'label'				=> 'Length (Dimension)',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-6',
+								'id'				=> 'create_length',
+								'col'				=> 'length',
+								'extra'				=> 'cm.',
+								'form_class'		=> 'form-control',
+								],
+
+								
+								['type'		 		=> 'number',
+								'label'				=> 'Width (Dimension)',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-6',
+								'id'				=> 'create_width',
+								'col'				=> 'width',
+								'extra'				=> 'cm.',
+								'form_class'		=> 'form-control',
+								],
+								
+								['type'		 		=> 'number',
+								'label'				=> 'Height (Dimension)',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-6',
+								'id'				=> 'create_height',
+								'col'				=> 'height',
+								'extra'				=> 'cm.',
+								'form_class'		=> 'form-control',
+								],
+
+								['type' 			=> 'input',
+								'label'				=> 'Special Instruction',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_special_instruction',
+								'col'				=> 'special_instruction',
+								'form_class'		=> 'form-control',
+								]
+
+								
 							];
 
 
