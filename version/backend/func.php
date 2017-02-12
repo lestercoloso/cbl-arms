@@ -29,4 +29,9 @@ function getversion($path){
     return $return;
 }
 
+	function logs($content){
+		$txt = "[===================".date('G:i:s')."===================]".PHP_EOL.$content.PHP_EOL."[======================END=====================]".PHP_EOL.PHP_EOL;
+		$myfile = file_put_contents("../log/".date('Y-m-d').".txt", $txt , FILE_APPEND | LOCK_EX);
+	}
+
 ?>

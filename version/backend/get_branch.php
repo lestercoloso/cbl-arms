@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set('Asia/Manila');
 error_reporting(0);
 set_time_limit(0);
 
@@ -135,30 +135,52 @@ function changeConfig(){
 	}
 
 	function patch($version){
+	
 		$server_path = dirname(dirname(dirname(__FILE__)));
+
 		chdir($server_path."/sql/".$version);
 		$sqls = glob('*');
+
 			foreach ($sqls as $key => $sql) {
 				$patch .= file_get_contents($sql);
 			}
 			
 			$getconfig = getversion('');
 			$db = $getconfig['config'];
+
+			$newpatch = explode(";",$patch);
 			
 			$conn = new MySQLi(trim($db['host']), trim($db['username']), trim($db['password']), trim($db['database']));
-			$conn->query("update `version` set `version`='$version' where `description`='database'");
+			$logs = '';
+			$logs2 = '';
+
+
 			if(!mysqli_connect_error()) {
-				if(mysqli_multi_query($conn,$patch)){
-					
-					jdie('success');						
-					
-
+				foreach($newpatch as $sql){
+					$conn->query($sql);
+					$logs .=$conn->error.PHP_EOL;
+					$logs2 .=$conn->error."<br>";
 				}
-			}
 
+				$conn->query("update `version` set `version`='$version' where `description`='database'");
+				$result['status'] = "success";
+			}else{
+				$result['status'] = "failed";
+			}
+			$result['result'] = $logs2;
+
+			chdir($server_path.'/version/backend/');
+			$this->logs($logs);
+			jdie($result);
 			
 
 	}
+
+	function logs($content){
+		$txt = "[===================".date('G:i:s')."===================]".PHP_EOL.$content.PHP_EOL."[======================END=====================]".PHP_EOL.PHP_EOL;
+		$myfile = file_put_contents("../log/".date('Y-m-d').".txt", $txt , FILE_APPEND | LOCK_EX);
+	}
+
 
 
 

@@ -21,6 +21,9 @@ label{ float: left; }
 .loader{
 	display: none;
 }
+.patch_loader{
+	display: none;
+}
 .result{
 	 border: 1px solid #ccc!important;
 	 border-radius: 16px!important;
@@ -40,6 +43,7 @@ label{ float: left; }
 $_COOKIE['server_path'] = isset($_COOKIE['server_path']) ? $_COOKIE['server_path'] : '';
 $_COOKIE['gitusr'] = isset($_COOKIE['gitusr']) ? $_COOKIE['gitusr'] : '';
 $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
+$devmode = isset($_COOKIE['devmode']) ? $_COOKIE['devmode'] : '';
 
 	$dbhost = isset($_COOKIE['dbhost']) ? $_COOKIE['dbhost'] : '';
 	$db 	= isset($_COOKIE['db']) ? $_COOKIE['db'] : '';
@@ -52,7 +56,18 @@ $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
 		  <div class="col-sm-6">
 			 <button type="button" class="btn btn-default hide" data-toggle="modal" data-target="#login-modal">Store your Github</button>
 			 <button type="button" class="btn btn-default" data-toggle="modal" id="updatebutton">
-			 <span class="glyphicon glyphicon-repeat fast-right-spinner fa-spin"> </span>Update <em></em></button>
+			 <span class="glyphicon glyphicon-repeat fast-right-spinner fa-spin"> </span>Update <em></em></button>		
+			 <?php 
+
+if($devmode=='on'){
+echo '<button type="button" class="btn btn-default" data-toggle="modal" id="updatebutton" onclick="dev_mode(\'off\')"> Dev Mode Off </button>';
+}else{
+echo '<button type="button" class="btn btn-default" data-toggle="modal" id="updatebutton" onclick="dev_mode(\'on\')"> Dev Mode On </button>';
+}
+
+
+			 ?>
+		
 		  </div>
 	</div>
 
@@ -72,7 +87,7 @@ $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
 		  <div class="col-sm-5" id="branch_container">
 			  <div class="col-sm-10 row"><select class="form-control" id="patcher" placeholder="Select a version" ></select></div>
 			 <div class="col-sm-2" >
-		  	 	<button type="button" class="btn btn-success">Patch!</button>
+		  	 	<button type="button" class="btn btn-success" id="patcher_button"> <span class="patch_loader glyphicon glyphicon-repeat fast-right-spinner fa-spin"> </span> Patch!</button>
 		  	 </div>
 		  </div>
 
@@ -179,6 +194,7 @@ $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
 
 
 <script>
+var devmode = "<?php echo $devmode?>";
 	function getbranch(){
 		var path = $('#application_path').val();
 		var content = "";
@@ -319,7 +335,7 @@ $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
 				if(version==value){
 					select = 'selected';
 				}
-				if(value>=version){
+				if(value>=version || devmode=='on'){
 					content += '<option value"'+value+'" '+select+'>'+value+'</option>';
 				}
 			});
@@ -328,10 +344,33 @@ $_COOKIE['gitpss'] = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : '';
 	}
 
 
+	function patch(version){
+		$('.patch_loader').show();
+		$.post("backend/patch/"+version,{}, function(data){
+			alert(data.status);
+			if(data.status=="success"){
+				$('#database_version b').html(version);
+				$('.result').html(data.result);
+			}
+			$('.patch_loader').hide();
+		});
+
+	}
+
+	function dev_mode(t){
+		document.cookie = "devmode="+t;
+		window.location="";
+	}
+
+
 	$('#application_path').bind('keydown, change', function(event){
 		event.preventDefault();
 		document.cookie = "server_path="+$(this).val();
 		getbranch();
+	});
+
+	$('#patcher_button').click(function(){		
+		patch($('#patcher').val());
 	});
 
 	$('.store').click(function(){

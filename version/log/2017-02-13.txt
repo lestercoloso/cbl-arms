@@ -1,0 +1,69 @@
+[===================2:22:32===================]
+Table 'version' already exists
+Table 'rack_storage' already exists
+Table 'bay_storage' already exists
+Duplicate column name 'style'
+Duplicate column name 'style'
+Table 'inbound_list' already exists
+Table 'customer_information' already exists
+Duplicate column name 'invoice_no'
+Duplicate column name 'location'
+Duplicate column name 'code'
+Duplicate column name 'rack_level'
+
+Table 'bill_of_lading' already exists
+Duplicate column name 'type_of_shipment'
+Duplicate column name 'storage'
+
+Query was empty
+
+[======================END=====================]
+
+[===================2:33:11===================]
+Table 'version' already exists
+Table 'rack_storage' already exists
+Table 'bay_storage' already exists
+Duplicate column name 'style'
+Duplicate column name 'style'
+Table 'inbound_list' already exists
+Table 'customer_information' already exists
+Duplicate column name 'invoice_no'
+Duplicate column name 'location'
+Duplicate column name 'code'
+Duplicate column name 'rack_level'
+
+Table 'bill_of_lading' already exists
+Duplicate column name 'type_of_shipment'
+Duplicate column name 'storage'
+
+Query was empty
+
+[======================END=====================]
+
+[===================2:33:21===================]
+
+
+
+Table 'booking' already exists
+Table 'booking' already exists
+
+[======================END=====================]
+
+[===================2:34:15===================]
+Table 'booking' already exists
+Table 'booking' already exists
+
+[======================END=====================]
+
+[===================2:34:59===================]
+
+
+
+[======================END=====================]
+
+[===================2:35:03===================]
+Table 'booking' already exists
+Table 'booking' already exists
+
+[======================END=====================]
+
