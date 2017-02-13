@@ -67,3 +67,337 @@ Table 'booking' already exists
 
 [======================END=====================]
 
+[===================2:57:29===================]
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '<?php
+function jdie($array){
+	header('Content-Type: application/json')' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'die(json_encode($array))' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+function pdie($array){
+	echo '<pre>'' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'print_r($array)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'die()' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+function getversion($path){
+
+	$config = dirname(dirname(dirname(__FILE__)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '{
+
+		$config = file_get_contents($config)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$config = explode(PHP_EOL, $config)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$return['config']['database'] 	= !empty($config[3]) ? explode('=',$config[3])[1]' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$return['config']['host'] 		= !empty($config[0]) 	? explode('=',$config[0])[1] :' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$return['config']['username'] 	= !empty($config[1]) ? explode('=',$config[1])[1]' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$return['config']['password'] 	= !empty($config[2]) ? explode('=',$config[2])[1]' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}else{
+		$return = []' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+    return $return' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+	function logs($content){
+		$txt = "[===================".date('G:i:s')."=' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$myfile = file_put_contents("../log/".date('Y-m-d').".txt", $txt , FILE_APPEND |' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+?><?php
+
+	error_reporting(0)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'set_time_limit(0)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'class system{
+
+
+function getbranch(){
+	$return = []' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$return['version'] = '0.00'' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '['path'])){
+		chdir($_POST['path'])' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec("git branch -r" , $output)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git rev-parse --abbrev-ref HEAD', $currbranch)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git status', $status)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$return['current_branch'] = $currbranch' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$return['version'] = getversion($_POST['path'], 'version')' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'foreach($output as $branch){
+			if(trim($branch)!='origin/HEAD -> origin/master' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+		}
+
+		$return['git'] = $status' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '['data'])){
+			$return['status'] = 200' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}else{
+			$return['status'] = 101' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+	}else{
+		$return['status'] = 100' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+	jdie($return)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+function changeBranch(){
+		// $gitusr = isset($_COOKIE['gitusr']) ? $_COOK' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '// $gitpss = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : ''' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '// $repo = 'https://'.$gitusr.':'.$gitpss.'@github.com/nelsoft/nelsoft_inventory' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'chdir($_POST['path'])' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git clean -df')' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git checkout -- .')' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '// exec('git fetch '.$repo)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git checkout '.$_POST['branch'], $data)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '// exec('git pull '.$repo.' '.$_POST['branch'], $data)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$return['version'] = '0.00'' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$return['version'] = getversion($_POST['path'], 'version')' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$return['data'] = $data' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'jdie($return)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+function changeConfig(){
+	$server_path = isset($_COOKIE['server_path']) ? ' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$dbhost = isset($_COOKIE['dbhost']) ? $_COOKIE['dbhost'] : ''' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$db = isset($_COOKIE['db']) ? $_COOKIE['db'] : ''' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$dbusr = isset($_COOKIE['dbusr']) ? $_COOKIE['dbusr'] : ''' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$dbpss = isset($_COOKIE['dbpss']) ? $_COOKIE['dbpss'] : ''' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$fileName = $server_path."/nelsoft/backstage/config.xml"' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$fileContent = file($fileName)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'foreach($fileContent as $key=>$line){
+		if (strpos($line, '<database>') !== fal' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}		
+		if (strpos($line, '<host>') !== false) {
+			$fileContent[$key] = "<host>' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}		
+		if (strpos($line, '<user>') !== false) {
+			$fileContent[$key] = "<user>' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}		
+		if (strpos($line, '<password>') !== false) {
+			$fileContent[$key] = "<p' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+	}
+		file_put_contents ($fileName, implode("", $fileContent))' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$conn = new MySQLi(trim($dbhost), trim($dbusr), trim($dbpss), trim($db))' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$status = '<b style="color:#b41011' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '">Not Connected</b>'' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '{
+			$status = '<b style="color: #348c34' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '">Connected</b>'' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+		die($status)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+	function checkUpdates(){
+		$server_path = isset($_COOKIE['server_path']) ' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'chdir($server_path)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git rev-parse --abbrev-ref HEAD', $currbranch)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git status', $result)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$status = str_replace("Your branch is behind 'origin/".$currbranch[0]."' by ",''' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$status = str_replace(" commits, and can be fast-forwarded.",'', $status)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '{
+				die("(".$status.")")' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}else{
+				die(0)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+	}
+
+	function gitUpdate(){
+		$server_path = isset($_COOKIE['server_path'])' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'chdir($server_path)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$gitusr = isset($_COOKIE['gitusr']) ? $_COOKIE['gitusr'] : ''' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$gitpss = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : ''' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$repo = 'https://'.$gitusr.':'.$gitpss.'@github.com/nelsoft/nelsoft_inventory.gi' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git clean -df')' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git checkout -- .')' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git fetch '.$repo, $data1)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git pull '.$repo.' '.$_POST['branch'], $data2)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'jdie(array_merge($data1,$data2))' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+
+
+
+}
+
+?><?php
+date_default_timezone_set('Asia/Manila')' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'error_reporting(0)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'set_time_limit(0)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'class system{
+
+
+function getbranch(){
+	$return = []' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$return['version'] = '0.00'' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$getconfig = getversion('')' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$return['version'] = $getconfig['version']' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$return['config'] = $getconfig['config']' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'chdir(dirname(dirname(dirname(__FILE__))))' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec("git fetch" , $status)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec("git branch -r" , $output)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git rev-parse --abbrev-ref HEAD', $currbranch)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git status', $status)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$return['current_branch'] = $currbranch' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '// pdie($return)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'foreach($output as $branch){
+			if(trim($branch)!='origin/HEAD -> origin/master' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+		}
+
+		$return['git'] = $status' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '['data'])){
+			$return['status'] = 200' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}else{
+			$return['status'] = 101' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+
+	jdie($return)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+function changeBranch(){
+		// $gitusr = isset($_COOKIE['gitusr']) ? $_COOK' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '// $gitpss = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : ''' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '// $repo = 'https://'.$gitusr.':'.$gitpss.'@github.com/nelsoft/nelsoft_inventory' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'chdir(dirname(dirname(dirname(__FILE__))))' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git clean -df')' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git checkout -- .')' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '// exec('git fetch '.$repo)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git checkout '.$_POST['branch'], $data)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '// exec('git pull '.$repo.' '.$_POST['branch'], $data)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$getconfig = getversion($_POST['path'])' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$return['version'] = $getconfig['version']' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$return['config'] = $getconfig['config']' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$return['data'] = $data' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'jdie($return)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+function changeConfig(){
+	$server_path = !empty($_POST['path']) ? $_POST['' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$dbhost = !empty($_POST['host']) ? $_POST['host'] : ''' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$db = !empty($_POST['database']) ? $_POST['database'] : ''' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$dbusr = !empty($_POST['username']) ? $_POST['username'] : '1'' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$dbpss = !empty($_POST['password']) ? $_POST['password'] : ''' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$t = !empty($_POST['t']) ? $_POST['t'] : ''' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '=='change'){
+		$config = dirname(dirname(dirname(__FILE__)))."/config.cnf"' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$file = fopen($config,"w")' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$content = 'host='.$dbhost.PHP_EOL.'username='.$dbusr.PHP_EOL .'password='.$dbps' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'fwrite($file,$content)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'fclose($file)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+		$status['version'] = '-'' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$conn = new MySQLi(trim($dbhost), trim($dbusr), trim($dbpss), trim($db))' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$status['status'] = '<b style="color:#b41011' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '">Not Connected</b>'' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '{
+			$status['status'] = '<b style="color: #348c34' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '">Connected</b>'' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$result = $conn->query("select `version` from version where description='databas' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$return['count'] = $result->num_rows' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$row = $result->fetch_assoc()' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$status['version'] = $row['version']' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+		jdie($status)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+	function checkUpdates(){
+		$server_path = dirname(dirname(dirname(__FILE_' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'chdir($server_path)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git rev-parse --abbrev-ref HEAD', $currbranch)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git status', $result)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$status = str_replace("Your branch is behind 'origin/".$currbranch[0]."' by ",''' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$status = str_replace(" commits, and can be fast-forwarded.",'', $status)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '{
+				die("(".$status.")")' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}else{
+				die(0)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+	}
+
+	function gitUpdate(){
+		$server_path = dirname(dirname(dirname(__FILE' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'chdir($server_path)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$gitusr = isset($_COOKIE['gitusr']) ? $_COOKIE['gitusr'] : ''' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$gitpss = isset($_COOKIE['gitpss']) ? $_COOKIE['gitpss'] : ''' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '// $repo = 'https://'.$gitusr.':'.$gitpss.'@github.com/nelsoft/nelsoft_inventory' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git clean -df')' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git checkout -- .')' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git fetch ', $data1)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exec('git pull origin '.$_POST['branch'], $data2)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'jdie(array_merge($data1,$data2))' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+	function getpatcher(){
+		$server_path = dirname(dirname(dirname(__FILE__)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'chdir($server_path."/sql")' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$patch = glob('*')' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'jdie($patch)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+	function patch($version){
+	
+		$server_path = dirname(dirname(dirname(__F' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'chdir($server_path."/sql/".$version)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$sqls = glob('*')' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'foreach ($sqls as $key => $sql) {
+				$patch .= file_get_contents($sql)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+			
+			$getconfig = getversion('')' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$db = $getconfig['config']' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$newpatch = explode("' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '",$patch)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$conn = new MySQLi(trim($db['host']), trim($db['username']), trim($db['password'' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$logs = ''' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$logs2 = ''' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '{
+				foreach($newpatch as $sql){
+					$conn->query($sql)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$logs .=$conn->error.PHP_EOL' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$logs2 .=$conn->error."<br>"' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+				$conn->query("update `version` set `version`='$version' where `descript' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$result['status'] = "success"' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}else{
+				$result['status'] = "failed"' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+			$result['result'] = $logs2' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'chdir($server_path.'/version/backend/')' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$this->logs($logs)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'jdie($result)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+	function logs($content){
+		$txt = "[===================".date('G:i:s')."=' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$myfile = file_put_contents("../log/".date('Y-m-d').".txt", $txt , FILE_APPEND |' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+
+
+
+
+}
+
+?><?php
+
+
+
+require_once("func.php")' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'require_once("get_branch.php")' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$method = isset($_GET['method']) ? $_GET['method'] : ""' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$method = explode('/', $method)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$method2 = !empty($method[0]) ? $method[0] : 'index'' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$parameter= []' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '{
+			$parameter = array_slice($method, 1)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}
+			$me = new system' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'call_user_func_array([$me, $method2], $parameter)' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$main = new main' at line 1
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?>' at line 1
+
+[======================END=====================]
+

@@ -8,14 +8,53 @@
 
 	#subBody
 	{
+		border-radius: 15px;
+		 background: url(/img/login2.png);
 		margin-left: auto;
 		margin-right: auto;
 		width:714.75pt;
-		height: 350px;
+		height: 394px;
 		background-color: white;
 		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		padding-top: 100px;
 	}
+
+	#log-body{
+		width: 400px;
+		position: relative;
+		top: 245px;
+		float: right;
+		color: white;
+		right: 54px;
+	}
+	a:visited{
+		color: white;
+	}
+
+	h2{
+	position: relative;
+    left: 111px;
+    padding: 0px;
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.62);
+    font-family: monospace;
+	}
+
+	.loginfoot{
+		position: relative;
+		left: 66px;
+	}
+
+.formlogin span{
+	color: white;
+	width: 60px;
+	float: left;
+}
+.formlogin input{
+	width: 200px;
+}
+.formlogin{
+	margin: 5px;
+}
 
 	#logBody{
 
@@ -51,6 +90,7 @@
 		display: none;
 		width: 100%;
 		text-align: center;
-		position: relative;
-		top: 20%;
+	position: relative;
+    top: 43px;
+    right: 32px;
 	}

@@ -335,10 +335,13 @@ var devmode = "<?php echo $devmode?>";
 				if(version==value){
 					select = 'selected';
 				}
-				if(value>=version || devmode=='on'){
+				if(value>version || devmode=='on'){
 					content += '<option value"'+value+'" '+select+'>'+value+'</option>';
 				}
 			});
+			if(content.trim()==''){
+				$('#patcher_button').hide();
+			}
 			$('#patcher').html(content);
 		});
 	}
