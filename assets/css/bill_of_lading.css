@@ -16,10 +16,10 @@
 }
 
 #create_bill_of_lading input[type=text], #create_bill_of_lading select, #create_bill_of_lading input[type=number] {
-	padding: 5px 5px;
-	border-radius: 2px;
-	height: 20px;
-	font-size: 11px;
+    padding: 0px 5px;
+    border-radius: 2px;
+    height: 20px;
+    font-size: 11px;
  }
 
 .bordered .col-sm-4{
@@ -60,8 +60,8 @@
     width: 32.3333333333333%;
 }
 #add_billing_container_6 .bordered{
-	    height: 376px;
+	    height: 316px;
 }
 #add_billing_container_5 .bordered{
-	    height: 414px;
+	    height: 354px;
 }

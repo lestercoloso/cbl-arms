@@ -29,17 +29,10 @@ require_once('config/add_shipment_forms.php');
 <!-- end  -->
 
 </head>
-<body onResize="updateToolbarPos();">
-
-		<div class="scrollingContainer">
-		<div class="subContainer">
-		<div class="buff10"><!-- --></div>
-		<div class="buff10"><!-- --></div>
-		<div class="buff10"><!-- --></div>
-		<div class="buff10"><!-- --></div>
 
 
-		<div id="mainBody">
+
+		<div id="mainContainer">
 			<div id="sampleA">
 				<div style="margin-top:3%;margin-left:3%;color:#cc0000;">
 				

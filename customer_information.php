@@ -1,4 +1,4 @@
-<title>Booking</title>
+<title>Customer Information</title>
 <?php
 	require_once("helper/utility_helper.php");
 
@@ -13,65 +13,57 @@
 				stylessheet('booking.css')];
 		
 		construct_style($css);
-		require_once('config/booking.php');
+		require_once('config/customer_information.php');
 ?>
+
+
 
 <div id="mainContainer">
 
 <!-- Start of page -->
 
 
-<h2>Booking</h2>
+<h2>Customer Information</h2>
 <div class="search-filter row">
 	<br>
 	<div class="col-sm-4 searchdata">	
 
-			<input name="searchbookingnumber" id="searchbookingnumber" placeholder="Booking No." col="booking_no" type="text" class="form-control search-text not_mandatory">
-			<input name="searchcustomername" id="searchcustomername" placeholder="Customer Name" type="text" col="customer_name" class="form-control search-text not_mandatory">
-			<input name="searchcontactperson" id="searchcontactperson" placeholder="Contact Person" type="text" col="customer_name" class="form-control search-text not_mandatory">
+			<input name="searchbookingnumber" id="searchcustomername" placeholder="Customer Name" col="customer_name" type="text" class="form-control search-text not_mandatory">
+			<input name="searchcustomername" id="searcharea" placeholder="Area" type="text" col="area" class="form-control search-text not_mandatory">
 
 	</div>
 	<div class="col-sm-4 searchdata">	
-			    <div class="input-group date" id="search_booking_date_from">
-			        <input type="text" class="form-control not_mandatory" col="date" id="search_date_from" placeholder="Booking Date From">
-			        <span class="input-group-addon">
-			            <span class="fa fa-calendar"></span>
-			        </span>
-			    </div>
+				<input name="searchcontactperson" id="searchregion" placeholder="Region" type="text" col="region" class="form-control search-text not_mandatory">
 
-			    <div class="input-group date" id="search_booking_date_to">
-			        <input type="text" class="form-control not_mandatory" col="date" id="search_date_to" placeholder="Booking Date To">
-			        <span class="input-group-addon">
-			            <span class="fa fa-calendar"></span>
-			        </span>
-			    </div>
-	</div>
-	<div class="col-sm-4 searchdata">	
-					<select class="form-control not_mandatory" id="search_status" col="status">
-				 		<option value="">Select Mode of shipment</option>
+					<select class="form-control not_mandatory" id="search_industry_type" col="industry_type">
+				 		<option value="">Select Industry Type</option>
 				 		<?php
-				 			foreach($config['mode_of_shipment'] as $key => $option){
+				 			foreach($config['industry_type'] as $key => $option){
 				 				echo "<option value='$key'>$option</option>";		
 				 			}
 				 		?>
 					</select>
 
-					<select class="form-control not_mandatory" id="search_status" col="status">
-				 		<option value="">Select status</option>
+	</div>	
+
+	<div class="col-sm-4 searchdata">	
+					<select class="form-control not_mandatory" id="search_customer_status" col="customer_status">
+				 		<option value="">Select Customer Status</option>
 				 		<?php
-				 			foreach($config['status'] as $key => $option){
+				 			foreach($config['customer_status'] as $key => $option){
 				 				echo "<option value='$key'>$option</option>";		
 				 			}
 				 		?>
 					</select>
+
 	</div>	
 
 
 
-	<div class="col-sm-3 col-md-offset-9 search-btn">	
+<div class="col-sm-3 col-md-offset-9 search-btn">	
 		<button id="search" class="button-class custombutton">Search</button>
 		<button id="clearsearch" class="button-class custombutton">Clear</button>
-	</div>	
+	</div>
 
 </div>
 
@@ -79,7 +71,7 @@
 </div>
 
 	<div class="side-btn">
-		<button id="book_shipment" class="button-class custombutton">Book Shipment</button>
+		<button id="book_shipment" class="button-class custombutton">Add New Customer</button>
 	</div>
 
 
@@ -87,19 +79,25 @@
 <table class="table table-bordered table-striped table-list" id="search_result_list">
   <thead>
     <tr>
-      <th>Booking No.</th>
+      <th>Customer<br>Code</th>
       <th>Customer Name</th>
-      <th>Booking Date</th>
+      <th>Industry<br>Type</th>
       <th>Area</th>
-      <th>Mode of Shipping</th>
-      <th>Contact Person</th>
-      <th>Status</th>
+      <th>Region</th>
+      <th>Payment<br>Terms</th>
+      <th>Aging</th>
+      <th>Credit<br>Limit</th>
+      <th>Outstanding<br>Balance</th>
+      <th>Amount<br>Due</th>
       <th>Action</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td scope="row" class="centered">1</td>
+      <td>test</td>
+      <td>test</td>
+      <td>test</td>
       <td>test</td>
       <td>test</td>
       <td>test</td>
@@ -122,7 +120,7 @@
 
 		<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h4 class="modal-title">Book Shipment</h4>
+		<h4 class="modal-title">Add Customer</h4>
 		</div>
 
 		<div class="modal-body">

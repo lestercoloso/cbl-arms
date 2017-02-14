@@ -4,6 +4,7 @@ $config['packaging_type']['document'] 	= ['Small'=>'Small', 'Large'=>'Large'];
 $config['packaging_type']['parcel'] 	= ['Own'=>'Own', 'Others'=>'Others'];
 $config['packaging_type']['crafting'] 	= ['Skeletal'=>'Skeletal', 'Close'=>'Close'];
 $config['status'] = ['1'=>'Reviewed', '2'=>'Approved'];
+$config['mode_of_shipment']  = ['1'=>'Land Trip','2'=>'Sea Freight', '3'=>'Air Freight'];
 // $config['subinventory_type'] = [''=>'Please Select', '1'=>'test1', '2'=>'test2'];
 
 $config['add_shipment']['Shipper Information'] = [
@@ -134,7 +135,7 @@ $config['add_shipment']['Package Content (Complete Description)'] = [
 								'form_class'		=> 'form-control',
 								],
 
-								4 => ['type' 		=> 'input',
+								4 => ['type' 		=> 'number',
 								'label'				=> 'Dimension',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-6',
@@ -144,7 +145,7 @@ $config['add_shipment']['Package Content (Complete Description)'] = [
 								'form_class'		=> 'form-control',
 								],
 
-								5 => ['type' 		=> 'input',
+								5 => ['type' 		=> 'number',
 								'label'				=> 'Actual Weight',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-6',
@@ -210,12 +211,12 @@ $config['add_shipment']['Package Content (Complete Description)'] = [
 
 $config['add_shipment']['Charges'] = [
 								
-								0=>['type' 			=> 'checkbox',
+								0=>['type' 			=> 'select',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
 								'form_class'		=> 'form-control',
 								'col'				=> 'charges',
-								'options'			=> $config['charges']
+								'options'			=> array_merge([''=>'Select Charges'],$config['charges'])
 								]
 
 						];
@@ -377,7 +378,7 @@ $config['add_shipment']['Additional Changes'] = [
 
 $config['add_shipment']['Recipient Information'] = [
 								
-								['type' 			=> 'Input',
+								['type' 			=> 'input',
 								'label'				=> 'Recipient Name',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -449,6 +450,7 @@ $config['add_shipment'][' '] = [
 								'form_class'		=> 'form-control',
 								'id'				=> 'create_mode_of_shipping',
 								'col'				=> 'mode_of_shipping',
+								'options'			=> array_merge([''=>'Select Mode of Shipment'],$config['mode_of_shipment'])
 								],
 								['type' 			=> 'select',
 								'label'				=> 'Services',

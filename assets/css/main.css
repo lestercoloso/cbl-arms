@@ -1,10 +1,10 @@
 
 #mainContainer{
-		width: 1000px;
-		height: 700px;
+		width: 1069px;
+		height: auto;
 		background-color: white;
 		margin: auto;
-		margin-top: 35px;
+		margin-top: 10px;
 		box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		    display: block;
     		border-width: 0;
@@ -68,7 +68,7 @@
 	    font-size: 16px;
 	    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-input[type=text] {
+input[type=text], input[type=number]{
     width: 100%;
     padding: 5px 10px;
     /*margin: 8px 0;*/
@@ -232,7 +232,7 @@ select.form-control + .chosen-container-multi .chosen-results li.result-selected
     color: #999999 !important;
     font-weight: 100;
 }
-input[type="text"]{
+input[type="text"], input[type="number"] {
 	font-weight: 100;	
 }
 

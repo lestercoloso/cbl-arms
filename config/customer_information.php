@@ -1,6 +1,6 @@
 <?php
-$config['mode_of_shipment']  = ['1'=>'Land Trip','2'=>'Sea Freight', '3'=>'Air Freight'];
-$config['status']  = ['1'=>'Cancelled Pick Up', '2'=>'For Monitoring'];
+$config['industry_type']  	= ['1'=>'N/A','2'=>'N/A', '3'=>'N/A'];
+$config['customer_status']  = ['1'=>'Active', '0'=>'Inactive'];
 $config['book_shipment'][] = [
 								
 								['type' 			=> 'normal',
@@ -82,7 +82,7 @@ $config['book_shipment'][] = [
 								'form_class'		=> 'form-control',
 								'col'				=> 'mode_of_shipping',
 								'id'				=> 'create_mode_of_shipping',
-								'options'			=> array_merge([''=>'Select Mode of Shipping'],$config['mode_of_shipment'])
+								'options'			=> array_merge([''=>'Select Mode'],$config['mode_of_shipment'])
 								],
 								
 								['type' 			=> 'select',
@@ -161,7 +161,7 @@ $config['book_shipment'][] = [
 								'subparent_class' 	=> 'col-sm-6',
 								'id'				=> 'create_weight',
 								'col'				=> 'weight',
-								'extra'				=> 'kg.',
+								'extra'				=> 'cm.',
 								'form_class'		=> 'form-control',
 								],
 

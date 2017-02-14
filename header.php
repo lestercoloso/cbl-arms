@@ -39,13 +39,9 @@ session_start();
 <meta charset="UTF-8">
 <link rel="stylesheet" href="./libraries/styles.css?<?php echo rand();?>" type="text/css" />
 <link rel="stylesheet" href="./assets/css/main.css?<?php echo rand();?>" type="text/css" />
-<!-- <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" /> -->
-<!-- <script src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
-<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> -->
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="/bower_components/jquery-ui/themes/blitzer/jquery-ui.css" />
-<!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/blitzer/jquery-ui.css" /> -->
 <script src="./js/jquery.countdown.js"></script>
 <script type="text/javascript" src="./js/jquery.countdownTimer.js"></script>
 
@@ -489,3 +485,35 @@ var validateNumber = function(event,name,id) {
 </div>
 
 
+
+
+<body onResize="updateToolbarPos();">
+
+
+	<div class="scrollingContainer">
+	<div class="subContainer" style="width: 80%;">
+		<div class="buff10"><!-- --></div>
+		<div class="buff10"><!-- --></div>
+		<div class="buff10"><!-- --></div>
+		<div class="buff10"><!-- --></div>
+		<div style="" class="header-container">
+
+			<a href="homepage.php"  class="col-sm-2">
+			<img src="./img/CBL.png" alt="" title="" border=0>
+			</a>
+
+			<h2 class="moduletitle col-sm-10">Warehouse Management System (WMS)</h2>
+
+		</div>
+ 		<div style="clear: left; padding-left: 5px; height: 30px;" class="normalTextSmall">
+ 			Welcome!
+			<br>
+ 			<div style="clear: left; float: left; width: 250px;">
+			System Date/Time: <span id="systemTimeContent"><? echo $system_time ;?></span>
+			</div>
+			<div style="float: left;">
+			
+			Your session will expire in <span id="timerContent"></span>
+			
+			</div>
+ 		</div>
