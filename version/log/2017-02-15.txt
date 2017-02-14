@@ -20,3 +20,19 @@ Query was empty
 
 [======================END=====================]
 
+[===================3:09:09===================]
+Table 'booking' already exists
+Unknown table 'cblarms.home_module'
+
+
+
+
+
+
+
+
+
+Query was empty
+
+[======================END=====================]
+

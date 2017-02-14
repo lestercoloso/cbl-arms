@@ -15,32 +15,6 @@
 	require_once('config/bill_of_lading.php');
 ?>
 
-
-<body onResize="updateToolbarPos();">
-<div class="scrollingContainer">
-<div class="subContainer " style="width: 950px;">
-<div class="buff10"><!-- --></div>
-<div class="buff10"><!-- --></div>
-<div class="buff10"><!-- --></div>
-<div class="buff10"><!-- --></div>
-<div style="clear: left; float: left;"><a href="homepage.php"><img src="" width=445 height=70 alt="" title="" border=0></a></div>
-<div style="clear: left; padding-left: 5px; height: 30px;" class="normalTextSmall">
-Welcome <b><?php echo $_SESSION['profilename'];?></b> <?php echo " (" .$_SESSION['profilestats'] . ")" ; ?>
-<br>
-<div style="clear: left; float: left; width: 250px;">
-Last Login: <span id="head_lastlogin"></span><a href="">[view log]</a>
-</div>
-<div style="clear: left; float: left; width: 250px;">
-System Date/Time: <span id="systemTimeContent"><?php echo $system_time ;?></span>
-</div>
-<div style="float: left;">
-Your session will expire in <span id="timerContent"><?php echo "NEED HEADER HERE"; ?>:00</span>
-</div>
-<div style="clear: left; float: left; width: 250px;">
-<select id="selPort"></select><span id=""> </span><a href="" id="switchPort">[switch]</a>
-</div>
-</div>
-<br>
 <div id="mainContainer">
 
 <!-- Start of page -->
