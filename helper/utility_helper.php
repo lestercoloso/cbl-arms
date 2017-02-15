@@ -63,7 +63,7 @@ function construct_form($arr){
 		}
 
 
-		$return .='<div class="'.$data['parent_class'].'" id="'.$data['id'].'_container" >';
+		$return .='<div class="'.$data['parent_class'].'" id="'.$data['id'].'_container"  title="'.$data['title'].'">';
 		
 		if(!empty($data['label'])){
 			if(empty($data['label_class'])){
@@ -108,13 +108,12 @@ function construct_form($arr){
 			</span></div>';
 
 		}else if($data['type']=='checkbox'){
-
+			$return .='<div class="checkbox" id="'.$data['id'].'">';
 			if(!empty($data['options'])){
 				foreach ($data['options'] as $key => $option){
-					$return .='<div class="checkbox">
-							  		<label><input type="checkbox" value="'.$key.'" name="'.$data['col'].'"><span>'.$option.'</span></label>
-							   </div>';
+					$return .='<label><input type="checkbox" value="'.$key.'" name="'.$data['col'].'"><span>'.$option.'</span></label> &nbsp;';
 				}
+			$return .= '</div>';	
 			}
 		}else if($data['type']=='radio'){
 

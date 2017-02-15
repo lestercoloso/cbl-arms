@@ -36,7 +36,7 @@ function createPostData(classused){
 	$('.'+classused+' input, .'+classused+' select').each(function( data ) {
 			var c = $(this).attr('col');
 			var v = $(this).val();
-			if(c!=undefined){
+			if(c!=undefined && c!=''){
 				array2[c] = v;
 
 				if($(this).hasClass('not_mandatory')){

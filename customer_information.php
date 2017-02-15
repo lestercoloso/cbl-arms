@@ -10,7 +10,7 @@
 		$css = [bowerpath('toastr/toastr.min.css'),
 				bowerpath('eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'),
 				bowerpath('chosen/chosen.css'),
-				stylessheet('booking.css')];
+				stylessheet('customer_information.css')];
 		
 		construct_style($css);
 		require_once('config/customer_information.php');
@@ -71,7 +71,7 @@
 </div>
 
 	<div class="side-btn">
-		<button id="book_shipment" class="button-class custombutton">Add New Customer</button>
+		<button id="add_customer_info" class="button-class custombutton">Add New Customer</button>
 	</div>
 
 
@@ -120,7 +120,7 @@
 
 		<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h4 class="modal-title">Add Customer</h4>
+		<h4 class="modal-title">Customer Information</h4>
 		</div>
 
 		<div class="modal-body">
@@ -130,14 +130,34 @@
 
 
 <?php
-foreach($config['book_shipment'] as $forms){
-	echo '<div class="col-sm-4 create_shippment" id="">';
+
+foreach($config['create_customer'] as $forms){
+	echo '<div class="col-sm-3 create_customer" id="">';
 	echo construct_form($forms);				
 	echo '</div>';
 }
 ?>	
 </fieldset>
 </form>
+
+<div class="col-sm-12 bordered">
+
+<div class="col-sm-6 border_container">
+<div class="col-sm-4 selector">
+ <img src="/img/ci_address_inactive.png">
+</div>
+
+<div class="col-sm-4 selector">
+ <img src="/img/ci_contact_inactive.png">
+</div>
+
+<div class="col-sm-4 selector">
+ <img src="/img/ci_billing_inactive.png">
+</div>
+</div>
+
+
+</div>
 
 		</div>
 		<div class="modal-footer">
@@ -161,7 +181,7 @@ foreach($config['book_shipment'] as $forms){
 			'/js/moment.js',
 			bowerpath('eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'),
 			bowerpath('chosen/chosen.jquery.js'),
-			javascript('booking.js')
+			javascript('customer_info.js')
 			];
 	construct_js($js);
 

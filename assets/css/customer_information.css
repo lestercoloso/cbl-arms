@@ -1,0 +1,89 @@
+#create_modal .modal-dialog{
+	width: 98%;
+}
+#create_modal .modal-body{
+    height: 75%;
+    overflow: auto;
+}
+.bordered{
+	padding: 5px;
+	font-size: 11px;
+	/*margin: 5px 0px 5px 0px;*/
+	margin: auto;
+    float: none;
+    height: 250px;
+}
+/*.bordered div{
+	padding-left: 10px;
+	padding-right: 10px;
+}*/
+
+#create_modal input[type=text], #create_modal select, #create_modal input[type=number] {
+    padding: 0px 2px;
+    border-radius: 2px;
+    height: 20px;
+    font-weight: 100;
+    font-size: 10px;
+ }
+
+/*.bordered .col-sm-4{
+	padding: 0px;
+}
+
+.bordered .form-group {
+    margin-bottom: 5px;
+}
+
+.bordered .checkbox, .radio {
+     margin-top: 0px; 
+     margin-bottom: 0px; 
+}
+.bordered label{
+	font-weight: 700;
+}*/
+
+.no-pad{
+	padding: 0px;
+	    padding-right: 10px;
+}
+.no-wrap{
+	white-space: nowrap;
+}
+.no-margin{
+	margin: 0px !important;
+}
+.create_customer .form-group{
+	margin-bottom: 15px;
+	height: 18px;
+}
+
+.create_customer label, .create_customer div{
+	padding-right: 5px;
+	padding-left: 0px;
+}
+
+.create_customer .input-group-addon {
+    padding: 3px 8px;
+    font-size: 10px;
+}
+.create_customer .date {
+     margin: 0px; 
+}
+#create_modal .date input[type=text]{
+	    border-radius: 2px 0px 0px 2px;
+}
+
+.bordered .selector{
+	padding-left: 3px;
+    padding-right: 0px;
+}
+.bordered .selector img{
+	width: 100%;
+	cursor: pointer;
+}
+
+.border_container{
+	margin: auto;
+	float: none;
+	/*height: 20px;*/
+}

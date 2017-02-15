@@ -517,3 +517,5 @@ var validateNumber = function(event,name,id) {
 			
 			</div>
  		</div>
+
+ 		<?php 		require_once('config/main.php'); ?>
