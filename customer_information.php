@@ -142,22 +142,95 @@ foreach($config['create_customer'] as $forms){
 
 <div class="col-sm-12 bordered">
 
-<div class="col-sm-6 border_container">
-<div class="col-sm-4 selector">
- <img src="/img/ci_address_inactive.png">
+	<div class="col-sm-12 border_container">
+			
+			<div class="col-sm-12">
+				<div class="selector select_inactive" id="address_select">
+					<img src="/img/ci_address_inactive.png" class="img_inactive">
+					<img src="/img/ci_address_active.png" class="img_active">
+				</div>
+				<div class="selector select_inactive"  id="contact_select">
+					<img src="/img/ci_contact_inactive.png" class="img_inactive">
+					<img src="/img/ci_contact_active.png" class="img_active">
+				</div>
+				<div class="selector select_inactive"  id="billing_select">
+					<img src="/img/ci_billing_inactive.png" class="img_inactive">
+					<img src="/img/ci_billing_active.png" class="img_active">
+				</div>
+			</div>
+
+			<div class="col-sm-12 border_container" id="additional_table">
+				<table class="table table-bordered table-striped table-list border_table" id="address_selected" >
+				<thead>
+				<tr>
+				<th>Address Type</th>
+				<th>Address</th>
+				<th>City</th>
+				<th>Region</th>
+				<th>Area</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				</tr>
+				</tbody>
+				</table>
+
+				<table class="table table-bordered table-striped table-list border_table" id="contact_selected" >
+				<thead>
+				<tr>
+				<th>Name</th>
+				<th>Birth Date</th>
+				<th>Contact No.</th>
+				<th>Moble No.</th>
+				<th>Email Address</th>
+				<th>Department</th>
+				<th>Designation</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				</tr>
+				</tbody>
+				</table>
+
+				<table class="table table-bordered table-striped table-list border_table" id="billing_selected" >
+				<thead>
+				<tr>
+				<th>Billing Statement No.</th>
+				<th>Date Received</th>
+				<th>Amount</th>
+				<th>Aging</th>
+				<th>Remarks</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				</tr>
+				</tbody>
+				</table>
+			</div>
+	</div>		
 </div>
 
-<div class="col-sm-4 selector">
- <img src="/img/ci_contact_inactive.png">
-</div>
 
-<div class="col-sm-4 selector">
- <img src="/img/ci_billing_inactive.png">
-</div>
-</div>
-
-
-</div>
 
 		</div>
 		<div class="modal-footer">

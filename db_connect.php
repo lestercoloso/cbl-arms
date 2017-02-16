@@ -19,6 +19,7 @@ class Database {
 	public $_username = "root";
 	public $_password = "";
 	public $_database = "cblarms";
+	public $last_query = "";
 
 	// Constructor
 	public function __construct() {
@@ -81,6 +82,10 @@ class Database {
 		return $this->CheckResult($sql);
 	}
 
+	public function last_query(){
+		echo PHP_EOL.$this->last_query.PHP_EOL;
+	}
+
 	public function delete($table='', $where=''){
 		$where = !empty($where) ? ' where '.$where : '';
 		$sql = "delete from $table $where";
@@ -90,6 +95,8 @@ class Database {
 	}
 
 	public function CheckResult($sql){
+
+		$this->last_query = $sql;
 		if ($this->_connection->query($sql) === TRUE) {
 			return 1;
 		} else {

@@ -1,5 +1,6 @@
 
 
+var searchdata = "";
 
 var search = {
 	init: function(){
@@ -21,20 +22,33 @@ var customer = {
 			format: 'MM/DD/YYYY',
 			useCurrent: false
 		});
-		//add new bill of lading modal
+		
 		$('#add_customer_info').click(function(){
 			customer.createcustomer();
 		});		
 
-		//clear new bill of lading 
 		$('#clearecreate').click(function(){
 			customer.clear();
 		});		
-		//save new bill of lading 
+		
 		$('#savecreate').click(function(){
-			customer.save();
+			if(!$(this).hasClass('disabled')){
+				customer.save();	
+			}
+		});		
+		
+		$('.selector').click(function(){
+			customer.selector(this);
 		});		
 
+		customer.getcustomerlist();
+
+	},
+	selector: function(d){
+		$('.selector').attr('class','selector select_inactive');
+		$(d).attr('class','selector select_active');
+		$('#additional_table table').hide();
+		$('#'+d.id+'ed').show();
 	},
 
 	createcustomer: function(){
@@ -45,13 +59,27 @@ var customer = {
 	save: function(){
 		var arr = createPostData('create_customer');
 
+
 		if(arr['error']){
     		toastr["error"](arr['error']);
 
     	}else{
-
+			$('#savecreate').addClass('disabled');
+			$('#savecreate i').removeClass('hide');
 			$.post("backstage/customer/save/", { d:arr['data'] },function(data){
-				
+				if(data.status==200){
+					toastr["success"]('Successfully added.');
+					$('#create_modal').modal('hide');
+					$('#savecreate').removeClass('disabled');
+					$('#savecreate i').addClass('hide');
+					customer.getcustomerlist();
+				}else{
+				toastr["error"]('Network error!<br> Please try again.');	
+				}
+			}).fail(function(){
+				toastr["error"]('Error.');
+				$('#savecreate').removeClass('disabled');
+				$('#savecreate i').addClass('hide');
 			});
 
     	}
@@ -61,6 +89,9 @@ var customer = {
 		customer.form('create_shippment');
 		customer.getcustomer();
 		$('#create_customer_date').val(datetoday);
+		$('#savecreate').removeClass('disabled');
+		$('#savecreate i').addClass('hide');
+
 
 	},
 	form: function(classused){
@@ -69,9 +100,54 @@ var customer = {
 		$('.'+classused+' input, .'+classused+' select').val('');
 	},
 	getcustomer: function(){
-		$.post("backstage/customer/getcustomerno/", {},function(data){
-			$('#create_customer_no').val(data);
+		$.post("backstage/customer/getcustomercode/", {},function(data){
+			$('#create_customer_code').val(data);
 		});
+	},
+	getcustomerlist: function(page=1){
+	
+		$.post("backstage/customer/customerlist/"+page, {searchdata: searchdata},function(data){
+			var content = '';
+			// console.log(data);
+			$.each(data.data, function( index, value ) {
+
+				var action = '<button type="button" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
+				action += ' <button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
+				
+				content +='<tr id="customer-'+value.id+'">';
+				content +='<td class="centered">'+value.customer_code+'</td>';
+				content +='<td class="centered">'+value.customer_name+'</td>';
+				content +='<td>'+value.industry_type+'</td>';
+				content +='<td>'+value.area_1+'</td>';
+				content +='<td>'+value.region+'</td>';
+				content +='<td>'+value.payment_terms+'</td>';
+				content +='<td>'+value.aging+'</td>';
+				content +='<td>'+value.credit_limit+'</td>';
+				content +='<td>'+value.outstanding_balance+'</td>';
+				content +='<td>'+value.amount_due+'</td>';
+				content +='<th>'+action+'</th>';
+				content +='</tr>';
+			});
+
+			$('#pagination-container').html(data.pagination);
+			$('#search_result_list tbody').html(content);
+			$('.pagenumber').click(function(){
+				customer.getcustomerlist($(this).data('page'));
+			});
+			
+			// $('#inbound-list .btn-success').click(function(){
+			// 	shipment.edit($(this).parent().parent().attr('id'));
+			// });
+
+			// $('#inbound-list .btn-danger').click(function(){
+			// 	shipment.delete($(this).parent().parent().attr('id'));
+			// });
+
+
+		}).fail(function(){
+			toastr["error"]("Failed to load the inbound list.");
+		});
+
 	}
 
 

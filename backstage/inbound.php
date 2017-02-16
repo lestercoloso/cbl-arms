@@ -48,7 +48,7 @@ class Inbound{
 
 		$data = $this->db->select($sql);
 
-		$datatotal = $this->db->select_one("select count(id) as total from inbound_list a where status=1 limit 1" )['total'];
+		$datatotal = $this->db->select_one("select count(id) as total from inbound_list a $where limit 1" )['total'];
 		$data['pagination'] = $this->db->pagination($page, $datatotal, $limit);
 		jdie($data);
 

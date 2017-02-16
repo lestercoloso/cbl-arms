@@ -27,6 +27,7 @@ $config['book_shipment'][] = [
 								'id'				=> 'create_customer_name',
 								'col'				=> 'customer_name',
 								'form_class'		=> 'form-control',
+								'placeholder'		=> 'Select Customer Name',
 								],
 
 								['type' 			=> 'hide',

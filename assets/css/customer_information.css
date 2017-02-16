@@ -75,15 +75,45 @@
 
 .bordered .selector{
 	padding-left: 3px;
-    padding-right: 0px;
+	padding-right: 0px;
+	width: 33%;
+	float: left;
+	margin-left: 2px;
+	cursor: pointer;
 }
 .bordered .selector img{
-	width: 100%;
 	cursor: pointer;
+	width: 50%;
 }
 
 .border_container{
 	margin: auto;
-	float: none;
+	float: left;
 	/*height: 20px;*/
 }
+
+.border_table{
+    width: 98%;
+    margin: 0px auto;
+    position: relative;
+    top: 5px;
+}
+
+.select_inactive .img_active{
+	display: none;
+}
+.select_inactive{
+	background: #e2e4e6;
+}
+
+.select_active .img_inactive{
+	display: none;
+}
+
+#create_modal th, #create_modal td {
+    padding: 5px;
+ }
+
+ #additional_table table{
+ 	display: none;
+ }

@@ -9,7 +9,7 @@ $config['create_customer'][] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'form_class'		=> 'form-control',
 								'col'				=> 'customer_code',
-								'id'				=> 'create_booking_no',
+								'id'				=> 'create_customer_code',
 								],
 								
 								['type' 			=> 'select',

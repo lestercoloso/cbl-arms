@@ -53,6 +53,10 @@ var booking = {
 			booking.save();
 		});		
 
+		$('#create_customer_name').change(function(){
+			$('#create_customer_id').val($(this).find(':selected').data('client_id'));
+		});		
+
 	},
 
 	createbooking: function(){
@@ -74,6 +78,8 @@ var booking = {
 		booking.form('create_shippment');
 		booking.getbooking();
 		$('#create_booking_date').val(datetoday);
+		resetchosen('create_customer_name');
+		booking.getcustomerlist();
 
 	},
 	form: function(classused){
@@ -85,6 +91,24 @@ var booking = {
 		$.post("backstage/booking/getbookingno/", {},function(data){
 			$('#create_booking_no').val(data);
 		});
+	},
+
+	getcustomerlist: function(){
+		var d = $('#create_customer_name');
+		if(d.html().trim()==''){
+			$.post("backstage/customer/getcustomername/", {},function(data){
+				var content = "<option></option>";
+				$.each(data.data, function( index, value ) {
+					content +='<option value="'+value.customer_name+'" data-client_id="'+value.id+'"">'+value.customer_name+'</option>';
+				});
+
+				d.html(content);
+				d.chosen('destroy');
+				setTimeout(function(){ 
+					d.chosen({search_contains: true});
+				}, 300);
+			});
+		}		
 	}
 
 
