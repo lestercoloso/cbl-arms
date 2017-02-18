@@ -100,13 +100,13 @@
   <tbody>
     <tr>
       <td scope="row" class="centered">1</td>
-      <td>test</td>
-      <td>test</td>
-      <td>test</td>
-      <td>test</td>
-      <td>test</td>
-      <td>test</td>
-      <td>test</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
     </tr>
   </tbody>
 </table>
@@ -151,10 +151,6 @@ foreach($config['book_shipment'] as $forms){
 		</div>
 		</div>
 
-<script>
-	var datetoday = '<?php echo date('m/d/Y');?>';
-
-</script>
 
 <?php
 	$js = [ bowerpath('toastr/toastr.min.js'),

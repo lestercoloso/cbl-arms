@@ -92,12 +92,12 @@
     <tr>
       <td class="centered"><input type="checkbox" value=""></td class="centered">
       <td scope="row" class="centered">1</td>
-      <td>test</td>
-      <td>test</td>
-      <td>test</td>
-      <td>test</td>
-      <td>test</td>
-      <td>test</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
     </tr>
   </tbody>
 </table>

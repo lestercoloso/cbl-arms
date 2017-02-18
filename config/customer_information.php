@@ -345,4 +345,138 @@ $config['create_customer'][] = [
 						
 							];
 
+
+
+	$config['contact_person'] = [
+								['type' 			=> 'input',
+								'label'				=> 'First Name',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'id'				=> 'contact_first_name',
+								'col'				=> 'first_name',
+								],
+								['type' 			=> 'input',
+								'label'				=> 'Last Name',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'id'				=> 'contact_last_name',
+								'col'				=> 'last_name',
+								],
+								['type' 			=> 'input',
+								'label'				=> 'Middle Initial',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control not_mandatory',
+								'id'				=> 'contact_middle_initial',
+								'col'				=> 'middle_initial',
+								],
+
+								['type' 			=> 'date',
+								'label'				=> 'Birth Date',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'contact_birth_date',
+								'col'				=> 'birth_date',
+								'form_class'		=> 'form-control',
+								],
+
+								['type' 			=> 'input',
+								'label'				=> 'Contact Number',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'id'				=> 'contact_number_no',
+								'col'				=> 'contact_no',
+								],
+
+								['type' 			=> 'input',
+								'label'				=> 'Mobile Number',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'id'				=> 'contact_mobile_no',
+								'col'				=> 'mobile_no',
+								],
+
+								['type' 			=> 'input',
+								'label'				=> 'Email Address',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'id'				=> 'contact_email',
+								'col'				=> 'email',
+								],
+
+								['type' 			=> 'input',
+								'label'				=> 'Department',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'id'				=> 'contact_department',
+								'col'				=> 'department',
+								],
+
+								['type' 			=> 'input',
+								'label'				=> 'Designation',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'id'				=> 'contact_designation',
+								'col'				=> 'designation',
+								]
+
+							];
+
+		$config['address'] = [			
+								['type' 			=> 'select',
+								'label'				=> 'Address Type',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'id'				=> 'address_address_type',
+								'col'				=> 'address_type',
+								'options'			=> array_merge([''=>'Select Address Type'],$config['all']),								
+								],
+
+								['type' 			=> 'input',
+								'label'				=> 'Address',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'id'				=> 'address_address',
+								'col'				=> 'address',
+								],
+
+								['type' 			=> 'input',
+								'label'				=> 'City',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'id'				=> 'address_city',
+								'col'				=> 'city',
+								],
+
+								['type' 			=> 'input',
+								'label'				=> 'Region',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'id'				=> 'address_region',
+								'col'				=> 'region',
+								],
+
+								['type' 			=> 'input',
+								'label'				=> 'Area',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'id'				=> 'address_area',
+								'col'				=> 'area',
+								]
+							];
+
+
+
 ?>

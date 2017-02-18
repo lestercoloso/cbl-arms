@@ -172,13 +172,14 @@ foreach($config['create_customer'] as $forms){
 				</thead>
 				<tbody>
 				<tr>
-				<td>test</td>
-				<td>test</td>
-				<td>test</td>
-				<td>test</td>
-				<td>test</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
 				</tr>
 				</tbody>
+				<tfoot><tr><td colspan="7"><button id="add_customer_address" class="button-class custombutton">Add Address</button></td></tr></tfoot>		
 				</table>
 
 				<table class="table table-bordered table-striped table-list border_table" id="contact_selected" >
@@ -195,15 +196,16 @@ foreach($config['create_customer'] as $forms){
 				</thead>
 				<tbody>
 				<tr>
-				<td>test</td>
-				<td>test</td>
-				<td>test</td>
-				<td>test</td>
-				<td>test</td>
-				<td>test</td>
-				<td>test</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
 				</tr>
 				</tbody>
+				<tfoot><tr><td colspan="7"><button id="add_customer_contact" class="button-class custombutton">Add Contact Person</button></td></tr></tfoot>
 				</table>
 
 				<table class="table table-bordered table-striped table-list border_table" id="billing_selected" >
@@ -218,11 +220,11 @@ foreach($config['create_customer'] as $forms){
 				</thead>
 				<tbody>
 				<tr>
-				<td>test</td>
-				<td>test</td>
-				<td>test</td>
-				<td>test</td>
-				<td>test</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
 				</tr>
 				</tbody>
 				</table>
@@ -242,10 +244,49 @@ foreach($config['create_customer'] as $forms){
 		</div>
 		</div>
 
-<script>
-	var datetoday = '<?php echo date('m/d/Y');?>';
 
-</script>
+
+
+
+
+
+
+	<div id="create_additional" class="modal fade col-sm-12 " role="dialog">
+		<div class="modal-dialog custom-class">
+		<div class="modal-content">
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h4 class="modal-title">Add Address</h4>
+		</div>
+
+			<div class="modal-body">
+			<fieldset>
+<?php
+	echo '<div class="create_contact" id="">';
+	echo construct_form($config['contact_person']);				
+	echo '</div>';
+
+	echo '<div class="create_address" id="">';
+	echo construct_form($config['address']);				
+	echo '</div>';
+?>
+
+
+			</fieldset>
+			
+
+		<div class="modal-footer">
+		<button type="button" class="btn btn-default" id="saveaddress">Save</button>
+		<button type="button" class="btn btn-default" id="savecontact">Save</button>
+		<button type="button" class="btn btn-default" id="clearadditional">Clear</button>
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
+		</div>
+		</div>
+	</div>
+
+
+
 
 <?php
 	$js = [ bowerpath('toastr/toastr.min.js'),

@@ -120,7 +120,6 @@ var search = {
     execute: function(){
 		var arr = createPostData('searchdata');
 		searchdata = JSON.stringify(arr['data']);
-		console.log(searchdata);
 		getInbound();
     }
 }

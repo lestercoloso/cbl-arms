@@ -518,4 +518,8 @@ var validateNumber = function(event,name,id) {
 			</div>
  		</div>
 
+<script>
+	var datetoday = '<?php echo date('m/d/Y');?>';
+</script>		
+
  		<?php 		require_once('config/main.php'); ?>

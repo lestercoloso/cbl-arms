@@ -6,7 +6,7 @@ CREATE TABLE `customer_information` (
 	`customer_name` varchar(225) DEFAULT NULL,
 	`company_anniversary` date DEFAULT NULL,
 	`tel_no` varchar(225) DEFAULT NULL,
-	`fox_no` varchar(225) DEFAULT NULL,
+	`fax_no` varchar(225) DEFAULT NULL,
 	`industry_type` int(20) DEFAULT NULL,
 	`address` varchar(775) DEFAULT NULL,
 	`tin_no` varchar(50) DEFAULT NULL,
@@ -38,6 +38,10 @@ CREATE TABLE `customer_information` (
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `customer_code` (`customer_code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+
+ALTER TABLE `customer_information` 
+ADD COLUMN `customer_status` TINYINT(2) NULL DEFAULT 1 AFTER `created_date`;
 
 
 

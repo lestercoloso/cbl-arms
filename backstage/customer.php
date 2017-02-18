@@ -26,9 +26,18 @@ class Customer{
 		$additional = "limit $start, $limit";		
 		
 		$searchdata = (!empty($_POST['searchdata'])) ? json_decode($_POST['searchdata'], TRUE) : [];
+		if(!empty($searchdata)){
+			$likedata['customer_name'] = $searchdata['customer_name'];	
+			unset($searchdata['customer_name']);	
+			$this->db->where_like($likedata);	
+		}
+
+
 		$this->db->where_search(['status'=>1]);
+		
+		
 		$where = $this->db->where_search($searchdata);
-		$sql = "select id, LPAD(`customer_code`, 10, '0') as customer_code, customer_name, industry_type, area_1, region, payment_terms, '20' as aging, credit_limit, '0.00' as outstanding_balance, '0.00' as amount_due from  customer_information $where $additional";
+		$sql = "select id, LPAD(`customer_code`, 10, '0') as customer_code, customer_name, industry_type, area_1, region, payment_terms, '0' as aging, credit_limit, '0.00' as outstanding_balance, '0.00' as amount_due from  customer_information $where $additional";
 		$data = $this->db->select($sql);
 		$datatotal = $this->db->select_one("select count(id) as total from customer_information $where limit 1" )['total'];
 		$data['pagination'] = $this->db->pagination($page, $datatotal, $limit);
@@ -37,9 +46,15 @@ class Customer{
 
 	public function save(){
 		$data = $_POST['d'];
+		$contact = !empty($_POST['contact']) ? $_POST['contact'] : [];
+		$address = !empty($_POST['address']) ? $_POST['address'] : [];
+
+
+
 		$data['company_anniversary'] = date('Y-m-d', strtotime($data['company_anniversary']));
 		$return['status'] = 100;
 		if($this->db->insert("customer_information",$data)){
+			// die($this->db->insert_id());
 			$return['status'] = 200;
 		}
 		jdie($return);

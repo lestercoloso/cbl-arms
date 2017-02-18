@@ -20,6 +20,7 @@ class Database {
 	public $_password = "";
 	public $_database = "cblarms";
 	public $last_query = "";
+	public $insert_id = "";
 
 	// Constructor
 	public function __construct() {
@@ -78,9 +79,18 @@ class Database {
 		}
 
 		$sql = "insert into `$table` (".implode(',',$column).") values (".implode(',',$value).")";
-		// die($sql);
-		return $this->CheckResult($sql);
+		$this->last_query = $sql;
+		if ($this->_connection->query($sql) === TRUE) {
+			$this->insert_id = $this->_connection->insert_id;
+			return 1;
+		} else {
+			return "Error: " . $sql . "<br>" . $this->_connection->error;
+		}
 	}
+
+	public function insert_id(){
+		return $this->insert_id;
+	} 
 
 	public function last_query(){
 		echo PHP_EOL.$this->last_query.PHP_EOL;
@@ -104,6 +114,7 @@ class Database {
 		}
 
 	}
+
 
 
 	public function update($table,$data=[],$where=''){
@@ -132,6 +143,25 @@ class Database {
 
 		return $this->where_search;
 
+	}
+
+	public function where_like($array = []){
+
+		foreach ($array as $key => $value) {
+			if(!empty($value)){
+				$data = " `".$key."` like '%".mysql_real_escape_string($value)."%'";
+				$this->where_search .= (!empty($this->where_search)) ? " and ".$data : " where ".$data;				
+			}
+		}
+
+		return $this->where_search;
+
+	}
+
+	public function likedata($array=[], $array2=[]){
+
+
+		return $array;
 	}
 
 	public function pagination($page=1, $total=0, $limit=5){

@@ -1,6 +1,8 @@
 
 
 var searchdata = "";
+var contact = [];
+var address = [];
 
 var search = {
 	init: function(){
@@ -9,7 +11,18 @@ var search = {
 			$('.searchdata input, .searchdata select').val('');
 		});
 
-	}
+		$('#search').click( function(){
+			search.execute();
+		});
+
+	},
+
+	execute: function(){
+		var arr = createPostData('searchdata');
+		searchdata = JSON.stringify(arr['data']);
+		console.log(searchdata);
+		customer.getcustomerlist(1);
+    }
 
 
 }
@@ -19,6 +32,11 @@ var customer = {
 	init: function(){
 
 		$('#create_company_anniversary_container .create-date').datetimepicker({
+			format: 'MM/DD/YYYY',
+			useCurrent: false
+		});
+		
+		$('#contact_birth_date_container .create-date').datetimepicker({
 			format: 'MM/DD/YYYY',
 			useCurrent: false
 		});
@@ -39,6 +57,28 @@ var customer = {
 		
 		$('.selector').click(function(){
 			customer.selector(this);
+		});	
+
+
+		$('#add_customer_address').click(function(){
+			customer.additionalmodal('a');
+		});		
+
+		$('#add_customer_contact').click(function(){
+			customer.additionalmodal('c');
+		});	
+
+		$('#clearadditional').click(function(){
+			customer.form('create_contact');
+			customer.form('create_address');
+		});		
+
+		$('#saveaddress').click(function(){
+			customer.saveadditional('a');
+		});		
+
+		$('#savecontact').click(function(){
+			customer.saveadditional('c');
 		});		
 
 		customer.getcustomerlist();
@@ -51,6 +91,62 @@ var customer = {
 		$('#'+d.id+'ed').show();
 	},
 
+	saveadditional: function(t){
+		var cls = '';
+		if(t=='c'){
+			cls = 'create_contact';
+		}else{
+			cls = 'create_address';
+		}
+
+		var arr = createPostData(cls);
+		if(arr['error']){
+    		toastr["error"](arr['error']);
+    	}else{
+	    	if(t=='c'){
+				contact.push(arr['data']);
+			}else{
+				address.push(arr['data']);
+			}
+			customer.form('create_contact');
+			customer.form('create_address');	
+			$('#create_additional').modal('hide');		
+			customer.constructaddtional(t);
+    	}
+	},
+	constructaddtional: function(t){
+		var content = '';
+		var ids = '';
+		if(t=='c'){
+			ids = 'contact';
+			$.each(contact, function( i, v ) {
+				content +='<tr> <td>'+v.first_name+' '+v.middle_initial+' '+v.last_name+'</td> <td>'+v.birth_date+'</td>  <td>'+v.contact_no+'</td>  <td>'+v.mobile_no+'</td>  <td>'+v.email+'</td> <td>'+v.department+'</td> <td>'+v.designation+'</td> </tr>'
+			});
+		}else{
+			ids = 'address';
+			$.each(address, function( i, v ) {
+				content +='<tr> <td>'+v.address_type+'</td> <td>'+v.address+'</td>  <td>'+v.city+'</td>  <td>'+v.region+'</td>  <td>'+v.area+'</td> </tr>'			  
+			});
+		}
+		$('#'+ids+'_selected tbody').html(content);
+	},
+	additionalmodal: function(t){
+		$('.create_contact, .create_address, #saveaddress, #savecontact').hide();
+		if(t=='c'){
+			var title = 'Add Contact Person';
+			$('#savecontact').show();
+			$('.create_contact').show();
+		}else{
+			$('#saveaddress').show();
+			$('.create_address').show();
+			var title = 'Add Address';
+		}
+		$('#create_additional .modal-title').html(title);
+		$('#create_additional').modal();
+	},
+	edit: function(d){
+		$('#create_modal').modal();
+	},
 	createcustomer: function(){
 		$('#create_modal').modal();
 		customer.clear();
@@ -66,7 +162,7 @@ var customer = {
     	}else{
 			$('#savecreate').addClass('disabled');
 			$('#savecreate i').removeClass('hide');
-			$.post("backstage/customer/save/", { d:arr['data'] },function(data){
+			$.post("backstage/customer/save/", { d:arr['data'], contact: contact, address: address },function(data){
 				if(data.status==200){
 					toastr["success"]('Successfully added.');
 					$('#create_modal').modal('hide');
@@ -86,13 +182,15 @@ var customer = {
 
 	},
 	clear: function(){
-		customer.form('create_shippment');
+		customer.form('create_customer');
 		customer.getcustomer();
 		$('#create_customer_date').val(datetoday);
 		$('#savecreate').removeClass('disabled');
 		$('#savecreate i').addClass('hide');
-
-
+		contact = [];
+		address = [];
+		customer.constructaddtional('c');
+		customer.constructaddtional('a');
 	},
 	form: function(classused){
 		$('.'+classused+' div').removeClass('has-error');	
