@@ -4,7 +4,11 @@ $config['packaging_type']['document'] 	= ['Small'=>'Small', 'Large'=>'Large'];
 $config['packaging_type']['parcel'] 	= ['Own'=>'Own', 'Others'=>'Others'];
 $config['packaging_type']['crafting'] 	= ['Skeletal'=>'Skeletal', 'Close'=>'Close'];
 $config['status'] = ['1'=>'Reviewed', '2'=>'Approved'];
-$config['mode_of_shipment']  = ['1'=>'Land Trip','2'=>'Sea Freight', '3'=>'Air Freight'];
+$config['mode_of_shipment']  = $db->getconfig('mode_of_shipping');
+$config['services']  = $db->getconfig('services');
+$config['delivery_instruction']  = $db->getconfig('delivery_instruction');
+$config['commodity_class']  = $db->getconfig('commodity_class');
+$config['mode_of_payment']  = $db->getconfig('mode_of_payment');
 // $config['subinventory_type'] = [''=>'Please Select', '1'=>'test1', '2'=>'test2'];
 
 $config['add_shipment']['Shipper Information'] = [
@@ -26,7 +30,7 @@ $config['add_shipment']['Shipper Information'] = [
 								'id'				=> 'create_company',
 								],
 
-								2 => ['type' 		=> 'input',
+								2 => ['type' 		=> 'normal',
 								'label'				=> 'Contact No.',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -36,7 +40,7 @@ $config['add_shipment']['Shipper Information'] = [
 								'placeholder' 		=> ''
 								],
 
-								3 => ['type' 		=> 'input',
+								3 => ['type' 		=> 'normal',
 								'label'				=> 'Email Address',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -54,7 +58,7 @@ $config['add_shipment']['Shipper Information'] = [
 								'form_class'		=> 'form-control'
 								],
 
-								5 => ['type' 		=> 'input',
+								5 => ['type' 		=> 'normal',
 								'label'				=> 'Department',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -86,7 +90,7 @@ $config['add_shipment']['Shipper Information'] = [
 								'col'				=> 'city',
 								'form_class'		=> 'form-control'],
 
-								10 => ['type' 		=> 'input',
+								10 => ['type' 		=> 'normal',
 								'label'				=> 'Area',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -450,7 +454,7 @@ $config['add_shipment'][' '] = [
 								'form_class'		=> 'form-control',
 								'id'				=> 'create_mode_of_shipping',
 								'col'				=> 'mode_of_shipping',
-								'options'			=> array_merge([''=>'Select Mode of Shipment'],$config['mode_of_shipment'])
+								'options'			=> array_merge([''=>'Select Mode of Shipping'],$config['mode_of_shipment'])
 								],
 								['type' 			=> 'select',
 								'label'				=> 'Services',
@@ -459,6 +463,7 @@ $config['add_shipment'][' '] = [
 								'form_class'		=> 'form-control',
 								'id'				=> 'create_services',
 								'col'				=> 'services',
+								'options'			=> array_merge([''=>'Select Services'],$config['services'])								
 								],
 								['type' 			=> 'select',
 								'label'				=> 'Delivery Instruction',
@@ -467,6 +472,7 @@ $config['add_shipment'][' '] = [
 								'form_class'		=> 'form-control',
 								'id'				=> 'create_delivery_instruction',
 								'col'				=> 'delivery_instruction',
+								'options'			=> array_merge([''=>'Select Delivery Instruction'],$config['delivery_instruction'])									
 								],
 								['type' 			=> 'select',
 								'label'				=> 'Commodity Class',
@@ -475,6 +481,7 @@ $config['add_shipment'][' '] = [
 								'form_class'		=> 'form-control',
 								'id'				=> 'create_commodity_class',
 								'col'				=> 'commodity_class',
+								'options'			=> array_merge([''=>'Select Commodity Class'],$config['commodity_class'])
 								],
 								['type' 			=> 'input',
 								'label'				=> 'Document Attached',
@@ -482,7 +489,7 @@ $config['add_shipment'][' '] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'form_class'		=> 'form-control',
 								'id'				=> 'create_document_attached',
-								'col'				=> 'document_attached',
+								'col'				=> 'document_attached'
 								],
 								['type' 			=> 'select',
 								'label'				=> 'Mode of Payment',
@@ -491,6 +498,7 @@ $config['add_shipment'][' '] = [
 								'form_class'		=> 'form-control',
 								'id'				=> 'create_mode_of_payment',
 								'col'				=> 'mode_of_payment',
+								'options'			=> array_merge([''=>'Select Mode of payment'],$config['mode_of_payment'])
 								],
 				];										
 

@@ -41,13 +41,32 @@ var billoflading = {
 		//save new bill of lading 
 		$('#savenewbilling').click(function(){
 			billoflading.save();
+		});	
+
+		$('#booking_no').change(function(){
+			var booking_no = $(this).val();
+			var bookingid = $(this).find(':selected').data('bookingid');
+			billoflading.getbookingdata(booking_no, bookingid);
 		});		
 
 	},
-
+	getbookingdata: function(bookingno, bookingid){
+		$('#bill_no').val(bookingno);
+		$.post("backstage/billoflading/getbookingdetails/"+bookingid, {},function(data){
+			$('#create_shipper_name').val(data.contact_person);
+			$('#create_company').val(data.customer_name);
+			$('#create_contact_no').val(data.contact.contact_no);
+			$('#create_email').val(data.contact.email);
+			$('#create_department').val(data.contact.department);
+			$('#create_department').val(data.contact.department);
+			$('#create_area').val(data.area);
+			$('#create_address').val(data.address);
+		});
+	},
 	createBillOfLading: function(){
 		$('#create_bill_of_lading').modal();
 		billoflading.clear();
+		billoflading.getbookingno();
 	},
 
 	save: function(){
@@ -69,14 +88,34 @@ var billoflading = {
 		billoflading.form('form_4');
 		billoflading.form('form_5');
 		billoflading.form('form_6');
-		$(".first").prop("checked", true)
+		$(".first").prop("checked", true);
+		$('#booking_no').html('');
+		billoflading.getbookingno();
 
 	},
 	form: function(classused){
 		$('.'+classused+' div').removeClass('has-error');	
 		$('.'+classused).removeClass('has-error');	
 		$('.'+classused+' input, .'+classused+' select').val('');
-	}
+	},
+	getbookingno: function(){
+		var d = $('#booking_no');
+		if(d.html().trim()==''){
+			$.post("backstage/billoflading/getbookingno/", {},function(data){
+				var content = "<option></option>";
+				console.log(data);
+				$.each(data.data, function( index, value ) {
+					content +='<option value="'+value.booking_no+'" data-bookingid="'+value.id+'"">'+value.booking_no+'</option>';
+				});
+
+				d.html(content);
+				d.chosen('destroy');
+				setTimeout(function(){ 
+					d.chosen({search_contains: true});
+				}, 500);
+			});
+		}		
+	},
 
 
 

@@ -1,6 +1,6 @@
 <?php
-$config['industry_type']  	= ['1'=>'N/A','2'=>'N/A', '3'=>'N/A'];
-$config['customer_status']  = ['1'=>'Active', '0'=>'Inactive'];
+$config['industry_type']  	= $db->getconfig('industry_type');
+$config['customer_status']  = ['1'=>'Active', '2'=>'Inactive'];
 $config['create_customer'][] = [
 								
 								['type' 			=> 'normal',
@@ -63,7 +63,7 @@ $config['create_customer'][] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_industry_type',
 								'col'				=> 'industry_type',
-								'options'			=> array_merge([''=>'Select Industry Type'],$config['all']),						
+								'options'			=> array_merge([''=>'Select Industry Type'],$config['industry_type']),						
 								'form_class'		=> 'form-control'],
 
 								['type' 		=> 'input',

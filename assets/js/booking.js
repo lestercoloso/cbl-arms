@@ -1,5 +1,5 @@
 
-
+var searchdata = "";
 
 var search = {
 	init: function(){
@@ -30,7 +30,17 @@ var search = {
 			$('.searchdata input, .searchdata select').val('');
 		});
 
-	}
+		$('#search').click(function(){
+			search.execute();
+		});
+
+	},
+
+	execute: function(){
+		var arr = createPostData('searchdata');
+		searchdata = JSON.stringify(arr['data']);
+		booking.getbookinglist(1);
+    }
 
 
 }
@@ -47,15 +57,30 @@ var booking = {
 		//clear new bill of lading 
 		$('#clearecreate').click(function(){
 			booking.clear();
-		});		
-		//save new bill of lading 
-		$('#savecreate').click(function(){
-			booking.save();
-		});		
+		});			
 
 		$('#create_customer_name').change(function(){
-			$('#create_customer_id').val($(this).find(':selected').data('client_id'));
+			var clientid = $(this).find(':selected').data('client_id');
+			$('#create_customer_id').val(clientid);
+			booking.getcontacts(clientid);
 		});		
+
+		$('#create_contact_person').change(function(){
+			var department = $(this).find(':selected').data('department');
+			var contact_id = $(this).find(':selected').data('contact_id');
+			$('#create_department').val(department);
+			$('#create_contact_id').val(contact_id);
+
+		});		
+
+		$('#savecreate').click(function(){
+			if(!$(this).hasClass('disabled')){
+				booking.save();	
+			}
+		});	
+
+		booking.getbookinglist();
+
 
 	},
 
@@ -66,11 +91,26 @@ var booking = {
 
 	save: function(){
 		var arr = createPostData('create_shippment');
-
 		if(arr['error']){
     		toastr["error"](arr['error']);
     	}else{
-
+			$('#savecreate').addClass('disabled');
+			$('#savecreate i').removeClass('hide');
+    		$.post("backstage/booking/save/", {d:arr['data']},function(data){
+    			if(data.status==200){
+						toastr["success"]('Successfully added.');
+						$('#create_modal').modal('hide');
+						$('#savecreate').removeClass('disabled');
+						$('#savecreate i').addClass('hide');
+						booking.getbookinglist();
+				}else{
+					toastr["error"]('Network error!<br> Please try again.');	
+				}
+    		}).fail(function(){
+				toastr["error"]('Error.');
+				$('#savecreate').removeClass('disabled');
+				$('#savecreate i').addClass('hide');
+			});
     	}
 
 	},
@@ -78,8 +118,11 @@ var booking = {
 		booking.form('create_shippment');
 		booking.getbooking();
 		$('#create_booking_date').val(datetoday);
+		$('#create_contact_person').html('');
+		$('#create_area').html('');
 		resetchosen('create_customer_name');
 		booking.getcustomerlist();
+		$('#create_time_called').val(getClockTime());
 
 	},
 	form: function(classused){
@@ -90,6 +133,24 @@ var booking = {
 	getbooking: function(){
 		$.post("backstage/booking/getbookingno/", {},function(data){
 			$('#create_booking_no').val(data);
+		});
+	},
+
+	getcontacts: function(id){
+		var content1 = '<option value="">Select Area</option>';
+		var content2 = '<option value="">Select Contact Person</option>';
+		$.post("backstage/booking/getcontacts/"+id, {},function(data){
+			$.each(data.area, function( index, value ) {
+				if(value.trim()!=''){
+					content1 +='<option value="'+value+'">'+value+'</option>';
+				}
+			});		
+
+			$.each(data.contact, function( index, value ) {
+					content2 +='<option value="'+value.name+'" data-department="'+value.department+'" data-contact_id="'+value.id+'">'+value.name+'</option>';
+			});
+			$('#create_area').html(content1);
+			$('#create_contact_person').html(content2);
 		});
 	},
 
@@ -106,12 +167,48 @@ var booking = {
 				d.chosen('destroy');
 				setTimeout(function(){ 
 					d.chosen({search_contains: true});
-				}, 300);
+				}, 500);
 			});
 		}		
+	},
+
+getbookinglist: function(page=1){
+	
+		$.post("backstage/booking/bookinglist/"+page, {searchdata: searchdata},function(data){
+			var content = '';
+			// console.log(data);
+			$.each(data.data, function( index, value ) {
+
+				var action = '<button type="button" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
+				action += ' <button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
+				
+				content +='<tr id="booking-'+value.id+'">';
+				content +='<td class="centered">'+value.booking_no+'</td>';
+				content +='<td class="centered">'+value.customer_name+'</td>';
+				content +='<td>'+value.booking_date+'</td>';
+				content +='<td>'+value.area+'</td>';
+				content +='<td>'+value.mode_of_shipping+'</td>';
+				content +='<td>'+value.contact_person+'</td>';
+				content +='<td>'+value.booking_status+'</td>';
+				content +='<th>'+action+'</th>';
+				content +='</tr>';
+			});
+
+			$('#pagination-container').html(data.pagination);
+			$('#search_result_list tbody').html(content);
+			$('.pagenumber').click(function(){
+				booking.getcustomerlist($(this).data('page'));
+			});
+			
+			$('#search_result_list .btn-success').click(function(){
+				booking.edit($(this).parent().parent().attr('id'));
+			});
+
+		}).fail(function(){
+			toastr["error"]("Failed to load the inbound list.");
+		});
+
 	}
-
-
 
 
 

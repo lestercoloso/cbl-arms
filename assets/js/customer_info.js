@@ -53,6 +53,12 @@ var customer = {
 			if(!$(this).hasClass('disabled')){
 				customer.save();	
 			}
+		});	
+
+		$('#saveedit').click(function(){
+			if(!$(this).hasClass('disabled')){
+				customer.update();	
+			}
 		});		
 		
 		$('.selector').click(function(){
@@ -145,20 +151,40 @@ var customer = {
 		$('#create_additional').modal();
 	},
 	edit: function(d){
+		$('#address_select').trigger( "click" );
+		$('#saveedit').show();
+		$('#savecreate').hide();
+		$('#clearecreate').hide();
 		$('#create_modal').modal();
+		$('#create_modal .modal-title').html('Edit Customer Information');
+		$.post("backstage/customer/information/"+d, {},function(data){
+			contact = data.contact;
+			address = data.address;
+			customer.constructaddtional('c');
+			customer.constructaddtional('a');
+
+			$.each(data.customer, function( index, value ) {
+				$('.create_customer input[col="'+index+'"], .create_customer select[col="'+index+'"]').val(value);
+			});
+			$('#create_customer_status').val('Active');
+			$('#updateid').val(data.customer.id);
+
+		});
+
 	},
 	createcustomer: function(){
+		$('#create_modal .modal-title').html('Add Customer Information');
 		$('#create_modal').modal();
+		$('#saveedit').hide();
+		$('#savecreate').show();
+		$('#clearecreate').show();
 		customer.clear();
 	},
 
 	save: function(){
 		var arr = createPostData('create_customer');
-
-
 		if(arr['error']){
     		toastr["error"](arr['error']);
-
     	}else{
 			$('#savecreate').addClass('disabled');
 			$('#savecreate i').removeClass('hide');
@@ -179,9 +205,37 @@ var customer = {
 			});
 
     	}
+	},
 
+	update: function(){
+		var arr = createPostData('create_customer');
+		var updateid = $('#updateid').val();
+
+		if(arr['error']){
+    		toastr["error"](arr['error']);
+    	}else{
+			$('#saveedit').addClass('disabled');
+			$('#saveedit i').removeClass('hide');
+			$.post("backstage/customer/update/"+updateid, { d:arr['data'], contact: contact, address: address },function(data){
+				if(data.status==200){
+					toastr["success"]('Successfully updated.');
+					$('#create_modal').modal('hide');
+					$('#saveedit').removeClass('disabled');
+					$('#saveedit i').addClass('hide');
+					customer.getcustomerlist();
+				}else{
+				toastr["error"]('Network error!<br> Please try again.');	
+				}
+			}).fail(function(){
+				toastr["error"]('Error.');
+				$('#saveedit').removeClass('disabled');
+				$('#saveedit i').addClass('hide');
+			});
+
+    	}
 	},
 	clear: function(){
+		$('#address_select').trigger( "click" );
 		customer.form('create_customer');
 		customer.getcustomer();
 		$('#create_customer_date').val(datetoday);
@@ -210,7 +264,7 @@ var customer = {
 			$.each(data.data, function( index, value ) {
 
 				var action = '<button type="button" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
-				action += ' <button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
+				// action += ' <button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
 				
 				content +='<tr id="customer-'+value.id+'">';
 				content +='<td class="centered">'+value.customer_code+'</td>';
@@ -233,9 +287,9 @@ var customer = {
 				customer.getcustomerlist($(this).data('page'));
 			});
 			
-			// $('#inbound-list .btn-success').click(function(){
-			// 	shipment.edit($(this).parent().parent().attr('id'));
-			// });
+			$('#search_result_list .btn-success').click(function(){
+				customer.edit($(this).parent().parent().attr('id'));
+			});
 
 			// $('#inbound-list .btn-danger').click(function(){
 			// 	shipment.delete($(this).parent().parent().attr('id'));

@@ -8,7 +8,7 @@ class Inbound{
 	}
 
 	public function billoflading(){
-		$sql = "select LPAD(`bill_no`, 8, '0') as lading_number, 
+		$sql = "select LPAD(`bill_no`, 10, '0') as lading_number, 
 				(select `customer_name` from customer_information where id=a.client_id) as customer_name 
 				from bill_of_lading a where bill_no!=0 and bill_no not in (select bill_of_lading from inbound_list where status=1)";
 

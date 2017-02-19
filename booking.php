@@ -1,6 +1,6 @@
 <title>Booking</title>
 <?php
-	require_once("helper/utility_helper.php");
+		require_once("helper/utility_helper.php");
 
 		$css = [ bowerpath('bootstrap/dist/css/bootstrap.min.css'),bowerpath('font-awesome/css/font-awesome.min.css')];
 		construct_style($css);
@@ -13,6 +13,17 @@
 				stylessheet('booking.css')];
 		
 		construct_style($css);
+
+		$config['vehicle'] = [];
+		$config['driver']  = [];
+		foreach($db->select('select `type` from `vehicle`' )['data'] as $vehicles){
+			$config['vehicle'][$vehicles['type']] = $vehicles['type']; 
+		}
+
+		foreach($db->select('select `name` from `driver_profile`' )['data'] as $drivers){
+			$config['driver'][$drivers['name']] = $drivers['name']; 
+		}
+
 		require_once('config/booking.php');
 ?>
 
@@ -28,27 +39,27 @@
 
 			<input name="searchbookingnumber" id="searchbookingnumber" placeholder="Booking No." col="booking_no" type="text" class="form-control search-text not_mandatory">
 			<input name="searchcustomername" id="searchcustomername" placeholder="Customer Name" type="text" col="customer_name" class="form-control search-text not_mandatory">
-			<input name="searchcontactperson" id="searchcontactperson" placeholder="Contact Person" type="text" col="customer_name" class="form-control search-text not_mandatory">
+			<input name="searchcontactperson" id="searchcontactperson" placeholder="Contact Person" type="text" col="contact_person" class="form-control search-text not_mandatory">
 
 	</div>
 	<div class="col-sm-4 searchdata">	
 			    <div class="input-group date" id="search_booking_date_from">
-			        <input type="text" class="form-control not_mandatory" col="date" id="search_date_from" placeholder="Booking Date From">
+			        <input type="text" class="form-control not_mandatory" col="date_from" id="search_date_from" placeholder="Booking Date From">
 			        <span class="input-group-addon">
 			            <span class="fa fa-calendar"></span>
 			        </span>
 			    </div>
 
 			    <div class="input-group date" id="search_booking_date_to">
-			        <input type="text" class="form-control not_mandatory" col="date" id="search_date_to" placeholder="Booking Date To">
+			        <input type="text" class="form-control not_mandatory" col="date_to" id="search_date_to" placeholder="Booking Date To">
 			        <span class="input-group-addon">
 			            <span class="fa fa-calendar"></span>
 			        </span>
 			    </div>
 	</div>
 	<div class="col-sm-4 searchdata">	
-					<select class="form-control not_mandatory" id="search_status" col="status">
-				 		<option value="">Select Mode of shipment</option>
+					<select class="form-control not_mandatory" id="search_mode_of_shipping" col="mode_of_shipping">
+				 		<option value="">Select Mode of Shipping</option>
 				 		<?php
 				 			foreach($config['mode_of_shipment'] as $key => $option){
 				 				echo "<option value='$key'>$option</option>";		
@@ -56,7 +67,7 @@
 				 		?>
 					</select>
 
-					<select class="form-control not_mandatory" id="search_status" col="status">
+					<select class="form-control not_mandatory" id="search_status" col="booking_status">
 				 		<option value="">Select status</option>
 				 		<?php
 				 			foreach($config['status'] as $key => $option){

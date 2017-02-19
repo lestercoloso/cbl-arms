@@ -1,4 +1,3 @@
-drop  table `customer_information`;
 CREATE TABLE `customer_information` (
 	`id` bigint(20) NOT NULL AUTO_INCREMENT,
 	`customer_code` int(10) DEFAULT NULL,

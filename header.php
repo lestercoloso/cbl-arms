@@ -520,6 +520,7 @@ var validateNumber = function(event,name,id) {
 
 <script>
 	var datetoday = '<?php echo date('m/d/Y');?>';
+	var timenow = '<?php echo date('h:i A');?>';
 </script>		
 
  		<?php 		require_once('config/main.php'); ?>

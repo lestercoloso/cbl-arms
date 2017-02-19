@@ -20,7 +20,6 @@ class Database {
 	public $_password = "";
 	public $_database = "cblarms";
 	public $last_query = "";
-	public $insert_id = "";
 
 	// Constructor
 	public function __construct() {
@@ -79,21 +78,16 @@ class Database {
 		}
 
 		$sql = "insert into `$table` (".implode(',',$column).") values (".implode(',',$value).")";
-		$this->last_query = $sql;
-		if ($this->_connection->query($sql) === TRUE) {
-			$this->insert_id = $this->_connection->insert_id;
-			return 1;
-		} else {
-			return "Error: " . $sql . "<br>" . $this->_connection->error;
-		}
+		// die($sql);
+		return $this->CheckResult($sql);
 	}
-
-	public function insert_id(){
-		return $this->insert_id;
-	} 
 
 	public function last_query(){
 		echo PHP_EOL.$this->last_query.PHP_EOL;
+	}
+
+	public function insert_id(){
+		return $this->select_one('SELECT LAST_INSERT_ID() AS insert_id')['insert_id'];
 	}
 
 	public function delete($table='', $where=''){
@@ -116,7 +110,6 @@ class Database {
 	}
 
 
-
 	public function update($table,$data=[],$where=''){
 		$where = !empty($where) ? ' where '.$where : '';
 		$array = [];
@@ -125,6 +118,7 @@ class Database {
 		}
 
 		$sql = "update $table set ".implode($array, ',')." $where";
+			$this->last_query = $sql;
 		if ($this->_connection->query($sql) === TRUE) {
 			return 1;
 		} else {
@@ -136,7 +130,8 @@ class Database {
 
 		foreach ($array as $key => $value) {
 			if(!empty($value)){
-				$data = " `".$key."`='".mysql_real_escape_string($value)."'";
+				$data = " ".$key."='".mysql_real_escape_string($value)."'";
+				// $data = " `".$key."`='".mysql_real_escape_string($value)."'";
 				$this->where_search .= (!empty($this->where_search)) ? " and ".$data : " where ".$data;				
 			}
 		}
@@ -149,7 +144,7 @@ class Database {
 
 		foreach ($array as $key => $value) {
 			if(!empty($value)){
-				$data = " `".$key."` like '%".mysql_real_escape_string($value)."%'";
+				$data = " ".$key." like '%".mysql_real_escape_string($value)."%'";
 				$this->where_search .= (!empty($this->where_search)) ? " and ".$data : " where ".$data;				
 			}
 		}
@@ -161,6 +156,15 @@ class Database {
 	public function likedata($array=[], $array2=[]){
 
 
+		return $array;
+	}
+
+	public function getconfig($particulars=''){
+		$return = $this->select("select `description` from `maintenance` where particulars='$particulars'");
+		$array = [];
+		foreach($return['data'] as $r){
+			$array[$r['description']] = $r['description'];
+		}
 		return $array;
 	}
 

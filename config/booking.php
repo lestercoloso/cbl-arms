@@ -1,6 +1,8 @@
 <?php
-$config['mode_of_shipment']  = ['1'=>'Land Trip','2'=>'Sea Freight', '3'=>'Air Freight'];
-$config['status']  = ['1'=>'Cancelled Pick Up', '2'=>'For Monitoring'];
+$config['vehicle'] = !empty($config['vehicle']) ? $config['vehicle'] : [];
+$config['driver']  = !empty($config['driver']) ? $config['driver'] : [];
+$config['mode_of_shipment']  = $db->getconfig('mode_of_shipment');
+$config['status']  = $db->getconfig('booking_status');
 $config['book_shipment'][] = [
 								
 								['type' 			=> 'normal',
@@ -47,18 +49,19 @@ $config['book_shipment'][] = [
 								'label'				=> 'Area',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_are',
+								'id'				=> 'create_area',
 								'col'				=> 'area',
 								'form_class'		=> 'form-control'
 								],
 
-								['type' 		=> 'input',
+								['type' 			=> 'select',
 								'label'				=> 'Contact Person',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_contact_person',
 								'col'				=> 'contact_person',
-								'form_class'		=> 'form-control'],
+								'form_class'		=> 'form-control'
+								],
 
 								['type' 			=> 'normal',
 								'label'				=> 'Department',
@@ -69,8 +72,8 @@ $config['book_shipment'][] = [
 								'form_class'		=> 'form-control'],
 
 								['type' 			=> 'hide',
-								'id'				=> 'create_department_id',
-								'col'				=> 'department']
+								'id'				=> 'create_contact_id',
+								'col'				=> 'contact_id']
 							];
 
 
@@ -93,6 +96,7 @@ $config['book_shipment'][] = [
 								'form_class'		=> 'form-control',
 								'id'				=> 'create_vehicle_type',
 								'col'				=> 'vehicle_type',
+								'options'			=> array_merge([''=>'Select Vehicle Type'],$config['vehicle'])
 								],
 
 
@@ -111,12 +115,13 @@ $config['book_shipment'][] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_driver',
 								'col'				=> 'driver',
-								'form_class'		=> 'form-control'
+								'form_class'		=> 'form-control',
+								'options'			=> array_merge([''=>'Select Driver'],$config['driver'])
 								],
 
-								['type' 			=> 'hide',
-								'id'				=> 'create_driver_id',
-								'col'				=> 'driver_id'],
+								// ['type' 			=> 'hide',
+								// 'id'				=> 'create_driver_id',
+								// 'col'				=> 'driver_id'],
 
 								['type' 			=> 'select',
 								'label'				=> 'Status',
@@ -128,7 +133,7 @@ $config['book_shipment'][] = [
 								'options'			=> array_merge([''=>'Select Status'],$config['status']) 
 								],
 								
-								['type' 			=> 'time',
+								['type' 			=> 'normal',
 								'label'				=> 'Time Called',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',

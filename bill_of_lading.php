@@ -117,9 +117,13 @@
 
 		<div class="modal-body">
 			<div class="col-sm-12 bordered">
-				<div class="col-sm-8">Bill of Lading No.</div> 
-				<div class="col-sm-4">Booking No.</div>
-				<div class="col-sm-8">Delivery Status</div> 
+				<div class="col-sm-6"><div class="col-sm-3">Bill of Lading No. </div>  
+					<div  class="col-sm-4">
+						<input name="bill_no" type="text" col="bill_no" id="bill_no" class="form-control" disabled="disabled" value="">
+					</div>
+				</div> 
+				<div class="col-sm-4 col-md-offset-2"><div class="col-sm-4"> Booking No. </div> <div class="col-sm-8 bill_booking_no"><select class="form-control" name="booking_no" id="booking_no" col="booking_no" data-placeholder=""></select></div></div> 
+				<div class="col-sm-8"><div class="col-sm-3">Delivery Status</div></div> 
 			</div>
 
 

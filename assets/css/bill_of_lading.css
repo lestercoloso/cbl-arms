@@ -65,3 +65,18 @@
 #add_billing_container_5 .bordered{
 	    height: 354px;
 }
+
+#create_bill_of_lading .chosen-single{
+    padding: 0px 5px;
+    border-radius: 2px;
+    height: 20px;
+    font-size: 11px
+}
+#create_bill_of_lading .chosen-single span{
+   margin-top: 2px;
+}
+ #create_bill_of_lading .chosen-results{
+    padding: 0px 5px;
+    border-radius: 2px;
+    font-size: 11px
+ }

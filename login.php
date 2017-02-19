@@ -86,6 +86,7 @@ class Login extends Database {
 									$_SESSION['acclname']		= $data['lname'];
 									$_SESSION['accmobile']		= $data['mobile'];
 									$_SESSION['accemail']		= $data['email'];
+									$_SESSION['userid']			= $data['id'];
 
 							//RETURN VALUE
 									$date_this = date("Y-m-d H:i:s");
