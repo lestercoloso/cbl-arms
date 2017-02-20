@@ -79,6 +79,10 @@ class Database {
 
 		$sql = "insert into `$table` (".implode(',',$column).") values (".implode(',',$value).")";
 		// die($sql);
+		// if($_COOKIE['devmode']=='on'){
+			// session_start();
+			// $_SESSION['inser_sql'] = $sql;
+		// }
 		return $this->CheckResult($sql);
 	}
 

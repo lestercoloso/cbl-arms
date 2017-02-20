@@ -30,7 +30,7 @@ $config['add_shipment']['Shipper Information'] = [
 								'id'				=> 'create_company',
 								],
 
-								2 => ['type' 		=> 'normal',
+								2 => ['type' 		=> 'input',
 								'label'				=> 'Contact No.',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -40,7 +40,7 @@ $config['add_shipment']['Shipper Information'] = [
 								'placeholder' 		=> ''
 								],
 
-								3 => ['type' 		=> 'normal',
+								3 => ['type' 		=> 'input',
 								'label'				=> 'Email Address',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -90,7 +90,7 @@ $config['add_shipment']['Shipper Information'] = [
 								'col'				=> 'city',
 								'form_class'		=> 'form-control'],
 
-								10 => ['type' 		=> 'normal',
+								10 => ['type' 		=> 'input',
 								'label'				=> 'Area',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -104,7 +104,7 @@ $config['add_shipment']['Shipper Information'] = [
 
 $config['add_shipment']['Package Content (Complete Description)'] = [
 								
-								0=>['type' 			=> 'input',
+								0=>['type' 			=> 'number',
 								'label'				=> 'Total Packages',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -179,14 +179,15 @@ $config['add_shipment']['Package Content (Complete Description)'] = [
 
 								8 => ['type' 		=> '',
 								'label'				=> 'Packaging Type',
-								'parent_class' 		=> 'form-group col-sm-12 no-margin',
+								'parent_class' 		=> 'col-sm-12 no-margin',
+								'form_class' 		=> 'not_mandatory',
 								],
 
 								9=>['type' 			=> 'radio',
 								'parent_class' 		=> 'form-group col-sm-12 no-margin',
 								'label'				=> 'Document',								
 								'subparent_class' 	=> 'col-sm-8  no-wrap',
-								'form_class'		=> 'form-control',
+								'form_class'		=> 'form-control not_mandatory',
 								'id'				=> 'create_packing_type_document',
 								'col'				=> 'packing_type_document',
 								'options'			=> $config['packaging_type']['document']
@@ -196,7 +197,7 @@ $config['add_shipment']['Package Content (Complete Description)'] = [
 								'parent_class' 		=> 'form-group col-sm-12 no-margin',
 								'label'				=> 'Parcel',								
 								'subparent_class' 	=> 'col-sm-8  no-wrap',
-								'form_class'		=> 'form-control',
+								'form_class'		=> 'form-control not_mandatory',
 								'id'				=> 'create_packing_type_parcel',
 								'col'				=> 'packing_type_parcel',
 								'options'			=> $config['packaging_type']['parcel']
@@ -206,7 +207,7 @@ $config['add_shipment']['Package Content (Complete Description)'] = [
 								'parent_class' 		=> 'form-group col-sm-12 no-margin',
 								'label'				=> 'Crafting',								
 								'subparent_class' 	=> 'col-sm-8  no-wrap',
-								'form_class'		=> 'form-control',
+								'form_class'		=> 'form-control not_mandatory',
 								'id'				=> 'create_packing_type_crafting',
 								'col'				=> 'packing_type_crafting',
 								'options'			=> $config['packaging_type']['crafting']
@@ -220,6 +221,7 @@ $config['add_shipment']['Charges'] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'form_class'		=> 'form-control',
 								'col'				=> 'charges',
+								'id'				=> 'create_charges',
 								'options'			=> array_merge([''=>'Select Charges'],$config['charges'])
 								]
 
@@ -251,7 +253,7 @@ $config['add_shipment']['Additional Changes'] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_declared_value',
 								'col'				=> 'declared_value',
-								'form_class'		=> 'form-control',
+								'form_class'		=> 'form-control not_mandatory',
 								'placeholder' 		=> ''
 								],
 
@@ -303,7 +305,7 @@ $config['add_shipment']['Additional Changes'] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_crafting',
 								'col'				=> 'crafting',
-								'form_class'		=> 'form-control'],
+								'form_class'		=> 'form-control not_mandatory'],
 
 								['type' 		=> 'input',
 								'label'				=> 'Label Cost',
@@ -343,7 +345,7 @@ $config['add_shipment']['Additional Changes'] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_total',
 								'col'				=> 'total',
-								'form_class'		=> 'form-control'],
+								'form_class'		=> 'form-control not_mandatory'],
 
 								['type' 		=> 'normal',
 								'label'				=> '12% VAT',
@@ -351,7 +353,7 @@ $config['add_shipment']['Additional Changes'] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_vat',
 								'col'				=> 'vat',
-								'form_class'		=> 'form-control'],
+								'form_class'		=> 'form-control not_mandatory'],
 
 								['type' 		=> 'normal',
 								'label'				=> 'Total Amount Due',
@@ -359,7 +361,7 @@ $config['add_shipment']['Additional Changes'] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_total_amount_due',
 								'col'				=> 'total_amount_due',
-								'form_class'		=> 'form-control'],
+								'form_class'		=> 'form-control not_mandatory'],
 
 								['type' 		=> 'normal',
 								'label'				=> 'Discount Percent',
@@ -367,7 +369,7 @@ $config['add_shipment']['Additional Changes'] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_discount_percent',
 								'col'				=> 'discount_percent',
-								'form_class'		=> 'form-control'],
+								'form_class'		=> 'form-control not_mandatory'],
 
 								['type' 		=> 'normal',
 								'label'				=> 'Final Contract Price',
@@ -375,7 +377,7 @@ $config['add_shipment']['Additional Changes'] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_final_contract_price',
 								'col'				=> 'final_contract_price',
-								'form_class'		=> 'form-control']
+								'form_class'		=> 'form-control not_mandatory']
 
 							
 						];						

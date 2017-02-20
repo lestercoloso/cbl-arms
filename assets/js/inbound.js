@@ -246,6 +246,7 @@ var shipment = {
 		shipment.getNewBillOfLading();
 		$('#savenewshipment').removeClass('disabled');
 		$('#savenewshipment i').addClass('hide');
+		shipment.getpalletcode();
 	},
 
     getNewBillOfLading: function(){
@@ -306,8 +307,15 @@ var shipment = {
 				}, 300);
 			});
 		}
-	}
-,
+	},
+	getpalletcode: function(t){
+			$.post("backstage/inbound/getpallet/", {},function(data){
+				
+					$('#pallet_code_shipment').val(data);
+				
+			});
+	},
+
 	customer_name: function(){
 		// var d = $('#shipment_customer_name');
 		// if(d.html().trim()==''){

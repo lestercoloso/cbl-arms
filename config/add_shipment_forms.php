@@ -1,7 +1,7 @@
 <?php
-$config['type_of_shipment']  = [''=>'Please Select', '1'=>'Pickup', '2'=>'Delivery'];
-$config['storage_type'] 	 = [''=>'Please Select', '1'=>'Ambiant Storage', '2'=>'Cool Storage'];
-$config['subinventory_type'] = [''=>'Please Select', '1'=>'test1', '2'=>'test2'];
+$config['type_of_shipment']  = $db->getconfig('type_of_shipment');
+$config['storage_type'] 	 = $db->getconfig('storage_type');
+$config['subinventory_type'] = $db->getconfig('subinventory_type');
 
 $config['add_shipment'][] = [
 								0 => ['type' 		=> 'select',
@@ -41,7 +41,7 @@ $config['add_shipment'][] = [
 
 								4 => ['type' 		=> 'normal',
 								'label'				=> 'Pallet Code:',
-								'parent_class' 		=> 'form-group col-sm-12',
+								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'pallet_code_shipment',
 								'col'				=> 'pallet_code',
@@ -75,7 +75,7 @@ $config['add_shipment'][] = [
 								'id'				=> 'typeofshipment',
 								'col'				=> 'type_of_shipment',
 								'form_class'		=> 'form-control',
-								'options' 			=> $config['type_of_shipment']
+								'options' 			=> array_merge([''=>'Please Select'], $config['type_of_shipment'])
 								],
 							
 								2 => ['type' 		=> 'select',
@@ -124,7 +124,7 @@ $config['add_shipment'][] = [
 								'id'				=> 'storage_type_shipment',
 								'col'				=> 'storage_type',
 								'form_class'		=> 'form-control',
-								'options' 			=> $config['storage_type']
+								'options' 			=> array_merge([''=>'Please Select'], $config['storage_type'])
 								],	
 							];
 
@@ -136,7 +136,7 @@ $config['add_shipment'][] = [
 								'id'				=> 'subinventorylocation_type',
 								'col'				=> 'inventory_type',
 								'form_class'		=> 'form-control',
-								'options' 			=> $config['subinventory_type']
+								'options' 			=> array_merge([''=>'Please Select'], $config['subinventory_type'])
 								],
 
 								1 => ['type' 		=> 'input',

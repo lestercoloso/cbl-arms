@@ -16,6 +16,12 @@ class Inbound{
 		jdie($select);
 	}
 
+	public function getpallet(){
+		$select = $this->db->select_one('select max(pallet_code) as newnumber from inbound_list where status=1 limit 1' );
+		$newnumber = !empty($select['newnumber']) ? $select['newnumber'] : 0;
+		jdie(str_pad($newnumber+1,10,"0",STR_PAD_LEFT));
+	}
+
 	public function getInbound($page=1){
 		$limit = 5;
 		$start = ($page - 1) * $limit; //first item to display on this page
@@ -34,12 +40,13 @@ class Inbound{
 	
 		$sql = "select id,
 			(select `customer_name` from customer_information where id IN (select client_id from bill_of_lading where bill_no=a.bill_of_lading)) as customer_name, 
-			LPAD(`bill_of_lading`, 8, '0') as bill_of_lading, 
+			LPAD(`bill_of_lading`, 10, '0') as bill_of_lading, 
 			delivery_receipt, 
-			pallet_code, 
+			LPAD(`pallet_code`, 10, '0') as pallet_code, 
 			quantity, 
 			description, 
-			IF(`storage_type`=1,'Ambiant Storage','Cool Storage') as storage_type,
+			#IF(`storage_type`=1,'Ambiant Storage','Cool Storage') as storage_type,
+			storage_type,
 			inventory_type, 
 			DATE_FORMAT(`ex_date`,'%y-%m-%d') as ex_date,
 			DATE_FORMAT(`en_date`,'%y-%m-%d') as en_date,

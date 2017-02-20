@@ -1,5 +1,6 @@
 <?php
 $config['industry_type']  	= $db->getconfig('industry_type');
+$config['address_type']  	= $db->getconfig('address_type');
 $config['customer_status']  = ['1'=>'Active', '2'=>'Inactive'];
 $config['create_customer'][] = [
 								
@@ -437,7 +438,7 @@ $config['create_customer'][] = [
 								'form_class'		=> 'form-control',
 								'id'				=> 'address_address_type',
 								'col'				=> 'address_type',
-								'options'			=> array_merge([''=>'Select Address Type'],$config['all']),								
+								'options'			=> array_merge([''=>'Select Address Type'],$config['address_type']),								
 								],
 
 								['type' 			=> 'input',
