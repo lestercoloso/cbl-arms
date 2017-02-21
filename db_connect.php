@@ -134,7 +134,7 @@ class Database {
 
 		foreach ($array as $key => $value) {
 			if(!empty($value)){
-				$data = " ".$key."='".mysql_real_escape_string($value)."'";
+				$data = " ".$key."='".mysqli_real_escape_string($this->_connection,$value)."'";
 				// $data = " `".$key."`='".mysql_real_escape_string($value)."'";
 				$this->where_search .= (!empty($this->where_search)) ? " and ".$data : " where ".$data;				
 			}
@@ -148,7 +148,7 @@ class Database {
 
 		foreach ($array as $key => $value) {
 			if(!empty($value)){
-				$data = " ".$key." like '%".mysql_real_escape_string($value)."%'";
+				$data = " ".$key." like '%".mysqli_real_escape_string($this->_connection,$value)."%'";
 				$this->where_search .= (!empty($this->where_search)) ? " and ".$data : " where ".$data;				
 			}
 		}
