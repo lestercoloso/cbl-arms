@@ -19,10 +19,10 @@
 -- Table structure for table `Vehicle`
 --
 
-DROP TABLE IF EXISTS `Vehicle`;
+DROP TABLE IF EXISTS `vehicle`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Vehicle` (
+CREATE TABLE `vehicle` (
   `id` int(225) NOT NULL AUTO_INCREMENT,
   `vehicle_no` varchar(225) DEFAULT NULL,
   `vehicle_desc` varchar(255) DEFAULT NULL,
