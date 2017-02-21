@@ -2,6 +2,7 @@
 error_reporting("E_ALL");
 error_reporting( E_ERROR );
 	require_once("db_connect.php");
+die('hello');
 
 	if(!empty($_POST)){
 	// pdie($_POST);

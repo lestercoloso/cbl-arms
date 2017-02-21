@@ -95,7 +95,7 @@ echo '<button type="button" class="btn btn-default" data-toggle="modal" id="upda
 
 
 
-	<div class="col-sm-12" style="border-bottom:1px solid black;"">
+	<div class="col-sm-12" style="border-bottom:1px solid black;">
 	</div>
 
 	<label class="col-sm-12"><br>Config<br><br></label>
@@ -293,6 +293,7 @@ var devmode = "<?php echo $devmode?>";
 		}).fail(function(){
 			$('.db_status').html('<b style="color: #348c34;">Incompatible</b>');
 			$('#database_version b').html('0.00');
+				getpatcher();		
 		});
 
 	}
@@ -335,9 +336,9 @@ var devmode = "<?php echo $devmode?>";
 				if(version==value){
 					select = 'selected';
 				}
-				if(value>version || devmode=='on'){
+				// if(value>version || devmode=='on'){
 					content += '<option value"'+value+'" '+select+'>'+value+'</option>';
-				}
+				// }
 			});
 			if(content.trim()==''){
 				$('#patcher_button').hide();
@@ -394,6 +395,7 @@ var devmode = "<?php echo $devmode?>";
 	// useDb();
 	checkUpdates();
 	getbranch();
+	// getpatcher();
 
 
 
