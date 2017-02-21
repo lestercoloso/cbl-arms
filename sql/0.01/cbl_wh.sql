@@ -405,8 +405,8 @@ INSERT INTO `user_types` VALUES ('4', 'Regular User', '4', '1', '0,0,0,0,0,0,0,0
 -- ----------------------------
 -- Table structure for Vehicle
 -- ----------------------------
-DROP TABLE IF EXISTS `Vehicle`;
-CREATE TABLE `Vehicle` (
+DROP TABLE IF EXISTS `vehicle`;
+CREATE TABLE `vehicle` (
   `id` int(225) NOT NULL AUTO_INCREMENT,
   `vehicle_no` varchar(225) DEFAULT NULL,
   `vehicle_desc` varchar(255) DEFAULT NULL,

@@ -50,7 +50,7 @@ $.post("backstage/inbound/getInbound/"+page, {searchdata: searchdata},function(d
 		action += ' <button type="button" class="btn btn-info"><i class="fa fa-sign-out" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
 		action += ' <button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
 		
-		content +='<tr id="inbound-'+value.id+'">';
+		content +='<tr id="inbound-'+value.id+'" data-id="'+value.id+'" data-qty="'+value.quantity+'">';
 		content +='<td class="centered">'+value.bill_of_lading+'</td>';
 		content +='<td>'+value.customer_name+'</td>';
 		content +='<td>'+value.delivery_receipt+'</td>';
@@ -74,6 +74,11 @@ $.post("backstage/inbound/getInbound/"+page, {searchdata: searchdata},function(d
 
 	$('#inbound-list .btn-danger').click(function(){
 		shipment.delete($(this).parent().parent().attr('id'));
+	});
+
+	$('#inbound-list .btn-info').click(function(){
+		var o = $(this).parent().parent()
+		shipment.pullout(o.data('id'), o.data('qty'));
 	});
 
 
@@ -141,6 +146,12 @@ var shipment = {
 			shipment.cleardata();
 		});
 
+		$('#pulloutbutton').click( function(){
+			if(!$(this).hasClass('disabled')){
+				shipment.pullout_submit($(this).attr('pulloutid'));
+			}
+		});
+
 		$('#addshipment_storage').change( function(){
 			shipment.changestorage();
 		});
@@ -149,9 +160,58 @@ var shipment = {
 			shipment.customer_name();
 		});
 
+		$('#pullout_select').change( function(){
+			var v = $(this).val();
+			if(v!=''){
+				$('#pulloutbutton').show();	
+				$('#pulloutbutton span').html(v);	
+			}else{
+				$('#pulloutbutton').hide();	
+			}
+			
+		});
+
 		$('.addshipment_bay').hide();
 
     },
+
+    pullout: function(id, qty){
+    	$('#pullout_shipment').modal();
+    	$('#pulloutbutton').hide();
+    	$('#pulloutbutton').attr('pulloutid', id);
+    	$('#pullout_shipment input, #pullout_shipment select').val('');    
+    	$('#pullout_quantity').attr('maxlength',qty);    
+    },
+
+    pullout_submit: function(id){
+    	var arr = createPostData('pull_shipment');
+    	if(arr['error']){
+    		toastr["error"](arr['error']);
+    	}else{ 
+
+       		$('#pulloutbutton').addClass('disabled');
+    		$('#pulloutbutton i').removeClass('hide');
+			$.post("backstage/inbound/pullout/"+id, {d:arr['data']},function(data){
+				if(data.status==200){
+					toastr["success"]('Successfully saved.');
+					$('#pullout_shipment').modal('hide');
+					$('#pulloutbutton').removeClass('disabled');
+					$('#pulloutbutton i').addClass('hide');
+					getInbound();
+				}else{
+					toastr["error"]('Error.');
+					$('#pulloutbutton').removeClass('disabled');
+					$('#pulloutbutton i').addClass('hide');
+				}
+			}).fail(function(){
+				toastr["error"]('Network error!<br> Please try again.');
+				$('#pulloutbutton').removeClass('disabled');
+				$('#pulloutbutton i').addClass('hide');
+			}); 		
+
+    	}
+    }, 
+
     edit: function(id){
 
 	$.post("backstage/inbound/edit/"+id, {},function(data){

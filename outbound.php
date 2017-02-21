@@ -103,9 +103,9 @@ require_once('config/add_shipment_forms.php');
 <div id="pagination-container">
 <ul class="pagination"><li class="active"><a href="#">1</a></li><li><a href="/wilson/?&amp;page=2" data-ci-pagination-page="2">2</a></li><li><a href="/wilson/?&amp;page=3" data-ci-pagination-page="3">3</a></li><li><a href="/wilson/?&amp;page=2" data-ci-pagination-page="2" rel="next">»</a></li></ul>
 </div>
-	<div>
+	<div style="height: 80px">
 		<!-- <button id="addnewshipment" class="button-class custombutton"  data-toggle="modal" data-target="#add_shipment" >Add Shipment</button> -->
-		<button id="addnewshipment" class="button-class custombutton" >Add Shipment</button>
+		<!-- <button id="addnewshipment" class="button-class custombutton" >Add Shipment</button> -->
 	</div>
 
 
@@ -114,7 +114,7 @@ require_once('config/add_shipment_forms.php');
     <tr>
       <th>Bill of<br>Landing No.</th>
       <th>Customer Name</th>
-      <th>Deliver<br>Receipt</th>
+      <th>Delivery<br>Receipt</th>
       <th>Invoice<br>No.</th>
       <th>Pallet Code</th>
       <th>Quantity</th>
@@ -147,44 +147,6 @@ require_once('config/add_shipment_forms.php');
 </table>
 
 
-<div id="add_shipment" class="modal fade" role="dialog">
-	<div class="modal-dialog custom-class">
-	 <div class="modal-content">
-	
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h4 class="modal-title">Add Shipment</h4>
-		</div>
-
-	<div class="modal-body">
-	<form>
-	<fieldset>
-
-
-		<?php
-			foreach($config['add_shipment'] as $forms){
-				echo '<div class="col-sm-4 row" id="">';
-				echo construct_form($forms);				
-				echo '</div>';
-			}
-
-		?>	
-
-				
-
-		</fieldset>
-		</form>
-
-		</div>
-		<div class="modal-footer">
-          <button type="button" class="btn btn-default" id="updateshipment"><i class="fa fa-circle-o-notch fa-spin hide" style=""></i> Update</button>
-          <button type="button" class="btn btn-default" id="savenewshipment"><i class="fa fa-circle-o-notch fa-spin hide" style=""></i> Save</button>
-          <button type="button" class="btn btn-default" id="clearnewshipment">Clear</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-		</div>
-		</div>
-		</div>
   
 				  </div>
 				  
@@ -209,7 +171,7 @@ require_once('config/add_shipment_forms.php');
 <script src="/js/moment.js"></script>
 <script src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 <script src="/bower_components/chosen/chosen.jquery.js"></script>
-<script src="/assets/js/inbound.js?<?php echo rand();?>"></script>
+<script src="/assets/js/outbound.js?<?php echo rand();?>"></script>
 <!-- end -->
 </body>
 

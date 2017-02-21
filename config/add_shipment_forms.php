@@ -2,10 +2,43 @@
 $config['type_of_shipment']  = $db->getconfig('type_of_shipment');
 $config['storage_type'] 	 = $db->getconfig('storage_type');
 $config['subinventory_type'] = $db->getconfig('subinventory_type');
+$config['pullouttype'] 		 = $db->getconfig('pullout_shipment');
+
+
+$config['pullout'] = [ 
+								['type' 			=> 'select',
+								'label'				=> 'Pull-out Shipment',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'pullout_select',
+								'col'				=> 'pullout_type',
+								'form_class'		=> 'form-control',
+								'options' 			=> array_merge([''=>'Please Select'],$config['pullouttype'])
+								],
+
+								['type' 			=> 'number',
+								'label'				=> 'Quantity',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'pullout_quantity',
+								'col'				=> 'qty',
+								'form_class'		=> 'form-control',
+								'placeholder' 		=> 'Input Quantity'],
+
+								['type' 		=> 'input',
+								'label'				=> 'Location Name',
+								'parent_class' 		=> 'form-group col-sm-12 addship',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'pullout_location',
+								'col'				=> 'location',
+								'form_class'		=> 'form-control',
+								'placeholder' 		=> 'Input Location name']
+
+					]; 
 
 $config['add_shipment'][] = [
 								0 => ['type' 		=> 'select',
-								'label'				=> 'Bill of Lading:',
+								'label'				=> 'Bill of Lading',
 								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'addnew_billoflading',
@@ -14,7 +47,7 @@ $config['add_shipment'][] = [
 								'placeholder' 		=> 'Input Bill of lading'],
 								
 								1=>['type' 			=> 'normal',
-								'label'				=> 'Customer Name:',
+								'label'				=> 'Customer Name',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
 								'form_class'		=> 'form-control',
@@ -22,7 +55,7 @@ $config['add_shipment'][] = [
 								],
 
 								2 => ['type' 		=> 'input',
-								'label'				=> 'Delivery Receipt:',
+								'label'				=> 'Delivery Receipt',
 								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'delivery_receipt_shipment',
@@ -30,8 +63,8 @@ $config['add_shipment'][] = [
 								'form_class'		=> 'form-control not_mandatory',
 								'placeholder' 		=> 'Input Delivery receipt'],
 
-								3 => ['type' 		=> 'input',
-								'label'				=> 'Invoice number:',
+								3 => ['type' 		=> 'number',
+								'label'				=> 'Invoice number',
 								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'invoice_no_shipment',
@@ -40,7 +73,7 @@ $config['add_shipment'][] = [
 								'placeholder' 		=> 'Input Invoice number'],
 
 								4 => ['type' 		=> 'normal',
-								'label'				=> 'Pallet Code:',
+								'label'				=> 'Pallet Code',
 								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'pallet_code_shipment',
@@ -49,7 +82,7 @@ $config['add_shipment'][] = [
 								'placeholder' 		=> 'Auto-generated'],
 
 								5 => ['type' 		=> 'number',
-								'label'				=> 'Quantity:',
+								'label'				=> 'Quantity',
 								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'quantity_shipment',
@@ -61,7 +94,7 @@ $config['add_shipment'][] = [
 	$config['add_shipment'][] = [
 								
 								0 => ['type' 		=> 'input',
-								'label'				=> 'Description:',
+								'label'				=> 'Description',
 								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'description_shipment',
@@ -69,7 +102,7 @@ $config['add_shipment'][] = [
 								'form_class'		=> 'form-control'],
 
 								1 => ['type' 		=> 'select',
-								'label'				=> 'Type of Shipment:',
+								'label'				=> 'Type of Shipment',
 								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'typeofshipment',
@@ -79,7 +112,7 @@ $config['add_shipment'][] = [
 								],
 							
 								2 => ['type' 		=> 'select',
-								'label'				=> 'Storage:',
+								'label'				=> 'Storage',
 								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'addshipment_storage',
@@ -89,7 +122,7 @@ $config['add_shipment'][] = [
 								],
 
 								3 => ['type' 		=> 'select',
-								'label'				=> 'Rack Code:',
+								'label'				=> 'Rack Code',
 								'parent_class' 		=> 'form-group col-sm-12 addshipment_rack addship',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'rack_code',
@@ -99,7 +132,7 @@ $config['add_shipment'][] = [
 								],
 
 								4 => ['type' 		=> 'select',
-								'label'				=> 'Bay Code:',
+								'label'				=> 'Bay Code',
 								'parent_class' 		=> 'form-group addshipment_bay col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'bay_code',
@@ -109,7 +142,7 @@ $config['add_shipment'][] = [
 								],
 
 								5 => ['type' 		=> 'select',
-								'label'				=> 'Rack Level:',
+								'label'				=> 'Rack Level',
 								'parent_class' 		=> 'form-group addshipment_rack col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'rack_level',
@@ -118,7 +151,7 @@ $config['add_shipment'][] = [
 								],		
 
 								6 => ['type' 		=> 'select',
-								'label'				=> 'Storage type:',
+								'label'				=> 'Storage type',
 								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'storage_type_shipment',
@@ -130,7 +163,7 @@ $config['add_shipment'][] = [
 
 		$config['add_shipment'][] = [
 								0 => ['type' 		=> 'select',
-								'label'				=> 'Sub-Inv Location type:',
+								'label'				=> 'Sub-Inv Location type',
 								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'subinventorylocation_type',
@@ -140,7 +173,7 @@ $config['add_shipment'][] = [
 								],
 
 								1 => ['type' 		=> 'input',
-								'label'				=> 'Location:',
+								'label'				=> 'Location',
 								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'location_shipment',
@@ -148,7 +181,7 @@ $config['add_shipment'][] = [
 								'form_class'		=> 'form-control'],
 
 								2 => ['type' 		=> 'date',
-								'label'				=> 'Expiration Date:',
+								'label'				=> 'Expiration Date',
 								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'ex_date',
@@ -156,7 +189,7 @@ $config['add_shipment'][] = [
 								'form_class'		=> 'form-control'],
 
 								3 => ['type' 		=> 'date',
-								'label'				=> 'Entry Date:',
+								'label'				=> 'Entry Date',
 								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'en_date',
@@ -164,7 +197,7 @@ $config['add_shipment'][] = [
 								'form_class'		=> 'form-control'],
 
 								4 => ['type' 		=> 'date',
-								'label'				=> 'Pickup Date:',
+								'label'				=> 'Pickup Date',
 								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'pu_date',

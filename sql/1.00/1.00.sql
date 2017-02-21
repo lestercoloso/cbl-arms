@@ -37,9 +37,9 @@ CREATE TABLE `vehicle` (
 -- Dumping data for table `Vehicle`
 --
 
-LOCK TABLES `Vehicle` WRITE;
+LOCK TABLES `vehicle` WRITE;
 /*!40000 ALTER TABLE `Vehicle` DISABLE KEYS */;
-INSERT INTO `Vehicle` VALUES (1,'123','123','123','1','Status A'),(2,'321','321','321','2','Status B');
+INSERT INTO `vehicle` VALUES (1,'123','123','123','1','Status A'),(2,'321','321','321','2','Status B');
 /*!40000 ALTER TABLE `Vehicle` ENABLE KEYS */;
 UNLOCK TABLES;
 

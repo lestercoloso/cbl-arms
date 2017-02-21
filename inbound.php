@@ -218,6 +218,36 @@ require_once('config/add_shipment_forms.php');
 		</div>
 
 
+	<div id="pullout_shipment" class="modal fade col-sm-12 " role="dialog">
+		<div class="modal-dialog custom-class">
+		<div class="modal-content">
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h4 class="modal-title">Pull-out Shipment</h4>
+		</div>
+
+			<div class="modal-body">
+			<fieldset>
+
+			<?php
+				echo '<div class="pull_shipment" id="">';
+				echo construct_form($config['pullout']);				
+				echo '</div>';
+			?>
+
+
+			</fieldset>
+			
+
+		<div class="modal-footer">
+		<button type="button" class="btn btn-default" id="pulloutbutton"><i class="fa fa-circle-o-notch fa-spin hide" style=""></i> <span> - </span> </button>
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
+		</div>
+		</div>
+	</div>
+
+
 <script src="/bower_components/toastr/toastr.min.js"></script>
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/assets/js/main.js?<?php echo rand();?>"></script>

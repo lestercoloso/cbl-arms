@@ -131,14 +131,18 @@ class Database {
 	}
 
 	public function where_search($array = []){
-
-		foreach ($array as $key => $value) {
-			if(!empty($value)){
-				$data = " ".$key."='".mysqli_real_escape_string($this->_connection,$value)."'";
-				// $data = " `".$key."`='".mysql_real_escape_string($value)."'";
-				$this->where_search .= (!empty($this->where_search)) ? " and ".$data : " where ".$data;				
-			}
+		if(is_array($array)){
+			foreach ($array as $key => $value) {
+				if(!empty($value)){
+					$data = " ".$key."='".mysqli_real_escape_string($this->_connection,$value)."'";
+					// $data = " `".$key."`='".mysql_real_escape_string($value)."'";
+					$this->where_search .= (!empty($this->where_search)) ? " and ".$data : " where ".$data;				
+				}
+			}			
+		}else{
+			$this->where_search .= (!empty($this->where_search)) ? " and ".$array : " where ".$array;	
 		}
+
 
 		return $this->where_search;
 

@@ -230,3 +230,14 @@ input[type="text"]{
 .has-error a.chosen-default{
 	border-color: #a94442 !important;
 }
+
+#pullout_shipment .modal-dialog{
+    width: 350px;
+}
+#pullout_shipment .modal-footer{
+    padding-bottom: 0px;
+}
+#pullout_shipment select{
+    font-weight: 100;
+    font-size: 11px;
+}

@@ -1,4 +1,4 @@
 host=localhost
-username=dbuser
-password=123
+username=root
+password=
 database=cblarms

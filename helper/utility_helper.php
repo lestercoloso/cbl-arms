@@ -91,7 +91,7 @@ function construct_form($arr){
 			$return .='<input name="'.$data['col'].'" '.$data['additionals'].' type="text"  col="'.$data['col'].'" id="'.$data['id'].'"  class="'.$data['form_class'].'" placeholder="'.$data['placeholder'].'">
 						<span id="'.$data['col'].'_error" class="text-danger"></span>';
 		}else if($data['type']=='number'){
-		$return .='<input name="'.$data['col'].'" '.$data['additionals'].' type="number"  col="'.$data['col'].'" id="'.$data['id'].'"  class="'.$data['form_class'].'" placeholder="'.$data['placeholder'].'">
+		$return .='<input name="'.$data['col'].'" '.$data['additionals'].' type="number" min="1" col="'.$data['col'].'" id="'.$data['id'].'"  class="'.$data['form_class'].'" placeholder="'.$data['placeholder'].'">
 						<span id="'.$data['col'].'_error" class="text-danger"></span>';
 		}else if($data['type']=='date'){
 		$return .='<div class="input-group date  col-sm-12  create-date">

@@ -43,7 +43,7 @@ class Inbound{
 			LPAD(`bill_of_lading`, 10, '0') as bill_of_lading, 
 			delivery_receipt, 
 			LPAD(`pallet_code`, 10, '0') as pallet_code, 
-			quantity, 
+			(quantity - (select COALESCE(sum(qty),0) from outbound_list where inbound_id=a.id)) as quantity, 
 			description, 
 			#IF(`storage_type`=1,'Ambiant Storage','Cool Storage') as storage_type,
 			storage_type,
@@ -51,10 +51,8 @@ class Inbound{
 			DATE_FORMAT(`ex_date`,'%y-%m-%d') as ex_date,
 			DATE_FORMAT(`en_date`,'%y-%m-%d') as en_date,
 			DATE_FORMAT(`pu_date`,'%y-%m-%d') as pu_date
-			from inbound_list a $where $additional";
-
+			from inbound_list a $where having quantity>0 $additional";
 		$data = $this->db->select($sql);
-
 		$datatotal = $this->db->select_one("select count(id) as total from inbound_list a $where limit 1" )['total'];
 		$data['pagination'] = $this->db->pagination($page, $datatotal, $limit);
 		jdie($data);
@@ -74,6 +72,17 @@ class Inbound{
 	public function customer(){
 		$select = $this->db->select("select id, customer_name from customer_information where status=1");
 		jdie($select);
+	}
+
+	public function pullout($id=''){
+		$data = $_POST['d'];
+		$data['inbound_id'] = $id;
+
+		$return['status'] = 100;
+		if($this->db->insert("outbound_list",$data)){
+			$return['status'] = 200;
+		}
+		jdie($return);
 	}
 
 	public function save(){
