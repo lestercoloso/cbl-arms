@@ -16,11 +16,13 @@
 
 		$config['vehicle'] = [];
 		$config['driver']  = [];
-		foreach($db->select('select `type` from `vehicle`' )['data'] as $vehicles){
+		$sqlvehicle = 'select `type` from `Vehicle`';
+		foreach($db->select($sqlvehicle)['data'] as $vehicles){
 			$config['vehicle'][$vehicles['type']] = $vehicles['type']; 
 		}
 
-		foreach($db->select('select `name` from `driver_profile`' )['data'] as $drivers){
+		$sqldriver = 'select `name` from `driver_profile`';
+		foreach($db->select($sqldriver)['data'] as $drivers){
 			$config['driver'][$drivers['name']] = $drivers['name']; 
 		}
 
