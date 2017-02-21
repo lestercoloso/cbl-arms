@@ -1,0 +1,1502 @@
+[===================14:51:54===================]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Query was empty
+
+[======================END=====================]
+
+[===================14:52:02===================]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Query was empty
+
+[======================END=====================]
+
+[===================14:52:05===================]
+Invalid default value for 'created_date'
+Unknown table 'home_module'
+
+
+
+
+
+
+
+
+
+Query was empty
+
+[======================END=====================]
+
+[===================14:52:09===================]
+Invalid default value for 'created_date'
+Invalid default value for 'created_date'
+Table 'cblarms.booking' doesn't exist
+Table 'cblarms.booking' doesn't exist
+Table 'cblarms.booking' doesn't exist
+Table 'cblarms.booking' doesn't exist
+Unknown column 'industry_type' in 'customer_information'
+Table 'cblarms.booking' doesn't exist
+
+Invalid default value for 'created_date'
+Unknown column 'created_date' in 'bill_of_lading'
+Invalid default value for 'created_date'
+Unknown column 'created_date' in 'customer_information'
+Query was empty
+
+[======================END=====================]
+
+[===================14:52:12===================]
+Invalid default value for 'created_date'
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+
+[======================END=====================]
+
+[===================14:55:24===================]
+Invalid default value for 'created_date'
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+
+[======================END=====================]
+
+[===================14:57:30===================]
+Invalid default value for 'created_date'
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+
+[======================END=====================]
+
+[===================14:58:11===================]
+Invalid default value for 'created_date'
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+
+[======================END=====================]
+
+[===================14:58:14===================]
+Invalid default value for 'created_date'
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+
+[======================END=====================]
+
+[===================15:11:08===================]
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1' at line 6
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+Table 'cblarms.maintenance' doesn't exist
+
+[======================END=====================]
+
+[===================15:11:30===================]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[======================END=====================]
+
+[===================15:14:09===================]
+Table 'maintenance' already exists
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[======================END=====================]
+
+[===================15:14:53===================]
+Invalid default value for 'created_date'
+
+
+
+
+
+
+
+
+
+
+Query was empty
+
+[======================END=====================]
+
+[===================15:29:00===================]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Query was empty
+
+[======================END=====================]
+
+[===================15:29:09===================]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Query was empty
+
+[======================END=====================]
+
+[===================15:29:14===================]
+Invalid default value for 'created_date'
+Unknown table 'home_module'
+
+
+
+
+
+
+
+
+
+Query was empty
+
+[======================END=====================]
+
+[===================15:30:44===================]
+
+
+
+
+
+
+
+
+
+
+
+Query was empty
+
+[======================END=====================]
+
+[===================15:30:53===================]
+Invalid default value for 'created_date'
+Invalid default value for 'created_date'
+
+
+
+
+Unknown column 'industry_type' in 'customer_information'
+Unknown column 'created_date' in 'booking'
+
+Invalid default value for 'created_date'
+Unknown column 'created_date' in 'bill_of_lading'
+Invalid default value for 'created_date'
+Unknown column 'created_date' in 'customer_information'
+Query was empty
+
+[======================END=====================]
+
+[===================17:01:05===================]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Query was empty
+
+[======================END=====================]
+
+[===================17:01:09===================]
+Table 'version' already exists
+Table 'rack_storage' already exists
+Table 'bay_storage' already exists
+Duplicate column name 'style'
+Duplicate column name 'style'
+Table 'inbound_list' already exists
+Table 'customer_information' already exists
+Duplicate column name 'invoice_no'
+Duplicate column name 'location'
+Duplicate column name 'code'
+Duplicate column name 'rack_level'
+
+Table 'bill_of_lading' already exists
+Duplicate column name 'type_of_shipment'
+Duplicate column name 'storage'
+
+Query was empty
+
+[======================END=====================]
+
+[===================17:01:15===================]
+Table 'booking' already exists
+
+
+
+
+
+
+
+
+
+
+Query was empty
+
+[======================END=====================]
+
+[===================17:01:21===================]
+
+
+
+
+
+Unknown column 'department_id' in 'booking'
+Unknown column 'industry_type' in 'customer_information'
+Unknown column 'created_date' in 'booking'
+
+
+
+Table 'customer_information' already exists
+Unknown column 'created_date' in 'customer_information'
+Query was empty
+
+[======================END=====================]
+
+[===================17:01:56===================]
+Table 'customer_information' already exists
+Unknown column 'created_date' in 'customer_information'
+Table 'customer_contact' already exists
+Table 'customer_address' already exists
+
+
+
+Unknown column 'department_id' in 'booking'
+Unknown column 'industry_type' in 'customer_information'
+Unknown column 'created_date' in 'booking'
+
+Duplicate column name 'shipper_information'
+Duplicate column name 'recipient'
+Query was empty
+
+[======================END=====================]
+
+[===================17:02:03===================]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[======================END=====================]
+
+[===================17:33:18===================]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Query was empty
+
+[======================END=====================]
+
+[===================17:33:22===================]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Query was empty
+
+[======================END=====================]
+
+[===================17:33:26===================]
+
+Unknown table 'cblarms.home_module'
+
+
+
+
+
+
+
+
+
+Query was empty
+
+[======================END=====================]
+
+[===================17:34:09===================]
+Table 'booking' already exists
+
+
+
+
+
+
+
+
+
+
+Query was empty
+
+[======================END=====================]
+
+[===================17:34:14===================]
+Table 'booking' already exists
+
+
+
+
+
+
+
+
+
+
+Query was empty
+
+[======================END=====================]
+
+[===================17:34:19===================]
+Table 'customer_information' already exists
+Unknown column 'created_date' in 'customer_information'
+
+
+
+
+
+
+Unknown column 'industry_type' in 'customer_information'
+
+
+
+
+Query was empty
+
+[======================END=====================]
+
+[===================17:37:12===================]
+
+
+
+
+Table 'customer_contact' already exists
+Table 'customer_address' already exists
+
+
+
+Unknown column 'department_id' in 'booking'
+Duplicate column name 'contact'
+
+Duplicate column name 'shipper_information'
+Duplicate column name 'recipient'
+Query was empty
+
+[======================END=====================]
+
+[===================17:37:22===================]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[======================END=====================]
+

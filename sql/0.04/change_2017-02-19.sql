@@ -44,8 +44,7 @@ CHANGE COLUMN `booking_status` `booking_status` VARCHAR(255) NULL DEFAULT NULL ;
 ALTER TABLE `booking` 
 CHANGE COLUMN `department_id` `contact_id` INT(20) NULL DEFAULT NULL ;
 
-ALTER TABLE `customer_information` 
-CHANGE COLUMN `industry_type` `industry_type` VARCHAR(225) NULL DEFAULT NULL ;
+
 
 
 ALTER TABLE `booking` 
