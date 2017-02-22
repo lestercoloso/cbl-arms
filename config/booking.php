@@ -1,7 +1,7 @@
 <?php
 $config['vehicle'] = !empty($config['vehicle']) ? $config['vehicle'] : [];
 $config['driver']  = !empty($config['driver']) ? $config['driver'] : [];
-$config['mode_of_shipment']  = $db->getconfig('mode_of_shipment');
+$config['mode_of_shipment']  = $db->getconfig('mode_of_shipping');
 $config['status']  = $db->getconfig('booking_status');
 $config['book_shipment'][] = [
 								
