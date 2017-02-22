@@ -18,8 +18,36 @@ class Booking{
 		jdie($select);	
 	}
 	public function getbookingdetails($id=''){
-		$select = $this->db->select_one('select * from `booking` where id='.$id );
-		pdie($select);	
+
+		$sql = "select id, 
+			LPAD(`booking_no`, 10, '0') as booking_no,
+			customer_id,
+			customer_name,
+			contact_person,
+			department,
+			contact_id,
+			address,
+			area,
+			mode_of_shipping,
+			vehicle_type,
+			driver,
+			driver_id,
+			plate_no,
+			booking_status,
+			time_called,
+			special_instruction,
+			date_ready,
+			document,
+			weight,
+			length,
+			width,
+			height,
+			contact
+		 from `booking` where id=$id";
+		$select = $this->db->select_one($sql);
+		$select['date_ready'] = date('m/d/Y h:i A', strtotime($select['date_ready']));
+		$select['time_called'] = date('h:i A', strtotime($select['time_called']));
+		jdie($select);	
 	}
 	public function getcontacts($costumer_id=''){
 		$select['area'] = $this->db->select_one('select area_1, area_2, area_3, area_4, area_5  from customer_information where id='.$costumer_id  );

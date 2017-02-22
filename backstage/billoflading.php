@@ -13,7 +13,17 @@ class Billoflading{
 	}
 
 	public function getbookingdetails($id=''){
-		$select= $this->db->select_one('select contact_person, customer_name, contact, area, address from booking where id=\''.$id.'\' and status=1');
+		$sql = "select 
+		contact_person, 
+		customer_name, 
+		contact, 
+		concat(format(`length`,0), ' x ', format(`width`,0), ' x ', format(`height`,0)) as dimension,
+		round(`weight`,0) as weight,
+		(select tin_no from customer_information where id=a.customer_id limit 1) as tin_no,
+		area, 
+		address 
+		from booking a where id=$id and status=1";
+		$select= $this->db->select_one($sql);
 		$select['contact'] = json_decode($select['contact'], TRUE);
 		jdie($select);
 	}

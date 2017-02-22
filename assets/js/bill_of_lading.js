@@ -65,6 +65,9 @@ var billoflading = {
 			$('#create_department').val(data.contact.department);
 			$('#create_area').val(data.area);
 			$('#create_address').val(data.address);
+			$('#create_dimension').val(data.dimension);
+			$('#create_actual_weight').val(data.weight);
+			$('#create_tin_no').val(data.tin_no);
 		});
 	},
 	createBillOfLading: function(){
@@ -95,7 +98,7 @@ var billoflading = {
 						$('#create_bill_of_lading').modal('hide');
 						$('#savenewbilling').removeClass('disabled');
 						$('#savenewbilling i').addClass('hide');
-						// booking.getbookinglist();
+						billoflading.getbilllist();
 				}else{
 					toastr["error"]('Network error!<br> Please try again.');	
 				}

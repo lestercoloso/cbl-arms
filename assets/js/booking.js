@@ -86,8 +86,25 @@ var booking = {
 
 	createbooking: function(){
 		$('#create_modal').modal();
+		$('#savecreate').show();
+		$('#clearecreate').show();
+		$('#updatecreate').hide();
 		booking.clear();
 	},
+
+	edit: function(id){
+		$('#create_modal').modal();
+		$('#savecreate').hide();
+		$('#clearecreate').hide();
+		$('#updatecreate').show();
+		$('#create_customer_name').chosen('destroy');
+		$.post("backstage/booking/getbookingdetails/"+id, {},function(data){	
+			$.each(data, function( index, value ) {
+				$('.create_shippment input[col="'+index+'"], .create_shippment select[col="'+index+'"]').val(value);
+			});
+		});
+	},
+
 
 	save: function(){
 		var arr = createPostData('create_shippment');
@@ -136,6 +153,8 @@ var booking = {
 		});
 	},
 
+
+
 	getcontacts: function(id){
 		var content1 = '<option value="">Select Area</option>';
 		var content2 = '<option value="">Select Contact Person</option>';
@@ -182,7 +201,7 @@ getbookinglist: function(page=1){
 				var action = '<button type="button" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
 				action += ' <button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
 				
-				content +='<tr id="booking-'+value.id+'">';
+				content +='<tr id="booking-'+value.id+'" data-id="'+value.id+'">';
 				content +='<td class="centered">'+value.booking_no+'</td>';
 				content +='<td class="centered">'+value.customer_name+'</td>';
 				content +='<td>'+value.booking_date+'</td>';
@@ -201,7 +220,7 @@ getbookinglist: function(page=1){
 			});
 			
 			$('#search_result_list .btn-success').click(function(){
-				booking.edit($(this).parent().parent().attr('id'));
+				booking.edit($(this).parent().parent().data('id'));
 			});
 
 		}).fail(function(){

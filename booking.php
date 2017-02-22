@@ -156,6 +156,7 @@ foreach($config['book_shipment'] as $forms){
 
 		</div>
 		<div class="modal-footer">
+		<button type="button" class="btn btn-default" id="updatecreate"><i class="fa fa-circle-o-notch fa-spin hide" style=""></i> Update</button>
 		<button type="button" class="btn btn-default" id="savecreate"><i class="fa fa-circle-o-notch fa-spin hide" style=""></i> Save</button>
 		<button type="button" class="btn btn-default" id="clearecreate">Clear</button>
 		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

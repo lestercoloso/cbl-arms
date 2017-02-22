@@ -53,6 +53,14 @@ function construct_js($array = []){
 
 }
 
+function get_date($date=''){
+	return !empty($date) ? date('m/d/Y', strtotime($date)) : '';
+}
+
+function save_date($date=''){
+	return !empty($date) ? date('Y-m-d', strtotime($date)) : '';
+}
+
 
 function construct_form($arr){
 	$return = '';

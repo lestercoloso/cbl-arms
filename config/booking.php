@@ -73,7 +73,11 @@ $config['book_shipment'][] = [
 
 								['type' 			=> 'hide',
 								'id'				=> 'create_contact_id',
-								'col'				=> 'contact_id']
+								'col'				=> 'contact_id'],
+
+								['type' 			=> 'hide',
+								'id'				=> 'create_contact',
+								'col'				=> 'contact']
 							];
 
 

@@ -30,7 +30,7 @@ $config['add_shipment']['Shipper Information'] = [
 								'id'				=> 'create_company',
 								],
 
-								2 => ['type' 		=> 'input',
+								2 => ['type' 		=> 'normal',
 								'label'				=> 'Contact No.',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -40,7 +40,7 @@ $config['add_shipment']['Shipper Information'] = [
 								'placeholder' 		=> ''
 								],
 
-								3 => ['type' 		=> 'input',
+								3 => ['type' 		=> 'normal',
 								'label'				=> 'Email Address',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -49,7 +49,7 @@ $config['add_shipment']['Shipper Information'] = [
 								'form_class'		=> 'form-control',
 								],
 
-								4 => ['type' 		=> 'input',
+								4 => ['type' 		=> 'normal',
 								'label'				=> 'TIN No.',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -74,7 +74,7 @@ $config['add_shipment']['Shipper Information'] = [
 								'col'				=> 'business_style',
 								'form_class'		=> 'form-control'],
 
-								7 => ['type' 		=> 'input',
+								7 => ['type' 		=> 'normal',
 								'label'				=> 'Address',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -90,7 +90,7 @@ $config['add_shipment']['Shipper Information'] = [
 								'col'				=> 'city',
 								'form_class'		=> 'form-control'],
 
-								10 => ['type' 		=> 'input',
+								10 => ['type' 		=> 'normal',
 								'label'				=> 'Area',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -139,7 +139,7 @@ $config['add_shipment']['Package Content (Complete Description)'] = [
 								'form_class'		=> 'form-control',
 								],
 
-								4 => ['type' 		=> 'number',
+								4 => ['type' 		=> 'normal',
 								'label'				=> 'Dimension',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-6',
@@ -149,7 +149,7 @@ $config['add_shipment']['Package Content (Complete Description)'] = [
 								'form_class'		=> 'form-control',
 								],
 
-								5 => ['type' 		=> 'number',
+								5 => ['type' 		=> 'normal',
 								'label'				=> 'Actual Weight',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-6',
@@ -227,7 +227,7 @@ $config['add_shipment']['Charges'] = [
 
 						];
 
-$config['add_shipment']['Additional Changes'] = [
+$config['add_shipment']['Additional Charges'] = [
 								
 								['type' 			=> 'input',
 								'label'				=> 'ODA(Outside Delivery Area)',
