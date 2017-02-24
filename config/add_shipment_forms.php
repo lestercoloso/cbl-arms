@@ -27,10 +27,10 @@ $config['pullout'] = [
 
 								['type' 		=> 'input',
 								'label'				=> 'Location Name',
-								'parent_class' 		=> 'form-group col-sm-12 addship',
+								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'pullout_location',
-								'col'				=> 'location',
+								'col'				=> 'loc',
 								'form_class'		=> 'form-control',
 								'placeholder' 		=> 'Input Location name']
 

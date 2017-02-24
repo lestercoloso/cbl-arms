@@ -53,9 +53,24 @@ $version =rand();
 
 						</div>
 
-						<div class="left-container hide">
-							<button id="" class="button-class custombutton" >Edit</button>
-							<button id="" class="button-class custombutton" >Cancel</button>
+						<div class="left-container col-sm-12" id="left-container">
+
+							<label class="storage_type_container col-sm-12"><b>Rack Storage</b></label><br>
+							<div class="storage_preview_container col-sm-12">
+								
+								<span class="col-sm-6">Rack Code : </span> <span class="col-sm-6"> - </span> 
+								<span class="col-sm-6">Rack Code : </span> <span class="col-sm-6"> - </span> 
+
+							</div> <br>
+
+						
+							<button id="" class="button-class custombutton view_storage" >View</button>
+							<button id="" class="button-class custombutton delete_storage" >Delete</button>
+
+							<button id="" class="button-class custombutton rotate_left" > <i class="fa fa-undo" aria-hidden="true"></i> left</button>
+							<button id="" class="button-class custombutton rotate_right" > <i class="fa fa-repeat" aria-hidden="true"></i> right</button>
+							
+
 						</div>
 
 				  		<div style="float: left;width: 100%;">				  		

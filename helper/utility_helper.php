@@ -66,7 +66,7 @@ function construct_form($arr){
 	$return = '';
 	foreach ($arr as $data){
 		if($data['type']=='hide'){
-			$return .='<input name="'.$data['col'].'" col="'.$data['col'].'" type="hidden"  id="'.$data['id'].'">';
+			$return .='<input name="'.$data['col'].'" class="not_mandatory" col="'.$data['col'].'" type="hidden"  id="'.$data['id'].'">';
 			continue;
 		}
 

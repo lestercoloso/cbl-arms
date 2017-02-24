@@ -23,25 +23,7 @@ $(document).ready(function(){
 
 function addStorage(){
 	$( "#add_storage" ).modal();
-	// $( "#add_storage" ).dialog({
-	//       autoOpen: true,
-	//       width: 400,
-	//       modal: true,
-	//  	  resizable: false,
-	//  	  movable: false,
-	//  	  draggable: false, 
-	//  	  buttons: {
-	// 		        Save: function() {
-	// 		          saveStorage(this);
-	// 		        },			        
-	// 		        Clear: function() {
-	// 		          cleardata();
-	// 		        },
-	// 		        Cancel: function() {
-	// 		          $( this ).dialog( "close" );
-	// 		        }
- //      	  }
-	// });	
+	getcode('rack');
 }
 
 
@@ -64,20 +46,20 @@ function addStorage(){
 			if(value.style==null){
 				value.style = 'position:absolute;';
 			}
-			content +='<div id="rack-'+value.id+'" class="rackStorage" data-rackwidth="'+value.rack_width+'" data-racklength="'+value.rack_length+'"  data-racklevel="'+value.no_rack_level+'" data-racklevelheight="'+value.rack_level_height+'" style="height:'+value.rack_length.trim()+'px;width:'+value.rack_width+'px;'+value.style+'">'+deletebutton+rotate+'</div>';
+			content +='<div id="rack-'+value.id+'" class="rackStorage" data-rackcode="'+value.code+'" data-rackwidth="'+value.rack_width+'" data-racklength="'+value.rack_length+'"  data-racklevel="'+value.no_rack_level+'" data-racklevelheight="'+value.rack_level_height+'" style="height:'+value.rack_width.trim()+'px;width:'+value.rack_length+'px;'+value.style+'">'+deletebutton+rotate+'</div>';
 		});		
 
 		$.each(bdatas, function( index, value ) {
 			if(value.style==''){
 				value.style = 'transform: rotate(0deg)';
 			}
-			content +='<div class="bayStorage" id="bay-'+value.id+'" style="height:'+value.bay_length+'px;width:'+value.bay_width+'px;'+value.style+'">'+deletebutton+rotate+'</div>';
+			content +='<div class="bayStorage" id="bay-'+value.id+'" data-baycode="'+value.code+'" data-baywidth="'+value.bay_width+'" data-baylength="'+value.bay_length+'"  style="height:'+value.bay_width+'px;width:'+value.bay_length+'px;'+value.style+'">'+deletebutton+rotate+'</div>';
 		});
 
 		$('.warehouse_container').append(content);
 		$( ".rackStorage, .bayStorage" ).draggable({ containment: "parent" });
-		$( ".rackStorage, .bayStorage" ).dblclick(function() {openShelves( this.id );});
-		addFunctionToStorage();
+		addFunctionToStorage2();
+		$('#left-container').hide();
 	}
 
 	function getcode(type){
@@ -140,7 +122,7 @@ function openShelves(id){
 		var rw = d.data('rackwidth'); 
 
 		for (i = 1; i <= nrl; i++) { 
-			content += '<div class="rack-level" style="width:'+rw+'px;height:'+rlh+'px;"><div class="support-left" style="height:'+(rlh+15)+'px;"></div><div class="support-bottom"></div><div class="support-right" style="height:'+(rlh+15)+'px;"></div></div>';
+			content += '<div class="rack-level" style="width:'+rl+'px;height:'+rlh+'px;"><div class="support-left" style="height:'+(rlh+15)+'px;"></div><div class="support-bottom"></div><div class="support-right" style="height:'+(rlh+15)+'px;"></div></div>';
 		}
 		$('#shelf_container').html(content);
 
@@ -189,6 +171,9 @@ function getStorage(){
 		racksjsondata = JSON.stringify(data.rack);
 		baysjsondata = JSON.stringify(data.bay);
 		rearrangeshelves();
+		$('#warehouse').show();
+		$('#shelves').hide();
+		$('#left-container').hide();
 	}).fail(function(){
 		toastr["error"]("Failed to load.");
 	});
@@ -196,10 +181,12 @@ function getStorage(){
 
 function deleteStorage(id){
 
+
 	if(confirm('Are you sure you want to delete this storage?')){
 		$.post("backstage/warehouse/deleteStorage/"+id, {},function(data){
 			toastr["success"]("Successfully deleted.");	
 			getStorage();	
+
 		}).fail(function(){
 			toastr["error"]("Failed to load.");
 		});
@@ -225,6 +212,7 @@ function getAngle(d){
 }
 
 function rotate(d,angl){
+	console.log(d);
 	var angle = getAngle(d)+parseInt(angl);
 	d.css({ WebkitTransform: 'rotate('+angle+'deg)'});
 }
@@ -236,11 +224,9 @@ function addFunctionToStorage(){
 		$( this ).find( '.btn' ).show();
 	});
 
-
-
-	// $( ".rackStorage, .bayStorage" ).on( "mouseleave", function() {
-	// 	$( ".rackStorage .btn, .bayStorage .btn" ).hide();
-	// });
+	$( ".rackStorage, .bayStorage" ).dblclick(function() {
+		openShelves( this.id );
+	});
 
 	$(".deletethis").click(function(){
 		deleteStorage($(this).parent().attr('id'));
@@ -249,11 +235,59 @@ function addFunctionToStorage(){
 	$(".rotate .rotateright").click(function(){
 		rotate($(this).parent().parent(),'+'+adjust);
 	});
+
 	$(".rotate .rotateleft").click(function(){
 		rotate($(this).parent().parent(),'-'+adjust);
 	});
+}
+
+function selectStorage(){
+	$('#left-container').show();
+	var selected = $('.selected_storage');
+	if(selected.hasClass('bayStorage')){
+		$('.storage_type_container').html('<b>Bay Storage</b>');
+		var container = '<span class="col-sm-6">Bay Code : </span> <span class="col-sm-6"> '+pad(selected.data('baycode'),10)+' </span>';
+		 container += '<span class="col-sm-6">Bay Length : </span> <span class="col-sm-6"> '+selected.data('baylength')+' </span>';
+		 container += '<span class="col-sm-6">Bay Width : </span> <span class="col-sm-6"> '+selected.data('baywidth')+' </span>';
+		$('.storage_preview_container').html(container);
+	}else{
+		$('.storage_type_container').html('<b>Rack Storage</b>');
+		var container = '<span class="col-sm-6">Rack Code : </span> <span class="col-sm-6"> '+pad(selected.data('rackcode'),10)+' </span>';
+		 container += '<span class="col-sm-6">Rack Length : </span> <span class="col-sm-6"> '+selected.data('racklength')+' </span>';
+		 container += '<span class="col-sm-6">Rack Width : </span> <span class="col-sm-6"> '+selected.data('rackwidth')+' </span>';
+		 container += '<span class="col-sm-6">No. of Rack level : </span> <span class="col-sm-6"> '+selected.data('racklevel')+' </span>';
+		 container += '<span class="col-sm-6">Rack level height : </span> <span class="col-sm-6"> '+selected.data('racklevelheight')+' </span>';
+		$('.storage_preview_container').html(container);		
+	}
+
 
 }
+
+function addFunctionToStorage2(){
+	//reveal functions
+	$( ".rackStorage, .bayStorage" ).click(function() {
+		$( ".rackStorage, .bayStorage" ).removeClass('selected_storage');
+		$( this ).addClass('selected_storage');
+
+		selectStorage();
+	});
+
+}
+
+
+$(".view_storage").click(function(){
+	openShelves( $('.selected_storage').attr('id') );
+});
+$(".delete_storage").click(function(){
+	deleteStorage($('.selected_storage').attr('id'));
+});
+
+$(".rotate_right").click(function(){
+	rotate($('.selected_storage'),'+'+adjust);
+});
+$(".rotate_left").click(function(){
+	rotate($('.selected_storage'),'-'+adjust);
+});
 
 $('#addStorage').click(function(){
 	addStorage();
@@ -282,6 +316,9 @@ $('#saveOrder').click(function(){
 $('#cancelOrderStorage').click(function(){
 	rearrangeshelves();
 });
+
+
+
 
 
 // $( "#add_storage" ).dialog({autoOpen: false});	

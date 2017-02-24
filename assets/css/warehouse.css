@@ -8,12 +8,37 @@
 		padding-top: 20px;
    }
 
+ #left-container .button-class {
+    margin: 5px auto;
+}
+
+ #left-container{
+ 	display: none;
+ } 
+
+#left-container div {
+   float: left;
+    margin: 10px 10px;
+    padding-right: 0px; 
+	padding-left: 0px; 
+	text-align: left;
+}
+ #left-container span {
+   font-weight: 100;
+	padding-right: 0px; 
+	padding-left: 0px; 
+	text-align: left;
+}
+.storage_preview_container{
+	font-size: 11px;
+}
+
 	.ware-tab{
 		margin-top: 3%;
 		float: left;
 		width: 70%;
 		margin-left: 3%;
-		height: 85%;
+		height: 570px;
 		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	}
 
@@ -273,4 +298,7 @@ border: solid 1px #d3d3d3;
 .chosen-single span{
 	font-weight: 100;
 }
-
+.selected_storage{
+	-webkit-box-shadow: 5px 5px 15px rgba(0,0,0,.5);
+    box-shadow: 5px 5px 15px rgba(0,0,0,.5);
+}
