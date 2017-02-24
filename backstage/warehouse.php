@@ -55,6 +55,12 @@ class Warehouse{
 
 	}
 
+	public function getBoxes($code='', $type='', $level=''){
+		$sql = "select b.weight, b.length, b.width from inbound_list a, booking b where a.bill_of_lading=b.booking_no and a.code=$code and a.rack_level=$level and a.storage='$type'";
+		$data = $this->db->select($sql);
+		jdie($data);
+	}
+
 	public function deleteStorage($del=''){
 		$del = explode('-', $del);
 		$data['status'] = $this->db->delete($del[0].'_storage','id='.$del[1] );

@@ -13,7 +13,6 @@ require_once('header.php');
 // $bays = $db->select('select * from bay_storage where status=1' );
 
 $version =rand();
-
 ?>
 
 
@@ -258,6 +257,48 @@ $version =rand();
 		
 
 		</div>
+
+
+
+
+
+<div id="storage_view" class="modal fade" role="dialog">
+	<div class="modal-dialog custom-class">
+	 <div class="modal-content">
+	
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h4 class="modal-title"> - </h4>
+	</div>
+	<div class="modal-body">
+
+
+
+				<div class="cube" id="storage_container" style="width: 200px; height: 200px; transform: rotateX(-15deg) rotateY(30deg);">
+                    <div class="bottom">
+                     </div>
+                    <div class="left storage_height">
+                    </div>
+                    <div class="right storage_height">
+                    </div>
+                    <div class="back storage_lengthwidth"> 
+                    </div>
+                </div>
+
+<!-- https://desandro.github.io/3dtransforms/docs/rectangular-prism.html -->
+
+
+	</div>
+		<div class="modal-footer">
+          <button type="button" class="btn btn-default" id="savestorageview"><i class="fa fa-circle-o-notch fa-spin hide" style=""></i> Save</button>
+          <button type="button" class="btn btn-default" id="resetstorageview">Reset</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+		</div>
+		</div>
+		</div>
+
+
 
 <script src="/bower_components/toastr/toastr.min.js"></script>
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

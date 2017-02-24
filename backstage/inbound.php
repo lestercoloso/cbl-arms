@@ -89,9 +89,9 @@ class Inbound{
 
 		$data = json_decode($_POST['d'], TRUE);
 		$data['bill_of_lading'] = (int) $data['bill_of_lading'];
-		$data['ex_date'] = date('Y-m-d', strtotime($data['ex_date']));
-		$data['en_date'] = date('Y-m-d', strtotime($data['en_date']));
-		$data['pu_date'] = date('Y-m-d', strtotime($data['pu_date']));
+		$data['ex_date'] = save_date($data['ex_date']);
+		$data['en_date'] = save_date($data['en_date']);
+		$data['pu_date'] = save_date($data['pu_date']);
 
 
 		$return['status'] = 100;

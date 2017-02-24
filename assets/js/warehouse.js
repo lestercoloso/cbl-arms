@@ -46,14 +46,14 @@ function addStorage(){
 			if(value.style==null){
 				value.style = 'position:absolute;';
 			}
-			content +='<div id="rack-'+value.id+'" class="rackStorage" data-rackcode="'+value.code+'" data-rackwidth="'+value.rack_width+'" data-racklength="'+value.rack_length+'"  data-racklevel="'+value.no_rack_level+'" data-racklevelheight="'+value.rack_level_height+'" style="height:'+value.rack_width.trim()+'px;width:'+value.rack_length+'px;'+value.style+'">'+deletebutton+rotate+'</div>';
+			content +='<div id="rack-'+value.id+'" class="rackStorage" data-type="rack" data-rackcode="'+value.code+'" data-rackwidth="'+value.rack_width+'" data-racklength="'+value.rack_length+'"  data-racklevel="'+value.no_rack_level+'" data-racklevelheight="'+value.rack_level_height+'" style="height:'+value.rack_width.trim()+'px;width:'+value.rack_length+'px;'+value.style+'">'+deletebutton+rotate+'</div>';
 		});		
 
 		$.each(bdatas, function( index, value ) {
 			if(value.style==''){
 				value.style = 'transform: rotate(0deg)';
 			}
-			content +='<div class="bayStorage" id="bay-'+value.id+'" data-baycode="'+value.code+'" data-baywidth="'+value.bay_width+'" data-baylength="'+value.bay_length+'"  style="height:'+value.bay_width+'px;width:'+value.bay_length+'px;'+value.style+'">'+deletebutton+rotate+'</div>';
+			content +='<div class="bayStorage" id="bay-'+value.id+'"  data-type="bay" data-baycode="'+value.code+'" data-baywidth="'+value.bay_width+'" data-baylength="'+value.bay_length+'"  style="height:'+value.bay_width+'px;width:'+value.bay_length+'px;'+value.style+'">'+deletebutton+rotate+'</div>';
 		});
 
 		$('.warehouse_container').append(content);
@@ -122,16 +122,31 @@ function openShelves(id){
 		var rw = d.data('rackwidth'); 
 
 		for (i = 1; i <= nrl; i++) { 
-			content += '<div class="rack-level" style="width:'+rl+'px;height:'+rlh+'px;"><div class="support-left" style="height:'+(rlh+15)+'px;"></div><div class="support-bottom"></div><div class="support-right" style="height:'+(rlh+15)+'px;"></div></div>';
+			content += '<div class="rack-level" data-racklevel="'+i+'" style="width:'+rl+'px;height:'+rlh+'px;"><div class="support-left" style="height:'+(rlh+15)+'px;"></div><div class="support-bottom"></div><div class="support-right" style="height:'+(rlh+15)+'px;"></div></div>';
 		}
 		$('#shelf_container').html(content);
+		
+		$('.rack-level').click(function(){
+			viewShelve($(this).data('racklevel'));
+		});
 
 	}else{
 
 	}
+}
 
+function viewShelve(level){
+$('#storage_view').modal();
+var selected = $('.selected_storage');
+	if(selected.data('type')=='rack'){
+		$('#storage_view .modal-title').html('Rack ('+pad(selected.data('rackcode'),10) +') - Level '+level);
+	}else{
+
+	}
+	$('#storage_container').css('width', (selected.data('racklength')*2)+'px');
 
 }
+
 
 
 function cancelShelves(){

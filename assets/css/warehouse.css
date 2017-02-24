@@ -302,3 +302,76 @@ border: solid 1px #d3d3d3;
 	-webkit-box-shadow: 5px 5px 15px rgba(0,0,0,.5);
     box-shadow: 5px 5px 15px rgba(0,0,0,.5);
 }
+
+#storage_view .modal-dialog{
+	width: 1000px;
+}
+
+#storage_view .modal-body{
+	height: 450px;
+}
+
+
+
+
+
+ 			.cube {
+                margin: auto;
+ 				margin-top: 20px;                
+                position: relative;
+                transform-style: preserve-3d;
+            }
+
+                .cube div {
+                    position: absolute;
+                    padding: 10px;
+                    box-sizing: border-box;
+                    height: 100%;
+                    width: 100%;
+                    border: solid 6px #53876e;
+                    color: #fff;
+                    font: 10px arial;
+                }
+
+            .front {
+                transform: translateZ(100px);
+            }
+
+            .back {
+                transform: translateZ(-100px) rotateY(180deg) translate(0px, 2px);
+            }
+
+            .right {
+                transform: rotateY(-270deg) translate(100px, 2px);
+                transform-origin: top right;
+            }
+
+            .left {
+                transform: rotateY(270deg) translateX(-100px);
+                transform-origin: center left;
+            }
+
+            .top {
+                transform: rotateX(-270deg) translateY(-100px);
+                transform-origin: top center;
+            }
+
+            .bottom {
+                transform: rotateX(270deg) translateY(100px);
+                transform-origin: bottom center;
+			    background: #b98266; /* For browsers that do not support gradients */    
+			    background: -webkit-linear-gradient(right, #c55e28 , #b98266); /* For Safari 5.1 to 6.0 */
+			    background: -o-linear-gradient(right, #c55e28, #b98266); /* For Opera 11.1 to 12.0 */
+			    background: -moz-linear-gradient(right, #c55e28, #b98266); /* For Firefox 3.6 to 15 */
+			    background: linear-gradient(to left, #c55e28 , #b98266);
+
+            }
+
+
+
+
+
+
+
+
+
