@@ -30,7 +30,7 @@ $config['pullout'] = [
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'pullout_location',
-								'col'				=> 'loc',
+								'col'				=> 'location',
 								'form_class'		=> 'form-control',
 								'placeholder' 		=> 'Input Location name']
 

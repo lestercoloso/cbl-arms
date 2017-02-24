@@ -80,6 +80,7 @@ class Inbound{
 
 		$return['status'] = 100;
 		if($this->db->insert("outbound_list",$data)){
+			$this->db->last_query();
 			$return['status'] = 200;
 		}
 		jdie($return);
