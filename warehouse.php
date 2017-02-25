@@ -66,8 +66,11 @@ $version =rand();
 							<button id="" class="button-class custombutton view_storage" >View</button>
 							<button id="" class="button-class custombutton delete_storage" >Delete</button>
 
-							<button id="" class="button-class custombutton rotate_left" > <i class="fa fa-undo" aria-hidden="true"></i> left</button>
-							<button id="" class="button-class custombutton rotate_right" > <i class="fa fa-repeat" aria-hidden="true"></i> right</button>
+		<button id="" class="button-class custombutton rotate_left" > <i class="fa fa-undo" aria-hidden="true"></i> left</button>
+		<button id="" class="button-class custombutton rotate_right" > <i class="fa fa-repeat" aria-hidden="true"></i> right</button>		
+
+
+
 							
 
 						</div>
@@ -117,6 +120,9 @@ $version =rand();
 							</div>							
 
 
+
+
+
 							<div class="function-button">
 								<button id="editAddRackLevel" class="button-class custombutton" style="width: 150px;margin: 0px;" >Add Rack Level</button>
 							</div>
@@ -141,6 +147,13 @@ $version =rand();
 									<button id="saveShelves" class="button-class custombutton" >Save</button>
 									<button id="cancelShelves" class="button-class custombutton" >Cancel</button>
 								</div>
+
+<div id="rotate_shelves">
+		<button class="custombutton rl"> <i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+		<button class="custombutton rr"> <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+		<button class="custombutton ru"> <i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+		<button class="custombutton rd"> <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+</div>
 						</div>
 
 				  	</div>
@@ -273,17 +286,13 @@ $version =rand();
 	<div class="modal-body">
 
 
+<div style="margin-top: 55px;">
 
-				<div class="cube" id="storage_container" style="width: 200px; height: 200px; transform: rotateX(-15deg) rotateY(30deg);">
-                    <div class="bottom">
-                     </div>
-                    <div class="left storage_height">
-                    </div>
-                    <div class="right storage_height">
-                    </div>
-                    <div class="back storage_lengthwidth"> 
-                    </div>
-                </div>
+		<div class="shelves_container" style="transform: rotateX(-15deg) rotateY(30deg);"> <div class="back"></div><div class="bottom"></div> <div class="left storage_height"></div><div class="right storage_height"></div> </div>			
+		
+		
+		
+</div>
 
 <!-- https://desandro.github.io/3dtransforms/docs/rectangular-prism.html -->
 

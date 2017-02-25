@@ -1,4 +1,5 @@
 	var adjust = 3;
+	var adjust2 = 3;
 
 
 
@@ -120,34 +121,66 @@ function openShelves(id){
 		var rlh = d.data('racklevelheight'); 
 		var rl = d.data('racklength'); 
 		var rw = d.data('rackwidth'); 
-
+		zindex = 100;
 		for (i = 1; i <= nrl; i++) { 
-			content += '<div class="rack-level" data-racklevel="'+i+'" style="width:'+rl+'px;height:'+rlh+'px;"><div class="support-left" style="height:'+(rlh+15)+'px;"></div><div class="support-bottom"></div><div class="support-right" style="height:'+(rlh+15)+'px;"></div></div>';
+			zindex--;
+			// content += '<div class="rack-level" data-racklevel="'+i+'" style="width:'+rl+'px;height:'+rlh+'px;"><div class="support-left" style="height:'+(rlh+15)+'px;"></div><div class="support-bottom"></div><div class="support-right" style="height:'+(rlh+15)+'px;"></div></div>';
+			content += '	<div class="shelves_container rack-level"  data-racklevel="'+i+'"  style="z-index: '+zindex+';transform: rotateX(-15deg) rotateY(30deg);"> <div class="back"></div><div class="bottom">1</div> <div class="left storage_height"></div><div class="right storage_height"></div> </div>';
 		}
 		$('#shelf_container').html(content);
 		
 		$('.rack-level').click(function(){
-			viewShelve($(this).data('racklevel'));
+			viewShelve($(this).data('racklevel'), 3);
 		});
 
+		viewShelve();
+
 	}else{
 
 	}
 }
 
-function viewShelve(level){
-$('#storage_view').modal();
-var selected = $('.selected_storage');
-	if(selected.data('type')=='rack'){
-		$('#storage_view .modal-title').html('Rack ('+pad(selected.data('rackcode'),10) +') - Level '+level);
+function viewShelve(level='', scale=2){
+
+	if(level!=''){
+		$('#storage_view').modal();	
+		var add = '#storage_view ';
 	}else{
-
+		var add = '#shelf_container ';
 	}
-	$('#storage_container').css('width', (selected.data('racklength')*2)+'px');
+	
+	var selected = $('.selected_storage');
+		if(selected.data('type')=='rack'){
+			$('#storage_view .modal-title').html('Rack ('+pad(selected.data('rackcode'),10) +') - Level '+level);
+		}else{
 
+		}
+		var Length = (selected.data('racklength')*scale);
+		var Width  = (selected.data('rackwidth')*scale);
+		var Height = (selected.data('racklevelheight')*scale);
+		$(add+'.shelves_container').css('width', Length+'px');
+		$(add+'.shelves_container').css('height', Height+'px');
+		$(add+'.shelves_container .storage_height').css('width', Width+'px');
+		$(add+'.shelves_container .bottom').css('height', Width+'px');
+		$(add+'.shelves_container .bottom').css('transform', 'rotateX(270deg) translateY(100px) translateZ('+(Height-Width)+'px)');
+		$(add+'.shelves_container .back').css('height', Height+'px');
+		$(add+'.shelves_container .storage_height.right').css('transform', 'rotateY(-270deg) translate(100px, 2px) translateZ('+(Length-Width)+'px)');
 }
 
-
+function rotateShelf(id, t='up'){
+	var obj = $('#'+id+ ' .shelves_container');
+	var getcss = obj.attr('style');
+	var getX = /rotateX\(\s*([^ ,]+)deg\s*\)/;
+	var getY = /rotateY\(\s*([^ ,]+)deg\s*\)/;
+	var Y = getcss.split(getY)[1];
+	var X = getcss.split(getX)[1];
+	
+	if(t=='up'){ X = parseInt(X)+parseInt(adjust) }
+	if(t=='down'){ X = parseInt(X)-parseInt(adjust) }
+	if(t=='left'){ Y = parseInt(Y)-parseInt(adjust) }
+	if(t=='right'){ Y = parseInt(Y)+parseInt(adjust) }
+	obj.css({ WebkitTransform: 'rotateX('+X+'deg) rotateY('+Y+'deg)'});
+}
 
 function cancelShelves(){
 	$('#warehouse').show();
@@ -330,6 +363,21 @@ $('#saveOrder').click(function(){
 
 $('#cancelOrderStorage').click(function(){
 	rearrangeshelves();
+});
+
+
+//rotate function of shelf
+$('#rotate_shelves .ru').click(function(){
+	rotateShelf('shelf_container', 'up');
+});
+$('#rotate_shelves .rd').click(function(){
+	rotateShelf('shelf_container', 'down');
+});
+$('#rotate_shelves .rl').click(function(){
+	rotateShelf('shelf_container', 'left');
+});
+$('#rotate_shelves .rr').click(function(){
+	rotateShelf('shelf_container', 'right');
 });
 
 

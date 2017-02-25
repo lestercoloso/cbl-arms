@@ -239,6 +239,37 @@ border: solid 1px #d3d3d3;
 	color: #cc0000;
 }
 
+
+
+
+@media screen and (min-width: 768px) {
+    .custom-class2 {
+    	margin-top: 7%;
+        width: 35%; /* either % (e.g. 60%) or px (400px) */
+    }
+}
+
+.custom-class2 .form-control {
+    font-weight: 100;
+    font-size: 11px;
+}
+
+.chosen-single span{
+	font-weight: 100;
+}
+.selected_storage{
+	-webkit-box-shadow: 5px 5px 15px rgba(0,0,0,.5);
+    box-shadow: 5px 5px 15px rgba(0,0,0,.5);
+}
+
+#storage_view .modal-dialog{
+	width: 1000px;
+}
+
+#storage_view .modal-body{
+	height: 450px;
+}
+
 .rack-level{
 	height: 30px;
 	width: 300px;
@@ -276,53 +307,29 @@ border: solid 1px #d3d3d3;
     height: 10px;
 }
 .rack-level:hover{
-    background:  rgba(251, 127, 127, 0.63);;
-       cursor: -moz-zoom-in; 
+    /*background:  rgba(251, 127, 127, 0.63);*/
+    cursor: -moz-zoom-in; 
     cursor: -webkit-zoom-in; 
     cursor: zoom-in;
-}
-
-
-@media screen and (min-width: 768px) {
-    .custom-class2 {
-    	margin-top: 7%;
-        width: 35%; /* either % (e.g. 60%) or px (400px) */
-    }
-}
-
-.custom-class2 .form-control {
-    font-weight: 100;
-    font-size: 11px;
-}
-
-.chosen-single span{
-	font-weight: 100;
-}
-.selected_storage{
-	-webkit-box-shadow: 5px 5px 15px rgba(0,0,0,.5);
-    box-shadow: 5px 5px 15px rgba(0,0,0,.5);
-}
-
-#storage_view .modal-dialog{
-	width: 1000px;
-}
-
-#storage_view .modal-body{
-	height: 450px;
+    
 }
 
 
 
+.rack-level:hover > div {
+    border: solid 6px #000;
+}
 
 
- 			.cube {
+ 			.shelves_container {
                 margin: auto;
- 				margin-top: 20px;                
+ 				margin-top: -9px;                
                 position: relative;
                 transform-style: preserve-3d;
+                transition: transform 0.2s ease-in;
             }
 
-                .cube div {
+                .shelves_container div {
                     position: absolute;
                     padding: 10px;
                     box-sizing: border-box;
@@ -357,6 +364,7 @@ border: solid 1px #d3d3d3;
             }
 
             .bottom {
+
                 transform: rotateX(270deg) translateY(100px);
                 transform-origin: bottom center;
 			    background: #b98266; /* For browsers that do not support gradients */    
@@ -364,9 +372,29 @@ border: solid 1px #d3d3d3;
 			    background: -o-linear-gradient(right, #c55e28, #b98266); /* For Opera 11.1 to 12.0 */
 			    background: -moz-linear-gradient(right, #c55e28, #b98266); /* For Firefox 3.6 to 15 */
 			    background: linear-gradient(to left, #c55e28 , #b98266);
+			    background: url("/img/steel.jpg");
 
             }
 
+
+#rotate_shelves{
+	position: absolute;
+	top: 527px;
+    left: 873px
+}
+#rotate_shelves button{
+	position: relative;
+	width: 40px;
+	cursor: pointer;
+}
+#rotate_shelves .ru{
+	top: -29px;
+	left: -65px;
+}
+#rotate_shelves .rd{
+    top: 3px;
+    left: 23px;
+}
 
 
 
