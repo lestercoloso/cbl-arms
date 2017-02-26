@@ -316,7 +316,7 @@ border: solid 1px #d3d3d3;
 
 
 
-.rack-level:hover > div {
+.rack-level:hover > .back, .rack-level:hover > .right,  .rack-level:hover >.left, .rack-level:hover >.bottom {
     border: solid 6px #000;
 }
 
@@ -329,7 +329,7 @@ border: solid 1px #d3d3d3;
                 transition: transform 0.2s ease-in;
             }
 
-                .shelves_container div {
+                .shelves_container .back, .shelves_container .right, .shelves_container .left, .shelves_container .bottom {
                     position: absolute;
                     padding: 10px;
                     box-sizing: border-box;
@@ -339,6 +339,8 @@ border: solid 1px #d3d3d3;
                     color: #fff;
                     font: 10px arial;
                 }
+
+
 
             .front {
                 transform: translateZ(100px);
@@ -354,7 +356,7 @@ border: solid 1px #d3d3d3;
             }
 
             .left {
-                transform: rotateY(270deg) translateX(-100px);
+                transform: rotateY(270deg) translateX(-100px) translateY(2px);
                 transform-origin: center left;
             }
 
@@ -399,6 +401,58 @@ border: solid 1px #d3d3d3;
 
 
 
+
+          .box {
+                position: absolute;
+                height: 50px;
+                width: 50px;
+                transform-style: preserve-3d;
+                transition: transform 0.2s ease-in;
+                /*float: left;*/
+                /*transform: rotateX(-15deg) rotateY(30deg) translateX(78px) translateZ(185px);*/
+                    transform: translateY(50px);
+            }
+
+                .box div {
+                    position: absolute;
+                    padding: 10px;
+                    box-sizing: border-box;
+                    height: 100%;
+                    width: 100%;
+                    background-color: #dfcea9;
+                    border: solid 1px #bbac8e;
+                    color: #fff;
+                    font: 10px arial;
+                    transition: transform 2s;
+                }
+
+            .box .frnt {
+                transform: translateZ(-50px);
+            }
+
+            .box .bck {
+                transform: translateZ(-100px) rotateY(180deg);
+            }
+
+            .box .rght {
+                transform: rotateY(-270deg) translateX(100px);
+                transform-origin: top right;
+            }
+
+            .box .lft {
+                transform: rotateY(270deg) translateX(-100px);
+                transform-origin: center left;
+            }
+
+            .box .tp {
+                transform: rotateX(-270deg) translateY(-100px);
+                transform-origin: top center;
+            }
+
+            .box .bot {
+                transform: rotateX(270deg) translateY(100px);
+                transform-origin: bottom center;
+            }
 
 
 

@@ -122,10 +122,12 @@ function openShelves(id){
 		var rl = d.data('racklength'); 
 		var rw = d.data('rackwidth'); 
 		zindex = 100;
+
+		var box = '<div class="box"  draggable="true"><div class="frnt"></div><div class="bck"></div><div class="tp"></div><div class="bot"></div><div class="lft"></div><div class="rght"></div> </div>';
 		for (i = 1; i <= nrl; i++) { 
 			zindex--;
 			// content += '<div class="rack-level" data-racklevel="'+i+'" style="width:'+rl+'px;height:'+rlh+'px;"><div class="support-left" style="height:'+(rlh+15)+'px;"></div><div class="support-bottom"></div><div class="support-right" style="height:'+(rlh+15)+'px;"></div></div>';
-			content += '	<div class="shelves_container rack-level"  data-racklevel="'+i+'"  style="z-index: '+zindex+';transform: rotateX(-15deg) rotateY(30deg);"> <div class="back"></div><div class="bottom">1</div> <div class="left storage_height"></div><div class="right storage_height"></div> </div>';
+			content += '	<div class="shelves_container rack-level"  data-racklevel="'+i+'"  style="z-index: '+zindex+';transform: rotateX(-15deg) rotateY(30deg);"> '+box+box+box+'<div class="back"></div><div class="bottom"></div> <div class="left storage_height"></div><div class="right storage_height"></div></div>';
 		}
 		$('#shelf_container').html(content);
 		
@@ -175,8 +177,8 @@ function rotateShelf(id, t='up'){
 	var Y = getcss.split(getY)[1];
 	var X = getcss.split(getX)[1];
 	
-	if(t=='up'){ X = parseInt(X)+parseInt(adjust) }
-	if(t=='down'){ X = parseInt(X)-parseInt(adjust) }
+	if(t=='up' && X<=6){ X = parseInt(X)+parseInt(adjust) }
+	if(t=='down' && X>=-18){ X = parseInt(X)-parseInt(adjust) }
 	if(t=='left'){ Y = parseInt(Y)-parseInt(adjust) }
 	if(t=='right'){ Y = parseInt(Y)+parseInt(adjust) }
 	obj.css({ WebkitTransform: 'rotateX('+X+'deg) rotateY('+Y+'deg)'});
@@ -380,6 +382,10 @@ $('#rotate_shelves .rr').click(function(){
 	rotateShelf('shelf_container', 'right');
 });
 
+
+$('#shelf_container').keydown(function(e){
+	alert(e);
+});
 
 
 
