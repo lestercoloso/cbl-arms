@@ -127,7 +127,7 @@ function openShelves(id){
 		for (i = 1; i <= nrl; i++) { 
 			zindex--;
 			// content += '<div class="rack-level" data-racklevel="'+i+'" style="width:'+rl+'px;height:'+rlh+'px;"><div class="support-left" style="height:'+(rlh+15)+'px;"></div><div class="support-bottom"></div><div class="support-right" style="height:'+(rlh+15)+'px;"></div></div>';
-			content += '	<div class="shelves_container rack-level"  data-racklevel="'+i+'"  style="z-index: '+zindex+';transform: rotateX(-15deg) rotateY(30deg);"> '+box+box+box+'<div class="back"></div><div class="bottom"></div> <div class="left storage_height"></div><div class="right storage_height"></div></div>';
+			content += '	<div class="shelves_container rack-level" data-level="'+i+'" data-racklevel="'+i+'"  style="z-index: '+zindex+';transform: rotateX(-15deg) rotateY(30deg);"> <div class="boxes">'+box+'</div><div class="back"></div><div class="bottom"></div> <div class="left storage_height"></div><div class="right storage_height"></div></div>';
 		}
 		$('#shelf_container').html(content);
 		
@@ -183,6 +183,34 @@ function rotateShelf(id, t='up'){
 	if(t=='right'){ Y = parseInt(Y)+parseInt(adjust) }
 	obj.css({ WebkitTransform: 'rotateX('+X+'deg) rotateY('+Y+'deg)'});
 }
+
+function getBoxes(code=0, type=''){
+	$.post("backstage/warehouse/getBoxes/"+code+"/"+type, {},function(data){
+		$.each(data.level, function( i, v ) {
+				relocateboxes(i,v);
+		});		
+	});
+}
+
+
+
+function relocateboxes(level, d){
+	var obj = $('.shelves_container[data-level="'+level+'"] .boxes');
+	// var box = '<div class="box"  draggable="true"><div class="frnt"></div><div class="bck"></div><div class="tp"></div><div class="bot"></div><div class="lft"></div><div class="rght"></div> </div>';
+	var content = '';
+	var selected = $('.selected_storage');	
+		$.each(d, function( i, v ) {
+
+			var front = (-parseInt(selected.data('rackwidth'))-parseInt(v.width));
+			content += '<div class="box" style="height:'+v.height+'px;width:'+v.length+'">';
+			content += '<div class="frnt" style="transform: translateZ('+front+'px);"></div>';
+			content += '<div class="bck"></div><div class="tp"></div><div class="bot"></div><div class="lft"></div><div class="rght"></div> </div>';
+		});		
+
+		obj.html(content);
+}
+
+
 
 function cancelShelves(){
 	$('#warehouse').show();
@@ -326,7 +354,9 @@ function addFunctionToStorage2(){
 
 
 $(".view_storage").click(function(){
-	openShelves( $('.selected_storage').attr('id') );
+	var obj = $('.selected_storage');
+	openShelves( obj.attr('id') );
+	getBoxes(obj.data('rackcode'), obj.data('type'));
 });
 $(".delete_storage").click(function(){
 	deleteStorage($('.selected_storage').attr('id'));
