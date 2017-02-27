@@ -60,6 +60,7 @@ class Warehouse{
 		$data = $this->db->select($sql);
 		$new_data = [];
 		foreach($data['data'] as $d){
+			// $d['qty'] = 1;
 			for ($x = 1; $x <= $d['qty']; $x++) {
 				$new_data['level'][$d['rack_level']][] = ['length' => $d['length'], 'width' => $d['width'], 'height' => $d['height'] ];	
 			} 

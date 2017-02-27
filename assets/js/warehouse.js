@@ -127,7 +127,7 @@ function openShelves(id){
 		for (i = 1; i <= nrl; i++) { 
 			zindex--;
 			// content += '<div class="rack-level" data-racklevel="'+i+'" style="width:'+rl+'px;height:'+rlh+'px;"><div class="support-left" style="height:'+(rlh+15)+'px;"></div><div class="support-bottom"></div><div class="support-right" style="height:'+(rlh+15)+'px;"></div></div>';
-			content += '	<div class="shelves_container rack-level" data-level="'+i+'" data-racklevel="'+i+'"  style="z-index: '+zindex+';transform: rotateX(-15deg) rotateY(30deg);"> <div class="boxes">'+box+'</div><div class="back"></div><div class="bottom"></div> <div class="left storage_height"></div><div class="right storage_height"></div></div>';
+			content += '	<div class="shelves_container rack-level" data-level="'+i+'" data-racklevel="'+i+'"  style="z-index: '+zindex+';transform: rotateX(-15deg) rotateY(30deg);"> <div class="boxes"></div><div class="back"></div><div class="bottom"></div> <div class="left storage_height"></div><div class="right storage_height"></div></div>';
 		}
 		$('#shelf_container').html(content);
 		
@@ -157,6 +157,9 @@ function viewShelve(level='', scale=2){
 		}else{
 
 		}
+
+		getBoxes(selected.data('rackcode'), selected.data('type'), scale);
+
 		var Length = (selected.data('racklength')*scale);
 		var Width  = (selected.data('rackwidth')*scale);
 		var Height = (selected.data('racklevelheight')*scale);
@@ -184,27 +187,56 @@ function rotateShelf(id, t='up'){
 	obj.css({ WebkitTransform: 'rotateX('+X+'deg) rotateY('+Y+'deg)'});
 }
 
-function getBoxes(code=0, type=''){
+function getBoxes(code=0, type='', scale){
 	$.post("backstage/warehouse/getBoxes/"+code+"/"+type, {},function(data){
 		$.each(data.level, function( i, v ) {
-				relocateboxes(i,v);
+				relocateboxes(i,v,scale);
 		});		
 	});
 }
 
 
 
-function relocateboxes(level, d){
+function relocateboxes(level, d, s){
 	var obj = $('.shelves_container[data-level="'+level+'"] .boxes');
 	// var box = '<div class="box"  draggable="true"><div class="frnt"></div><div class="bck"></div><div class="tp"></div><div class="bot"></div><div class="lft"></div><div class="rght"></div> </div>';
 	var content = '';
 	var selected = $('.selected_storage');	
+	var container = $('.shelves_container[data-level="'+level+'"]');
+	var container_height = parseInt(selected.data('racklevelheight'))*s;
+	var container_width = parseInt(selected.data('rackwidth'))*s;
+	var container_length = parseInt(selected.data('racklength'))*s;
+	var ch = container_height;
+	var cw = 0;
+	var cl = 0;
 		$.each(d, function( i, v ) {
 
-			var front = (-parseInt(selected.data('rackwidth'))-parseInt(v.width));
-			content += '<div class="box" style="height:'+v.height+'px;width:'+v.length+'">';
-			content += '<div class="frnt" style="transform: translateZ('+front+'px);"></div>';
-			content += '<div class="bck"></div><div class="tp"></div><div class="bot"></div><div class="lft"></div><div class="rght"></div> </div>';
+			var w = parseInt(v.width);
+			var l = parseInt(v.length);
+			var h = parseInt(v.height);
+			var locationY = (ch-h);
+			var locationZ = 0;
+
+			if(locationY<0){
+				ch = container_height;
+				cw += w;
+				locationY = container_height-h;
+
+				if(cw>=container_width){
+					cw = 0;	
+					cl += l;			
+				}
+
+			} 
+
+			content += '<div class="box" style="height:'+w+'px;width:'+l+';transform: translateY('+locationY+'px) translateZ('+cw+'px) translateX('+cl+'px);">';
+			content += '<div class="frnt" style="transform: translateZ('+(w-100)+'px);height:'+h+'px;"></div>';
+			content += '<div class="bck"></div>';
+			content += '<div class="tp"></div>';
+			content += '<div class="bot" style="transform: rotateX(270deg) translateY(100px) translateZ('+(h-w)+'px)"></div>';
+			content += '<div class="lft" style="width:'+w+'px;height:'+h+'px;"></div>';
+			content += '<div class="rght" style="width:'+w+'px;height:'+h+'px;transform: rotateY(-270deg) translate(100px) translateZ('+(l-w)+'px)"></div> </div>';	
+			ch = ch-h;
 		});		
 
 		obj.html(content);
@@ -356,7 +388,6 @@ function addFunctionToStorage2(){
 $(".view_storage").click(function(){
 	var obj = $('.selected_storage');
 	openShelves( obj.attr('id') );
-	getBoxes(obj.data('rackcode'), obj.data('type'));
 });
 $(".delete_storage").click(function(){
 	deleteStorage($('.selected_storage').attr('id'));
