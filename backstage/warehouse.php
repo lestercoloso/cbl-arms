@@ -56,11 +56,10 @@ class Warehouse{
 	}
 
 	public function getBoxes($code='', $type='', $level=''){
-		$sql = "select b.weight, b.length, b.width, b.height, a.rack_level, (select (a.quantity-sum(qty)) from outbound_list where inbound_id=a.id) as qty from inbound_list a, booking b where a.bill_of_lading=b.booking_no and a.code=$code and a.storage='$type'";
+		$sql = "select b.weight, b.length, b.width, b.height, a.rack_level, (select COALESCE(a.quantity-sum(qty),a.quantity) from outbound_list where inbound_id=a.id) as qty from inbound_list a, booking b where a.bill_of_lading=b.booking_no and a.code=$code and a.storage='$type' and a.status=1";
 		$data = $this->db->select($sql);
 		$new_data = [];
 		foreach($data['data'] as $d){
-			// $d['qty'] = 1;
 			for ($x = 1; $x <= $d['qty']; $x++) {
 				$new_data['level'][$d['rack_level']][] = ['length' => $d['length'], 'width' => $d['width'], 'height' => $d['height'] ];	
 			} 

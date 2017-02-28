@@ -342,30 +342,30 @@ border: solid 1px #d3d3d3;
 
 
 
-            .front {
+          .shelves_container .front {
                 transform: translateZ(100px);
             }
 
-            .back {
+            .shelves_container .back {
                 transform: translateZ(-100px) rotateY(180deg) translate(0px, 2px);
             }
 
-            .right {
+            .shelves_container .right {
                 transform: rotateY(-270deg) translate(100px, 2px);
                 transform-origin: top right;
             }
 
-            .left {
+            .shelves_container .left {
                 transform: rotateY(270deg) translateX(-100px) translateY(2px);
                 transform-origin: center left;
             }
 
-            .top {
+            .shelves_container .top {
                 transform: rotateX(-270deg) translateY(-100px);
                 transform-origin: top center;
             }
 
-            .bottom {
+            .shelves_container .bottom {
 
                 transform: rotateX(270deg) translateY(100px);
                 transform-origin: bottom center;

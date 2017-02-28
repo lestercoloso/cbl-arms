@@ -81,7 +81,7 @@ $config['add_shipment'][] = [
 								'form_class'		=> 'form-control',
 								'placeholder' 		=> 'Auto-generated'],
 
-								5 => ['type' 		=> 'number',
+								5 => ['type' 		=> 'normal',
 								'label'				=> 'Quantity',
 								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',

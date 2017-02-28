@@ -51,6 +51,7 @@ class Billoflading{
 
 		$shipper 	= json_decode($_POST['shipper_information'], TRUE)['shipper_name'];
 		$recipient 	= json_decode($_POST['recipient_information'], TRUE)['recipient_name'];
+		$quantity 	= json_decode($_POST['package_content'], TRUE)['total_package'];
 
 		$data['shipper_information'] 	= $_POST['shipper_information'];
 		$data['package_content'] 		= $_POST['package_content'];
@@ -61,6 +62,7 @@ class Billoflading{
 		$data['bill_no'] 				= $_POST['d']['bill_no'];
 		$data['client_id'] 				= $_POST['d']['client_id'];
 		$data['book_id'] 				= $_POST['d']['booking_no'];
+		$data['quantity'] 				= $quantity;
 		$data['recipient'] 				= $recipient;
 		$data['shipper'] 				= $shipper;
 		// pdie($data);

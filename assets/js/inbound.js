@@ -315,7 +315,7 @@ var shipment = {
 			$.post("backstage/inbound/billoflading", {},function(data){
 				var content = "<option></option>";
 				$.each(data.data, function( index, value ) {
-					content +='<option value="'+value.lading_number+'" data-customer_name="'+value.customer_name+'"">'+value.lading_number+'</option>';
+					content +='<option value="'+value.lading_number+'" data-qty="'+value.quantity+'" data-customer_name="'+value.customer_name+'"">'+value.lading_number+'</option>';
 				});
 
 				d.html(content);
@@ -377,23 +377,9 @@ var shipment = {
 	},
 
 	customer_name: function(){
-		// var d = $('#shipment_customer_name');
-		// if(d.html().trim()==''){
-		// 	$.post("backstage/inbound/customer", {},function(data){
-		// 		var content = "<option></option>";
-		// 		$.each(data.data, function( index, value ) {
-		// 			content +='<option value="'+value.id+'">'+value.customer_name+'</option>';
-		// 		});
-
-		// 		d.html(content);
-		// 		d.chosen('destroy');
-		// 		setTimeout(function(){ 
-		// 			d.chosen({search_contains: true});
-		// 		}, 300);
-		// 	});
-		// }
-		var customer = $('#addnew_billoflading :selected').data('customer_name');
-		$('#shipment_customer_name').val(customer);
+		var customer = $('#addnew_billoflading :selected');
+		$('#shipment_customer_name').val(customer.data('customer_name'));
+		$('#quantity_shipment').val(customer.data('qty'));
 	}
 
 

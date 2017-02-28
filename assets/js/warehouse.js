@@ -219,10 +219,9 @@ function relocateboxes(level, d, s){
 
 			if(locationY<0){
 				ch = container_height;
-				cw += w;
 				locationY = container_height-h;
-
-				if(cw>=container_width){
+				cw += w;
+				if((cw+w)>container_width){
 					cw = 0;	
 					cl += l;			
 				}
@@ -430,16 +429,16 @@ $('#cancelOrderStorage').click(function(){
 
 
 //rotate function of shelf
-$('#rotate_shelves .ru').click(function(){
+$('#rotate_shelves .ru').mousedown(function(){
 	rotateShelf('shelf_container', 'up');
 });
-$('#rotate_shelves .rd').click(function(){
+$('#rotate_shelves .rd').mousedown(function(){
 	rotateShelf('shelf_container', 'down');
 });
-$('#rotate_shelves .rl').click(function(){
+$('#rotate_shelves .rl').mousedown(function(){
 	rotateShelf('shelf_container', 'left');
 });
-$('#rotate_shelves .rr').click(function(){
+$('#rotate_shelves .rr').mousedown(function(){
 	rotateShelf('shelf_container', 'right');
 });
 

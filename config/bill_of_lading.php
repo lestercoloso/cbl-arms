@@ -9,6 +9,7 @@ $config['services']  = $db->getconfig('services');
 $config['delivery_instruction']  = $db->getconfig('delivery_instruction');
 $config['commodity_class']  = $db->getconfig('commodity_class');
 $config['mode_of_payment']  = $db->getconfig('mode_of_payment');
+$config['destination_type']  = [2=>'International', 1=>'Local'];
 // $config['subinventory_type'] = [''=>'Please Select', '1'=>'test1', '2'=>'test2'];
 
 $config['add_shipment']['Shipper Information'] = [
@@ -112,13 +113,14 @@ $config['add_shipment']['Package Content (Complete Description)'] = [
 								'col'				=> 'total_package',
 								'id'				=> 'create_total_package',
 								],
-								1=>['type' 			=> 'input',
+								1=>['type' 			=> 'select',
 								'label'				=> 'Destination Type',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
 								'form_class'		=> 'form-control',
 								'col'				=> 'destination_type',
 								'id'				=> 'create_destination_type',
+								'options'			=> array_merge([''=>'Select Destination Type'],$config['destination_type'])
 								],
 
 								2 => ['type' 		=> 'input',
@@ -159,7 +161,7 @@ $config['add_shipment']['Package Content (Complete Description)'] = [
 								'form_class'		=> 'form-control',
 								],
 
-								6 => ['type' 		=> 'input',
+								6 => ['type' 		=> 'number',
 								'label'				=> 'Total Declared Value',
 								'parent_class' 		=> 'form-group col-sm-12 no-margin',
 								'subparent_class' 	=> 'col-sm-8',
@@ -168,7 +170,7 @@ $config['add_shipment']['Package Content (Complete Description)'] = [
 								'form_class'		=> 'form-control',
 								],
 
-								7 => ['type' 		=> 'input',
+								7 => ['type' 		=> 'number',
 								'label'				=> 'TDV % Applied',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
