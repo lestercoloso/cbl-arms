@@ -323,7 +323,7 @@ var devmode = "<?php echo $devmode?>";
 			}
 			$('#updatebutton span').hide();
 			checkUpdates();
-			useDb();
+			useDb('change');
 		});
 	}
 
