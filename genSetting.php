@@ -47,6 +47,10 @@
 		<h3>Inbound</h3>
 		<?php echo construct_maintenance($config['inbound'], $db);?>
 	</div>
+	<div class="col-sm-6">
+		<h3>Bill of Lading</h3>
+		<?php echo construct_maintenance($config['bol'], $db);?>
+	</div>
 </div>
  		
 </div>
