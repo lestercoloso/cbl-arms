@@ -81,6 +81,16 @@
 		font-weight: bolder;
 	}
 
+	#sub a button{
+	    border: none;
+	    background: none;
+	    cursor: pointer;
+	    color: white;
+	    text-decoration: underline;
+	    font-family: sans-serif, Helvetica, Tahoma, Verdana, Arial;
+	    font-size: 11px;
+	}
+
 	.txtField{
 		width: 120px;
 		border: solid black 1px;
@@ -94,3 +104,4 @@
     top: 43px;
     right: 32px;
 	}
+

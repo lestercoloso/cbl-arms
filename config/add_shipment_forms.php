@@ -1,7 +1,7 @@
 <?php
 $config['type_of_shipment']  = $db->getconfig('type_of_shipment');
 $config['storage_type'] 	 = $db->getconfig('storage_type');
-$config['subinventory_type'] = $db->getconfig('subinventory_type');
+$config['subinventory_type'] = $db->getconfig('sub_inventory_type');
 $config['pullouttype'] 		 = $db->getconfig('pullout_shipment');
 
 

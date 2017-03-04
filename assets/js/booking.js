@@ -137,8 +137,10 @@ var booking = {
 		$('#create_booking_date').val(datetoday);
 		$('#create_contact_person').html('');
 		$('#create_area').html('');
-		resetchosen('create_customer_name');
 		booking.getcustomerlist();
+		setTimeout(function(){ 
+			resetchosen('create_customer_name');
+		}, 500);
 		$('#create_time_called').val(getClockTime());
 
 	},

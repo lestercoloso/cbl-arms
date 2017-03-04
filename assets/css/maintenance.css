@@ -1,0 +1,51 @@
+#moduleChecker{
+	width: 200px;
+    margin: 20px auto;
+}
+
+.set{
+	float:left;
+	width: 100%;
+	height:auto;
+	border: dotted 1px #999;
+	background-color: white;
+	margin-bottom: 10px;
+	padding: 20px;
+}
+
+.custombutton{
+		margin: 0px 1px;
+		padding: 2px 5px;
+		font-size: 9px;
+		width: auto;
+}
+
+.form-control{
+	height: auto;
+	font-size: 11px;
+	padding: 2px 4px;
+	font-weight: 100;
+}
+
+.optionlist{
+	padding-right: 0px;
+	padding-left: 10px;
+	    height: 35px;
+	    font-size: 11px;
+}
+.optionlist div, .optionlist label{
+	padding-right: 5px;
+	padding-left: 0px;
+	line-height: 11px;
+}
+
+#add_maintenance .modal-dialog {
+    width: 400px;
+    top: 75px;
+}
+
+.modal-footer {
+    padding: 15px 15px 0px;
+    text-align: right;
+    border-top: 1px solid #e5e5e5;
+}

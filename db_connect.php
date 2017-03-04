@@ -167,11 +167,16 @@ class Database {
 		return $array;
 	}
 
-	public function getconfig($particulars=''){
-		$return = $this->select("select `description` from `maintenance` where particulars='$particulars'");
+	public function getconfig($particulars='',$type=''){
+		$return = $this->select("select `description`, `id` from `maintenance` where particulars='$particulars'");
 		$array = [];
 		foreach($return['data'] as $r){
-			$array[$r['description']] = $r['description'];
+			if($type=='maintenance'){
+				$array[$r['id']] = $r['description'];
+			}else{
+				$array[$r['description']] = $r['description'];				
+			}
+
 		}
 		return $array;
 	}

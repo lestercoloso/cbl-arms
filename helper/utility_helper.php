@@ -167,6 +167,31 @@ function construct_form($arr){
 
 }
 
+function construct_maintenance($array=[],$db){
+	foreach($array as $key=>$arr){
+
+		echo '<div class="col-sm-12 optionlist" id="'.$key.'">
+				<label class="col-sm-3">'.$arr.'</label>
+				<div class="col-sm-5">
+				<select id="select-'.$key.'" class="form-control"><option value="">Select '.$arr.'</option>';
+		foreach($db->getconfig($key, 'maintenance') as $id=>$maintenance){
+			echo '<option value="'.$id.'">'.$maintenance.'</option>'.PHP_EOL;
+		}
+
+
+		echo	'</select></div>
+				<div class="col-sm-4">
+				<button class="button-class custombutton add-maintenance">Add</button>
+				<button class="button-class custombutton edit-maintenance">Edit</button>
+				<button class="button-class custombutton delete-maintenance">Delete</button>
+				</div>
+			</div>'.PHP_EOL;
+	}
+
+
+
+}
+
 
 
 ?>

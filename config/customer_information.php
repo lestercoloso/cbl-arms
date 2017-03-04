@@ -1,6 +1,21 @@
 <?php
-$config['industry_type']  	= $db->getconfig('industry_type');
-$config['address_type']  	= $db->getconfig('address_type');
+$config['industry_type']  		= $db->getconfig('industry_type');
+$config['address_type']  		= $db->getconfig('address_type');
+$config['billing_format']  		= $db->getconfig('billing_format');
+$config['tax_type']  			= $db->getconfig('tax_type');
+$config['preferred_supplier']  	= $db->getconfig('preferred_supplier');
+$config['customer_type']  		= $db->getconfig('customer_type');
+$config['assistant_executive_1']  		= $db->getconfig('assistant_executive_1');
+$config['assistant_executive_2']  		= $db->getconfig('assistant_executive_2');
+
+$config['domestic_sea']  		= $db->getconfig('domestic_sea');
+$config['domestic_air']  		= $db->getconfig('domestic_air');
+$config['domestic_trucking']  	= $db->getconfig('domestic_trucking');
+
+$config['international_sea']  		= $db->getconfig('international_sea');
+$config['international_air']  		= $db->getconfig('international_air');
+$config['international_trucking']  	= $db->getconfig('international_trucking');
+
 $config['customer_status']  = ['1'=>'Active', '2'=>'Inactive'];
 $config['create_customer'][] = [
 								
@@ -20,7 +35,7 @@ $config['create_customer'][] = [
 								'form_class'		=> 'form-control',
 								'col'				=> 'customer_type',
 								'id'				=> 'create_customer_type',
-								'options'			=> array_merge([''=>'Select Customer Type'],$config['all'])
+								'options'			=> array_merge([''=>'Select Customer Type'],$config['customer_type'])
 								],
 
 								['type' 			=> 'input',
@@ -101,19 +116,19 @@ $config['create_customer'][] = [
 								'label'				=> 'Assistant Executive 1',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
-								'form_class'		=> 'form-control',
+								'form_class'		=> 'form-control not_mandatory',
 								'id'				=> 'create_assistant_executive_1',
 								'col'				=> 'assistant_executive_1',
-								'options'			=> array_merge([''=>'Select Assistant Executive 1'],$config['all']),								
+								'options'			=> array_merge([''=>'Select Assistant Executive 1'],$config['assistant_executive_1']),								
 								],
 
 								['type' 			=> 'select',
 								'label'				=> 'Assistant Executive 2',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
-								'form_class'		=> 'form-control',
+								'form_class'		=> 'form-control not_mandatory',
 								'id'				=> 'create_assistant_executive_2',
-								'options'			=> array_merge([''=>'Select Assistant Executive 2'],$config['all']),								
+								'options'			=> array_merge([''=>'Select Assistant Executive 2'],$config['assistant_executive_2']),								
 								'col'				=> 'assistant_executive_2',
 								],
 
@@ -187,7 +202,7 @@ $config['create_customer'][] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_tax_type',
 								'col'				=> 'tax_type',
-								'options'			=> array_merge([''=>'Select Tax Type'],$config['all']),						
+								'options'			=> array_merge([''=>'Select Tax Type'],$config['tax_type']),						
 								'form_class'		=> 'form-control'],
 
 								['type' 			=> 'input',
@@ -205,7 +220,7 @@ $config['create_customer'][] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_preferred_supplier',
 								'col'				=> 'preferred_supplier',
-								'options'			=> array_merge([''=>'Select Preferred Supplier'],$config['all']),						
+								'options'			=> array_merge([''=>'Select Preferred Supplier'],$config['preferred_supplier']),						
 								'form_class'		=> 'form-control'],
 
 								['type' 			=> 'select',
@@ -215,8 +230,8 @@ $config['create_customer'][] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_pricelist_ds',
 								'col'				=> 'pricelist_ds',
-								'options'			=> array_merge([''=>'Select Price List (DS)'],$config['all']),						
-								'form_class'		=> 'form-control'],
+								'options'			=> array_merge([''=>'Select Price List (DS)'],$config['domestic_sea']),	
+								'form_class'		=> 'form-control not_mandatory'],
 
 								['type' 			=> 'select',
 								'title'				=> 'Price List (Domestic Air)',
@@ -225,8 +240,8 @@ $config['create_customer'][] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_pricelist_da',
 								'col'				=> 'pricelist_da',
-								'options'			=> array_merge([''=>'Select Price List (DA)'],$config['all']),						
-								'form_class'		=> 'form-control'],
+								'options'			=> array_merge([''=>'Select Price List (DA)'],$config['domestic_air']),	
+								'form_class'		=> 'form-control not_mandatory'],
 
 								['type' 			=> 'select',
 								'title'				=> 'Price List (Domestic Trucking)',
@@ -235,8 +250,8 @@ $config['create_customer'][] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_pricelist_dt',
 								'col'				=> 'pricelist_dt',
-								'options'			=> array_merge([''=>'Select Price List (DT)'],$config['all']),						
-								'form_class'		=> 'form-control'],
+								'options'			=> array_merge([''=>'Select Price List (DT)'],$config['domestic_trucking']),	
+								'form_class'		=> 'form-control not_mandatory'],
 
 								['type' 			=> 'select',
 								'title'				=> 'Price List (International Sea)',
@@ -245,8 +260,8 @@ $config['create_customer'][] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_pricelist_is',
 								'col'				=> 'pricelist_is',
-								'options'			=> array_merge([''=>'Select Price List (IS)'],$config['all']),						
-								'form_class'		=> 'form-control'],
+								'options'			=> array_merge([''=>'Select Price List (IS)'],$config['international_sea']),
+								'form_class'		=> 'form-control not_mandatory'],
 
 								['type' 			=> 'select',
 								'title'				=> 'Price List (International Air)',
@@ -255,8 +270,8 @@ $config['create_customer'][] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_pricelist_ia',
 								'col'				=> 'pricelist_ia',
-								'options'			=> array_merge([''=>'Select Price List (IA)'],$config['all']),						
-								'form_class'		=> 'form-control'],
+								'options'			=> array_merge([''=>'Select Price List (IA)'],$config['international_air']),	
+								'form_class'		=> 'form-control not_mandatory'],
 
 								['type' 			=> 'select',
 								'title'				=> 'Price List (International Trucking)',
@@ -265,10 +280,9 @@ $config['create_customer'][] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_pricelist_it',
 								'col'				=> 'pricelist_it',
-								'options'			=> array_merge([''=>'Select Price List (IT)'],$config['all']),						
-								'form_class'		=> 'form-control'],
+								'options'			=> array_merge([''=>'Select Price List (IT)'],$config['international_trucking']),
+								'form_class'		=> 'form-control not_mandatory'],
 
-								
 							];
 
 
@@ -316,7 +330,7 @@ $config['create_customer'][] = [
 								'form_class'		=> 'form-control',
 								'id'				=> 'create_billing_format',
 								'col'				=> 'billing_format',
-								'options'			=> array_merge([''=>'Select Billing Format'],$config['all']),								
+								'options'			=> array_merge([''=>'Select Billing Format'],$config['billing_format']),								
 								],
 
 								
