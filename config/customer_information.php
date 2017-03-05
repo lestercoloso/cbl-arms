@@ -223,7 +223,7 @@ $config['create_customer'][] = [
 								'options'			=> array_merge([''=>'Select Preferred Supplier'],$config['preferred_supplier']),						
 								'form_class'		=> 'form-control'],
 
-								['type' 			=> 'select',
+								['type' 			=> 'input',
 								'title'				=> 'Price List (Domestic Sea)',
 								'label'				=> 'Price List (DS)',
 								'parent_class' 		=> 'form-group col-sm-12',
@@ -233,7 +233,7 @@ $config['create_customer'][] = [
 								'options'			=> array_merge([''=>'Select Price List (DS)'],$config['domestic_sea']),	
 								'form_class'		=> 'form-control not_mandatory'],
 
-								['type' 			=> 'select',
+								['type' 			=> 'input',
 								'title'				=> 'Price List (Domestic Air)',
 								'label'				=> 'Price List (DA)',
 								'parent_class' 		=> 'form-group col-sm-12',
@@ -243,7 +243,7 @@ $config['create_customer'][] = [
 								'options'			=> array_merge([''=>'Select Price List (DA)'],$config['domestic_air']),	
 								'form_class'		=> 'form-control not_mandatory'],
 
-								['type' 			=> 'select',
+								['type' 			=> 'input',
 								'title'				=> 'Price List (Domestic Trucking)',
 								'label'				=> 'Price List (DT)',
 								'parent_class' 		=> 'form-group col-sm-12',
@@ -253,7 +253,7 @@ $config['create_customer'][] = [
 								'options'			=> array_merge([''=>'Select Price List (DT)'],$config['domestic_trucking']),	
 								'form_class'		=> 'form-control not_mandatory'],
 
-								['type' 			=> 'select',
+								['type' 			=> 'input',
 								'title'				=> 'Price List (International Sea)',
 								'label'				=> 'Price List (IS)',
 								'parent_class' 		=> 'form-group col-sm-12',
@@ -263,7 +263,7 @@ $config['create_customer'][] = [
 								'options'			=> array_merge([''=>'Select Price List (IS)'],$config['international_sea']),
 								'form_class'		=> 'form-control not_mandatory'],
 
-								['type' 			=> 'select',
+								['type' 			=> 'input',
 								'title'				=> 'Price List (International Air)',
 								'label'				=> 'Price List (IA)',
 								'parent_class' 		=> 'form-group col-sm-12',
@@ -273,7 +273,7 @@ $config['create_customer'][] = [
 								'options'			=> array_merge([''=>'Select Price List (IA)'],$config['international_air']),	
 								'form_class'		=> 'form-control not_mandatory'],
 
-								['type' 			=> 'select',
+								['type' 			=> 'input',
 								'title'				=> 'Price List (International Trucking)',
 								'label'				=> 'Price List (IT)',
 								'parent_class' 		=> 'form-group col-sm-12',
