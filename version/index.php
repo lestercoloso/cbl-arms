@@ -264,7 +264,7 @@ var devmode = "<?php echo $devmode?>";
 			$('#application_version').html("<b>"+data.version+"</b>");
 			$('#branch_container .loader').hide();
 			checkUpdates();
-			useDb();
+			useDb('change');
 		});
 	}
 
