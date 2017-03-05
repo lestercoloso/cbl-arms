@@ -110,7 +110,13 @@ class Customer{
 
 
 	}
+	public function delete($id){
 
+		if($this->db->delete("customer_information", "id=$id")){
+			$return['status'] = 200;
+		}
+		jdie($return);
+	}
 
 
 

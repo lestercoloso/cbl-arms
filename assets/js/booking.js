@@ -167,6 +167,19 @@ var booking = {
     	}
 
 	},
+
+	delete: function(id){
+		if(confirm("Are you sure you want to delete this?")){
+			$.post("backstage/booking/delete/"+id, {},function(data){
+				toastr["success"]('Successfully deleted.');
+				booking.getbookinglist();
+			}).fail(function(){
+				toastr["error"]('Network error!<br> Please try again.');				
+			});			
+		}
+
+	},
+
 	clear: function(){
 		booking.form('create_shippment');
 		booking.getbooking();
@@ -191,6 +204,7 @@ var booking = {
 			$('#create_booking_no').val(data);
 		});
 	},
+
 
 
 
@@ -263,6 +277,10 @@ getbookinglist: function(page=1){
 			
 			$('#search_result_list .btn-success').click(function(){
 				booking.edit($(this).parent().parent().data('id'));
+			});
+
+			$('#search_result_list .btn-danger').click(function(){
+				booking.delete($(this).parent().parent().data('id'));
 			});
 
 		}).fail(function(){

@@ -70,6 +70,14 @@ class Booking{
 		jdie($return);
 	}
 
+	public function delete($id){
+
+		if($this->db->delete("booking", "id=$id")){
+			$return['status'] = 200;
+		}
+		jdie($return);
+	}
+
 	public function save(){
 		$data = $_POST['d'];
 		$data['date_ready'] = date('Y-m-d G:i:s', strtotime($data['date_ready']));

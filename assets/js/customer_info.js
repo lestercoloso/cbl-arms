@@ -229,7 +229,17 @@ var customer = {
 
     	}
 	},
+	delete: function(id){
+		if(confirm("Are you sure you want to delete this?")){
+			$.post("backstage/customer/delete/"+id, {},function(data){
+				toastr["success"]('Successfully deleted.');
+				customer.getcustomerlist();
+			}).fail(function(){
+				toastr["error"]('Network error!<br> Please try again.');				
+			});			
+		}
 
+	},
 	update: function(){
 		var arr = createPostData('create_customer');
 		var updateid = $('#updateid').val();
@@ -287,9 +297,9 @@ var customer = {
 			$.each(data.data, function( index, value ) {
 
 				var action = '<button type="button" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
-				// action += ' <button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
+				action += ' <button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
 				
-				content +='<tr id="customer-'+value.id+'">';
+				content +='<tr id="customer-'+value.id+'" data-id="'+value.id+'">';
 				content +='<td class="centered">'+value.customer_code+'</td>';
 				content +='<td class="centered">'+value.customer_name+'</td>';
 				content +='<td>'+value.industry_type+'</td>';
@@ -314,9 +324,9 @@ var customer = {
 				customer.edit($(this).parent().parent().attr('id'));
 			});
 
-			// $('#inbound-list .btn-danger').click(function(){
-			// 	shipment.delete($(this).parent().parent().attr('id'));
-			// });
+			$('#search_result_list .btn-danger').click(function(){
+				customer.delete($(this).parent().parent().data('id'));
+			});
 
 
 		}).fail(function(){
