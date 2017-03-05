@@ -205,11 +205,11 @@ var devmode = "<?php echo $devmode?>";
 		$.post("backend/getbranch",{path:path}, function(data){
 		
 		if(data.config){
-			// $('#host').val(data.config.host);
-			// $('#database').val(data.config.database);
-			// $('#usr-config').val(data.config.username);
-			// $('#pss-config').val(data.config.password);
-			useDb('change');	
+			$('#host').val(data.config.host);
+			$('#database').val(data.config.database);
+			$('#usr-config').val(data.config.username);
+			$('#pss-config').val(data.config.password);
+			useDb();	
 		}else{
 			$('#host').val('');
 			$('#database').val('');
@@ -264,7 +264,7 @@ var devmode = "<?php echo $devmode?>";
 			$('#application_version').html("<b>"+data.version+"</b>");
 			$('#branch_container .loader').hide();
 			checkUpdates();
-			useDb();
+			useDb('change');
 		});
 	}
 
