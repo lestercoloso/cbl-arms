@@ -205,11 +205,11 @@ var devmode = "<?php echo $devmode?>";
 		$.post("backend/getbranch",{path:path}, function(data){
 		
 		if(data.config){
-			$('#host').val(data.config.host);
-			$('#database').val(data.config.database);
-			$('#usr-config').val(data.config.username);
-			$('#pss-config').val(data.config.password);
-			useDb();	
+			// $('#host').val(data.config.host);
+			// $('#database').val(data.config.database);
+			// $('#usr-config').val(data.config.username);
+			// $('#pss-config').val(data.config.password);
+			useDb('change');	
 		}else{
 			$('#host').val('');
 			$('#database').val('');
