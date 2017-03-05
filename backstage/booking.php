@@ -42,6 +42,7 @@ class Booking{
 			length,
 			width,
 			height,
+			transaction_type,
 			contact,
 			created_date
 		 from `booking` where id=$id";

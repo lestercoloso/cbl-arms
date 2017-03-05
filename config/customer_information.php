@@ -314,7 +314,7 @@ $config['create_customer'][] = [
 								'col'				=> 'billing_cycle',
 								'id'				=> 'create_billing_cycle',
 								],
-								['type' 			=> 'input',
+								['type' 			=> 'number',
 								'label'				=> 'Credit Limit',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',

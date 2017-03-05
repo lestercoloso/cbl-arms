@@ -297,9 +297,9 @@ var customer = {
 				content +='<td>'+value.region+'</td>';
 				content +='<td>'+value.payment_terms+'</td>';
 				content +='<td>'+value.aging+'</td>';
-				content +='<td>'+value.credit_limit+'</td>';
-				content +='<td>'+value.outstanding_balance+'</td>';
-				content +='<td>'+value.amount_due+'</td>';
+				content +='<td class="numeric">'+value.credit_limit+'</td>';
+				content +='<td class="numeric">'+value.outstanding_balance+'</td>';
+				content +='<td class="numeric">'+value.amount_due+'</td>';
 				content +='<th>'+action+'</th>';
 				content +='</tr>';
 			});
