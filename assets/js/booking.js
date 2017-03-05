@@ -1,5 +1,6 @@
 
 var searchdata = "";
+var updateid = '';
 
 var search = {
 	init: function(){
@@ -77,6 +78,11 @@ var booking = {
 			if(!$(this).hasClass('disabled')){
 				booking.save();	
 			}
+		});
+		$('#updatecreate').click(function(){
+			if(!$(this).hasClass('disabled')){
+				booking.update();	
+			}
 		});	
 
 		booking.getbookinglist();
@@ -93,6 +99,7 @@ var booking = {
 	},
 
 	edit: function(id){
+		booking.form('create_shippment');
 		$('#create_modal').modal();
 		$('#savecreate').hide();
 		$('#clearecreate').hide();
@@ -102,10 +109,39 @@ var booking = {
 			$.each(data, function( index, value ) {
 				$('.create_shippment input[col="'+index+'"], .create_shippment select[col="'+index+'"]').val(value);
 			});
+			updateid = data.id;
+			$('#create_customer_name').html('<option value="'+data.customer_name+'" data-client_id="'+data.customer_id+'" "="">'+data.customer_name+'</option>');
+			$('#create_booking_date').val(data.booking_date);
+			booking.getcontacts(data.customer_id, data.area, data.contact_person);
 		});
 	},
 
 
+	update: function(){
+		var arr = createPostData('create_shippment');
+		if(arr['error']){
+    		toastr["error"](arr['error']);
+    	}else{
+			$('#updatecreate').addClass('disabled');
+			$('#updatecreate i').removeClass('hide');
+    		$.post("backstage/booking/update/"+updateid, {d:arr['data']},function(data){
+    			if(data.status==200){
+						toastr["success"]('Successfully updated.');
+						$('#create_modal').modal('hide');
+						$('#updatecreate').removeClass('disabled');
+						$('#updatecreate i').addClass('hide');
+						booking.getbookinglist();
+				}else{
+					toastr["error"]('Network error!<br> Please try again.');	
+				}
+    		}).fail(function(){
+				toastr["error"]('Error.');
+				$('#updatecreate').removeClass('disabled');
+				$('#updatecreate i').addClass('hide');
+			});
+    	}
+
+	},
 	save: function(){
 		var arr = createPostData('create_shippment');
 		if(arr['error']){
@@ -142,6 +178,7 @@ var booking = {
 			resetchosen('create_customer_name');
 		}, 500);
 		$('#create_time_called').val(getClockTime());
+		$('#craete_transaction_type').val('Delivery');
 
 	},
 	form: function(classused){
@@ -157,7 +194,7 @@ var booking = {
 
 
 
-	getcontacts: function(id){
+	getcontacts: function(id, t1='', t2=''){
 		var content1 = '<option value="">Select Area</option>';
 		var content2 = '<option value="">Select Contact Person</option>';
 		$.post("backstage/booking/getcontacts/"+id, {},function(data){
@@ -172,12 +209,15 @@ var booking = {
 			});
 			$('#create_area').html(content1);
 			$('#create_contact_person').html(content2);
+
+			$('#create_area').val(t1);
+			$('#create_contact_person').val(t2);	
 		});
 	},
 
 	getcustomerlist: function(){
 		var d = $('#create_customer_name');
-		if(d.html().trim()==''){
+		// if(d.html().trim()==''){
 			$.post("backstage/customer/getcustomername/", {},function(data){
 				var content = "<option></option>";
 				$.each(data.data, function( index, value ) {
@@ -190,7 +230,7 @@ var booking = {
 					d.chosen({search_contains: true});
 				}, 500);
 			});
-		}		
+		// }		
 	},
 
 getbookinglist: function(page=1){
@@ -218,7 +258,7 @@ getbookinglist: function(page=1){
 			$('#pagination-container').html(data.pagination);
 			$('#search_result_list tbody').html(content);
 			$('.pagenumber').click(function(){
-				booking.getcustomerlist($(this).data('page'));
+				booking.getbookinglist($(this).data('page'));
 			});
 			
 			$('#search_result_list .btn-success').click(function(){

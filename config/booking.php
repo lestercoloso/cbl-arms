@@ -1,8 +1,11 @@
 <?php
 $config['vehicle'] = !empty($config['vehicle']) ? $config['vehicle'] : [];
 $config['driver']  = !empty($config['driver']) ? $config['driver'] : [];
+$config['vehicle_type']  = $db->getconfig('vehicle_type');
+$config['vehicle_status']  = $db->getconfig('vehicle_status');
 $config['mode_of_shipment']  = $db->getconfig('mode_of_shipping');
 $config['status']  = $db->getconfig('booking_status');
+$config['transaction_type']  = $db->getconfig('transaction_type');
 $config['book_shipment'][] = [
 								
 								['type' 			=> 'normal',
@@ -100,17 +103,18 @@ $config['book_shipment'][] = [
 								'form_class'		=> 'form-control',
 								'id'				=> 'create_vehicle_type',
 								'col'				=> 'vehicle_type',
-								'options'			=> array_merge([''=>'Select Vehicle Type'],$config['vehicle'])
+								'options'			=> array_merge([''=>'Select Vehicle Type'],$config['vehicle_type'])
 								],
 
 
-								['type' 			=> 'input',
+								['type' 			=> 'select',
 								'label'				=> 'Plate No.',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_plate_no',
 								'col'				=> 'plate_no',
 								'form_class'		=> 'form-control',
+								'options'			=> array_merge([''=>'Select Plate No.'],$config['vehicle'])								
 								],
 
 								['type' 			=> 'select',
@@ -214,6 +218,16 @@ $config['book_shipment'][] = [
 								'id'				=> 'create_special_instruction',
 								'col'				=> 'special_instruction',
 								'form_class'		=> 'form-control',
+								],
+
+								['type' 			=> 'select',
+								'label'				=> 'Transaction Type',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'craete_transaction_type',
+								'col'				=> 'transaction_type',
+								'form_class'		=> 'form-control',
+								'options'			=> array_merge([''=>'Select Transaction Type'],$config['transaction_type']) 
 								]
 
 								
@@ -221,6 +235,116 @@ $config['book_shipment'][] = [
 
 
 
+
+
+
+$config['vehicleform'][] = [ 
+								['type' 			=> 'normal',
+								'label'				=> 'Vehicle No.',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'col'				=> 'vehicle_no',
+								'id'				=> 'create_vehicle_no',
+								],
+
+								['type' 			=> 'input',
+								'label'				=> 'Vehicle Description',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_vehicle_desc',
+								'col'				=> 'vehicle_desc',
+								'form_class'		=> 'form-control',
+								],
+
+								['type' 			=> 'input',
+								'label'				=> 'Plate No.',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_plate_no',
+								'col'				=> 'plate_no',
+								'form_class'		=> 'form-control',
+								],
+
+								['type' 			=> 'select',
+								'label'				=> 'Vehicle Type',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'craete_vehicle_type',
+								'col'				=> 'type',
+								'form_class'		=> 'form-control',
+								'options'			=> array_merge([''=>'Select Vehicle Type'],$config['vehicle_type']) 
+								],
+
+								['type' 			=> 'select',
+								'label'				=> 'Status',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'craete_vehicle_status',
+								'col'				=> 'status',
+								'form_class'		=> 'form-control',
+								'options'			=> array_merge([''=>'Select Vehicle Status'],$config['vehicle_status']) 
+								]
+							];
+
+
+$config['driver_form'][] = [ 
+								['type' 			=> 'normal',
+								'label'				=> 'Driver Code',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'col'				=> 'code',
+								'id'				=> 'create_driver_code',
+								],
+
+								['type' 			=> 'input',
+								'label'				=> 'Driver Name',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_name',
+								'col'				=> 'name',
+								'form_class'		=> 'form-control',
+								],
+
+								['type' 			=> 'date',
+								'label'				=> 'Birthday',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_birthday',
+								'col'				=> 'birthday',
+								'form_class'		=> 'form-control',
+								],
+
+								['type' 			=> 'number',
+								'label'				=> 'Age',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_age',
+								'col'				=> 'age',
+								'form_class'		=> 'form-control',
+								],
+
+
+								['type' 			=> 'input',
+								'label'				=> 'Address',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_address',
+								'col'				=> 'address',
+								'form_class'		=> 'form-control',
+								],
+
+								['type' 			=> 'select',
+								'label'				=> 'Vehicle Type',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'craete_vehicle_type',
+								'col'				=> 'vehicle_type',
+								'form_class'		=> 'form-control',
+								'options'			=> array_merge([''=>'Select Vehicle Type'],$config['vehicle_type']) 
+								]
+							];
 
 
 ?>

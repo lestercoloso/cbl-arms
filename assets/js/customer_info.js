@@ -126,16 +126,39 @@ var customer = {
 		if(t=='c'){
 			ids = 'contact';
 			$.each(contact, function( i, v ) {
-				content +='<tr> <td>'+v.first_name+' '+v.middle_initial+' '+v.last_name+'</td> <td>'+v.birth_date+'</td>  <td>'+v.contact_no+'</td>  <td>'+v.mobile_no+'</td>  <td>'+v.email+'</td> <td>'+v.department+'</td> <td>'+v.designation+'</td> </tr>'
+				action = ' <button data-index="'+i+'" type="button" class="btn btn-danger c-btn"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
+				content +='<tr> <td>'+v.first_name+' '+v.middle_initial+' '+v.last_name+'</td> <td>'+v.birth_date+'</td>  <td>'+v.contact_no+'</td>  <td>'+v.mobile_no+'</td>  <td>'+v.email+'</td> <td>'+v.department+'</td> <td>'+v.designation+'</td> <td class="action">'+action+'</td> </tr>'
 			});
 		}else{
 			ids = 'address';
 			$.each(address, function( i, v ) {
-				content +='<tr> <td>'+v.address_type+'</td> <td>'+v.address+'</td>  <td>'+v.city+'</td>  <td>'+v.region+'</td>  <td>'+v.area+'</td> </tr>'			  
+				action = ' <button data-index="'+i+'" type="button" class="btn btn-danger a-btn"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
+				content +='<tr> <td>'+v.address_type+'</td> <td>'+v.address+'</td>  <td>'+v.city+'</td>  <td>'+v.region+'</td>  <td>'+v.area+'</td> <td class="action">'+action+'</td></tr>'			  
 			});
 		}
 		$('#'+ids+'_selected tbody').html(content);
+		$('#additional_table .action .'+t+'-btn').click(function(){
+			customer.deletelist($(this).data('index'),t);
+		});
+
 	},
+	deletelist: function(id,t){
+		if(t=='c'){
+			var title = 'Contact';
+		}else{
+			var title = 'Address';
+		}
+		if(confirm("Are you sure you want to delete this "+title+"?")){
+			if(t=='c'){
+				contact.remove(id);
+			}else{
+				address.remove(id);
+			}
+
+			customer.constructaddtional(t);
+		}
+	},
+
 	additionalmodal: function(t){
 		$('.create_contact, .create_address, #saveaddress, #savecontact').hide();
 		if(t=='c'){

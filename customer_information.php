@@ -140,7 +140,7 @@ foreach($config['create_customer'] as $forms){
 </fieldset>
 </form>
 
-<div class="col-sm-12 bordered">
+<div class="col-sm-12 bordered" style="overflow-x: auto;">
 
 	<div class="col-sm-12 border_container">
 			
@@ -168,10 +168,12 @@ foreach($config['create_customer'] as $forms){
 				<th>City</th>
 				<th>Region</th>
 				<th>Area</th>
+				<th>Action</th>
 				</tr>
 				</thead>
 				<tbody>
 				<tr>
+				<td>-</td>
 				<td>-</td>
 				<td>-</td>
 				<td>-</td>
@@ -192,6 +194,7 @@ foreach($config['create_customer'] as $forms){
 				<th>Email Address</th>
 				<th>Department</th>
 				<th>Designation</th>
+				<th>Action</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -203,9 +206,10 @@ foreach($config['create_customer'] as $forms){
 				<td>-</td>
 				<td>-</td>
 				<td>-</td>
+				<td>-</td>
 				</tr>
 				</tbody>
-				<tfoot><tr><td colspan="7"><button id="add_customer_contact" class="button-class custombutton">Add Contact Person</button></td></tr></tfoot>
+				<tfoot><tr><td colspan="8"><button id="add_customer_contact" class="button-class custombutton">Add Contact Person</button></td></tr></tfoot>
 				</table>
 
 				<table class="table table-bordered table-striped table-list border_table" id="billing_selected" >

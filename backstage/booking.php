@@ -42,9 +42,11 @@ class Booking{
 			length,
 			width,
 			height,
-			contact
+			contact,
+			created_date
 		 from `booking` where id=$id";
 		$select = $this->db->select_one($sql);
+		$select['booking_date'] =get_date($select['date_ready']);
 		$select['date_ready'] = date('m/d/Y h:i A', strtotime($select['date_ready']));
 		$select['time_called'] = date('h:i A', strtotime($select['time_called']));
 		jdie($select);	
@@ -53,6 +55,18 @@ class Booking{
 		$select['area'] = $this->db->select_one('select area_1, area_2, area_3, area_4, area_5  from customer_information where id='.$costumer_id  );
 		$select['contact'] = $this->db->select('select id, department, concat(`last_name`, \', \', `first_name`,\' \', `middle_initial`) as name from customer_contact where customer_id='.$costumer_id  )['data'];
 		jdie($select);
+	}
+
+	public function update($id){
+		$data = $_POST['d'];
+		$data['date_ready'] = date('Y-m-d G:i:s', strtotime($data['date_ready']));
+		$data['time_called'] = date('G:i:s', strtotime($data['time_called']));
+		$data['contact'] = json_encode($this->db->select_one('select * from customer_contact where id='.$data['contact_id'].' limit 1' ));
+
+		if($this->db->update("booking",$data, "id=$id")){
+			$return['status'] = 200;
+		}
+		jdie($return);
 	}
 
 	public function save(){

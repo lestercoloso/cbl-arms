@@ -160,3 +160,12 @@
  	margin: 0px; 
  	width: auto;
  }
+
+#additional_table .action{
+	text-align: center;
+}
+
+#additional_table .action .btn{
+	    padding: 2px 6px;
+	    font-size: 11px;
+}

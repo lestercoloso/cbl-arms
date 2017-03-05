@@ -104,3 +104,8 @@ function pad(n, width, z) {
   n = n + '';
   return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }
+
+Array.prototype.remove = function(from, to){
+  this.splice(from, (to=[0,from||1,++to-from][arguments.length])<0?this.length+to:to);
+  return this.length;
+};

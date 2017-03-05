@@ -1,0 +1,44 @@
+.form-group {
+    margin-bottom: 5px;
+}
+#create_modal .row .col-sm-8 {
+    padding: 0px;
+}
+
+@media screen and (min-width: 768px) {
+    .custom-class {
+        margin-top: 7%;
+        width: 75%; /* either % (e.g. 60%) or px (400px) */
+    }
+}
+
+#create_modal select{
+    font-family: Arial,sans-serif;
+    font-size: 11px;
+    font-weight: 100;
+}
+#create_modal .chosen-single {
+    padding: 8px 12px;
+    font-size: 11px;
+}
+
+#create_modal .date {
+    margin: 0;
+}
+#create_modal .col-sm-8 {
+	padding: 0px;
+}
+#create_modal label,#create_modal .col-sm-8 {
+	padding: 0px;
+	/*padding-left: 5px; */
+}
+.extra{
+	padding: 0px;
+}
+#create_modal .col-sm-6{
+	padding-left: 0px;
+}
+
+.custom-class{
+    width: 430px;
+}

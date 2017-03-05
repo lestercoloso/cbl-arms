@@ -16,9 +16,9 @@
 
 		$config['vehicle'] = [];
 		$config['driver']  = [];
-		$sqlvehicle = 'select `type` from `vehicle`';
+		$sqlvehicle = 'select `plate_no` from `vehicle`';
 		foreach($db->select($sqlvehicle)['data'] as $vehicles){
-			$config['vehicle'][$vehicles['type']] = $vehicles['type']; 
+			$config['vehicle'][$vehicles['plate_no']] = $vehicles['plate_no']; 
 		}
 
 		$sqldriver = 'select `name` from `driver_profile`';
