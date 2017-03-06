@@ -17,9 +17,14 @@
     font-size: 11px;
     font-weight: 100;
 }
-#create_modal .chosen-single {
-    padding: 8px 12px;
+#create_modal .chosen-single, #create_modal .chosen-results {
+    padding: 1px 4px;
     font-size: 11px;
+        height: 20px;
+}
+
+#create_modal .chosen-single div {
+     top: -2px;
 }
 
 #create_modal .date {
@@ -36,5 +41,21 @@
 	padding: 0px;
 }
 #create_modal .col-sm-6{
-	padding-left: 0px;
+    padding-left: 0px;
 }
+#create_modal .input-group-addon {
+    padding: 0px 12px;
+    font-size: 11px;
+}
+
+#create_modal input, #create_modal select{
+    height: 20px;
+}
+#create_modal .form-group{
+	height: 35px;
+    margin-bottom: 0px;
+}
+.create_shippment{
+    padding: 0px;
+}
+
