@@ -50,6 +50,7 @@
 
 #create_modal input, #create_modal select{
     height: 20px;
+    padding: 0px 12px;
 }
 #create_modal .form-group{
 	height: 35px;
