@@ -12,16 +12,29 @@
     }
 }
 
+
+#create_modal .modal-body{
+    height: 450px;
+    overflow: auto;
+}
+#create_modal .modal-dialog{
+    margin: 3% auto;
+}
 #create_modal select{
     font-family: Arial,sans-serif;
     font-size: 11px;
     font-weight: 100;
 }
-#create_modal .chosen-single, #create_modal .chosen-results {
+#create_modal .chosen-single {
     padding: 1px 4px;
     font-size: 11px;
         height: 20px;
 }
+#create_modal .chosen-results{
+        padding: 1px 4px;
+    font-size: 11px;
+}
+
 
 #create_modal .chosen-single div {
      top: -2px;
@@ -34,7 +47,11 @@
 	padding: 0px;
 }
 #create_modal label,#create_modal .col-sm-8 {
-	padding: 0px;
+    padding: 0px;
+    /*padding-left: 5px; */
+}
+#create_modal label {
+	padding: 0px 5px;
 	/*padding-left: 5px; */
 }
 .extra{
@@ -60,3 +77,76 @@
     padding: 0px;
 }
 
+
+
+.bordered .selector{
+    padding-left: 3px;
+    padding-right: 0px;
+    width: 49%;
+    float: left;
+    margin-left: 2px;
+    cursor: pointer;
+    font-size: large;
+        color: #555555;
+            font-weight: 100;
+}
+.bordered .selector img{
+    cursor: pointer;
+    width: 50%;
+}
+
+.border_container{
+    margin: 3px auto;
+    float: left;
+    /*height: 20px;*/
+}
+
+.border_table{
+    width: 98%;
+    margin: 0px auto;
+    position: relative;
+    top: 5px;
+}
+
+.select_inactive .active{
+    display: none;
+}
+.selector div{
+     font-family: monospace;
+         margin: 3px 0px;
+}
+.selector i{
+    float: left;
+    margin: 5px 8px 0px 20px;
+}
+.select_inactive{
+    background: #e2e4e6;
+}
+
+.select_active{
+    color: #ad0f36 !important;
+    font-weight: 700 !important;
+}
+
+#create_modal th, #create_modal td {
+    padding: 5px;
+ }
+
+ #additional_table table{
+    display: none;
+ }
+ 
+ #additional_table tfoot td button{
+    float: right;
+    margin: 0px; 
+    width: auto;
+ }
+
+#additional_table .action{
+    text-align: center;
+}
+
+#additional_table .action .btn{
+        padding: 2px 6px;
+        font-size: 11px;
+}

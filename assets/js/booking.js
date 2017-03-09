@@ -53,6 +53,15 @@ var booking = {
 		//add new bill of lading modal
 		$('#book_shipment').click(function(){
 			booking.createbooking();
+		});				
+
+		$('.selector').click(function(){
+			$('.selector').removeClass('select_active');
+			$('.selector').addClass('select_inactive');
+			$(this).addClass('select_active');
+			$(this).removeClass('select_inactive');
+			$('#additional_table table').hide();
+			$('#additional_table #'+this.id+'ed').show();
 		});		
 
 		//clear new bill of lading 

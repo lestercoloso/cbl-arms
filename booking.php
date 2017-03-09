@@ -154,6 +154,74 @@ foreach($config['book_shipment'] as $forms){
 </fieldset>
 </form>
 
+
+
+
+
+
+
+
+
+
+
+<div class="col-sm-12 bordered" style="overflow-x: auto;height: 210px;">
+
+	<div class="col-sm-12 border_container">
+			
+			<div class="col-sm-12">
+				<div class="selector select_active" id="inventory_select">
+					<i class="fa fa-inbox" aria-hidden="true"></i><div> INVENTORY </div>
+				</div>
+				<div class="selector select_inactive" id="vehicle_select">
+				<i class="fa fa-truck" aria-hidden="true"></i><div> VEHICLE </div>
+				</div>
+			</div>
+
+			<div class="col-sm-12 border_container" id="additional_table">
+				<table class="table table-bordered table-striped table-list border_table" id="inventory_selected" style="display: table;">
+				<thead>
+				<tr>
+				<th>Address Type</th>
+				<th>Address</th>
+				<th>City</th>
+				<th>Region</th>
+				<th>Area</th>
+				<th>Action</th>
+				</tr>
+				</thead>
+				<tbody></tbody>
+				<tfoot><tr><td colspan="7"><button id="add_customer_address" class="button-class custombutton">Add Inventory</button></td></tr></tfoot>		
+				</table>
+
+				<table class="table table-bordered table-striped table-list border_table" id="vehicle_selected" style="display: none;">
+				<thead>
+				<tr>
+				<th>Name</th>
+				<th>Birth Date</th>
+				<th>Contact No.</th>
+				<th>Moble No.</th>
+				<th>Email Address</th>
+				<th>Department</th>
+				<th>Designation</th>
+				<th>Action</th>
+				</tr>
+				</thead>
+				<tbody></tbody>
+				<tfoot><tr><td colspan="8"><button id="add_customer_contact" class="button-class custombutton">Add Vehicle</button></td></tr></tfoot>
+				</table>
+			</div>
+	</div>		
+</div>
+
+
+
+
+
+
+
+
+
+
 		</div>
 		<div class="modal-footer">
 		<button type="button" class="btn btn-default" id="updatecreate"><i class="fa fa-circle-o-notch fa-spin hide" style=""></i> Update</button>

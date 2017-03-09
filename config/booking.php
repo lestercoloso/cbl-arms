@@ -66,13 +66,7 @@ $config['book_shipment'][] = [
 								'form_class'		=> 'form-control'
 								],
 
-								['type' 			=> 'normal',
-								'label'				=> 'Department',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_department',
-								'col'				=> 'department',
-								'form_class'		=> 'form-control'],
+
 
 								['type' 			=> 'hide',
 								'id'				=> 'create_contact_id',
@@ -85,6 +79,14 @@ $config['book_shipment'][] = [
 
 
 $config['book_shipment'][] = [
+
+								['type' 			=> 'normal',
+								'label'				=> 'Department',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_department',
+								'col'				=> 'department',
+								'form_class'		=> 'form-control'],
 								
 								['type' 			=> 'select',
 								'label'				=> 'Mode of Shipping',
@@ -96,36 +98,36 @@ $config['book_shipment'][] = [
 								'options'			=> array_merge([''=>'Select Mode of Shipping'],$config['mode_of_shipment'])
 								],
 								
-								['type' 			=> 'select',
-								'label'				=> 'Vehicle Type',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'form_class'		=> 'form-control',
-								'id'				=> 'create_vehicle_type',
-								'col'				=> 'vehicle_type',
-								'options'			=> array_merge([''=>'Select Vehicle Type'],$config['vehicle_type'])
-								],
+								// ['type' 			=> 'select',
+								// 'label'				=> 'Vehicle Type',
+								// 'parent_class' 		=> 'form-group col-sm-12',
+								// 'subparent_class' 	=> 'col-sm-8',
+								// 'form_class'		=> 'form-control',
+								// 'id'				=> 'create_vehicle_type',
+								// 'col'				=> 'vehicle_type',
+								// 'options'			=> array_merge([''=>'Select Vehicle Type'],$config['vehicle_type'])
+								// ],
 
 
-								['type' 			=> 'select',
-								'label'				=> 'Plate No.',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_plate_no',
-								'col'				=> 'plate_no',
-								'form_class'		=> 'form-control',
-								'options'			=> array_merge([''=>'Select Plate No.'],$config['vehicle'])								
-								],
+								// ['type' 			=> 'select',
+								// 'label'				=> 'Plate No.',
+								// 'parent_class' 		=> 'form-group col-sm-12',
+								// 'subparent_class' 	=> 'col-sm-8',
+								// 'id'				=> 'create_plate_no',
+								// 'col'				=> 'plate_no',
+								// 'form_class'		=> 'form-control',
+								// 'options'			=> array_merge([''=>'Select Plate No.'],$config['vehicle'])								
+								// ],
 
-								['type' 			=> 'select',
-								'label'				=> 'Driver',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_driver',
-								'col'				=> 'driver',
-								'form_class'		=> 'form-control',
-								'options'			=> array_merge([''=>'Select Driver'],$config['driver'])
-								],
+								// ['type' 			=> 'select',
+								// 'label'				=> 'Driver',
+								// 'parent_class' 		=> 'form-group col-sm-12',
+								// 'subparent_class' 	=> 'col-sm-8',
+								// 'id'				=> 'create_driver',
+								// 'col'				=> 'driver',
+								// 'form_class'		=> 'form-control',
+								// 'options'			=> array_merge([''=>'Select Driver'],$config['driver'])
+								// ],
 
 								// ['type' 			=> 'hide',
 								// 'id'				=> 'create_driver_id',
@@ -156,10 +158,7 @@ $config['book_shipment'][] = [
 								'id'				=> 'create_datetime_ready',
 								'col'				=> 'date_ready',
 								'form_class'		=> 'form-control'],
-							];
 
-$config['book_shipment'][] = [
-								
 								['type' 			=> 'input',
 								'label'				=> 'Document / Parcel',
 								'parent_class' 		=> 'form-group col-sm-12',
@@ -168,6 +167,11 @@ $config['book_shipment'][] = [
 								'col'				=> 'document',
 								'id'				=> 'create_document',
 								],
+							];
+
+$config['book_shipment'][] = [
+								
+
 								
 								['type'		 		=> 'number',
 								'label'				=> 'Weight',
