@@ -16,11 +16,10 @@
 
 		$config['vehicle'] = [];
 		$config['driver']  = [];
-		$sqlvehicle = 'select `plate_no` from `vehicle`';
+		$sqlvehicle = 'select `plate_no`, `type` from `vehicle`';
 		foreach($db->select($sqlvehicle)['data'] as $vehicles){
-			$config['vehicle'][$vehicles['plate_no']] = $vehicles['plate_no']; 
+			$vehicle_data[$vehicles['type']][] = $vehicles['plate_no']; 
 		}
-
 		$sqldriver = 'select `name` from `driver_profile`';
 		foreach($db->select($sqldriver)['data'] as $drivers){
 			$config['driver'][$drivers['name']] = $drivers['name']; 
@@ -30,7 +29,10 @@
 ?>
 
 <div id="mainContainer">
+<script>
+	var vehicle_data = <?php echo json_encode($vehicle_data)?>;
 
+</script>
 <!-- Start of page -->
 
 
@@ -181,33 +183,37 @@ foreach($config['book_shipment'] as $forms){
 				<table class="table table-bordered table-striped table-list border_table" id="inventory_selected" style="display: table;">
 				<thead>
 				<tr>
-				<th>Address Type</th>
-				<th>Address</th>
-				<th>City</th>
-				<th>Region</th>
-				<th>Area</th>
+				<th>Item ID</th>
+				<th>Product Code</th>
+				<!-- <th>Bar Code</th> -->
+				<th>Item Type</th>
+				<!-- <th>Case Bar Code</th> -->
+				<th>Unit of Measurement</th>
+				<th>Packaging (pcs)</th>
+				<th>Dimension</th>
+				<th>Storage Type</th>
+				<th>Unit Cost</th>
+				<th>Unit Price</th>
+				<!-- <th>Floor Level</th> -->
+				<!-- <th>Ceiling Level</th> -->
 				<th>Action</th>
 				</tr>
 				</thead>
 				<tbody></tbody>
-				<tfoot><tr><td colspan="7"><button id="add_customer_address" class="button-class custombutton">Add Inventory</button></td></tr></tfoot>		
+				<tfoot><tr><td colspan="14"><button id="add_new_inventory" class="button-class custombutton">Add Inventory</button></td></tr></tfoot>		
 				</table>
 
 				<table class="table table-bordered table-striped table-list border_table" id="vehicle_selected" style="display: none;">
 				<thead>
 				<tr>
-				<th>Name</th>
-				<th>Birth Date</th>
-				<th>Contact No.</th>
-				<th>Moble No.</th>
-				<th>Email Address</th>
-				<th>Department</th>
-				<th>Designation</th>
+				<th>Vehicle Type</th>
+				<th>Plate No.</th>
+				<th>Driver</th>
 				<th>Action</th>
 				</tr>
 				</thead>
 				<tbody></tbody>
-				<tfoot><tr><td colspan="8"><button id="add_customer_contact" class="button-class custombutton">Add Vehicle</button></td></tr></tfoot>
+				<tfoot><tr><td colspan="8"><button id="add_multiple_vehicle" class="button-class custombutton">Add Vehicle</button></td></tr></tfoot>
 				</table>
 			</div>
 	</div>		
@@ -232,6 +238,51 @@ foreach($config['book_shipment'] as $forms){
 		</div>
 		</div>
 		</div>
+
+
+
+
+
+
+	<div id="create_additional" class="modal fade col-sm-12 inventory" role="dialog">
+		<div class="modal-dialog custom-class">
+		<div class="modal-content">
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h4 class="modal-title">Add Iventory</h4>
+		</div>
+
+			<div class="modal-body">
+			<fieldset>
+<?php
+foreach($config['inventory'] as $inv){
+	echo '<div class="add_inventory col-sm-6">';
+	echo construct_form($inv);				
+	echo '</div>';
+}
+	echo '<div class="add_vehicle">';
+	echo construct_form($config['multiple_vehicle']);				
+	echo '</div>';
+
+?>
+			</fieldset>
+			
+
+		<div class="modal-footer">
+		<button type="button" class="btn btn-default" id="updateinventory">Update</button>
+		<button type="button" class="btn btn-default" id="saveinventory">Save</button>
+		<button type="button" class="btn btn-default" id="updatevehicle">Update</button>
+		<button type="button" class="btn btn-default" id="savevehicle">Save</button>
+		<button type="button" class="btn btn-default" id="clearadditional">Clear</button>
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
+		</div>
+		</div>
+	</div>
+
+
+
+
 
 
 <?php

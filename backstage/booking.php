@@ -44,12 +44,16 @@ class Booking{
 			height,
 			transaction_type,
 			contact,
+			vehicle,
 			created_date
 		 from `booking` where id=$id";
 		$select = $this->db->select_one($sql);
 		$select['booking_date'] =get_date($select['date_ready']);
 		$select['date_ready'] = date('m/d/Y h:i A', strtotime($select['date_ready']));
 		$select['time_called'] = date('h:i A', strtotime($select['time_called']));
+		
+		$sql2 = "select * from inventory where booking_id=$id";
+		$select['inventory'] = json_encode($this->db->select($sql2)['data']);
 		jdie($select);	
 	}
 	public function getcontacts($costumer_id=''){
@@ -63,9 +67,16 @@ class Booking{
 		$data['date_ready'] = date('Y-m-d G:i:s', strtotime($data['date_ready']));
 		$data['time_called'] = date('G:i:s', strtotime($data['time_called']));
 		$data['contact'] = json_encode($this->db->select_one('select * from customer_contact where id='.$data['contact_id'].' limit 1' ));
+		$data['vehicle'] = json_encode($_POST['v']);
+
 
 		if($this->db->update("booking",$data, "id=$id")){
 			$return['status'] = 200;
+			$this->db->delete("inventory", "booking_id=$id");
+			foreach($_POST['i'] as $i){
+				$i['booking_id'] = $id;
+				$this->db->insert("inventory",$i);
+			}
 		}
 		jdie($return);
 	}
@@ -83,9 +94,15 @@ class Booking{
 		$data['date_ready'] = date('Y-m-d G:i:s', strtotime($data['date_ready']));
 		$data['time_called'] = date('G:i:s', strtotime($data['time_called']));
 		$data['contact'] = json_encode($this->db->select_one('select * from customer_contact where id='.$data['contact_id'].' limit 1' ));
-
+		$data['vehicle'] = json_encode($_POST['v']);
 
 		if($this->db->insert("booking",$data)){
+			$created_id = $this->db->insert_id();
+			foreach($_POST['i'] as $i){
+				$i['booking_id'] = $created_id;
+				$this->db->insert("inventory",$i);
+			}
+
 			$return['status'] = 200;
 		}
 		jdie($return);

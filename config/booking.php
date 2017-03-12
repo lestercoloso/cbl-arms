@@ -6,6 +6,9 @@ $config['vehicle_status']  = $db->getconfig('vehicle_status');
 $config['mode_of_shipment']  = $db->getconfig('mode_of_shipping');
 $config['status']  = $db->getconfig('booking_status');
 $config['transaction_type']  = $db->getconfig('transaction_type');
+$config['storage_type']  = $db->getconfig('storage_type');
+$config['unit_of_measurement']  = $db->getconfig('unit_of_measurement');
+$config['item_type']  = $db->getconfig('item_type');
 $config['book_shipment'][] = [
 								
 								['type' 			=> 'normal',
@@ -351,4 +354,187 @@ $config['driver_form'][] = [
 							];
 
 
+
+$config['inventory'][] = [ 
+								['type' 			=> 'normal',
+								'label'				=> 'Item ID',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'col'				=> 'item_id',
+								'id'				=> 'additional-item_id',
+								],
+
+								['type' 			=> 'input',
+								'label'				=> 'Product Code',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'additional-product_code',
+								'col'				=> 'product_code',
+								'form_class'		=> 'form-control',
+								],
+
+								['type' 			=> 'number',
+								'label'				=> 'Bar Code',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'additional-bar_code',
+								'col'				=> 'bar_code',
+								'form_class'		=> 'form-control',
+								],
+
+								['type' 			=> 'select',
+								'label'				=> 'Item Type',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'additional-item_type',
+								'col'				=> 'item_type',
+								'form_class'		=> 'form-control',
+								'options'			=> array_merge([''=>'Select Item Type'],$config['item_type']) 
+								],
+
+								['type' 			=> 'number',
+								'label'				=> 'Case Bar Code',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'additional-casebar_code',
+								'col'				=> 'casebar_code',
+								'form_class'		=> 'form-control',
+								],
+
+								['type' 			=> 'select',
+								'label'				=> 'Unit of Measurement',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'additional-unit_of_measurement',
+								'col'				=> 'unit_of_measurement',
+								'form_class'		=> 'form-control',
+								'options'			=> array_merge([''=>'Select Unit of Measurement'],$config['unit_of_measurement']) 
+								],
+
+								['type' 			=> 'number',
+								'label'				=> 'Packaging (pcs)',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'additional-packaging',
+								'col'				=> 'packaging',
+								'form_class'		=> 'form-control',
+								],
+
+								['type' 			=> 'select',
+								'label'				=> 'Storage Type',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'additional-storage_type',
+								'col'				=> 'storage_type',
+								'form_class'		=> 'form-control',
+								'options'			=> array_merge([''=>'Select Storage type'],$config['storage_type']) 
+								],
+
+						];
+
+$config['inventory'][] = [ 
+
+								['type'		 		=> 'number',
+								'label'				=> 'Length (Dimension)',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-6',
+								'id'				=> 'additional-length',
+								'col'				=> 'length',
+								'extra'				=> 'cm.',
+								'form_class'		=> 'form-control',
+								],
+
+								['type'		 		=> 'number',
+								'label'				=> 'Width (Dimension)',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-6',
+								'id'				=> 'additional-width',
+								'col'				=> 'width',
+								'extra'				=> 'cm.',
+								'form_class'		=> 'form-control',
+								],
+								
+								['type'		 		=> 'number',
+								'label'				=> 'Height (Dimension)',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-6',
+								'id'				=> 'additional-height',
+								'col'				=> 'height',
+								'extra'				=> 'cm.',
+								'form_class'		=> 'form-control',
+								],
+
+
+
+								['type'		 		=> 'number',
+								'label'				=> 'Unit Cost',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'id'				=> 'additional-unit_cost',
+								'col'				=> 'unit_cost',
+								'form_class'		=> 'form-control',
+								],
+
+								['type'		 		=> 'number',
+								'label'				=> 'Unit Price',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'id'				=> 'additional-unit_price',
+								'col'				=> 'unit_price',
+								'form_class'		=> 'form-control',
+								],
+
+								['type'		 		=> 'number',
+								'label'				=> 'Floor Level',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'id'				=> 'additional-floor_level',
+								'col'				=> 'floor_level',
+								'form_class'		=> 'form-control',
+								],
+
+								['type'		 		=> 'number',
+								'label'				=> 'Ceiling Level',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'id'				=> 'additional-ceiling_level',
+								'col'				=> 'ceiling_level',
+								'form_class'		=> 'form-control',
+								],
+
+
+						];
+
+
+$config['multiple_vehicle'] = [
+
+								['type' 			=> 'select',
+								'label'				=> 'Vehicle Type',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'id'				=> 'additional-vehicle_type',
+								'col'				=> 'vehicle_type',
+								'options'			=> array_merge([''=>'Select Vehicle Type'],$config['vehicle_type'])
+								],
+
+
+								['type' 			=> 'select',
+								'label'				=> 'Plate No.',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'additional-plate_no',
+								'col'				=> 'plate_no',
+								'form_class'		=> 'form-control',
+								// 'options'			=> array_merge([''=>'Select Plate No.'],$config['vehicle'])								
+								],
+
+								['type' 			=> 'select',
+								'label'				=> 'Driver',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'additional-driver',
+								'col'				=> 'driver',
+								'form_class'		=> 'form-control',
+								'options'			=> array_merge([''=>'Select Driver'],$config['driver'])
+								],
+
+							  ];						
 ?>

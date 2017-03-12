@@ -341,7 +341,7 @@ $config['add_shipment']['Additional Charges'] = [
 								'col'				=> 'back_load',
 								'form_class'		=> 'form-control'],
 
-								['type' 		=> 'normal',
+								['type' 		=> 'number',
 								'label'				=> 'Total',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -349,7 +349,7 @@ $config['add_shipment']['Additional Charges'] = [
 								'col'				=> 'total',
 								'form_class'		=> 'form-control not_mandatory'],
 
-								['type' 		=> 'normal',
+								['type' 		=> 'number',
 								'label'				=> '12% VAT',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -357,7 +357,7 @@ $config['add_shipment']['Additional Charges'] = [
 								'col'				=> 'vat',
 								'form_class'		=> 'form-control not_mandatory'],
 
-								['type' 		=> 'normal',
+								['type' 		=> 'number',
 								'label'				=> 'Total Amount Due',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -365,7 +365,7 @@ $config['add_shipment']['Additional Charges'] = [
 								'col'				=> 'total_amount_due',
 								'form_class'		=> 'form-control not_mandatory'],
 
-								['type' 		=> 'normal',
+								['type' 		=> 'number',
 								'label'				=> 'Discount Percent',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -373,7 +373,7 @@ $config['add_shipment']['Additional Charges'] = [
 								'col'				=> 'discount_percent',
 								'form_class'		=> 'form-control not_mandatory'],
 
-								['type' 		=> 'normal',
+								['type' 		=> 'number',
 								'label'				=> 'Final Contract Price',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',

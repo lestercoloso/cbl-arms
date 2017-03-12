@@ -1,6 +1,12 @@
 
 var searchdata = "";
 var updateid = '';
+var inventory = [];
+var vehicle = [];
+var lastitemid = 0;
+var updateinventorykey = '';
+var updatevehiclekey = '';
+
 
 var search = {
 	init: function(){
@@ -54,6 +60,27 @@ var booking = {
 		$('#book_shipment').click(function(){
 			booking.createbooking();
 		});				
+		$('#add_new_inventory').click(function(){
+			booking.createinventory();
+		});				
+		$('#add_multiple_vehicle').click(function(){
+			booking.createvehicle();
+		});				
+		$('#savevehicle').click(function(){
+			booking.savevehicle();
+		});				
+		$('#saveinventory').click(function(){
+			booking.saveinventory();
+		});					
+		$('#updateinventory').click(function(){
+			booking.updateinventory();
+		});				
+		$('#updatevehicle').click(function(){
+			booking.updatevehicle();
+		});				
+		$('#clearadditional').click(function(){
+			booking.clearadditional();
+		});				
 
 		$('.selector').click(function(){
 			$('.selector').removeClass('select_active');
@@ -66,7 +93,10 @@ var booking = {
 
 		//clear new bill of lading 
 		$('#clearecreate').click(function(){
-			booking.clear();
+			if(confirm("Are you sure you want to proceed?\nThis will also clear the inventory/vehicle list.")){
+				booking.clear();				
+			}
+
 		});			
 
 		$('#create_customer_name').change(function(){
@@ -96,7 +126,20 @@ var booking = {
 
 		booking.getbookinglist();
 
+		$('#additional-vehicle_type').change(function(){
+			booking.selectvehicle();
+		});
 
+	},
+
+	selectvehicle: function(selected){
+		var vehicle_type = $('#additional-vehicle_type').val();
+		var content = '<option value="">Select Plate No.</option>';
+		$.each(vehicle_data[vehicle_type], function( index, value ) {
+			content += '<option value="'+value+'">'+value+'</option>';
+		});
+		$('#additional-plate_no').html(content);
+		$('#additional-plate_no').val(selected);
 	},
 
 	createbooking: function(){
@@ -106,6 +149,200 @@ var booking = {
 		$('#updatecreate').hide();
 		booking.clear();
 	},
+
+	createinventory: function(){
+		$('#create_additional').modal();
+		$('#create_additional .modal-title').html('Add Inventory');
+		$('#create_additional').addClass('inventory');
+		$('#create_additional').removeClass('vehicle');
+		$('.add_inventory').show();
+		$('.add_vehicle').hide();
+		booking.clearadditional();
+		$('#clearadditional').show();
+		$('#saveinventory').show();
+		$('#savevehicle').hide();
+		$('#updateinventory').hide();
+		$('#updatevehicle').hide();
+
+	},
+	
+	createvehicle: function(){
+		$('#create_additional').modal();
+		$('#create_additional .modal-title').html('Add Vehicle');		
+		$('#create_additional').removeClass('inventory');
+		$('#create_additional').addClass('vehicle');
+		$('.add_inventory').hide();
+		$('.add_vehicle').show();
+		booking.clearadditional();
+		$('#saveinventory').hide();
+		$('#clearadditional').show();
+		$('#savevehicle').show();
+		$('#updateinventory').hide();
+		$('#updatevehicle').hide();
+	},
+
+	vehicleedit: function(key){
+		$('#saveinventory').hide();
+		$('#savevehicle').hide();
+		$('#clearadditional').hide();
+		$('#updateinventory').hide();
+		$('#updatevehicle').show();
+		$('.add_inventory').hide();
+		$('.add_vehicle').show();
+		$('#create_additional').modal();
+		$('#create_additional').removeClass('inventory');
+		$('#create_additional').addClass('vehicle');
+		$('#create_additional .modal-title').html('Edit Vehicle');
+		$.each(vehicle[key], function( index, value ) {
+			$('#additional-'+index).val(value);
+		});
+		updatevehiclekey = key;
+		booking.selectvehicle(vehicle[key].plate_no);
+	},
+	inventoryedit: function(key){
+		$('#saveinventory').hide();
+		$('#savevehicle').hide();
+		$('#clearadditional').hide();
+		$('#updateinventory').show();
+		$('#updatevehicle').hide();
+		$('#create_additional').modal();
+		$('.add_inventory').show();
+		$('.add_vehicle').hide();
+		$('#create_additional').addClass('inventory');
+		$('#create_additional').removeClass('vehicle');
+		$('#create_additional .modal-title').html('Edit Inventory');
+		$.each(inventory[key], function( index, value ) {
+			$('#additional-'+index).val(value);
+		});
+		updateinventorykey = key;
+	},
+
+	saveinventory: function(){
+
+		var arr = createPostData('add_inventory');
+		if(arr['error']){
+    		toastr["error"](arr['error']);
+    	}else{
+    		inventory.push(arr['data']);
+    		toastr["success"]('Successfully added.');
+    		$('#create_additional').modal('hide');
+    		booking.constructinventory();
+    	}
+	},
+	updateinventory: function(){
+
+		var arr = createPostData('add_inventory');
+		if(arr['error']){
+    		toastr["error"](arr['error']);
+    	}else{
+    		toastr["success"]('Successfully updated.');
+    		$('#create_additional').modal('hide');
+    		inventory[updateinventorykey] = arr['data'];
+    		booking.constructinventory();
+    	}
+	},
+	savevehicle: function(){
+
+		var arr = createPostData('add_vehicle');
+		if(arr['error']){
+    		toastr["error"](arr['error']);
+    	}else{
+    		vehicle.push(arr['data']);
+    		toastr["success"]('Successfully added.');
+    		$('#create_additional').modal('hide');
+    		booking.constructvehicle();
+    	}
+	},	
+	updatevehicle: function(){
+
+		var arr = createPostData('add_vehicle');
+		if(arr['error']){
+    		toastr["error"](arr['error']);
+    	}else{
+    		vehicle[updatevehiclekey] = arr['data'];
+    		toastr["success"]('Successfully updated.');
+    		$('#create_additional').modal('hide');
+    		booking.constructvehicle();
+    	}
+	},
+	constructvehicle: function(){
+		
+		var action = '<button type="button" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
+		action += ' <button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
+		content = '';
+		$.each(vehicle, function( index, value ) {
+			content +='<tr id="vehicle-'+index+'" data-key="'+index+'">';
+			content +='<td class="centered">'+value.vehicle_type+'</td>';
+			content +='<td class="centered">'+value.plate_no+'</td>';
+			content +='<td class="centered">'+value.driver+'</td>';
+			content +='<td class="centered">'+action+'</td></tr>';
+		});
+
+		$('#vehicle_selected tbody').html(content);
+		$('#vehicle_selected tbody tr .btn-success').click(function(){
+			booking.vehicleedit($(this).parent().parent().data('key'));
+		});
+		$('#vehicle_selected tbody tr .btn-danger').click(function(){
+			if(confirm('Are you sure you want to remove this?')){
+					vehicle.remove($(this).parent().parent().data('key'));
+					toastr["success"]('Successfully removed.');
+					booking.constructvehicle();					
+				
+			}
+		});
+	},
+	constructinventory: function(){
+		
+		var action = '<button type="button" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
+		action += ' <button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
+		content = '';
+		$.each(inventory, function( index, value ) {
+			content +='<tr id="inventory-'+index+'" data-key="'+index+'">';
+			content +='<td class="centered">'+pad(value.item_id,10,'0')+'</td>';
+			content +='<td class="centered">'+value.product_code+'</td>';
+			content +='<td class="centered">'+value.item_type+'</td>';
+			content +='<td class="centered">'+value.unit_of_measurement+'</td>';
+			content +='<td class="centered">'+value.packaging+'</td>';
+			content +='<td class="centered">'+value.length+'x'+value.width+'x'+value.height+'</td>';
+			content +='<td class="centered">'+value.storage_type+'</td>';
+			content +='<td class="centered">'+value.unit_cost+'</td>';
+			content +='<td class="centered">'+value.unit_price+'</td>';
+			content +='<td class="centered">'+action+'</td></tr>';	
+
+			lastitemid = parseInt(value.item_id);
+		});
+
+		$('#inventory_selected tbody').html(content);
+		$('#inventory_selected tbody tr .btn-success').click(function(){
+			booking.inventoryedit($(this).parent().parent().data('key'));
+		});		
+		$('#inventory_selected tbody tr .btn-danger').click(function(){
+			if(confirm('Are you sure you want to remove this?')){
+					inventory.remove($(this).parent().parent().data('key'));
+					toastr["success"]('Successfully removed.');
+					booking.constructinventory();					
+			}
+		});
+	},
+
+
+
+
+	getnewinventorynumber: function(){
+		var item_id = (lastitemid+1);
+		$('#additional-item_id').val(pad(item_id, 10, '0'));
+	},
+
+	clearadditional: function(){
+		$('#create_additional input, #create_additional select').val('');
+		booking.getnewinventorynumber();
+		booking.form('add_inventory');
+		booking.form('add_vehicle');
+		booking.getnewinventorynumber();
+		$('#additional-plate_no').html('');
+
+	},
+
 
 	edit: function(id){
 		booking.form('create_shippment');
@@ -122,6 +359,22 @@ var booking = {
 			$('#create_customer_name').html('<option value="'+data.customer_name+'" data-client_id="'+data.customer_id+'" "="">'+data.customer_name+'</option>');
 			$('#create_booking_date').val(data.booking_date);
 			booking.getcontacts(data.customer_id, data.area, data.contact_person);
+			
+			if(data.vehicle){
+				vehicle = JSON.parse(data.vehicle);				
+			}else{
+				vehicle = [];
+			}
+
+			if(data.inventory){
+				inventory = JSON.parse(data.inventory);
+			}else{
+				inventory = [];
+			}
+
+			
+			booking.constructvehicle();	
+			booking.constructinventory();	
 		});
 	},
 
@@ -133,7 +386,7 @@ var booking = {
     	}else{
 			$('#updatecreate').addClass('disabled');
 			$('#updatecreate i').removeClass('hide');
-    		$.post("backstage/booking/update/"+updateid, {d:arr['data']},function(data){
+    		$.post("backstage/booking/update/"+updateid, {d:arr['data'], i:inventory, v:vehicle},function(data){
     			if(data.status==200){
 						toastr["success"]('Successfully updated.');
 						$('#create_modal').modal('hide');
@@ -153,12 +406,26 @@ var booking = {
 	},
 	save: function(){
 		var arr = createPostData('create_shippment');
+		// if(inventory.length<=0){
+		// 	arr['error'] = 'Complete the fields';
+		// 	$('#inventory_select').addClass('has-error');
+		// }else{
+		// 	$('#inventory_select').removeClass('has-error');
+		// }
+
+		// if(vehicle.length<=0){
+		// 	$('#vehicle_select').addClass('has-error');
+		// 	arr['error'] = 'Complete the fields';
+		// }else{
+		// 	$('#vehicle_select').removeClass('has-error');			
+		// }
+
 		if(arr['error']){
     		toastr["error"](arr['error']);
     	}else{
 			$('#savecreate').addClass('disabled');
 			$('#savecreate i').removeClass('hide');
-    		$.post("backstage/booking/save/", {d:arr['data']},function(data){
+    		$.post("backstage/booking/save/", {d:arr['data'], i:inventory, v:vehicle},function(data){
     			if(data.status==200){
 						toastr["success"]('Successfully added.');
 						$('#create_modal').modal('hide');
@@ -201,6 +468,10 @@ var booking = {
 		}, 500);
 		$('#create_time_called').val(getClockTime());
 		$('#craete_transaction_type').val('Delivery');
+		inventory = [];
+		vehicle = [];
+		booking.constructvehicle();	
+		booking.constructinventory();	
 
 	},
 	form: function(classused){
