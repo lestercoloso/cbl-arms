@@ -74,13 +74,15 @@ class Booking{
 		$data['date_ready'] = date('Y-m-d G:i:s', strtotime($data['date_ready']));
 		$data['time_called'] = date('G:i:s', strtotime($data['time_called']));
 		$data['contact'] = json_encode($this->db->select_one('select * from customer_contact where id='.$data['contact_id'].' limit 1' ));
-		$data['vehicle'] = json_encode($_POST['v']);
+		$vehicle 	= !empty($_POST['v']) ? $_POST['v'] : [];
+		$inventory 	= !empty($_POST['i']) ? $_POST['i'] : [];
+		$data['vehicle'] = json_encode($vehicle);
 
 
 		if($this->db->update("booking",$data, "id=$id")){
 			$return['status'] = 200;
 			$this->db->delete("inventory", "booking_id=$id");
-			foreach($_POST['i'] as $i){
+			foreach($inventory as $i){
 				$i['booking_id'] = $id;
 				$this->db->insert("inventory",$i);
 			}
@@ -101,11 +103,13 @@ class Booking{
 		$data['date_ready'] = date('Y-m-d G:i:s', strtotime($data['date_ready']));
 		$data['time_called'] = date('G:i:s', strtotime($data['time_called']));
 		$data['contact'] = json_encode($this->db->select_one('select * from customer_contact where id='.$data['contact_id'].' limit 1' ));
-		$data['vehicle'] = json_encode($_POST['v']);
+		$vehicle 	= !empty($_POST['v']) ? $_POST['v'] : [];
+		$inventory 	= !empty($_POST['i']) ? $_POST['i'] : [];		
+		$data['vehicle'] = json_encode($vehicle);
 
 		if($this->db->insert("booking",$data)){
 			$created_id = $this->db->insert_id();
-			foreach($_POST['i'] as $i){
+			foreach($inventory as $i){
 				$i['booking_id'] = $created_id;
 				$this->db->insert("inventory",$i);
 			}
