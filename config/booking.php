@@ -403,13 +403,13 @@ $config['inventory'][] = [
 								],
 
 								['type' 			=> 'select',
-								'label'				=> 'Unit of Measurement',
+								'label'				=> 'UOM',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'additional-unit_of_measurement',
 								'col'				=> 'unit_of_measurement',
 								'form_class'		=> 'form-control',
-								'options'			=> array_merge([''=>'Select Unit of Measurement'],$config['unit_of_measurement']) 
+								'options'			=> array_merge([''=>'Select UOM'],$config['unit_of_measurement']) 
 								],
 
 								['type' 			=> 'number',

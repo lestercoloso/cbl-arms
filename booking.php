@@ -188,7 +188,7 @@ foreach($config['book_shipment'] as $forms){
 				<!-- <th>Bar Code</th> -->
 				<th>Item Type</th>
 				<!-- <th>Case Bar Code</th> -->
-				<th>Unit of Measurement</th>
+				<th>UOM</th>
 				<th>Packaging (pcs)</th>
 				<th>Dimension</th>
 				<th>Storage Type</th>
