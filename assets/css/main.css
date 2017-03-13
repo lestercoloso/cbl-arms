@@ -244,9 +244,10 @@ input[type="text"], input[type="number"] {
 }
 
 .custombutton{
-	    padding: 5px 10px;
-	    width: 45%;
-	    border: solid 1px #adadad;
+    white-space: nowrap;
+    padding: 5px 10px;
+    width: 45%;
+    border: solid 1px #adadad;
     background: none;
     color: #cc0000;
     border-radius: 4px;

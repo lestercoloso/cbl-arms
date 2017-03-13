@@ -38,33 +38,15 @@
 	font-weight: 700;
 }
 
-.no-pad{
-	padding: 0px;
-	    padding-right: 10px;
-}
+
 .no-wrap{
 	white-space: nowrap;
 }
 .no-margin{
 	margin: 0px !important;
 }
-#add_billing_container_5{
-	top: 382px;
-    position: absolute;
-    width: 32.333333%;
-}
-#add_billing_container_6{
-	position: absolute;
-    top: 420px;
-    left: 33.933333%;
-    width: 32.3333333333333%;
-}
-#add_billing_container_6 .bordered{
-	    height: 316px;
-}
-#add_billing_container_5 .bordered{
-	    height: 354px;
-}
+
+
 
 #create_bill_of_lading .chosen-single{
     padding: 0px 5px;
@@ -80,3 +62,32 @@
     border-radius: 2px;
     font-size: 11px
  }
+
+ .radio-inline {
+    width: 70px;
+}
+.no-pad{
+    padding: 0px;
+    padding-right: 10px;
+    width: 353px;
+}
+.form_3, .form_4, .form_5, .form_6{
+    position: absolute;
+    top: 82px;
+    left: 369px;
+}
+.form_4{
+    top: 425px;
+}
+.form_6{
+    top: 160px;
+}
+.form_5, .form_6{
+        left: 723px;
+}
+#add_billing_container_2 .bordered{
+       height: 358px; 
+}
+#add_billing_container_4 .bordered{
+       height: 317px; 
+}

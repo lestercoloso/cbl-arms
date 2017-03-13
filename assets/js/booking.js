@@ -503,7 +503,7 @@ var booking = {
 			});
 			$('#create_area').html(content1);
 			$('#create_contact_person').html(content2);
-
+			$('#create_address').val(data.address);
 			$('#create_area').val(t1);
 			$('#create_contact_person').val(t2);	
 		});

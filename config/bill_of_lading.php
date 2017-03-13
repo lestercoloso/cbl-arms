@@ -2,7 +2,7 @@
 $config['charges']  = ['DHL'=>'DHL', 'FEDEX'=>'FEDEX', 'LBC'=>'LBC', 'AIR21'=>'AIR21'];
 $config['packaging_type']['document'] 	= ['Small'=>'Small', 'Large'=>'Large'];
 $config['packaging_type']['parcel'] 	= ['Own'=>'Own', 'Others'=>'Others'];
-$config['packaging_type']['crafting'] 	= ['Skeletal'=>'Skeletal', 'Close'=>'Close'];
+$config['packaging_type']['crating'] 	= ['Skeletal'=>'Skeletal', 'Close'=>'Close'];
 $config['status'] = ['1'=>'Reviewed', '2'=>'Approved'];
 $config['mode_of_shipment']  = $db->getconfig('mode_of_shipping');
 $config['services']  = $db->getconfig('services');
@@ -101,289 +101,6 @@ $config['add_shipment']['Shipper Information'] = [
 
 							];
 
-
-
-$config['add_shipment']['Package Content (Complete Description)'] = [
-								
-								0=>['type' 			=> 'number',
-								'label'				=> 'Total Packages',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'form_class'		=> 'form-control',
-								'col'				=> 'total_package',
-								'id'				=> 'create_total_package',
-								],
-								1=>['type' 			=> 'select',
-								'label'				=> 'Destination Type',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'form_class'		=> 'form-control',
-								'col'				=> 'destination_type',
-								'id'				=> 'create_destination_type',
-								'options'			=> array_merge([''=>'Select Destination Type'],$config['destination_type'])
-								],
-
-								2 => ['type' 		=> 'input',
-								'label'				=> 'Country/Zone',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_country_zone',
-								'col'				=> 'country_zone',
-								'form_class'		=> 'form-control',
-								],
-
-								3 => ['type' 		=> 'input',
-								'label'				=> 'Province/Zone',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_province_zone',
-								'col'				=> 'province_zone',
-								'form_class'		=> 'form-control',
-								],
-
-								4 => ['type' 		=> 'normal',
-								'label'				=> 'Dimension',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-6',
-								'id'				=> 'create_dimension',
-								'col'				=> 'dimension',
-								'extra'				=> 'cm.',
-								'form_class'		=> 'form-control',
-								],
-
-								5 => ['type' 		=> 'normal',
-								'label'				=> 'Actual Weight',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-6',
-								'id'				=> 'create_actual_weight',
-								'col'				=> 'actual_weight',
-								'extra'				=> 'kg.',
-								'form_class'		=> 'form-control',
-								],
-
-								6 => ['type' 		=> 'number',
-								'label'				=> 'Total Declared Value',
-								'parent_class' 		=> 'form-group col-sm-12 no-margin',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_total_declared_value',
-								'col'				=> 'total_declared_value',
-								'form_class'		=> 'form-control',
-								],
-
-								7 => ['type' 		=> 'number',
-								'label'				=> 'TDV % Applied',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_tdv_applied',
-								'col'				=> 'tdv_applied',
-								'form_class'		=> 'form-control',
-								],
-
-								8 => ['type' 		=> '',
-								'label'				=> 'Packaging Type',
-								'parent_class' 		=> 'col-sm-12 no-margin',
-								'form_class' 		=> 'not_mandatory',
-								],
-
-								9=>['type' 			=> 'radio',
-								'parent_class' 		=> 'form-group col-sm-12 no-margin',
-								'label'				=> 'Document',								
-								'subparent_class' 	=> 'col-sm-8  no-wrap',
-								'form_class'		=> 'form-control not_mandatory',
-								'id'				=> 'create_packing_type_document',
-								'col'				=> 'packing_type_document',
-								'options'			=> $config['packaging_type']['document']
-								],
-
-								10=>['type' 		=> 'radio',
-								'parent_class' 		=> 'form-group col-sm-12 no-margin',
-								'label'				=> 'Parcel',								
-								'subparent_class' 	=> 'col-sm-8  no-wrap',
-								'form_class'		=> 'form-control not_mandatory',
-								'id'				=> 'create_packing_type_parcel',
-								'col'				=> 'packing_type_parcel',
-								'options'			=> $config['packaging_type']['parcel']
-								],
-
-								11=>['type' 		=> 'radio',
-								'parent_class' 		=> 'form-group col-sm-12 no-margin',
-								'label'				=> 'Crafting',								
-								'subparent_class' 	=> 'col-sm-8  no-wrap',
-								'form_class'		=> 'form-control not_mandatory',
-								'id'				=> 'create_packing_type_crafting',
-								'col'				=> 'packing_type_crafting',
-								'options'			=> $config['packaging_type']['crafting']
-								]
-							];
-
-$config['add_shipment']['Charges'] = [
-								
-								0=>['type' 			=> 'select',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'form_class'		=> 'form-control',
-								'col'				=> 'charges',
-								'id'				=> 'create_charges',
-								'options'			=> array_merge([''=>'Select Charges'],$config['charges'])
-								]
-
-						];
-
-$config['add_shipment']['Additional Charges'] = [
-								
-								['type' 			=> 'input',
-								'label'				=> 'ODA(Outside Delivery Area)',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'form_class'		=> 'form-control',
-								'id'				=> 'create_oda',
-								'col'				=> 'oda',
-								],
-								
-								['type' 			=> 'input',
-								'label'				=> 'Special Handling',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'form_class'		=> 'form-control',
-								'id'				=> 'create_special_handling',
-								'id'				=> 'special_handling',
-								],
-
-								['type' 		=> 'normal',
-								'label'				=> 'Declared Value',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_declared_value',
-								'col'				=> 'declared_value',
-								'form_class'		=> 'form-control not_mandatory',
-								'placeholder' 		=> ''
-								],
-
-								['type' 		=> 'input',
-								'label'				=> 'Fumigation',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_fumigation',
-								'col'				=> 'fumigation',
-								'form_class'		=> 'form-control',
-								],
-
-								['type' 		=> 'input',
-								'label'				=> 'Export Declaration Fee',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_export_declaration_fee',
-								'col'				=> 'export_declaration_fee',
-								'form_class'		=> 'form-control'
-								],
-
-								['type' 		=> 'input',
-								'label'				=> 'Address Correction Charge',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_address_correction_charge',
-								'col'				=> 'address_correction_charge',
-								'form_class'		=> 'form-control'],
-
-								['type' 		=> 'input',
-								'label'				=> 'Residential Delivery',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_residential_delivery',
-								'col'				=> 'residential_delivery',
-								'form_class'		=> 'form-control'],
-
-								['type' 		=> 'input',
-								'label'				=> 'Non Stackable Charge',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_non_stackable_charge',
-								'col'				=> 'non_stackable_charge',
-								'form_class'		=> 'form-control'],
-
-								['type' 		=> 'normal',
-								'label'				=> 'Crafting',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_crafting',
-								'col'				=> 'crafting',
-								'form_class'		=> 'form-control not_mandatory'],
-
-								['type' 		=> 'input',
-								'label'				=> 'Label Cost',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_label_cost',
-								'col'				=> 'label_cost',
-								'form_class'		=> 'form-control'],
-								
-								['type' 		=> 'input',
-								'label'				=> 'DG Charge',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_dg_charge',
-								'col'				=> 'dg_charge',
-								'form_class'		=> 'form-control'],
-
-								['type' 		=> 'input',
-								'label'				=> 'Demmurage Fee',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_demmurage_fee',
-								'col'				=> 'demmurage_fee',
-								'form_class'		=> 'form-control'],
-
-								['type' 		=> 'input',
-								'label'				=> 'Back Load',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_back_load',
-								'col'				=> 'back_load',
-								'form_class'		=> 'form-control'],
-
-								['type' 		=> 'number',
-								'label'				=> 'Total',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_total',
-								'col'				=> 'total',
-								'form_class'		=> 'form-control not_mandatory'],
-
-								['type' 		=> 'number',
-								'label'				=> '12% VAT',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_vat',
-								'col'				=> 'vat',
-								'form_class'		=> 'form-control not_mandatory'],
-
-								['type' 		=> 'number',
-								'label'				=> 'Total Amount Due',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_total_amount_due',
-								'col'				=> 'total_amount_due',
-								'form_class'		=> 'form-control not_mandatory'],
-
-								['type' 		=> 'number',
-								'label'				=> 'Discount Percent',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_discount_percent',
-								'col'				=> 'discount_percent',
-								'form_class'		=> 'form-control not_mandatory'],
-
-								['type' 		=> 'number',
-								'label'				=> 'Final Contract Price',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'create_final_contract_price',
-								'col'				=> 'final_contract_price',
-								'form_class'		=> 'form-control not_mandatory']
-
-							
-						];						
-
 $config['add_shipment']['Recipient Information'] = [
 								
 								['type' 			=> 'input',
@@ -448,7 +165,122 @@ $config['add_shipment']['Recipient Information'] = [
 								'form_class'		=> 'form-control']
 
 							
-						];		
+						];	
+
+$config['add_shipment']['Package Content (Complete Description)'] = [
+								
+								['type' 			=> 'number',
+								'label'				=> 'Total Packages',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'col'				=> 'total_package',
+								'id'				=> 'create_total_package',
+								],
+								['type' 			=> 'select',
+								'label'				=> 'Destination Type',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'col'				=> 'destination_type',
+								'id'				=> 'create_destination_type',
+								'options'			=> array_merge([''=>'Select Destination Type'],$config['destination_type'])
+								],
+
+								['type' 		=> 'input',
+								'label'				=> 'Country/Zone',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_country_zone',
+								'col'				=> 'country_zone',
+								'form_class'		=> 'form-control',
+								],
+
+								['type' 		=> 'input',
+								'label'				=> 'Province/Zone',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_province_zone',
+								'col'				=> 'province_zone',
+								'form_class'		=> 'form-control',
+								],
+
+								['type' 		=> 'normal',
+								'label'				=> 'Dimension',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-6',
+								'id'				=> 'create_dimension',
+								'col'				=> 'dimension',
+								'extra'				=> 'cm.',
+								'form_class'		=> 'form-control',
+								],
+
+								['type' 		=> 'normal',
+								'label'				=> 'Actual Weight',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-6',
+								'id'				=> 'create_actual_weight',
+								'col'				=> 'actual_weight',
+								'extra'				=> 'kg.',
+								'form_class'		=> 'form-control',
+								],
+
+								['type' 		=> 'number',
+								'label'				=> 'Total Declared Value',
+								'parent_class' 		=> 'form-group col-sm-12 no-margin',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_total_declared_value',
+								'col'				=> 'total_declared_value',
+								'form_class'		=> 'form-control',
+								],
+
+								['type' 		=> 'number',
+								'label'				=> 'TDV % Applied',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_tdv_applied',
+								'col'				=> 'tdv_applied',
+								'form_class'		=> 'form-control',
+								],
+
+								['type' 		=> '',
+								'label'				=> 'Packaging Type',
+								'parent_class' 		=> 'col-sm-12 no-margin',
+								'form_class' 		=> 'not_mandatory',
+								],
+
+								['type' 			=> 'radio',
+								'parent_class' 		=> 'form-group col-sm-12 no-margin',
+								'label'				=> 'Document',								
+								'subparent_class' 	=> 'col-sm-8  no-wrap',
+								'form_class'		=> 'form-control not_mandatory',
+								'id'				=> 'create_packing_type_document',
+								'col'				=> 'packing_type_document',
+								'options'			=> $config['packaging_type']['document']
+								],
+
+								['type' 		=> 'radio',
+								'parent_class' 		=> 'form-group col-sm-12 no-margin',
+								'label'				=> 'Parcel',								
+								'subparent_class' 	=> 'col-sm-8  no-wrap',
+								'form_class'		=> 'form-control not_mandatory',
+								'id'				=> 'create_packing_type_parcel',
+								'col'				=> 'packing_type_parcel',
+								'options'			=> $config['packaging_type']['parcel']
+								],
+
+								['type' 		=> 'radio',
+								'parent_class' 		=> 'form-group col-sm-12 no-margin',
+								'label'				=> 'Crating',								
+								'subparent_class' 	=> 'col-sm-8  no-wrap',
+								'form_class'		=> 'form-control not_mandatory',
+								'id'				=> 'create_packing_type_crating',
+								'col'				=> 'packing_type_crating',
+								'options'			=> $config['packaging_type']['crating']
+								]
+							];
+
+
 $config['add_shipment'][' '] = [
 								
 								['type' 			=> 'select',
@@ -504,7 +336,177 @@ $config['add_shipment'][' '] = [
 								'col'				=> 'mode_of_payment',
 								'options'			=> array_merge([''=>'Select Mode of payment'],$config['mode_of_payment'])
 								],
-				];										
+				];							
+
+$config['add_shipment']['Charges'] = [
+								
+								['type' 			=> 'select',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'col'				=> 'charges',
+								'id'				=> 'create_charges',
+								'options'			=> array_merge([''=>'Select Charges'],$config['charges'])
+								]
+
+						];
+
+$config['add_shipment']['Additional Charges'] = [
+								
+								['type' 			=> 'input',
+								'label'				=> 'ODA(Outside Delivery Area)',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'id'				=> 'create_oda',
+								'col'				=> 'oda',
+								],
+								
+								['type' 			=> 'input',
+								'label'				=> 'Special Handling',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'form_class'		=> 'form-control',
+								'id'				=> 'create_special_handling',
+								'id'				=> 'special_handling',
+								],
+
+								['type' 		=> 'number',
+								'label'				=> 'Declared Value',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_declared_value',
+								'col'				=> 'declared_value',
+								'form_class'		=> 'form-control not_mandatory',
+								'placeholder' 		=> ''
+								],
+
+								['type' 		=> 'input',
+								'label'				=> 'Fumigation',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_fumigation',
+								'col'				=> 'fumigation',
+								'form_class'		=> 'form-control',
+								],
+
+								['type' 		=> 'input',
+								'label'				=> 'Export Declaration Fee',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_export_declaration_fee',
+								'col'				=> 'export_declaration_fee',
+								'form_class'		=> 'form-control'
+								],
+
+								['type' 		=> 'input',
+								'label'				=> 'Address Correction Charge',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_address_correction_charge',
+								'col'				=> 'address_correction_charge',
+								'form_class'		=> 'form-control'],
+
+								['type' 		=> 'input',
+								'label'				=> 'Residential Delivery',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_residential_delivery',
+								'col'				=> 'residential_delivery',
+								'form_class'		=> 'form-control'],
+
+								['type' 		=> 'input',
+								'label'				=> 'Non Stackable Charge',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_non_stackable_charge',
+								'col'				=> 'non_stackable_charge',
+								'form_class'		=> 'form-control'],
+
+								['type' 		=> 'input',
+								'label'				=> 'Crating',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_crating',
+								'col'				=> 'crating',
+								'form_class'		=> 'form-control not_mandatory'],
+
+								['type' 		=> 'input',
+								'label'				=> 'Label Cost',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_label_cost',
+								'col'				=> 'label_cost',
+								'form_class'		=> 'form-control'],
+								
+								['type' 		=> 'input',
+								'label'				=> 'DG Charge',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_dg_charge',
+								'col'				=> 'dg_charge',
+								'form_class'		=> 'form-control'],
+
+								['type' 		=> 'input',
+								'label'				=> 'Demmurage Fee',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_demmurage_fee',
+								'col'				=> 'demmurage_fee',
+								'form_class'		=> 'form-control'],
+
+								['type' 		=> 'input',
+								'label'				=> 'Back Load',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_back_load',
+								'col'				=> 'back_load',
+								'form_class'		=> 'form-control'],
+
+								['type' 		=> 'number',
+								'label'				=> 'Total',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_total',
+								'col'				=> 'total',
+								'form_class'		=> 'form-control'],
+
+								['type' 		=> 'number',
+								'label'				=> '12% VAT',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_vat',
+								'col'				=> 'vat',
+								'form_class'		=> 'form-control'],
+
+								['type' 		=> 'number',
+								'label'				=> 'Total Amount Due',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_total_amount_due',
+								'col'				=> 'total_amount_due',
+								'form_class'		=> 'form-control'],
+
+								['type' 		=> 'number',
+								'label'				=> 'Discount Percent',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_discount_percent',
+								'col'				=> 'discount_percent',
+								'form_class'		=> 'form-control'],
+
+								['type' 		=> 'number',
+								'label'				=> 'Final Contract Price',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create_final_contract_price',
+								'col'				=> 'final_contract_price',
+								'form_class'		=> 'form-control']
+
+							
+						];						
+
+											
 
 
 ?>

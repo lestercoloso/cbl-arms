@@ -42,7 +42,7 @@ $config['book_shipment'][] = [
 								'id'				=> 'create_customer_id',
 								'col'				=> 'customer_id'],
 
-								['type' 		=> 'input',
+								['type' 		=> 'normal',
 								'label'				=> 'Address',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -163,7 +163,7 @@ $config['book_shipment'][] = [
 								'form_class'		=> 'form-control'],
 
 								['type' 			=> 'input',
-								'label'				=> 'Document / Parcel',
+								'label'				=> 'Document/Parcel',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
 								'form_class'		=> 'form-control',
@@ -188,7 +188,7 @@ $config['book_shipment'][] = [
 
 								
 								['type'		 		=> 'number',
-								'label'				=> 'Length (Dimension)',
+								'label'				=> 'Length',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-6',
 								'id'				=> 'create_length',
@@ -199,7 +199,7 @@ $config['book_shipment'][] = [
 
 								
 								['type'		 		=> 'number',
-								'label'				=> 'Width (Dimension)',
+								'label'				=> 'Width',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-6',
 								'id'				=> 'create_width',
@@ -209,7 +209,7 @@ $config['book_shipment'][] = [
 								],
 								
 								['type'		 		=> 'number',
-								'label'				=> 'Height (Dimension)',
+								'label'				=> 'Height',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-6',
 								'id'				=> 'create_height',
@@ -436,7 +436,7 @@ $config['inventory'][] = [
 $config['inventory'][] = [ 
 
 								['type'		 		=> 'number',
-								'label'				=> 'Length (Dimension)',
+								'label'				=> 'Length',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-6',
 								'id'				=> 'additional-length',
@@ -446,7 +446,7 @@ $config['inventory'][] = [
 								],
 
 								['type'		 		=> 'number',
-								'label'				=> 'Width (Dimension)',
+								'label'				=> 'Width',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-6',
 								'id'				=> 'additional-width',
@@ -456,7 +456,7 @@ $config['inventory'][] = [
 								],
 								
 								['type'		 		=> 'number',
-								'label'				=> 'Height (Dimension)',
+								'label'				=> 'Height',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-6',
 								'id'				=> 'additional-height',

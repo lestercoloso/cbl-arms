@@ -1,6 +1,6 @@
 
 var searchdata = "";
-
+var updateid = "";
 var search = {
 	init: function(){
 		$('#bill_of_lading_to_container, #bill_of_lading_from_container').datetimepicker({
@@ -43,6 +43,10 @@ var billoflading = {
 			billoflading.save();
 		});	
 
+		$('#updatebilling').click(function(){
+			billoflading.update();
+		});	
+
 		$('#booking_no').change(function(){
 			var booking_no = $(this).val();
 			var bookingid = $(this).find(':selected').data('bookingid');
@@ -72,11 +76,102 @@ var billoflading = {
 	},
 	createBillOfLading: function(){
 		$('#create_bill_of_lading').modal();
+		$('#create_bill_of_lading .modal-title').html('Add Bill of Lading');
 		billoflading.clear();
 		billoflading.getbookingno();
+		$('#updatebilling').hide();
+		$('#savenewbilling').show();
+		$('#clearnewbilling').show();		
 	},
 
-	save: function(){
+	edit: function(id){
+		updateid = id;
+		$('#booking_no').chosen('destroy');
+		$('#create_bill_of_lading').modal();
+		$('#create_bill_of_lading .modal-title').html('Edit Bill of Lading');		
+		$('#updatebilling').show();
+		$('#savenewbilling').hide();
+		$('#clearnewbilling').hide();
+
+		$.post("backstage/billoflading/boldetails/"+id, {},function(data){
+			$('#booking_no').html("<option value='"+data.book_id+"'>"+pad(data.book_id,10,'0')+"</option>");
+			$('#bill_no').val(pad(data.bill_no,10,'0'));
+			$('#bill_client_id').val(data.client_id);
+
+			$.each(JSON.parse(data.shipper_information), function( index, value ) {
+				$('.form_1 input[col="'+index+'"], .form_1 select[col="'+index+'"]').val(value);
+			});	
+
+			$.each(JSON.parse(data.recipient_information), function( index, value ) {
+				$('.form_2 input[col="'+index+'"], .form_2 select[col="'+index+'"]').val(value);
+			});
+
+			var pack_cont = JSON.parse(data.package_content);
+			$.each(pack_cont, function( index, value ) {
+				$('.form_3 input[type="number"][col="'+index+'"], .form_3 input[type="text"][col="'+index+'"], .form_3 select[col="'+index+'"]').val(value);
+			});
+
+			$('.form_3 input[type="radio"][value="'+pack_cont.packing_type_document+'"]').prop("checked", true);
+			$('.form_3 input[type="radio"][value="'+pack_cont.packing_type_parcel+'"]').prop("checked", true);
+			$('.form_3 input[type="radio"][value="'+pack_cont.packing_type_crating+'"]').prop("checked", true);
+
+			$.each(JSON.parse(data.others), function( index, value ) {
+				$('.form_4 input[col="'+index+'"], .form_4 select[col="'+index+'"]').val(value);
+			});
+
+			$.each(JSON.parse(data.charges), function( index, value ) {
+				$('.form_5 input[col="'+index+'"], .form_5 select[col="'+index+'"]').val(value);
+			})
+
+			$.each(JSON.parse(data.additional_charges), function( index, value ) {
+				$('.form_6 input[col="'+index+'"], .form_6 select[col="'+index+'"]').val(value);
+			});
+		});
+
+	},
+
+	update: function(){
+
+		var form1 = createPostData('form_1');
+		var form2 = createPostData('form_2');
+		var form3 = createPostData('form_3');
+		var form4 = createPostData('form_4');
+		var form5 = createPostData('form_5');
+		var form6 = createPostData('form_6');
+
+		if(form1['error'] || form2['error'] || form3['error'] || form4['error'] || form5['error'] || form6['error']){
+			toastr["error"]('Complete the fields');
+		}else{
+			$('#updatebilling').addClass('disabled');
+			$('#updatebilling i').removeClass('hide');
+
+			$.post("backstage/billoflading/update/"+updateid, {
+				shipper_information:JSON.stringify(form1['data']), 
+				recipient_information: JSON.stringify(form2['data']), 
+				package_content: JSON.stringify(form3['data']), 
+				others: JSON.stringify(form4['data']),
+				charges: JSON.stringify(form5['data']), 
+				additional_charges: JSON.stringify(form6['data']) 
+			},function(data){
+    			if(data.status==200){
+						toastr["success"]('Successfully updated.');
+						$('#create_bill_of_lading').modal('hide');
+						$('#updatebilling').removeClass('disabled');
+						$('#updatebilling i').addClass('hide');
+						billoflading.getbilllist();
+				}else{
+					toastr["error"]('Network error!<br> Please try again.');	
+				}
+    		}).fail(function(){
+				toastr["error"]('Error.');
+				$('#updatebilling').removeClass('disabled');
+				$('#updatebilling i').addClass('hide');
+			});
+
+
+		}
+
+	},	save: function(){
 
 		var form1 = createPostData('form_1');
 		var form2 = createPostData('form_2');
@@ -92,7 +187,15 @@ var billoflading = {
 			$('#savenewbilling').addClass('disabled');
 			$('#savenewbilling i').removeClass('hide');
 
-			$.post("backstage/billoflading/save/", {d:d['data'], shipper_information:JSON.stringify(form1['data']), package_content: JSON.stringify(form2['data']), charges: JSON.stringify(form3['data']), additional_charges: JSON.stringify(form4['data']), recipient_information: JSON.stringify(form5['data']), others: JSON.stringify(form6['data']) },function(data){
+			$.post("backstage/billoflading/save/", {
+				d:d['data'], 
+				shipper_information:JSON.stringify(form1['data']), 
+				recipient_information: JSON.stringify(form2['data']), 
+				package_content: JSON.stringify(form3['data']), 
+				others: JSON.stringify(form4['data']),
+				charges: JSON.stringify(form5['data']), 
+				additional_charges: JSON.stringify(form6['data']) 
+			},function(data){
     			if(data.status==200){
 						toastr["success"]('Successfully added.');
 						$('#create_bill_of_lading').modal('hide');
@@ -111,7 +214,6 @@ var billoflading = {
 
 		}
 
-
 	},
 	clear: function(){
 		billoflading.form('form_1');
@@ -129,8 +231,20 @@ var billoflading = {
 	form: function(classused){
 		$('.'+classused+' div').removeClass('has-error');	
 		$('.'+classused).removeClass('has-error');	
-		$('.'+classused+' input, .'+classused+' select').val('');
+		$('.'+classused+' input[type="text"], .'+classused+' input[type="number"], .'+classused+' select').val('');
+		$('.'+classused+' .first').attr('checked', 'checked');
 	},
+	delete: function(id){
+		if(confirm('Are you sure you want to delete this?')){
+			$.post("backstage/billoflading/delete/"+id, {},function(data){
+				toastr["success"]('Successfully removed.');
+				billoflading.getbilllist();
+			}).fail(function(){
+				toastr["error"]("Failed to load the inbound list.");
+			});					
+		}
+	},
+
 	getbookingno: function(){
 		var d = $('#booking_no');
 		if(d.html().trim()==''){
@@ -158,7 +272,7 @@ var billoflading = {
 				var action = '<button type="button" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
 				action += ' <button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
 				
-				content +='<tr id="booking-'+value.id+'">';
+				content +='<tr id="booking-'+value.id+'" data-id="'+value.id+'">';
 				content +='<td class="centered"><input type="checkbox" value="" id="check-'+value.id+'"></td>';
 				content +='<td class="centered">'+value.bill_no+'</td>';
 				content +='<td>'+value.recipient+'</td>';
@@ -177,7 +291,10 @@ var billoflading = {
 			});
 			
 			$('#search_result_list .btn-success').click(function(){
-				billoflading.edit($(this).parent().parent().attr('id'));
+				billoflading.edit($(this).parent().parent().data('id'));
+			});
+			$('#search_result_list .btn-danger').click(function(){
+				billoflading.delete($(this).parent().parent().data('id'));
 			});
 
 		}).fail(function(){

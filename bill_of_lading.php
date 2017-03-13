@@ -79,7 +79,7 @@
   <thead>
     <tr>
       <th><input type="checkbox" value=""></th>
-      <th>Bill of<br>Landing No.</th>
+      <th>Bill of<br>Lading No.</th>
       <th>Recipient</th>
       <th>Shipper</th>
       <th>Bill of Lading Date</th>
@@ -132,7 +132,7 @@
 $i = 0;
 foreach($config['add_shipment'] as $label => $forms){
 	$i++;
-	echo '<div class="col-sm-4 no-pad form_'.$i.'" id="add_billing_container_'.$i.'">';
+	echo '<div class="no-pad form_'.$i.'" id="add_billing_container_'.$i.'">';
 	echo '<div class="col-sm-12 bordered">';
 	echo "<label>$label</label>";
 	echo construct_form($forms);				
@@ -151,6 +151,7 @@ foreach($config['add_shipment'] as $label => $forms){
 		</div>
 		<div class="modal-footer">
 		<button type="button" class="btn btn-default" id="savenewbilling"><i class="fa fa-circle-o-notch fa-spin hide" style=""></i> Save</button>
+		<button type="button" class="btn btn-default" id="updatebilling"><i class="fa fa-circle-o-notch fa-spin hide" style=""></i> Update</button>
 		<button type="button" class="btn btn-default" id="clearnewbilling">Clear</button>
 		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		</div>

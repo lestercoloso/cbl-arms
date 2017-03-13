@@ -57,7 +57,14 @@ class Booking{
 		jdie($select);	
 	}
 	public function getcontacts($costumer_id=''){
-		$select['area'] = $this->db->select_one('select area_1, area_2, area_3, area_4, area_5  from customer_information where id='.$costumer_id  );
+		$customer = $this->db->select_one('select area_1, area_2, area_3, area_4, area_5, address  from customer_information where id='.$costumer_id  );
+
+		$select['area'][] = $customer['area_1'];
+		$select['area'][] = $customer['area_2'];
+		$select['area'][] = $customer['area_3'];
+		$select['area'][] = $customer['area_4'];
+		$select['area'][] = $customer['area_5'];
+		$select['address'] = $customer['address'];
 		$select['contact'] = $this->db->select('select id, department, concat(`last_name`, \', \', `first_name`,\' \', `middle_initial`) as name from customer_contact where customer_id='.$costumer_id  )['data'];
 		jdie($select);
 	}

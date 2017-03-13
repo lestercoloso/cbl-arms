@@ -143,7 +143,7 @@ function construct_form($arr){
 					}
 
 					$return .='<label class="radio-inline">
-								<input type="radio"  value="'.$key.'" class="'.$cls.'" col="'.$data['col'].'" name="'.$data['col'].'" '.$checked.'>'.$option.'
+								<input type="radio"  value="'.$option.'" class="'.$cls.'" col="'.$data['col'].'" name="'.$data['col'].'" '.$checked.'>'.$option.'
 								</label>';
 				}
 			}

@@ -23,5 +23,8 @@ CREATE TABLE `inventory` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
 
+ALTER TABLE `bill_of_lading` 
+ADD COLUMN `amount` FLOAT NOT NULL DEFAULT 0.00 AFTER `shipper`;
+
 
 
