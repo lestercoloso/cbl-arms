@@ -162,7 +162,7 @@ $config['add_shipment'][] = [
 							];
 
 		$config['add_shipment'][] = [
-								0 => ['type' 		=> 'select',
+								['type' 		=> 'select',
 								'label'				=> 'Sub-Inv Location type',
 								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
@@ -172,7 +172,7 @@ $config['add_shipment'][] = [
 								'options' 			=> array_merge([''=>'Please Select'], $config['subinventory_type'])
 								],
 
-								1 => ['type' 		=> 'input',
+								['type' 		=> 'input',
 								'label'				=> 'Location',
 								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
@@ -180,7 +180,7 @@ $config['add_shipment'][] = [
 								'col'				=> 'location',
 								'form_class'		=> 'form-control'],
 
-								2 => ['type' 		=> 'date',
+								['type' 		=> 'date',
 								'label'				=> 'Expiration Date',
 								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
@@ -188,7 +188,7 @@ $config['add_shipment'][] = [
 								'col'				=> 'ex_date',
 								'form_class'		=> 'form-control'],
 
-								3 => ['type' 		=> 'date',
+								 ['type' 		=> 'date',
 								'label'				=> 'Entry Date',
 								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
@@ -196,7 +196,7 @@ $config['add_shipment'][] = [
 								'col'				=> 'en_date',
 								'form_class'		=> 'form-control'],
 
-								4 => ['type' 		=> 'date',
+								['type' 		=> 'date',
 								'label'				=> 'Pickup Date',
 								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
@@ -206,6 +206,62 @@ $config['add_shipment'][] = [
 							];		
 
 
+
+	$config['inventory'][] = [
+								['type' 		=> 'number',
+								'label'				=> 'IRR #',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'inventory_irr_number',
+								'col'				=> 'irr_number',
+								'form_class'		=> 'form-control'
+								],
+
+								['type' 		=> 'date',
+								'label'				=> 'IRR Date',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'inventory_irr_date',
+								'col'				=> 'irr_date',
+								'form_class'		=> 'form-control'],
+							];		
+
+$config['inventory'][] = [
+								['type' 		=> 'number',
+								'label'				=> 'DR Ref #',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'inventory_irr_number',
+								'col'				=> 'irr_number',
+								'form_class'		=> 'form-control'
+								],
+								['type' 		=> 'number',
+								'label'				=> 'SI Ref #',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'inventory_irr_number',
+								'col'				=> 'irr_number',
+								'form_class'		=> 'form-control'
+								]
+							];	
+$config['inventory'][] = [
+								['type' 		=> 'input',
+								'label'				=> 'Unit Type',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'inventory_unit_type',
+								'col'				=> 'unit_type',
+								'form_class'		=> 'form-control'
+								],
+								['type' 		=> 'input',
+								'label'				=> 'Client Name',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'inventory_client_name',
+								'col'				=> 'client_name',
+								'form_class'		=> 'form-control'
+								]
+							];	
 
 
 ?>

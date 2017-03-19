@@ -53,7 +53,7 @@ $config['create_customer'][] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'create_company_anniversary',
 								'col'				=> 'company_anniversary',
-								'form_class'		=> 'form-control',
+								'form_class'		=> 'form-control not_mandatory',
 								],
 
 								['type' 			=> 'input',
@@ -221,7 +221,7 @@ $config['create_customer'][] = [
 								'id'				=> 'create_preferred_supplier',
 								'col'				=> 'preferred_supplier',
 								'options'			=> array_merge([''=>'Select Preferred Supplier'],$config['preferred_supplier']),						
-								'form_class'		=> 'form-control'],
+								'form_class'		=> 'form-control not_mandatory'],
 
 								['type' 			=> 'input',
 								'title'				=> 'Price List (Domestic Sea)',
@@ -294,7 +294,7 @@ $config['create_customer'][] = [
 								'label'				=> 'Follow Up Day',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
-								'form_class'		=> 'form-control',
+								'form_class'		=> 'form-control not_mandatory',
 								'col'				=> 'follow_up_day',
 								'id'				=> 'create_follow_up_day',
 								],
@@ -330,7 +330,7 @@ $config['create_customer'][] = [
 								'form_class'		=> 'form-control',
 								'id'				=> 'create_billing_format',
 								'col'				=> 'billing_format',
-								'options'			=> array_merge([''=>'Select Billing Format'],$config['billing_format']),								
+								'options'			=> $config['billing_format'],								
 								],
 
 								

@@ -473,6 +473,11 @@ var booking = {
 		booking.constructvehicle();	
 		booking.constructinventory();	
 
+		$('#create_address_container').hide();
+		$('#create_area_container').hide();
+		$('#create_contact_person_container').hide();
+		$('#create_department_container').hide();
+
 	},
 	form: function(classused){
 		$('.'+classused+' div').removeClass('has-error');	
@@ -490,7 +495,9 @@ var booking = {
 
 	getcontacts: function(id, t1='', t2=''){
 		var content1 = '<option value="">Select Area</option>';
+		var content1 = '';
 		var content2 = '<option value="">Select Contact Person</option>';
+		var content2 = '';
 		$.post("backstage/booking/getcontacts/"+id, {},function(data){
 			$.each(data.area, function( index, value ) {
 				if(value.trim()!=''){
@@ -504,8 +511,20 @@ var booking = {
 			$('#create_area').html(content1);
 			$('#create_contact_person').html(content2);
 			$('#create_address').val(data.address);
-			$('#create_area').val(t1);
-			$('#create_contact_person').val(t2);	
+			if(t1!=''){
+				$('#create_area').val(t1);			
+			}
+
+			if(t2!=''){
+				$('#create_contact_person').val(t2);					
+			}
+
+
+			$('#create_address_container').show();
+			$('#create_area_container').show();
+			$('#create_contact_person_container').show();
+			$('#create_department_container').show();
+
 		});
 	},
 

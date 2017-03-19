@@ -47,14 +47,19 @@ function addStorage(){
 			if(value.style==null){
 				value.style = 'position:absolute;';
 			}
-			content +='<div id="rack-'+value.id+'" class="rackStorage" data-type="rack" data-rackcode="'+value.code+'" data-rackwidth="'+value.rack_width+'" data-racklength="'+value.rack_length+'"  data-racklevel="'+value.no_rack_level+'" data-racklevelheight="'+value.rack_level_height+'" style="height:'+value.rack_width.trim()+'px;width:'+value.rack_length+'px;'+value.style+'">'+deletebutton+rotate+'</div>';
+			var width 	= (parseInt(value.rack_width)*0.01)*warehouse_scale;
+			var length 	= (parseInt(value.rack_length)*0.01)*warehouse_scale;
+			content +='<div id="rack-'+value.id+'" class="rackStorage" data-type="rack" data-rackcode="'+value.code+'" data-rackwidth="'+value.rack_width+'" data-racklength="'+value.rack_length+'"  data-racklevel="'+value.no_rack_level+'" data-racklevelheight="'+value.rack_level_height+'" style="height:'+width+'px;width:'+length+'px;'+value.style+'">'+deletebutton+rotate+'</div>';
 		});		
 
 		$.each(bdatas, function( index, value ) {
 			if(value.style==''){
 				value.style = 'transform: rotate(0deg)';
 			}
-			content +='<div class="bayStorage" id="bay-'+value.id+'"  data-type="bay" data-baycode="'+value.code+'" data-baywidth="'+value.bay_width+'" data-baylength="'+value.bay_length+'"  style="height:'+value.bay_width+'px;width:'+value.bay_length+'px;'+value.style+'">'+deletebutton+rotate+'</div>';
+			var width 	= value.bay_width;
+			var length 	= value.bay_length;
+
+			content +='<div class="bayStorage" id="bay-'+value.id+'"  data-type="bay" data-baycode="'+value.code+'" data-baywidth="'+width+'" data-baylength="'+length+'"  style="height:'+value.bay_width+'px;width:'+value.bay_length+'px;'+value.style+'">'+deletebutton+rotate+'</div>';
 		});
 
 		$('.warehouse_container').append(content);
@@ -132,7 +137,7 @@ function openShelves(id){
 		$('#shelf_container').html(content);
 		
 		$('.rack-level').click(function(){
-			viewShelve($(this).data('racklevel'), 3);
+			// viewShelve($(this).data('racklevel'), 3);
 		});
 
 		viewShelve();

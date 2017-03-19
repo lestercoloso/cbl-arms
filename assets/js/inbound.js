@@ -14,26 +14,7 @@
 
 function addShipment(){
 	$('#add_shipment').modal();
-	// $( "#add_shipment" ).dialog('destroy');
-	// $( "#add_shipment" ).dialog({
-	//       autoOpen: true,
-	//       width: 1100,
-	//       modal: true,
-	//  	  resizable: false,
-	//  	  movable: false,
-	//  	  draggable: false, 
-	//  	  buttons: {
-	// 		        Save: function() {
-	// 		          saveStorage(this);
-	// 		        },			        
-	// 		        Clear: function() {
-	// 		          cleardata();
-	// 		        },
-	// 		        Cancel: function() {
-	// 		          $( this ).dialog( "close" );
-	// 		        }
- //      	  }
-	// });	
+	shipment.cleardata();
 }
 
 var searchdata = "";
@@ -132,8 +113,10 @@ var search = {
 var shipment = {
     init: function() {
 		$('#addnewshipment').click( function(){
-			shipment.addShipment();
-			shipment.cleardata();
+			shipment.addInventory();
+		});
+		$('#saveinventory').click( function(){
+			shipment.saveInventory();
 		});
 
 		$('#savenewshipment').click( function(){
@@ -327,8 +310,16 @@ var shipment = {
 		}
 
 	},
-	addShipment: function(){
+
+	addInventory: function(){
+		$('#inventory_modal').modal();
 		
+	},
+	saveInventory: function(){
+		$('#inventory_modal').modal('hide');
+		shipment.addShipment();
+	},
+	addShipment: function(){
 		$('#add_shipment').modal();
 		$('#add_shipment .modal-title').html('Add Shipment');
 

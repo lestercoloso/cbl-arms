@@ -43,7 +43,7 @@ class Billoflading{
 		$searchdata = (!empty($_POST['searchdata'])) ? json_decode($_POST['searchdata'], TRUE) : [];
 		$where = $this->db->where_search(['status'=>1]);
 
-		$sql = "select id, LPAD(`bill_no`, 10, '0') as bill_no, recipient, shipper, DATE_FORMAT(`created_date`,'%m/%d/%Y') as bill_date, amount, ' - ' as bill_status
+		$sql = "select id, LPAD(`bill_no`, 10, '0') as bill_no, recipient, shipper, DATE_FORMAT(`created_date`,'%m/%d/%Y') as bill_date, FORMAT(`amount`, 2) as amount, ' - ' as bill_status
 		    from bill_of_lading $where $additional";
 		$data = $this->db->select($sql);
 		$datatotal = $this->db->select_one("select count(id) as total from bill_of_lading $where limit 1" )['total'];

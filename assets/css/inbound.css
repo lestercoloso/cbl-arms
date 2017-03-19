@@ -241,3 +241,52 @@ input[type="text"]{
     font-weight: 100;
     font-size: 11px;
 }
+
+#inventory_modal .custom-class {
+        margin-top: 7%;
+        width: 60%; /* either % (e.g. 60%) or px (400px) */
+    }
+#inventory_modal .modal-body {
+       height: 350px;
+    }
+
+#inventory_modal label{
+    white-space: nowrap;
+}    
+#inventory_modal .form-group{
+    padding-left: 0px;
+    padding-right: 0px;
+}  
+#inventory_modal .date {
+    margin: 0px 0;
+} 
+#inventory_modal .form-control {
+    height: 25px;
+} 
+#inventory_modal .input-group-addon {
+    font-size: 11px;
+}
+
+.inventory_label{
+text-transform: uppercase;
+    border: solid 1px #cccccc;
+    text-align: center;
+    height: 28px;
+    float: left;
+    width: 100%;
+    margin-top: 20px;
+    line-height: 26px;
+    margin-bottom: 5px;
+}
+
+#inventory-list th{
+    text-align: center;
+}
+#inventory-list .btn{
+    padding: 3px 7px;
+    font-size: 11px;
+}
+
+#inventory-list th, #inventory-list td{
+        font-size: 11px;
+}

@@ -171,16 +171,16 @@ foreach($config['book_shipment'] as $forms){
 	<div class="col-sm-12 border_container">
 			
 			<div class="col-sm-12">
-<!-- 				<div class="selector select_active" id="inventory_select">
+				<div class="selector select_active" id="inventory_select">
 					<i class="fa fa-inbox" aria-hidden="true"></i><div> INVENTORY </div>
-				</div> -->
-				<div class="selector select_active" id="vehicle_select">
+				</div>
+				<div class="selector select_inactive" id="vehicle_select">
 				<i class="fa fa-truck" aria-hidden="true"></i><div> VEHICLE </div>
 				</div>
 			</div>
 
 			<div class="col-sm-12 border_container" id="additional_table">
-				<table class="table table-bordered table-striped table-list border_table" id="inventory_selected" style="display: none;">
+				<table class="table table-bordered table-striped table-list border_table" id="inventory_selected" style="display: table;">
 				<thead>
 				<tr>
 				<th>Item ID</th>
@@ -203,7 +203,7 @@ foreach($config['book_shipment'] as $forms){
 				<tfoot><tr><td colspan="14"><button id="add_new_inventory" class="button-class custombutton">Add Inventory</button></td></tr></tfoot>		
 				</table>
 
-				<table class="table table-bordered table-striped table-list border_table" id="vehicle_selected" style="display: table;">
+				<table class="table table-bordered table-striped table-list border_table" id="vehicle_selected" style="display: none;">
 				<thead>
 				<tr>
 				<th>Vehicle Type</th>

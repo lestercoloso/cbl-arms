@@ -78,7 +78,11 @@ function construct_form($arr){
 
 
 		$return .='<div class="'.$data['parent_class'].'" id="'.$data['id'].'_container"  title="'.$data['title'].'">';
-		
+
+			if(stristr($data['form_class'], 'not_mandatory') === FALSE) {
+				$data['label'] = $data['label']." *";
+			}
+
 		if(!empty($data['label'])){
 			if(empty($data['label_class'])){
 				$return	.='<label class="col-sm-4">'.$data['label'].'</label>';	

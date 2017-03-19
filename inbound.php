@@ -14,7 +14,11 @@ require_once("helper/utility_helper.php");
 require_once('config/add_shipment_forms.php');
 ?>
 
+<script type="text/javascript">
+	
+	var warehouse_scale = 1.6;
 
+</script>
 	    
 
 
@@ -216,6 +220,73 @@ require_once('config/add_shipment_forms.php');
 		</div>
 		</div>
 		</div>
+
+
+<div id="inventory_modal" class="modal fade" role="dialog">
+	<div class="modal-dialog custom-class">
+	 <div class="modal-content">
+	
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Inbound/Receiving Report</h4>
+		</div>
+
+		<div class="modal-body">
+<?php
+			foreach($config['inventory'] as $forms){
+				echo '<div class="col-sm-4" id="" style="padding-left: 0px;">';
+				echo construct_form($forms);				
+				echo '</div>';
+			}
+
+?>
+		<div class="inventory_label">Inbound/Receiving Report</div>
+
+
+<table class="table table-bordered  table-striped" id="inventory-list">
+  <thead>
+    <tr>
+      <th>PC ID #</th>
+      <th>Item No.</th>
+      <th>Material Description</th>
+      <th>QTY</th>
+      <th>UOM</th>
+      <th>Batch Code</th>
+      <th>Expiry Date</th>
+      <th>CBM</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="centered" contenteditable></td>
+      <td  contenteditable></td>
+      <td  contenteditable></td>
+      <td  contenteditable class="numeric">0</td>
+      <td  contenteditable></td>
+      <td  contenteditable></td>
+      <td  contenteditable></td>
+      <td  contenteditable></td>
+      <td class="centered">
+      	<button type="button" class="btn btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>
+      	<button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+		</div>
+		<div class="modal-footer">
+          <button type="button" class="btn btn-default" id="saveinventory"><i class="fa fa-circle-o-notch fa-spin hide" style=""></i> Save</button>
+          <button type="button" class="btn btn-default" id="clearinventory">Clear</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+		</div>
+		</div>
+</div>
+
 
 
 	<div id="pullout_shipment" class="modal fade col-sm-12 " role="dialog">

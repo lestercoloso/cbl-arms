@@ -278,6 +278,7 @@ var customer = {
 		address = [];
 		customer.constructaddtional('c');
 		customer.constructaddtional('a');
+		$('#create_billing_format').val('Default Format');
 	},
 	form: function(classused){
 		$('.'+classused+' div').removeClass('has-error');	

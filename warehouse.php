@@ -27,7 +27,11 @@ $version =rand();
 <link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
 <link rel="stylesheet" href="/bower_components/chosen/chosen.css" />
 <!-- end  -->
+<script type="text/javascript">
+	
+	var warehouse_scale = 1.6;
 
+</script>
 </head>
 
 

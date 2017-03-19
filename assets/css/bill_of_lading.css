@@ -1,8 +1,10 @@
 #create_bill_of_lading .modal-dialog{
-	width: 1100px;
+    width: 100%;
+	width: 1317px;
+        margin-top: 0px;
 }
 #create_bill_of_lading .modal-body{
-    height: 70%;
+    height: 80%;
     overflow: auto;
 }
 .bordered{
@@ -69,25 +71,34 @@
 .no-pad{
     padding: 0px;
     padding-right: 10px;
-    width: 353px;
+    width: 33%;
+    width: 429px;
 }
 .form_3, .form_4, .form_5, .form_6{
     position: absolute;
     top: 82px;
-    left: 369px;
+    left: 33.333%;
+        left: 440px;
 }
 .form_4{
     top: 425px;
+    top: 413px;
 }
-.form_6{
+/*.form_6{
     top: 160px;
-}
+}*/
 .form_5, .form_6{
-        left: 723px;
+        left: 67%;
+        left: 866px;
+}
+.form_5{
+    display: none;
 }
 #add_billing_container_2 .bordered{
        height: 358px; 
+       height: 235px; 
 }
 #add_billing_container_4 .bordered{
        height: 317px; 
+       height: 206px; 
 }

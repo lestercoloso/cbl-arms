@@ -55,9 +55,49 @@ var billoflading = {
 			billoflading.getbookingdata(booking_no, bookingid);
 		});		
 
+		$('#create_bill_of_lading input[type="number"]').bind('keyup keydown change',function(){
+			billoflading.compute_billing();
+		});		
+
 		billoflading.getbilllist();
 
+		$('#create_vat').attr('disabled','disabled');
+		$('#create_declared_value').attr('disabled','disabled');
+		$('#create_total').attr('disabled','disabled');
+		$('#create_total_amount_due').attr('disabled','disabled');
+		$('#create_final_contract_price').attr('disabled','disabled');
+
 	},
+	compute_billing: function(){
+		var tdv 			= $('#create_total_declared_value').val();
+		var tdvapplied 		= $('#create_tdv_applied').val()*0.01;
+		var declared_value 	= parseInt(tdv)+(tdv*tdvapplied);
+		$('#create_declared_value').val(declared_value);
+
+
+		var fumigation 	= $('#create_fumigation').val();
+		var exp_fee 	= $('#create_export_declaration_fee').val();
+		var acc 	 	= $('#create_address_correction_charge').val();
+		var rd  	 	= $('#create_residential_delivery').val();
+		var nsc  	 	= $('#create_non_stackable_charge').val();
+		var crating  	= $('#create_crating').val();
+		var labelcost  	= $('#create_label_cost').val();
+		var dgcharge  	= $('#create_dg_charge').val();
+		var backload  	= $('#create_back_load').val();
+		var total   	= parseInt(declared_value)+parseInt(fumigation)+parseInt(exp_fee)+parseInt(acc)+parseInt(rd)+parseInt(nsc)+parseInt(crating)+parseInt(labelcost)+parseInt(dgcharge)+parseInt(backload);	
+		$('#create_total').val(total);
+		var vat 	    = (total*0.12);
+		var plusvat 	= parseInt(total)+(total*0.12);
+		$('#create_vat').val(vat);
+		$('#create_total_amount_due').val(plusvat);
+
+		var discount  	= $('#create_discount_percent').val()*0.01;
+		$('#create_final_contract_price').val(parseInt(plusvat)-(plusvat*discount));
+
+
+
+	},
+
 	getbookingdata: function(bookingno, bookingid){
 		$('#bill_no').val(bookingno);
 		$.post("backstage/billoflading/getbookingdetails/"+bookingid, {},function(data){
@@ -82,6 +122,7 @@ var billoflading = {
 		$('#updatebilling').hide();
 		$('#savenewbilling').show();
 		$('#clearnewbilling').show();		
+		$('#create_bill_of_lading input[type="number"]').val(0);
 	},
 
 	edit: function(id){
@@ -278,7 +319,7 @@ var billoflading = {
 				content +='<td>'+value.recipient+'</td>';
 				content +='<td>'+value.shipper+'</td>';
 				content +='<td>'+value.bill_date+'</td>';
-				content +='<td>'+value.amount+'</td>';
+				content +='<td class="numeric">'+value.amount+'</td>';
 				content +='<td>'+value.bill_status+'</td>';
 				content +='<th>'+action+'</th>';
 				content +='</tr>';
