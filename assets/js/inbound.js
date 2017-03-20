@@ -1,6 +1,6 @@
 var inventory = [];       
             $(function () {
-               $('#exdate_group, #endate_group, #pudate_group, .create-date').datetimepicker({
+               $('#exdate_group, #endate_group, #pudate_group, .create-date, #inventory_irr_date').datetimepicker({
                  format: 'MM/DD/YYYY',
                  useCurrent: false
            		});               
@@ -162,10 +162,25 @@ var shipment = {
 		//inventory
 		$('#inventory_modal tfoot .btn-success').click(function(){
 			shipment.inventoryAdd();
+		});		
+		$('#inventory_modal tfoot .btn-danger').click(function(){
+			$(this).parent().parent().find('input').val('');
+			$(this).parent().parent().find('select').val('');
 		});
 
 		$('#saveinventory').click( function(){
 			shipment.saveInventory();
+		});
+		$('#viewinventory').click( function(){
+			shipment.viewInventory();
+		});
+		$('#backinventory').click( function(){
+			shipment.backInventory();
+		});
+		$('#clearinventory').click( function(){
+			if(confirm('Are you sure you want to proceed? \nThis will clear all the data.')){
+				shipment.clearInventory();
+			}
 		});
     },
 
@@ -321,15 +336,38 @@ var shipment = {
 		}
 
 	},
-
+	viewInventory: function(){
+		$('#inventory_modal').modal();
+		$('#add_shipment').modal('hide');
+		$('#updateinventory').show();
+		$('#backinventory').show();
+		$('#clearinventory').hide();
+		$('#saveinventory').hide();
+	},
+	backInventory: function(){
+		$('#add_shipment').modal();
+		$('#inventory_modal').modal('hide');
+	},
 	inventoryAdd: function(){
 		var inv = createPostData('add_inventory');
 		inventory.push(inv['data']);
-		$('#inventory_modal tfoot input').val('');
+		$('#inventory_modal tfoot input, #inventory_modal tfoot select').val('');
 		shipment.constructInventory();
+		$("#inventory_modal input[col='exp_date']").datetimepicker('destroy');
+       $('#inventory_modal input[col="exp_date"]').datetimepicker({
+         format: 'MM/DD/YYYY',
+         useCurrent: false
+   		});		
+		$('input[col="pcid"]').focus();
 	},
 	addInventory: function(){
 		$('#inventory_modal').modal();
+		$('#updateinventory').hide();
+		$('#backinventory').hide();
+		$('#clearinventory').show();
+		$('#saveinventory').show();
+
+
 	},
 	constructInventory: function(){
 		var content = '';
@@ -337,11 +375,11 @@ var shipment = {
       		action += '<button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
    
 		$.each(inventory, function( index, value ) {
-			content +='<tr>';
+			content +='<tr data-key="'+index+'">';
 				content +='<td>'+value.pcid+'</td>';
 				content +='<td>'+value.item_no+'</td>';
 				content +='<td>'+value.material_desc+'</td>';
-				content +='<td>'+value.qty+'</td>';
+				content +='<td class="numeric">'+value.qty+'</td>';
 				content +='<td>'+value.uom+'</td>';
 				content +='<td>'+value.batch_code+'</td>';
 				content +='<td>'+value.exp_date+'</td>';
@@ -351,10 +389,36 @@ var shipment = {
 		});
 
 		$('#inventory-list tbody').html(content);
+		$('#inventory-list tbody tr td .btn-danger').click(function(){
+			if(confirm("Are you sure you want to remove this?")){
+				inventory.remove($(this).parent().parent().data('key'));
+				shipment.constructInventory();
+			}
+		});
+	},
+	clearInventory: function(){
+			$('.inv_form input').val('');
+			$('.inv_form .has-error').removeClass('has-error');
+			$('.inventory_table_container').removeClass('has-error-container');
+			inventory = [];
+			shipment.constructInventory();
 	},
 	saveInventory: function(){
-		$('#inventory_modal').modal('hide');
-		shipment.addShipment();
+
+		var inv = createPostData('inv_form');
+
+		if(inventory.length==0){
+			toastr["error"]('Complete the fields');
+			$('.inventory_table_container').addClass('has-error-container');
+		}else if(inv['error']!=""){
+			$('.inventory_table_container').removeClass('has-error-container');
+			toastr["error"](inv['error']);
+		}else{
+			$('.inventory_table_container').removeClass('has-error-container');
+			$('#inventory_modal').modal('hide');
+			shipment.addShipment();			
+		}
+
 	},
 	addShipment: function(){
 		$('#add_shipment').modal();

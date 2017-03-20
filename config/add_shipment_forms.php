@@ -3,7 +3,7 @@ $config['type_of_shipment']  = $db->getconfig('type_of_shipment');
 $config['storage_type'] 	 = $db->getconfig('storage_type');
 $config['subinventory_type'] = $db->getconfig('sub_inventory_type');
 $config['pullouttype'] 		 = $db->getconfig('pullout_shipment');
-
+$config['unit_of_measurement']  = $db->getconfig('unit_of_measurement');
 
 $config['pullout'] = [ 
 								['type' 			=> 'select',
@@ -231,16 +231,16 @@ $config['inventory'][] = [
 								'label'				=> 'DR Ref #',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'inventory_irr_number',
-								'col'				=> 'irr_number',
+								'id'				=> 'inventory_drref_no',
+								'col'				=> 'drref_no',
 								'form_class'		=> 'form-control'
 								],
 								['type' 		=> 'number',
 								'label'				=> 'SI Ref #',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'inventory_irr_number',
-								'col'				=> 'irr_number',
+								'id'				=> 'inventory_siref_no',
+								'col'				=> 'siref_no',
 								'form_class'		=> 'form-control'
 								]
 							];	

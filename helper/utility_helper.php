@@ -197,5 +197,13 @@ function construct_maintenance($array=[],$db){
 }
 
 
+function htmloption($array = []){
+	$content = "";
+	foreach ($array as $key => $value) {
+		$content .="<option value=\"".$key."\">".$value."</option>";
+	}
+	return $content;
+}
+
 
 ?>

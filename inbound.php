@@ -205,6 +205,7 @@ require_once('config/add_shipment_forms.php');
 		<div class="modal-footer">
           <button type="button" class="btn btn-default" id="updateshipment"><i class="fa fa-circle-o-notch fa-spin hide" style=""></i> Update</button>
           <button type="button" class="btn btn-default" id="savenewshipment"><i class="fa fa-circle-o-notch fa-spin hide" style=""></i> Save</button>
+          <button type="button" class="btn btn-default" id="viewinventory">View Inventory</button>
           <button type="button" class="btn btn-default" id="clearnewshipment">Clear</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
@@ -234,7 +235,7 @@ require_once('config/add_shipment_forms.php');
 		<div class="modal-body">
 <?php
 			foreach($config['inventory'] as $forms){
-				echo '<div class="col-sm-4" id="" style="padding-left: 0px;">';
+				echo '<div class="col-sm-4 inv_form" id="" style="padding-left: 0px;">';
 				echo construct_form($forms);				
 				echo '</div>';
 			}
@@ -266,7 +267,13 @@ require_once('config/add_shipment_forms.php');
       <td><input type="text" col="item_no"></td>
       <td><input type="text" col="material_desc"></td>
       <td><input type="number" col="qty" min="1"></td>
-      <td><input type="text" col="uom"></td>
+      <td>
+      	<select col="uom">
+      		<?php
+      			echo htmloption(array_merge([''=>'Select UOM'],$config['unit_of_measurement']));
+      		?>
+      	</select>
+      </td>
       <td><input type="text" col="batch_code"></td>
       <td><input type="text" col="exp_date" ></td>
       <td><input type="text" col="cbm"></td>
@@ -281,7 +288,9 @@ require_once('config/add_shipment_forms.php');
 
 		</div>
 		<div class="modal-footer">
-          <button type="button" class="btn btn-default" id="saveinventory"><i class="fa fa-circle-o-notch fa-spin hide" style=""></i> Save</button>
+          <button type="button" class="btn btn-default" id="saveinventory">Save</button>
+          <button type="button" class="btn btn-default" id="updateinventory">Update</button>
+          <button type="button" class="btn btn-default" id="backinventory">Back</button>
           <button type="button" class="btn btn-default" id="clearinventory">Clear</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>

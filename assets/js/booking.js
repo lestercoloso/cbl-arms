@@ -106,11 +106,7 @@ var booking = {
 		});		
 
 		$('#create_contact_person').change(function(){
-			var department = $(this).find(':selected').data('department');
-			var contact_id = $(this).find(':selected').data('contact_id');
-			$('#create_department').val(department);
-			$('#create_contact_id').val(contact_id);
-
+			booking.select_contacts();
 		});		
 
 		$('#savecreate').click(function(){
@@ -132,6 +128,12 @@ var booking = {
 
 	},
 
+	select_contacts: function(){
+			var department = $('#create_contact_person').find(':selected').data('department');
+			var contact_id = $('#create_contact_person').find(':selected').data('contact_id');
+			$('#create_department').val(department);
+			$('#create_contact_id').val(contact_id);
+	},
 	selectvehicle: function(selected){
 		var vehicle_type = $('#additional-vehicle_type').val();
 		var content = '<option value="">Select Plate No.</option>';
@@ -524,6 +526,7 @@ var booking = {
 			$('#create_area_container').show();
 			$('#create_contact_person_container').show();
 			$('#create_department_container').show();
+			booking.select_contacts();
 
 		});
 	},

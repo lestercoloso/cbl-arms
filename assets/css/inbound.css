@@ -291,7 +291,7 @@ text-transform: uppercase;
 #inventory-list th, #inventory-list td{
         font-size: 11px;
 }
-#inventory-list tfoot input{
+#inventory-list tfoot input, #inventory-list tfoot select{
     margin: 0px;
     border-radius: 0px;
     height: 24px;
@@ -319,4 +319,7 @@ text-transform: uppercase;
     height: 220px;
     float: left;
     width: 100%;
+}
+.has-error-container{
+    border: 1px solid #a94442;
 }
