@@ -244,7 +244,7 @@ input[type="text"]{
 
 #inventory_modal .custom-class {
         margin-top: 7%;
-        width: 60%; /* either % (e.g. 60%) or px (400px) */
+        width: 900px; /* either % (e.g. 60%) or px (400px) */
     }
 #inventory_modal .modal-body {
        height: 350px;
@@ -285,8 +285,38 @@ text-transform: uppercase;
 #inventory-list .btn{
     padding: 3px 7px;
     font-size: 11px;
+    margin-top: 3px;
 }
 
 #inventory-list th, #inventory-list td{
         font-size: 11px;
+}
+#inventory-list tfoot input{
+    margin: 0px;
+    border-radius: 0px;
+    height: 24px;
+    border: 0px;
+    width: 80px;
+}
+#inventory-list tfoot td{
+    padding: 0px;
+    text-align: center;
+}
+#inventory-list input[col="qty"]{
+    width: 60px;
+}
+#inventory-list input[col="exp_date"]{
+    width: 110px;
+}
+#inventory-list input[col="material_desc"]{
+    width: 160px;
+}
+#inventory-list tbody td{
+    padding: 5px;
+}
+.inventory_table_container{
+    overflow: auto;
+    height: 220px;
+    float: left;
+    width: 100%;
 }

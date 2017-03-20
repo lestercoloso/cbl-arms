@@ -1,6 +1,11 @@
-            
+var inventory = [];       
             $(function () {
                $('#exdate_group, #endate_group, #pudate_group, .create-date').datetimepicker({
+                 format: 'MM/DD/YYYY',
+                 useCurrent: false
+           		});               
+
+               $('#inventory_modal input[col="exp_date"]').datetimepicker({
                  format: 'MM/DD/YYYY',
                  useCurrent: false
            		});
@@ -115,9 +120,7 @@ var shipment = {
 		$('#addnewshipment').click( function(){
 			shipment.addInventory();
 		});
-		$('#saveinventory').click( function(){
-			shipment.saveInventory();
-		});
+
 
 		$('#savenewshipment').click( function(){
 			if(!$(this).hasClass('disabled')){
@@ -156,6 +159,14 @@ var shipment = {
 
 		$('.addshipment_bay').hide();
 
+		//inventory
+		$('#inventory_modal tfoot .btn-success').click(function(){
+			shipment.inventoryAdd();
+		});
+
+		$('#saveinventory').click( function(){
+			shipment.saveInventory();
+		});
     },
 
     pullout: function(id, qty){
@@ -311,9 +322,35 @@ var shipment = {
 
 	},
 
+	inventoryAdd: function(){
+		var inv = createPostData('add_inventory');
+		inventory.push(inv['data']);
+		$('#inventory_modal tfoot input').val('');
+		shipment.constructInventory();
+	},
 	addInventory: function(){
 		$('#inventory_modal').modal();
-		
+	},
+	constructInventory: function(){
+		var content = '';
+		var action 	= '<button type="button" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i><span class="hidden-xs"> </span> </button> ';
+      		action += '<button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
+   
+		$.each(inventory, function( index, value ) {
+			content +='<tr>';
+				content +='<td>'+value.pcid+'</td>';
+				content +='<td>'+value.item_no+'</td>';
+				content +='<td>'+value.material_desc+'</td>';
+				content +='<td>'+value.qty+'</td>';
+				content +='<td>'+value.uom+'</td>';
+				content +='<td>'+value.batch_code+'</td>';
+				content +='<td>'+value.exp_date+'</td>';
+				content +='<td>'+value.cbm+'</td>';
+				content +='<td>'+action+'</td>';
+			content +='</tr>';
+		});
+
+		$('#inventory-list tbody').html(content);
 	},
 	saveInventory: function(){
 		$('#inventory_modal').modal('hide');

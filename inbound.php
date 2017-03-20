@@ -242,7 +242,7 @@ require_once('config/add_shipment_forms.php');
 ?>
 		<div class="inventory_label">Inbound/Receiving Report</div>
 
-
+<div class="inventory_table_container">
 <table class="table table-bordered  table-striped" id="inventory-list">
   <thead>
     <tr>
@@ -258,24 +258,26 @@ require_once('config/add_shipment_forms.php');
     </tr>
   </thead>
   <tbody>
+
+  </tbody>
+  <tfoot class="add_inventory">
     <tr>
-      <td class="centered" contenteditable></td>
-      <td  contenteditable></td>
-      <td  contenteditable></td>
-      <td  contenteditable class="numeric">0</td>
-      <td  contenteditable></td>
-      <td  contenteditable></td>
-      <td  contenteditable></td>
-      <td  contenteditable></td>
-      <td class="centered">
+      <td><input type="text" col="pcid"></td>
+      <td><input type="text" col="item_no"></td>
+      <td><input type="text" col="material_desc"></td>
+      <td><input type="number" col="qty" min="1"></td>
+      <td><input type="text" col="uom"></td>
+      <td><input type="text" col="batch_code"></td>
+      <td><input type="text" col="exp_date" ></td>
+      <td><input type="text" col="cbm"></td>
+      <td>
       	<button type="button" class="btn btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>
       	<button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>
-
       </td>
     </tr>
-  </tbody>
+  </tfoot>
 </table>
-
+</div>
 
 		</div>
 		<div class="modal-footer">

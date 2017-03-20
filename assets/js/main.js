@@ -33,7 +33,7 @@ function createPostData(classused){
 			$('.'+classused+' div').removeClass('has-error');	
 			$('.'+classused).removeClass('has-error');	
 		
-	$('.'+classused+' input[type="text"], .'+classused+' input[type="number"], .'+classused+' select, .'+classused+' input[type="hidden"]').each(function( data ) {
+	$('.'+classused+' input[type="text"], .'+classused+' input[type="number"], .'+classused+' select, .'+classused+' input[type="hidden"], .'+classused+' input[type="date"]').each(function( data ) {
 			var c = $(this).attr('col');
 			var v = $(this).val();
 			if(c!=undefined && c!=''){

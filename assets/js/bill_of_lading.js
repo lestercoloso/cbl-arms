@@ -75,24 +75,26 @@ var billoflading = {
 		$('#create_declared_value').val(declared_value);
 
 
-		var fumigation 	= $('#create_fumigation').val();
-		var exp_fee 	= $('#create_export_declaration_fee').val();
-		var acc 	 	= $('#create_address_correction_charge').val();
-		var rd  	 	= $('#create_residential_delivery').val();
-		var nsc  	 	= $('#create_non_stackable_charge').val();
-		var crating  	= $('#create_crating').val();
-		var labelcost  	= $('#create_label_cost').val();
-		var dgcharge  	= $('#create_dg_charge').val();
-		var backload  	= $('#create_back_load').val();
-		var total   	= parseInt(declared_value)+parseInt(fumigation)+parseInt(exp_fee)+parseInt(acc)+parseInt(rd)+parseInt(nsc)+parseInt(crating)+parseInt(labelcost)+parseInt(dgcharge)+parseInt(backload);	
-		$('#create_total').val(total);
+		var fumigation 	= $('#create_fumigation').val()*1;
+		var exp_fee 	= $('#create_export_declaration_fee').val()*1;
+		var acc 	 	= $('#create_address_correction_charge').val()*1;
+		var rd  	 	= $('#create_residential_delivery').val()*1;
+		var nsc  	 	= $('#create_non_stackable_charge').val()*1;
+		var crating  	= $('#create_crating').val()*1;
+		var labelcost  	= $('#create_label_cost').val()*1;
+		var dgcharge  	= $('#create_dg_charge').val()*1;
+		var backload  	= $('#create_back_load').val()*1;
+		var demurage  	= $('#create_demmurage_fee').val()*1;
+		var total   	= parseFloat(declared_value)+parseFloat(fumigation)+parseFloat(exp_fee)+parseFloat(acc)+parseFloat(rd)+parseFloat(nsc)+parseFloat(crating)+parseFloat(labelcost)+parseFloat(dgcharge)+parseFloat(backload)+parseFloat(demurage);	
+		$('#create_total').val(total.toFixed(2));
 		var vat 	    = (total*0.12);
-		var plusvat 	= parseInt(total)+(total*0.12);
-		$('#create_vat').val(vat);
-		$('#create_total_amount_due').val(plusvat);
+		var plusvat 	= parseFloat(total)+(total*0.12);
+		$('#create_vat').val(vat.toFixed(2));
+		$('#create_total_amount_due').val(plusvat.toFixed(2));
 
 		var discount  	= $('#create_discount_percent').val()*0.01;
-		$('#create_final_contract_price').val(parseInt(plusvat)-(plusvat*discount));
+		var contract 	= parseFloat(plusvat)-(plusvat*discount);
+		$('#create_final_contract_price').val(contract.toFixed(2));
 
 
 
