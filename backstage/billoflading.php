@@ -66,7 +66,7 @@ class Billoflading{
 		$shipper 	= json_decode($_POST['shipper_information'], TRUE)['shipper_name'];
 		$recipient 	= json_decode($_POST['recipient_information'], TRUE)['recipient_name'];
 		$quantity 	= json_decode($_POST['package_content'], TRUE)['total_package'];
-		$amount 	= json_decode($_POST['additional_charges'], TRUE)['total_amount_due'];
+		$amount 	= json_decode($_POST['additional_charges'], TRUE)['final_contract_price'];
 
 		$data['shipper_information'] 	= $_POST['shipper_information'];
 		$data['package_content'] 		= $_POST['package_content'];
@@ -95,7 +95,7 @@ class Billoflading{
 		$shipper 	= json_decode($_POST['shipper_information'], TRUE)['shipper_name'];
 		$recipient 	= json_decode($_POST['recipient_information'], TRUE)['recipient_name'];
 		$quantity 	= json_decode($_POST['package_content'], TRUE)['total_package'];
-		$amount 	= json_decode($_POST['additional_charges'], TRUE)['total_amount_due'];
+		$amount 	= json_decode($_POST['additional_charges'], TRUE)['final_contract_price'];
 
 		$data['shipper_information'] 	= $_POST['shipper_information'];
 		$data['package_content'] 		= $_POST['package_content'];
