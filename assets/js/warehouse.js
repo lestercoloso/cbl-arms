@@ -41,7 +41,7 @@ function addStorage(){
 		var rotateleft = '<button type="button" class="btn btn-primary rotateleft"><i class="fa fa-rotate-left" aria-hidden="true"></i><span class="hidden-xs"> </span></button>';
 		var rotate = '<div class="rotate">'+rotateleft+rotateright+'</div>';
 		// var rotate = '';
-
+		$('.area div').html('');
 		var content = '';
 		$.each(rdatas, function( index, value ) {
 			if(value.style==null){
@@ -49,20 +49,22 @@ function addStorage(){
 			}
 			var width 	= (parseInt(value.rack_width)*0.01)*warehouse_scale;
 			var length 	= (parseInt(value.rack_length)*0.01)*warehouse_scale;
-			content +='<div id="rack-'+value.id+'" class="rackStorage" data-type="rack" data-rackcode="'+value.code+'" data-rackwidth="'+value.rack_width+'" data-racklength="'+value.rack_length+'"  data-racklevel="'+value.no_rack_level+'" data-racklevelheight="'+value.rack_level_height+'" style="height:'+width+'px;width:'+length+'px;'+value.style+'">'+deletebutton+rotate+'</div>';
+			var content ='<div id="rack-'+value.id+'" class="rackStorage" data-type="rack" data-no_section="'+value.no_rack_section+'" data-rackcode="'+value.code+'" data-rackwidth="'+value.rack_width+'" data-racklength="'+value.rack_length+'"  data-racklevel="'+value.no_rack_level+'" data-racklevelheight="'+value.rack_level_height+'" style="height:'+width+'px;width:'+length+'px;'+value.style+'">'+deletebutton+rotate+'</div>';
+			$('.block_'+value.block+' div').append(content);
 		});		
 
 		$.each(bdatas, function( index, value ) {
 			if(value.style==''){
 				value.style = 'transform: rotate(0deg)';
 			}
-			var width 	= value.bay_width;
-			var length 	= value.bay_length;
+			var width 	= (parseInt(value.bay_width)*0.01)*warehouse_scale;
+			var length 	= (parseInt(value.bay_length)*0.01)*warehouse_scale;
 
-			content +='<div class="bayStorage" id="bay-'+value.id+'"  data-type="bay" data-baycode="'+value.code+'" data-baywidth="'+width+'" data-baylength="'+length+'"  style="height:'+value.bay_width+'px;width:'+value.bay_length+'px;'+value.style+'">'+deletebutton+rotate+'</div>';
+			var content ='<div class="bayStorage" id="bay-'+value.id+'"  data-type="bay" data-baycode="'+value.code+'" data-baywidth="'+value.bay_width+'" data-baylength="'+value.bay_length+'"  style="height:'+width+'px;width:'+length+'px;'+value.style+'">'+deletebutton+rotate+'</div>';
+			$('.block_'+value.block+' div').append(content);
 		});
 
-		$('.warehouse_container').append(content);
+		// $('.warehouse_container').append(content);
 		$( ".rackStorage, .bayStorage" ).draggable({ containment: "parent" });
 		addFunctionToStorage2();
 		$('#left-container').hide();
@@ -76,6 +78,7 @@ function addStorage(){
 
 	function cleardata(){
 		$('#add_storage input[type="number"]').val('');
+		$('#add_storage .bay select, #add_storage .rack select').val('');
 		$('div').removeClass('has-error');
 	}
 
@@ -147,7 +150,7 @@ function openShelves(id){
 	}
 }
 
-function viewShelve(level='', scale=2){
+function viewShelve(level='', scale=5){
 
 	if(level!=''){
 		$('#storage_view').modal();	
@@ -164,10 +167,10 @@ function viewShelve(level='', scale=2){
 		}
 
 		getBoxes(selected.data('rackcode'), selected.data('type'), scale);
-
-		var Length = (selected.data('racklength')*scale);
-		var Width  = (selected.data('rackwidth')*scale);
-		var Height = (selected.data('racklevelheight')*scale);
+// warehouse_scale
+		var Length = (((selected.data('racklength')*0.01)*warehouse_scale)*scale);
+		var Width  = (((selected.data('rackwidth')*0.01)*warehouse_scale)*scale);
+		var Height = (((selected.data('racklevelheight')*0.01)*warehouse_scale)*scale);
 		$(add+'.shelves_container').css('width', Length+'px');
 		$(add+'.shelves_container').css('height', Height+'px');
 		$(add+'.shelves_container .storage_height').css('width', Width+'px');
@@ -193,7 +196,7 @@ function rotateShelf(id, t='up'){
 }
 
 function getBoxes(code=0, type='', scale){
-	$.post("backstage/warehouse/getBoxes/"+code+"/"+type, {},function(data){
+	$.post("backstage/warehouse/getBoxes/"+code+"/"+type+"/"+warehouse_scale+"/"+scale, {},function(data){
 		$.each(data.level, function( i, v ) {
 				relocateboxes(i,v,scale);
 		});		
@@ -208,9 +211,10 @@ function relocateboxes(level, d, s){
 	var content = '';
 	var selected = $('.selected_storage');	
 	var container = $('.shelves_container[data-level="'+level+'"]');
-	var container_height = parseInt(selected.data('racklevelheight'))*s;
-	var container_width = parseInt(selected.data('rackwidth'))*s;
-	var container_length = parseInt(selected.data('racklength'))*s;
+	// (((selected.data('racklength')*0.01)*warehouse_scale)*scale);
+	var container_height = parseInt(((selected.data('racklevelheight')*0.01)*warehouse_scale)*s);
+	var container_width = parseInt(((selected.data('rackwidth')*0.01)*warehouse_scale)*s);
+	var container_length = parseInt(((selected.data('racklength')*0.01)*warehouse_scale)*s);;
 	var ch = container_height;
 	var cw = 0;
 	var cl = 0;
@@ -371,6 +375,7 @@ function selectStorage(){
 		 container += '<span class="col-sm-6">Rack Width : </span> <span class="col-sm-6"> '+selected.data('rackwidth')+' </span>';
 		 container += '<span class="col-sm-6">No. of Rack level : </span> <span class="col-sm-6"> '+selected.data('racklevel')+' </span>';
 		 container += '<span class="col-sm-6">Rack level height : </span> <span class="col-sm-6"> '+selected.data('racklevelheight')+' </span>';
+		 container += '<span class="col-sm-6">No. of Rack Section : </span> <span class="col-sm-6"> '+selected.data('no_section')+' </span>';
 		$('.storage_preview_container').html(container);		
 	}
 

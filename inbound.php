@@ -263,8 +263,8 @@ require_once('config/add_shipment_forms.php');
   </tbody>
   <tfoot class="add_inventory">
     <tr>
-      <td><input type="text" col="pcid"></td>
-      <td><input type="text" col="item_no"></td>
+      <td><input type="number" col="pcid"></td>
+      <td><input type="number" col="item_no"></td>
       <td><input type="text" col="material_desc"></td>
       <td><input type="number" col="qty" min="1"></td>
       <td>
@@ -274,7 +274,7 @@ require_once('config/add_shipment_forms.php');
       		?>
       	</select>
       </td>
-      <td><input type="text" col="batch_code"></td>
+      <td><input type="number" col="batch_code"></td>
       <td><input type="text" col="exp_date" ></td>
       <td><input type="text" col="cbm"></td>
       <td>

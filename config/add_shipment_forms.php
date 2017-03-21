@@ -48,10 +48,11 @@ $config['add_shipment'][] = [
 								
 								1=>['type' 			=> 'normal',
 								'label'				=> 'Customer Name',
-								'parent_class' 		=> 'form-group col-sm-12',
+								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
 								'form_class'		=> 'form-control',
 								'id'				=> 'shipment_customer_name',
+								'col'				=> 'customer_name'
 								],
 
 								2 => ['type' 		=> 'input',
@@ -61,7 +62,8 @@ $config['add_shipment'][] = [
 								'id'				=> 'delivery_receipt_shipment',
 								'col'				=> 'delivery_receipt',
 								'form_class'		=> 'form-control not_mandatory',
-								'placeholder' 		=> 'Input Delivery receipt'],
+								// 'placeholder' 		=> 'Input Delivery receipt'
+								],
 
 								3 => ['type' 		=> 'number',
 								'label'				=> 'Invoice number',
@@ -70,16 +72,18 @@ $config['add_shipment'][] = [
 								'id'				=> 'invoice_no_shipment',
 								'col'				=> 'invoice_no',
 								'form_class'		=> 'form-control not_mandatory',
-								'placeholder' 		=> 'Input Invoice number'],
+								// 'placeholder' 		=> 'Input Invoice number'
+								],
 
-								4 => ['type' 		=> 'normal',
+								4 => ['type' 		=> 'number',
 								'label'				=> 'Pallet Code',
 								'parent_class' 		=> 'form-group col-sm-12 addship',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'pallet_code_shipment',
 								'col'				=> 'pallet_code',
 								'form_class'		=> 'form-control',
-								'placeholder' 		=> 'Auto-generated'],
+								// 'placeholder' 		=> 'Auto-generated'
+								],
 
 								5 => ['type' 		=> 'normal',
 								'label'				=> 'Quantity',

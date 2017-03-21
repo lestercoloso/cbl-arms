@@ -103,9 +103,9 @@ $version =rand();
 								<div class="warehouse_gate">
 								</div>
 
-								<div class="area block_a"><em>Block A</em></div>
-								<div class="area block_b"><em>Block B</em></div>
-								<div class="area block_c"><em>Block C</em></div>
+								<div class="area block_A"><em>Block A</em><div></div></div>
+								<div class="area block_B"><em>Block B</em><div></div></div>
+								<div class="area block_C"><em>Block C</em><div></div></div>
 								<div class="freezer"></div>
 
 							</div>
@@ -189,25 +189,39 @@ $version =rand();
 			<form>
 			<fieldset>
 				<div class="form-group col-sm-12">
-				  <label for="stype" class="col-sm-4">Storage Type : </label>
+				  <label for="stype" class="col-sm-4">Storage Type * </label>
 				  <div class="col-sm-8">
 					  <select class="form-control" id="stype">
 					    <option value="rack">Rack</option>
 					    <option value="bay">Bay</option>
 					  </select>
 				  </div>
-				</div>
+				</div>				
+
+
 				
 				<div class="form-group col-sm-12 rack" id="rackcode_container">
-				    <label class="col-sm-4" for="textinput">Rack Code : </label>
+				    <label class="col-sm-4" for="textinput">Rack Code * </label>
 				    <div class="col-sm-8">
 				        <input name="name" type="text" id="rackcode" col="code" disabled="disabled" class="form-control">
 				        <span id="rackcode_error" class="text-danger"></span>
-				    </div>
+				    </div>				    
+				</div>
+				<div class="form-group col-sm-12 rack" id="rblock_container">
+				  <label for="stype" class="col-sm-4">Block </label>
+				  <div class="col-sm-8">
+					  <select class="form-control" id="rblock"  col="block">
+					    <option value="">Select Block</option>
+					    <option value="A">Block A</option>
+					    <option value="B">Block B</option>
+					    <option value="C">Block C</option>
+					  </select>
+				  </div>
 				</div>
 
+
 				<div class="form-group col-sm-12 rack" id="racklength_container">
-				    <label class="col-sm-4" for="racklength">Rack Lenth : </label>
+				    <label class="col-sm-4" for="racklength">Rack Lenth * </label>
 				    <div class="col-sm-8">
 				        <input name="racklength" type="number" col="rack_length" min="1" id="racklength" placeholder="Enter the rack length" class="form-control">
 				        <span id="racklength_error" class="text-danger"></span>
@@ -215,41 +229,73 @@ $version =rand();
 				</div>
 
 				<div class="form-group col-sm-12 rack" id="rackwidth_container">
-				    <label class="col-sm-4" for="rackwidth">Rack Width : </label>
+				    <label class="col-sm-4" for="rackwidth">Rack Width * </label>
 				    <div class="col-sm-8">
 				        <input name="rackwidth" type="number" col="rack_width" min="1"  id="rackwidth" placeholder="Enter the rack width" class="form-control">
 				        <span id="rackwidth_error" class="text-danger"></span>
 				    </div>
 				</div>
 
-				<div class="form-group col-sm-12 rack" id="noofracklevel_container">
-				    <label class="col-sm-4" for="textinput" >No. of rack level : </label>
-				    <div class="col-sm-8">
-				        <input name="noofracklevel" type="number" col="no_rack_level" min="1" id="noofracklevel" placeholder="Enter No. of rack level" class="form-control">
-				        <span id="noofracklevel_error" class="text-danger"></span>
-				    </div>
-				</div>
+				<div class="form-group col-sm-12 rack"  id="noofracklevel_container">
+				  <label for="noofracklevel" class="col-sm-4">No. of Rack level * </label>
+				  <div class="col-sm-8">
+					  <select class="form-control" col="no_rack_level" id="noofracklevel">
+					    <option value="">Select No of Rack level</option>
+					    <option value="1">1</option>
+					    <option value="2">2</option>
+					    <option value="3">3</option>
+					    <option value="4">4</option>
+					    <option value="5">5</option>
+					    <option value="6">6</option>
+					  </select>
+				  </div>
+				</div>				
 
 				<div class="form-group col-sm-12 rack" id="racklevelheight_container">
-				    <label class="col-sm-4" for="textinput">Rack level height : </label>
+				    <label class="col-sm-4" for="textinput">Rack level height * </label>
 				    <div class="col-sm-8">
 				        <input name="racklevelheight" type="number"  min="1" col="rack_level_height"  id="racklevelheight" placeholder="Enter the rack level height" class="form-control">
 				        <span id="racklevelheight_error" class="text-danger"></span>
+				    </div>
+				</div>
+				<div class="form-group col-sm-12 rack" id="noracksection_container">
+				    <label class="col-sm-4" for="textinput">No. of Rack section * </label>
+				    <div class="col-sm-8">
+				        <input name="no_rack_section" type="number"  min="1" col="no_rack_section"  id="noracksection" placeholder="Enter No. of Rack section" class="form-control">
+				        <span id="noracksection_error" class="text-danger"></span>
+				    </div>
+				</div>
+				<div class="form-group col-sm-12 rack" id="nopalletposition_container">
+				    <label class="col-sm-4" for="textinput">No. of Pallet Position * </label>
+				    <div class="col-sm-8">
+				        <input name="no_pallet_position" type="number"  min="1" col="no_pallet_position"  id="nopalletposition" placeholder="Enter No. of Pallet position" class="form-control">
+				        <span id="nopalletposition_error" class="text-danger"></span>
 				    </div>
 				</div>
 
 
 
 				<div class="form-group col-sm-12 bay" id="baycode_container">
-				    <label class="col-sm-4" for="textinput">Bay Code : </label>
+				    <label class="col-sm-4" for="textinput">Bay Code * </label>
 				    <div class="col-sm-8">
 				        <input name="racklevelheight" col="code" type="text" id="baycode" disabled="disabled" class="form-control">
 				        <span id="baycode_error" class="text-danger"></span>
 				    </div>
 				</div>
 
+				<div class="form-group col-sm-12 bay" id="bblock_container">
+				  <label for="stype" class="col-sm-4">Block * </label>
+				  <div class="col-sm-8">
+					  <select class="form-control" id="bblock"  col="block">
+					    <option value="">Select Block</option>
+					    <option value="A">Block A</option>
+					    <option value="B">Block B</option>
+					    <option value="C">Block C</option>
+					  </select>
+				  </div>
+				</div>
 				<div class="form-group col-sm-12 bay" id="bay_length_container">
-				    <label class="col-sm-4" for="textinput">Bay Length : </label>
+				    <label class="col-sm-4" for="textinput">Bay Length * </label>
 				    <div class="col-sm-8">
 				        <input name="bay_length" type="number"  min="1" col="bay_length" id="bay_length" placeholder="Enter the bay length" class="form-control">
 				        <span id="bay_length_error" class="text-danger"></span>
@@ -257,7 +303,7 @@ $version =rand();
 				</div>
 
 				<div class="form-group col-sm-12 bay" id="bay_width_container">
-				    <label class="col-sm-4" for="textinput">Bay Width : </label>
+				    <label class="col-sm-4" for="textinput">Bay Width * </label>
 				    <div class="col-sm-8">
 				        <input name="bay_width" type="number"  min="1"  col="bay_width" id="bay_width" placeholder="Enter the bay width" class="form-control">
 				        <span id="bay_width_error" class="text-danger"></span>

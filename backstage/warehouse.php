@@ -10,10 +10,10 @@ class Warehouse{
 	public function getStorage(){
 
 
-		$datas = $this->db->select('select LPAD(`code`, 10, \'0\') as code, id, no_rack_level, rack_length, rack_level_height, rack_width, style from rack_storage where status=1' );
+		$datas = $this->db->select('select LPAD(`code`, 10, \'0\') as code, id, no_rack_level, rack_length, rack_level_height, rack_width, style, block, no_rack_section from rack_storage where status=1' );
 		$return['rack'] = $datas['data'];
 
-		$datas = $this->db->select('select LPAD(`code`, 10, \'0\') as code, bay_length, bay_width, id, style from bay_storage where status=1' );
+		$datas = $this->db->select('select LPAD(`code`, 10, \'0\') as code, bay_length, bay_width, id, style, block from bay_storage where status=1' );
 		$return['bay'] = $datas['data'];
 
 		jdie($return);
@@ -55,13 +55,13 @@ class Warehouse{
 
 	}
 
-	public function getBoxes($code='', $type='', $level=''){
+	public function getBoxes($code='', $type='', $level='', $wscale = 1, $scale = 1){
 		$sql = "select b.weight, b.length, b.width, b.height, a.rack_level, (select COALESCE(a.quantity-sum(qty),a.quantity) from outbound_list where inbound_id=a.id) as qty from inbound_list a, booking b where a.bill_of_lading=b.booking_no and a.code=$code and a.storage='$type' and a.status=1";
 		$data = $this->db->select($sql);
 		$new_data = [];
 		foreach($data['data'] as $d){
 			for ($x = 1; $x <= $d['qty']; $x++) {
-				$new_data['level'][$d['rack_level']][] = ['length' => $d['length'], 'width' => $d['width'], 'height' => $d['height'] ];	
+				$new_data['level'][$d['rack_level']][] = ['length' => (($d['length']*0.01)*$wscale)*$scale, 'width' => (($d['width']*0.01)*$wscale)*$scale, 'height' => (($d['height']*0.01)*$wscale)*$scale ];	
 			} 
 
 		}
