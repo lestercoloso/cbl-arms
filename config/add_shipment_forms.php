@@ -231,7 +231,7 @@ $config['add_shipment'][] = [
 							];		
 
 $config['inventory'][] = [
-								['type' 		=> 'number',
+								['type' 		=> 'input',
 								'label'				=> 'DR Ref #',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -239,7 +239,7 @@ $config['inventory'][] = [
 								'col'				=> 'drref_no',
 								'form_class'		=> 'form-control'
 								],
-								['type' 		=> 'number',
+								['type' 		=> 'input',
 								'label'				=> 'SI Ref #',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',

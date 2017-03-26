@@ -41,7 +41,7 @@ function addStorage(){
 		var rotateleft = '<button type="button" class="btn btn-primary rotateleft"><i class="fa fa-rotate-left" aria-hidden="true"></i><span class="hidden-xs"> </span></button>';
 		var rotate = '<div class="rotate">'+rotateleft+rotateright+'</div>';
 		// var rotate = '';
-		$('.area div').html('');
+		$('.area .container').html('');
 		var content = '';
 		$.each(rdatas, function( index, value ) {
 			if(value.style==null){
@@ -49,8 +49,21 @@ function addStorage(){
 			}
 			var width 	= (parseInt(value.rack_width)*0.01)*warehouse_scale;
 			var length 	= (parseInt(value.rack_length)*0.01)*warehouse_scale;
-			var content ='<div id="rack-'+value.id+'" class="rackStorage" data-type="rack" data-no_section="'+value.no_rack_section+'" data-rackcode="'+value.code+'" data-rackwidth="'+value.rack_width+'" data-racklength="'+value.rack_length+'"  data-racklevel="'+value.no_rack_level+'" data-racklevelheight="'+value.rack_level_height+'" style="height:'+width+'px;width:'+length+'px;'+value.style+'">'+deletebutton+rotate+'</div>';
-			$('.block_'+value.block+' div').append(content);
+			var content ='<div id="rack-'+value.id+'" class="rackStorage" data-storage_type="'+value.storage_type+'" data-no_pallet_position="'+value.no_pallet_position+'" data-type="rack" data-no_section="'+value.no_rack_section+'" data-rackcode="'+value.code+'" data-rackwidth="'+value.rack_width+'" data-racklength="'+value.rack_length+'"  data-racklevel="'+value.no_rack_level+'" data-racklevelheight="'+value.rack_level_height+'" style="height:'+width+'px;width:'+length+'px;'+value.style+'">';
+				content +='<table>';
+				for (i = 0; i < value.no_pallet_position; i++) { 
+					content += "<tr>";
+
+					for (ir = 0; ir < value.no_rack_section; ir++) { 
+						content += "<td></td>";
+					}
+
+					content += "</tr>";
+				}
+				content +='</table>';
+
+				content +='</div>';
+			$('.block_'+value.block+' .container').append(content);
 		});		
 
 		$.each(bdatas, function( index, value ) {
@@ -61,7 +74,7 @@ function addStorage(){
 			var length 	= (parseInt(value.bay_length)*0.01)*warehouse_scale;
 
 			var content ='<div class="bayStorage" id="bay-'+value.id+'"  data-type="bay" data-baycode="'+value.code+'" data-baywidth="'+value.bay_width+'" data-baylength="'+value.bay_length+'"  style="height:'+width+'px;width:'+length+'px;'+value.style+'">'+deletebutton+rotate+'</div>';
-			$('.block_'+value.block+' div').append(content);
+			$('.block_'+value.block+' .container').append(content);
 		});
 
 		// $('.warehouse_container').append(content);
@@ -120,6 +133,10 @@ function addStorage(){
 
 
 function openShelves(id){
+
+
+//not needed anymore	
+/**
 	$('#warehouse').hide();
 	$('#shelves').show();
 	var d = $('#'+id);
@@ -148,6 +165,7 @@ function openShelves(id){
 	}else{
 
 	}
+	**/
 }
 
 function viewShelve(level='', scale=5){
@@ -370,12 +388,14 @@ function selectStorage(){
 		$('.storage_preview_container').html(container);
 	}else{
 		$('.storage_type_container').html('<b>Rack Storage</b>');
-		var container = '<span class="col-sm-6">Rack Code : </span> <span class="col-sm-6"> '+pad(selected.data('rackcode'),10)+' </span>';
-		 container += '<span class="col-sm-6">Rack Length : </span> <span class="col-sm-6"> '+selected.data('racklength')+' </span>';
-		 container += '<span class="col-sm-6">Rack Width : </span> <span class="col-sm-6"> '+selected.data('rackwidth')+' </span>';
-		 container += '<span class="col-sm-6">No. of Rack level : </span> <span class="col-sm-6"> '+selected.data('racklevel')+' </span>';
-		 container += '<span class="col-sm-6">Rack level height : </span> <span class="col-sm-6"> '+selected.data('racklevelheight')+' </span>';
-		 container += '<span class="col-sm-6">No. of Rack Section : </span> <span class="col-sm-6"> '+selected.data('no_section')+' </span>';
+		var container = '<span class="col-sm-7">Rack Code : </span> <span class="col-sm-5"> '+pad(selected.data('rackcode'),10)+' </span>';
+		 container += '<span class="col-sm-7">Storage Type : </span> <span class="col-sm-5"> '+selected.data('storage_type')+' </span>';
+		 container += '<span class="col-sm-7">Rack Length : </span> <span class="col-sm-5"> '+selected.data('racklength')+' </span>';
+		 container += '<span class="col-sm-7">Rack Width : </span> <span class="col-sm-5"> '+selected.data('rackwidth')+' </span>';
+		 container += '<span class="col-sm-7">No. of Rack level : </span> <span class="col-sm-5"> '+selected.data('racklevel')+' </span>';
+		 container += '<span class="col-sm-7">Rack height level : </span> <span class="col-sm-5"> '+selected.data('racklevelheight')+' </span>';
+		 container += '<span class="col-sm-7">No. of Rack Section : </span> <span class="col-sm-5"> '+selected.data('no_section')+' </span>';
+		 container += '<span class="col-sm-7">No. of Pallet Postiion : </span> <span class="col-sm-5"> '+selected.data('no_pallet_position')+' </span>';
 		$('.storage_preview_container').html(container);		
 	}
 

@@ -85,7 +85,7 @@ edit: function(id){
 	$.post("backstage/maintenance/driverdetail/"+id, {},function(data){
 		updateid = data.id;
 		$.each(data, function( index, value ) {
-			$('[col="'+index+'"]').val(value);
+			$('#create_modal [col="'+index+'"]').val(value);
 		});
 	});
 

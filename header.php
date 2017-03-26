@@ -430,6 +430,7 @@ var validateNumber = function(event,name,id) {
 	<div style="color:#b00;" class="tbMenuItems" onClick="location.href='driverProfile.php';">Driver Information</div>
 	<div style="color:#b00;" class="tbMenuItems" onClick="location.href='vehicle.php';">Vehicle Information</div>
 	<div style="color:#b00;" class="tbMenuItems" onClick="">Location Management</div>
+	<div style="color:#b00;" class="tbMenuItems"  onClick="location.href='item_master_file.php';">Item Master File</div>
 	
 </div>
 

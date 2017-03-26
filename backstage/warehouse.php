@@ -10,7 +10,7 @@ class Warehouse{
 	public function getStorage(){
 
 
-		$datas = $this->db->select('select LPAD(`code`, 10, \'0\') as code, id, no_rack_level, rack_length, rack_level_height, rack_width, style, block, no_rack_section from rack_storage where status=1' );
+		$datas = $this->db->select('select LPAD(`code`, 10, \'0\') as code, id, no_rack_level, rack_length, rack_level_height, rack_width, style, block, no_rack_section, no_pallet_position, storage_type from rack_storage where status=1' );
 		$return['rack'] = $datas['data'];
 
 		$datas = $this->db->select('select LPAD(`code`, 10, \'0\') as code, bay_length, bay_width, id, style, block from bay_storage where status=1' );

@@ -383,6 +383,16 @@ $config['inventory'][] = [
 								'form_class'		=> 'form-control',
 								],
 
+
+								['type' 			=> 'number',
+								'label'				=> 'Case Bar Code',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'additional-casebar_code',
+								'col'				=> 'case_bar_code',
+								'form_class'		=> 'form-control',
+								],								
+
 								['type' 			=> 'select',
 								'label'				=> 'Item Type',
 								'parent_class' 		=> 'form-group col-sm-12',
@@ -393,21 +403,13 @@ $config['inventory'][] = [
 								'options'			=> array_merge([''=>'Select Item Type'],$config['item_type']) 
 								],
 
-								['type' 			=> 'number',
-								'label'				=> 'Case Bar Code',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'additional-casebar_code',
-								'col'				=> 'casebar_code',
-								'form_class'		=> 'form-control',
-								],
 
 								['type' 			=> 'select',
 								'label'				=> 'UOM',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'additional-unit_of_measurement',
-								'col'				=> 'unit_of_measurement',
+								'id'				=> 'additional-uom',
+								'col'				=> 'uom',
 								'form_class'		=> 'form-control',
 								'options'			=> array_merge([''=>'Select UOM'],$config['unit_of_measurement']) 
 								],
@@ -464,8 +466,6 @@ $config['inventory'][] = [
 								'extra'				=> 'cm.',
 								'form_class'		=> 'form-control',
 								],
-
-
 
 								['type'		 		=> 'number',
 								'label'				=> 'Unit Cost',

@@ -28,6 +28,7 @@
 	padding-right: 0px; 
 	padding-left: 0px; 
 	text-align: left;
+    white-space: nowrap;
 }
 .storage_preview_container{
 	font-size: 11px;
@@ -86,8 +87,12 @@
 	/*border: 1px solid #333;*/
 }
 .area em{
-	margin: 5px;
+    margin: 5px;
     position: absolute;
+    text-align: center;
+    width: 100%;
+    z-index: 100;
+
 }
 .block_a{
 	top: 0px;
@@ -462,6 +467,7 @@ border: solid 1px #d3d3d3;
     position: absolute;
     width: 100%;
     height:100%;
+    padding: 0px;
 }
 
 input{
@@ -470,4 +476,18 @@ input{
 
 #add_storage label{
     white-space: nowrap;
+}
+
+#add_storage .form-control {
+    height: 25px;
+}
+
+.area table{
+    width: 100%;
+    height: 100%;
+}
+.area table td{
+    width: auto;
+    height: auto;
+    border: solid 1px black;
 }
