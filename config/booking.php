@@ -8,6 +8,8 @@ $config['status']  = $db->getconfig('booking_status');
 $config['transaction_type']  = $db->getconfig('transaction_type');
 $config['storage_type']  = $db->getconfig('storage_type');
 $config['unit_of_measurement']  = $db->getconfig('unit_of_measurement');
+$config['unit_of_measurement_2']  = $db->getconfig('unit_of_measurement_2');
+$config['unit_of_measurement_3']  = $db->getconfig('unit_of_measurement_3');
 $config['item_type']  = $db->getconfig('item_type');
 $config['book_shipment'][] = [
 								
@@ -405,13 +407,36 @@ $config['inventory'][] = [
 
 
 								['type' 			=> 'select',
-								'label'				=> 'UOM',
+								'label'				=> 'UOM 1',
 								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'additional-uom',
-								'col'				=> 'uom',
-								'form_class'		=> 'form-control',
-								'options'			=> array_merge([''=>'Select UOM'],$config['unit_of_measurement']) 
+								'subparent_class' 	=> 'col-sm-6',
+								'id'				=> 'additional-uom1',
+								'col'				=> 'uom_1',
+								'form_class'		=> 'form-control uom-select',
+								'options'			=> array_merge([''=>'Select UOM 1'],$config['unit_of_measurement']),
+								'extra'				=> '<input type="number" min=1 col="uom_qty_1" id="add-uom_1" class="form-control extra uom_1" placeholder="Qty">' 
+								],
+
+								['type' 			=> 'select',
+								'label'				=> 'UOM 2',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-6',
+								'id'				=> 'additional-uom2',
+								'col'				=> 'uom_2',
+								'form_class'		=> 'form-control uom-select',
+								'options'			=> array_merge([''=>'Select UOM 2'],$config['unit_of_measurement_2']),
+								'extra'				=> '<input type="number" min=1 col="uom_qty_2" id="add-uom_2" class="form-control extra uom_2" placeholder="Qty">' 
+								],
+
+								['type' 			=> 'select',
+								'label'				=> 'UOM 3',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-6',
+								'id'				=> 'additional-uom3',
+								'col'				=> 'uom_3',
+								'form_class'		=> 'form-control uom-select',
+								'options'			=> array_merge([''=>'Select UOM 3'],$config['unit_of_measurement_3']),
+								'extra'				=> '<input type="number" min=1 col="uom_qty_3" id="add-uom_3" class="form-control extra uom_3" placeholder="Qty">' 
 								],
 
 								['type' 			=> 'number',
@@ -423,6 +448,11 @@ $config['inventory'][] = [
 								'form_class'		=> 'form-control',
 								],
 
+
+
+						];
+
+$config['inventory'][] = [ 
 								['type' 			=> 'select',
 								'label'				=> 'Storage Type',
 								'parent_class' 		=> 'form-group col-sm-12',
@@ -433,9 +463,6 @@ $config['inventory'][] = [
 								'options'			=> array_merge([''=>'Select Storage type'],$config['storage_type']) 
 								],
 
-						];
-
-$config['inventory'][] = [ 
 
 								['type'		 		=> 'number',
 								'label'				=> 'Length',

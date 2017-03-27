@@ -50,14 +50,6 @@
 	</div>
 	<div class="col-sm-4 searchdata">	
 
-					<select class="form-control not_mandatory" id="searchvehicletype" col="vehicle_type">
-						<option value="">Select UOM</option>
-				 		<?php
-				 			foreach($config['vehicle_type'] as $key => $option){
-				 				echo "<option value='$key'> - </option>";		
-				 			}
-				 		?>
-					</select>
 
 					<select class="form-control not_mandatory" id="searchvehicletype" col="vehicle_type">
 						<option value="">Select Storage Type</option>
@@ -84,7 +76,7 @@
 
 	<div class="side-btn">
 		<button id="addmodal" class="button-class custombutton">Add Item</button>
-		<button id="uomsettings" class="button-class custombutton">UOM Settings</button>
+		<!-- <button id="uomsettings" class="button-class custombutton">UOM Settings</button> -->
 	</div>
 
 

@@ -265,18 +265,23 @@ require_once('config/add_shipment_forms.php');
     <tr>
       <td><input type="number" col="pcid"></td>
       <td><input type="number" col="item_no"></td>
-      <td><input type="text" col="material_desc"></td>
-      <td><input type="number" col="qty" min="1"></td>
       <td>
-      	<select col="uom">
+      <!-- <input type="text" col="material_desc"> -->
+		<select col="material_desc">
+		</select> 
+
+      </td>
+      <td><input type="number" col="qty" min="1"></td>
+      <td><input type="text" col="uom" disabled="disabled">
+      	<!-- <select col="uom">
       		<?php
-      			echo htmloption(array_merge([''=>'Select UOM'],$config['unit_of_measurement']));
+      			// echo htmloption(array_merge([''=>'Select UOM'],$config['unit_of_measurement']));
       		?>
-      	</select>
+      	</select> -->
       </td>
       <td><input type="number" col="batch_code"></td>
       <td><input type="text" col="exp_date" ></td>
-      <td><input type="text" col="cbm"></td>
+      <td><input type="text" col="cbm" disabled="disabled"></td>
       <td>
       	<button type="button" class="btn btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>
       	<button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>
@@ -288,8 +293,10 @@ require_once('config/add_shipment_forms.php');
 
 		</div>
 		<div class="modal-footer">
+		<div class="inv_form" style="float: left;"><input type="checkbox" col="maintain" value="1"> Maintain some item Batch Code and Expiry Date</div>
+		
           <button type="button" class="btn btn-default" id="saveinventory">Save</button>
-          <button type="button" class="btn btn-default" id="updateinventory">Update</button>
+          <!-- <button type="button" class="btn btn-default" id="updateinventory">Update</button> -->
           <button type="button" class="btn btn-default" id="backinventory">Back</button>
           <button type="button" class="btn btn-default" id="clearinventory">Clear</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -320,7 +327,7 @@ require_once('config/add_shipment_forms.php');
 
 			</fieldset>
 			
-
+ 
 		<div class="modal-footer">
 		<button type="button" class="btn btn-default" id="pulloutbutton"><i class="fa fa-circle-o-notch fa-spin hide" style=""></i> <span> - </span> </button>
 		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

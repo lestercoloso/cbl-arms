@@ -45,3 +45,8 @@
 .custom-class .form-control {
     height: 25px;
 }
+
+input[type="number"].extra{
+    padding: 5px 0px;
+    text-align: center;
+}

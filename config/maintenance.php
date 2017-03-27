@@ -11,7 +11,9 @@ $config['booking'] = [
 						'vehicle_type'=>'Vehicle Type', 
 						'vehicle_status'=>'Vehicle Status', 
 						'transaction_type'=>'Transaction Type',
-						'unit_of_measurement'=>'UOM',
+						'unit_of_measurement'=>'UOM 1',
+						'unit_of_measurement_2'=>'UOM 2',
+						'unit_of_measurement_3'=>'UOM 3',
 						'item_type'=>'Item Type',
 
 						];

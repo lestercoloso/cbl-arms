@@ -1,4 +1,5 @@
 var inventory = [];       
+var updateit = '';
             $(function () {
                $('#exdate_group, #endate_group, #pudate_group, .create-date, #inventory_irr_date').datetimepicker({
                  format: 'MM/DD/YYYY',
@@ -128,6 +129,12 @@ var shipment = {
 			}
 		});
 
+		$('#updateshipment').click( function(){
+			if(!$(this).hasClass('disabled')){
+				shipment.update();	
+			}
+		});
+
 		$('#clearnewshipment').click( function(){
 			shipment.cleardata();
 		});
@@ -182,6 +189,12 @@ var shipment = {
 				shipment.clearInventory();
 			}
 		});
+
+
+		$('input[col="qty"]').bind('keyup keydown', function(){
+			var cbm = $('select[col="material_desc"] :selected').attr('cbm');
+			$('input[col="cbm"]').val(($(this).val()*cbm)+'m³');
+		});		
     },
 
     pullout: function(id, qty){
@@ -222,18 +235,45 @@ var shipment = {
     }, 
 
     edit: function(id){
-
+    	$('#clearnewshipment').hide();
 	$.post("backstage/inbound/edit/"+id, {},function(data){
 		// $('#addnew_billoflading').val(data);
-		// console.log(data);
 		$('#savenewshipment').hide();
 		$('#updateshipment').show();
 		$('#add_shipment').modal();
 		$('#add_shipment .modal-title').html('Edit Shipment');
 
+    	$('#rack_code').chosen('destroy');
+		$('#rack_code').html('');
+		$('#bay_code').chosen('destroy');
+		$('#bay_code').html('');
+
 		$.each(data, function( index, value ) {
 			$('#add_shipment [col="'+index+'"]').val(value);
 		});
+		shipment.getstoragecode(data.storage, pad(data.code, 10, '0'));
+		// shipment.changestorage();
+
+		$('.addshipment_bay, .addshipment_rack').hide();
+		$('.addshipment_'+data.storage).show();
+
+		updateid = data.id;
+		$('#addnew_billoflading').chosen('destroy');
+		$('#addnew_billoflading').html('<option value="'+data.bill_of_lading+'">'+pad(data.bill_of_lading,10, '0')+'</option>');
+
+		shipment.rack_level(data.rack_level);
+		inventory = data.inventory;
+
+		var irr = JSON.parse(data.irr);
+		
+		$('input[type="checkbox"][col="maintain"]').prop('checked', irr.maintain);
+		$.each(irr, function( index, value ) {
+			$('#inventory_modal [col="'+index+'"]').val(value);
+		});
+		// $('#rack_code').change(function(){
+		// 	var rack_level = $('#'+this.id+' :selected').data('racklevel');
+		// 	shipment.rack_level(rack_level);
+		// });
 
 	}).fail(function(){
 	    toastr["error"]('Error occured!<br>Please try again.');		
@@ -260,20 +300,45 @@ var shipment = {
     },
 
     update: function(){
-
+		var arr = createPostData('addship');
+    	var irr = createPostData('inv_form');
+    	console.log(arr);
+    	if(arr['error']){
+    		toastr["error"](arr['error']);
+    	}else{
+    		var arr = JSON.stringify(arr['data']);
+    		var irr = JSON.stringify(irr['data']);
+    		$('#updateshipment').addClass('disabled');
+    		$('#updateshipment i').removeClass('hide');
+			$.post("backstage/inbound/update/"+updateid, {d:arr, i: irr, inv: inventory},function(data){
+				if(data.status==200){
+					toastr["success"]('Successfully updated.');
+					$('#add_shipment').modal('hide');
+					$('#updateshipment').removeClass('disabled');
+					$('#updateshipment i').addClass('hide');
+					getInbound();
+				}
+			}).fail(function(){
+				toastr["error"]('Network error!<br> Please try again.');
+				$('#updateshipment').removeClass('disabled');
+				$('#updateshipment i').addClass('hide');
+			});
+    	}
     },
 
     create: function(){
 
     	var arr = createPostData('addship');
-
+    	var irr = createPostData('inv_form');
+		$('#clearnewshipment').show();
     	if(arr['error']){
     		toastr["error"](arr['error']);
     	}else{
     		var arr = JSON.stringify(arr['data']);
+    		var irr = JSON.stringify(irr['data']);
     		$('#savenewshipment').addClass('disabled');
     		$('#savenewshipment i').removeClass('hide');
-			$.post("backstage/inbound/save/", {d:arr},function(data){
+			$.post("backstage/inbound/save/", {d:arr, i: irr, inv: inventory},function(data){
 				if(data.status==200){
 					toastr["success"]('Successfully added.');
 					$('#add_shipment').modal('hide');
@@ -347,6 +412,7 @@ var shipment = {
 		$('#backinventory').show();
 		$('#clearinventory').hide();
 		$('#saveinventory').hide();
+		shipment.constructInventory();
 	},
 	backInventory: function(){
 		$('#add_shipment').modal();
@@ -358,13 +424,16 @@ var shipment = {
 		$('#inventory_modal tfoot input, #inventory_modal tfoot select').val('');
 		shipment.constructInventory();
 		$("#inventory_modal input[col='exp_date']").datetimepicker('destroy');
-       $('#inventory_modal input[col="exp_date"]').datetimepicker({
+       	$('#inventory_modal input[col="exp_date"]').datetimepicker({
          format: 'MM/DD/YYYY',
          useCurrent: false
-   		});		
+   		});
+   		$('select[col="material_desc"]').trigger('chosen:updated');		
 		$('input[col="pcid"]').focus();
 	},
 	addInventory: function(){
+		shipment.clearInventory();
+		shipment.getitemmasterfile();
 		$('#inventory_modal').modal();
 		$('#updateinventory').hide();
 		$('#backinventory').hide();
@@ -392,7 +461,7 @@ var shipment = {
 				content +='<td>'+value.uom+'</td>';
 				content +='<td>'+value.batch_code+'</td>';
 				content +='<td>'+value.exp_date+'</td>';
-				content +='<td>'+value.cbm+'</td>';
+				content +='<td class="numeric">'+value.cbm+'</td>';
 				content +='<td>'+action+'</td>';
 			content +='</tr>';
 		});
@@ -406,7 +475,8 @@ var shipment = {
 		});
 	},
 	clearInventory: function(){
-			$('.inv_form input').val('');
+			$('.inv_form input[type="text"], .inv_form input[type="number"]').val('');
+			$('.inv_form input[type="checkbox"]').prop('checked', false);
 			$('.inv_form .has-error').removeClass('has-error');
 			$('.inventory_table_container').removeClass('has-error-container');
 			inventory = [];
@@ -430,6 +500,9 @@ var shipment = {
 
 	},
 	addShipment: function(){
+
+
+
 		$('#add_shipment').modal();
 		$('#add_shipment .modal-title').html('Add Shipment');
 
@@ -443,14 +516,19 @@ var shipment = {
 		
 		$('#rack_code').change(function(){
 			var rack_level = $('#'+this.id+' :selected').data('racklevel');
-			var content = '<option>Please Select</option>';
-			for (i = 1; i <= rack_level; i++) { content +='<option value="'+i+'">'+i+'</option>';}
-			$('#rack_level').html(content);
+			shipment.rack_level(rack_level);
 		});
+
 		shipment.cleardata();
 
 	},
-	getstoragecode: function(t){
+	rack_level: function(rack_level){
+		var content = '<option>Please Select</option>';
+		for (i = 1; i <= rack_level; i++) { content +='<option value="'+i+'">'+i+'</option>';}
+		$('#rack_level').html(content);
+	},
+
+	getstoragecode: function(t, c=''){
 		var d = $('#'+t+'_code');
 		if(d.html().trim()==''){
 			$.post("backstage/inbound/getcode/"+t, {},function(data){
@@ -463,6 +541,8 @@ var shipment = {
 				});
 
 				d.html(content);
+				d.val(c);
+				
 				d.chosen('destroy');
 				setTimeout(function(){ 
 					d.chosen({search_contains: true});
@@ -474,6 +554,25 @@ var shipment = {
 			$.post("backstage/inbound/getpallet/", {},function(data){
 				
 					$('#pallet_code_shipment').val(data);
+				
+			});
+	},
+	getitemmasterfile: function(t){
+			$.post("backstage/inbound/getitemmasterfile/", {},function(data){
+				var content = "<option></option>";
+				$.each(data.data, function( index, value ) {
+					content += "<option value='"+value.item_id+"' cbm=\""+value.cbm+"\" uom=\""+value.uom+"\">"+value.item_id+"</option>";
+				});
+				$('select[col="material_desc"]').html(content);
+				$('select[col="material_desc"]').change(function(){
+					var cbm = $(this).find(':selected').attr('cbm'); 
+					var uom = $(this).find(':selected').attr('uom'); 
+					$('input[col="uom"]').val(uom);
+					$('input[col="cbm"]').val(cbm+'m³');
+					$('input[col="qty"]').val(1);
+				});
+
+				$('select[col="material_desc"]').chosen({search_contains: true});
 				
 			});
 	},

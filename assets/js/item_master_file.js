@@ -52,6 +52,16 @@ var item = {
 
 		$('#clearecreate').click(function(){
 			item.clear();
+		});	
+
+		$('.uom-select').change(function(){
+			var un = $(this).attr('name');
+			if($(this).val()==''){
+				$('.'+un).val('');
+			}else{
+				$('.'+un).val(1);	
+			}
+			
 		});					
 
 		item.getlist();

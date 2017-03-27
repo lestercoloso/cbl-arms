@@ -57,6 +57,14 @@ function createPostData(classused){
 				}
 			}
 	});
+
+	$('.'+classused+' input[type="checkbox"]').each(function( data ) {
+			var c = $(this).attr('col');
+			var v = $(this).val();
+			if(c!=undefined){
+				array2[c] = $(this).is(':checked');					
+			}
+	});
 	array['data'] = array2;
 	return array;
 // 

@@ -86,16 +86,50 @@ class Inbound{
 	}
 
 	public function save(){
-
 		$data = json_decode($_POST['d'], TRUE);
 		$data['bill_of_lading'] = (int) $data['bill_of_lading'];
 		$data['ex_date'] = save_date($data['ex_date']);
 		$data['en_date'] = save_date($data['en_date']);
 		$data['pu_date'] = save_date($data['pu_date']);
+		$data['irr'] 	 = $_POST['i'];
 
 
 		$return['status'] = 100;
 		if($this->db->insert("inbound_list",$data)){
+			$insert_id = $this->db->insert_id();
+
+			foreach ($_POST['inv'] as $value) {
+				$value['inbound_id'] = $insert_id;
+				$value['exp_date'] = save_date($value['exp_date']);
+				$this->db->insert("irr_list",$value);
+			}
+
+			$return['status'] = 200;
+		}
+		jdie($return);
+
+
+	}
+
+	public function update($updateid=""){
+		$data = json_decode($_POST['d'], TRUE);
+		$data['bill_of_lading'] = (int) $data['bill_of_lading'];
+		$data['ex_date'] = save_date($data['ex_date']);
+		$data['en_date'] = save_date($data['en_date']);
+		$data['pu_date'] = save_date($data['pu_date']);
+		$data['irr'] 	 = $_POST['i'];
+
+
+		$return['status'] = 100;
+		if($this->db->update("inbound_list",$data, "id=$updateid")){
+	
+			$this->db->delete('irr_list', "inbound_id=$updateid");
+			foreach ($_POST['inv'] as $value) {
+				$value['inbound_id'] = $updateid;
+				$value['exp_date'] = save_date($value['exp_date']);
+				$this->db->insert("irr_list",$value);
+			}
+
 			$return['status'] = 200;
 		}
 		jdie($return);
@@ -117,7 +151,35 @@ class Inbound{
 		$inboundid = explode('-', $inboundid);
 		$id = $inboundid[1];
 		$data = $this->db->select_one("select * from inbound_list a where status=1 and id=$id limit 1" );
+		$data['ex_date'] = get_date($data['ex_date']);
+		$data['en_date'] = get_date($data['en_date']);
+		$data['pu_date'] = get_date($data['pu_date']);
+
+		
+		$sql = "select 
+				pcid,
+				item_no,
+				batch_code,
+				material_desc,
+				uom,
+				cbm,
+				qty,
+				DATE_FORMAT(`exp_date`,'%m/%d/%Y') as exp_date
+				from irr_list where status=1 and inbound_id=$id";
+		$data['inventory'] = $this->db->select($sql)['data'];
 		jdie($data);
+	}
+
+	public function getitemmasterfile(){
+
+		$sql = "select 
+		LPAD(`item_id`, 10, '0') as item_id,
+		((length*0.01)*(width*0.01)*(height*0.01)*(uom_qty_1*uom_qty_2*uom_qty_3)) as cbm,
+		concat(`uom_1`, '-', `uom_qty_1`, '/', `uom_2`, '-', `uom_qty_2`, '/', `uom_3`, '-', `uom_qty_3`) as uom
+		from item_master_file where status=1";
+		$data = $this->db->select($sql);
+		jdie($data);	
+
 	}
 	
 }

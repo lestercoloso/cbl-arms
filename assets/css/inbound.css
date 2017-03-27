@@ -324,3 +324,27 @@ text-transform: uppercase;
     border: 1px solid #a94442;
 }
 
+select[col="material_desc"]{
+    width: 100% !important;
+    text-align: center !important;
+}
+input[col="uom"]{
+    width: 140px !important;
+}
+input[col="cbm"], input[col="qty"]{
+ text-align: right !important;
+}
+
+#inventory-list .chosen-single{
+    position: absolute;
+    border-radius: 0px;
+    margin: 0px;
+    height: auto;
+    width: 100%;
+    border: none;
+}
+
+#inventory-list .chosen-container{
+    width: 100% !important;
+    font-size: 11px;
+}
