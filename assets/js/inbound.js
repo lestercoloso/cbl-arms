@@ -420,7 +420,17 @@ var shipment = {
 	},
 	inventoryAdd: function(){
 		var inv = createPostData('add_inventory');
+
+		if(inventory.length==0){
+			inv['data'].pcid = 1;
+		}else{
+			$.each(inventory, function( index, value ) {
+				inv['data'].pcid = parseInt(value.pcid)+1; 
+			});
+		}
+
 		inventory.push(inv['data']);
+		
 		$('#inventory_modal tfoot input, #inventory_modal tfoot select').val('');
 		shipment.constructInventory();
 		$("#inventory_modal input[col='exp_date']").datetimepicker('destroy');
@@ -429,7 +439,7 @@ var shipment = {
          useCurrent: false
    		});
    		$('select[col="material_desc"]').trigger('chosen:updated');		
-		$('input[col="pcid"]').focus();
+		$('input[col="item_no"]').focus();
 	},
 	addInventory: function(){
 		shipment.clearInventory();

@@ -263,7 +263,7 @@ require_once('config/add_shipment_forms.php');
   </tbody>
   <tfoot class="add_inventory">
     <tr>
-      <td><input type="number" col="pcid"></td>
+      <td><input type="input" placeholder="Autogenerate" col="pcid" disabled="disabled"></td>
       <td><input type="number" col="item_no"></td>
       <td>
       <!-- <input type="text" col="material_desc"> -->
@@ -293,7 +293,7 @@ require_once('config/add_shipment_forms.php');
 
 		</div>
 		<div class="modal-footer">
-		<div class="inv_form" style="float: left;"><input type="checkbox" col="maintain" value="1"> Maintain some item Batch Code and Expiry Date</div>
+		<div class="inv_form" style="float: left;"><input type="checkbox" col="maintain" value="1"> Maintain same item Batch Code and Expiry Date</div>
 		
           <button type="button" class="btn btn-default" id="saveinventory">Save</button>
           <!-- <button type="button" class="btn btn-default" id="updateinventory">Update</button> -->
