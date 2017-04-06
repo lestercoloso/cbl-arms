@@ -34,9 +34,26 @@ session_start();
  $mobile		= $_SESSION['accmobile'];
  $email		    = $_SESSION['accemail'];
  $usrname		= $_SESSION['accusrname'];
+
+
+
+	
+
+ require_once('config/main.php');
+ require_once('config/links.php');
+
 ?>
+
+<script>
+	var datetoday = '<?php echo date('m/d/Y');?>';
+	var timenow = '<?php echo date('h:i A');?>';
+</script>	
 <head>
 <meta charset="UTF-8">
+
+<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />		
+<link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css" />		
+
 <link rel="stylesheet" href="./libraries/styles.css?<?php echo rand();?>" type="text/css" />
 <link rel="stylesheet" href="./assets/css/main.css?<?php echo rand();?>" type="text/css" />
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
@@ -44,6 +61,9 @@ session_start();
 <link rel="stylesheet" href="/bower_components/jquery-ui/themes/blitzer/jquery-ui.css" />
 <script src="./js/jquery.countdown.js"></script>
 <script type="text/javascript" src="./js/jquery.countdownTimer.js"></script>
+
+
+
 
 <script type="text/javascript">
 var hasMenu = 0;
@@ -220,30 +240,30 @@ var restoreAccount = function(){
  var showDialogAccount = function(){
  	$('#myAccountDialog').dialog('open');
  }
-document.write('<div id="toolbar" style="position: absolute; top: 0px; left: 0px; width: '+toolbarWidth+'px; height: 33px; overflow: hidden; z-index: 10;">');
-document.write('	<div id="innerToolbar" style="width: '+innerSpacing+'px; height: 33px; background-image: url(\'./img/toolbar_ct.png\');">');
-document.write('		<div class="tbDividerLeft"><!-- --></div>');
-document.write('		<div class="tbDividerLeftShadow"><!-- --></div>');
+// document.write('<div id="toolbar" style="position: absolute; top: 0px; left: 0px; width: '+toolbarWidth+'px; height: 33px; overflow: hidden; z-index: 10;">');
+// document.write('	<div id="innerToolbar" style="width: '+innerSpacing+'px; height: 33px; background-image: url(\'./img/toolbar_ct.png\');">');
+// document.write('		<div class="tbDividerLeft"><!-- --></div>');
+// document.write('		<div class="tbDividerLeftShadow"><!-- --></div>');
 
-var page = "<?php echo $usr_type; ?>";
+// var page = "<?php echo $usr_type; ?>";
 
 
 
-document.write('		<div class="toolbarCellLeft" title="Back to Home"><a href="homepage.php" class="tbTextSmall" style="color: #b00;">Home</a></div>');
-document.write('		<div class="tbDividerLeft"><!-- --></div>');
-document.write('		<div class="tbDividerLeftShadow"><!-- --></div>');
-document.write('		<div class="toolbarCellLeft" title="Open your profile and other setting"><span onClick="showDialogAccount();" class="tbTextSmall" style="color: #b00;cursor:pointer"><b>My Account</span></div>');
-document.write('		<div class="tbDividerLeft"><!-- --></div>');
-document.write('		<div class="tbDividerLeftShadow"><!-- --></div>');
-document.write('		<div class="toolbarCellLeft" title="" onMouseOver="showTools(\'toolsMenu\',1);" onMouseOut="showTools(\'toolsMenu\',0);showTools(\'Main_Menu\',0);"><a href="javascript:void(0);" class="tbTextSmall" style="color: #b00;">Applications</a></div>');
-document.write('		<div class="tbDividerLeft"><!-- --></div>');
-document.write('		<div class="tbDividerLeftShadow"><!-- --></div>');
+// document.write('		<div class="toolbarCellLeft" title="Back to Home"><a href="homepage.php" class="tbTextSmall" style="color: #b00;">Home</a></div>');
+// document.write('		<div class="tbDividerLeft"><!-- --></div>');
+// document.write('		<div class="tbDividerLeftShadow"><!-- --></div>');
+// document.write('		<div class="toolbarCellLeft" title="Open your profile and other setting"><span onClick="showDialogAccount();" class="tbTextSmall" style="color: #b00;cursor:pointer"><b>My Account</span></div>');
+// document.write('		<div class="tbDividerLeft"><!-- --></div>');
+// document.write('		<div class="tbDividerLeftShadow"><!-- --></div>');
+// document.write('		<div class="toolbarCellLeft" title="" onMouseOver="showTools(\'toolsMenu\',1);" onMouseOut="showTools(\'toolsMenu\',0);showTools(\'Main_Menu\',0);"><a href="javascript:void(0);" class="tbTextSmall" style="color: #b00;">Applications</a></div>');
+// document.write('		<div class="tbDividerLeft"><!-- --></div>');
+// document.write('		<div class="tbDividerLeftShadow"><!-- --></div>');
 
-document.write('		<div class="toolbarCellRight" title="Logout from the SM Trade Portal"><a href="logout.php" class="tbTextSmall" style="color: #b00;">Logout</a></div>');
-document.write('		<div class="tbDividerRightShadow"><!-- --></div>');
-document.write('		<div class="tbDividerRight"><!-- --></div>');
-document.write('	</div>');
-document.write('</div>');
+// document.write('		<div class="toolbarCellRight" title="Logout from the SM Trade Portal"><a href="logout.php" class="tbTextSmall" style="color: #b00;">Logout</a></div>');
+// document.write('		<div class="tbDividerRightShadow"><!-- --></div>');
+// document.write('		<div class="tbDividerRight"><!-- --></div>');
+// document.write('	</div>');
+// document.write('</div>');
 
 function updateToolbarPos()
 	{
@@ -407,7 +427,63 @@ var validateNumber = function(event,name,id) {
 </head>
 
 
-<div id="toolsMenu" style="position: absolute; top: 30px; left: 165px; width: 300px; height: auto; background-color: #bbb; z-index: 10; display: none;" onMouseOver="showTools('toolsMenu',1);" onMouseOut="showTools('toolsMenu',0);">
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <!-- <a class="navbar-brand" href="#">Brand</a> -->
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li id="homepage"><a href="/">Home</a></li>
+        <li><a href="#">My Account</a></li>
+        <li class="dropdown">
+          <a dp href="javascript:void(0);">Applications <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+       <?php
+      	foreach ($config['links'] as $name => $value) {
+		  	$link = !empty($value['link']) ? $value['link'].'.php' : 'javascript:dpremove();';
+			if(count($value['options'])>0){
+				echo '<li class="dropdown"><a dp href="javascript:void(0);">'.$name.' <i class="fa fa-caret-right"></i></a>
+				 	<ul class="dropdown-menu sub-link">';
+
+			 	foreach($value['options'] as $subname => $subvalue){
+			 		$sublink = !empty($subvalue) ? $subvalue.'.php' : 'javascript:dpremove();';
+					echo '<li><a href="'.$sublink.'">'.$subname.'</a></li>';				 		
+			 	}
+				echo '</ul></li>';		
+			}else{
+					echo '<li><a href="'.$link.'">'.$name.'</a></li>';				        			
+			}
+
+      	}
+       ?>
+            
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+         <li logout><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> LOGOUT</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+       
+
+
+
+<!-- <div id="toolsMenu" style="position: absolute; top: 30px; left: 165px; width: 300px; height: auto; background-color: #bbb; z-index: 10; display: none;" onMouseOver="showTools('toolsMenu',1);" onMouseOut="showTools('toolsMenu',0);">
 	
 	<?php if($usr_type =="System Administrator"){
 	?>
@@ -424,16 +500,16 @@ var validateNumber = function(event,name,id) {
 	<div style="color:#b00;" class="tbMenuItems" onClick="">Collection Call Out</div>
 	<div style="color:#b00;" class="tbMenuItems" onClick="">Payment</div>
 	<div style="color:#b00;" class="tbMenuItems" onClick="">Reports</div>
-</div>
-<div id="Main_Menu" style="position: absolute; top: 30px; left: 465px; width: 300px; height: auto; background-color: #bbb; z-index: 10; display: none;" onMouseOver="showTools('Main_Menu',1);" onmouseleave="showTools('Main_Menu',0);">
+</div> -->
+	<!-- <div id="Main_Menu" style="position: absolute; top: 30px; left: 465px; width: 300px; height: auto; background-color: #bbb; z-index: 10; display: none;" onMouseOver="showTools('Main_Menu',1);" onmouseleave="showTools('Main_Menu',0);">
 	<div style="color:#b00;" class="tbMenuItems" onClick="location.href='genSetting.php';">General Settings</div>
 	<div style="color:#b00;" class="tbMenuItems" onClick="location.href='driverProfile.php';">Driver Information</div>
 	<div style="color:#b00;" class="tbMenuItems" onClick="location.href='vehicle.php';">Vehicle Information</div>
 	<div style="color:#b00;" class="tbMenuItems" onClick="">Location Management</div>
 	<div style="color:#b00;" class="tbMenuItems"  onClick="location.href='item_master_file.php';">Item Master File</div>
 	
-</div>
-
+	</div>
+ -->
 
 <div id='myAccountDialog' style='display:none;' title='My Account'>
 	<table>
@@ -488,7 +564,8 @@ var validateNumber = function(event,name,id) {
 
 
 
-<body onResize="updateToolbarPos();">
+<!-- <body onResize="updateToolbarPos();"> -->
+<body>
 
 
 	<div class="scrollingContainer">
@@ -519,9 +596,3 @@ var validateNumber = function(event,name,id) {
 			</div>
  		</div>
 
-<script>
-	var datetoday = '<?php echo date('m/d/Y');?>';
-	var timenow = '<?php echo date('h:i A');?>';
-</script>		
-
- 		<?php 		require_once('config/main.php'); ?>

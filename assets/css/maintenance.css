@@ -30,8 +30,9 @@
 .optionlist{
 	padding-right: 0px;
 	padding-left: 10px;
-	    height: 35px;
-	    font-size: 11px;
+    height: auto;
+    margin: 10px 0;
+    font-size: 11px;
 }
 .optionlist div, .optionlist label{
 	padding-right: 5px;

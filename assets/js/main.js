@@ -117,3 +117,22 @@ Array.prototype.remove = function(from, to){
   this.splice(from, (to=[0,from||1,++to-from][arguments.length])<0?this.length+to:to);
   return this.length;
 };
+
+
+function dpremove(){
+	alert('Not Available');
+	$('.dropdown').removeClass('open');
+}
+
+// $('body').click(function(){
+// 	$('.dropdown').removeClass('open');
+// });
+$('.dropdown [dp]').click(function(){
+
+	if($(this).parent().hasClass('open')){
+		$(this).parent().removeClass('open');
+	}else{
+		$(this).parent().addClass('open');	
+	}
+	
+});

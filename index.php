@@ -10,8 +10,6 @@ session_start();
 $_SESSION['page']="home";
 
 require_once('db_connect.php');
-$css = [ bowerpath('bootstrap/dist/css/bootstrap.min.css'),bowerpath('font-awesome/css/font-awesome.min.css')];
-construct_style($css);
 require_once('header.php');
 
 
@@ -102,4 +100,17 @@ The CBL Warehouse Management System (WMS) built to facilitate warehouse manageme
 	</div>
 </div>
 
+<?php
+	$js = [ bowerpath('toastr/toastr.min.js'),
+			bowerpath('bootstrap/dist/js/bootstrap.min.js'),
+			javascript('main.js')	];
+	construct_js($js);
+
+
+?>
+
+<script type="text/javascript">
+	$('#homepage').addClass('active');
+	$('#homepage a').attr('href', 'javascript:void(0);');
+</script>
 </body>

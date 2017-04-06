@@ -1,6 +1,4 @@
-<title>Warehouse</title>
-<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />		
-<link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css" />		  	
+<title>Warehouse</title>	  	
 <?php
 
 session_start();

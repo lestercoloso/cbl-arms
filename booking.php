@@ -2,8 +2,6 @@
 <?php
 		require_once("helper/utility_helper.php");
 
-		$css = [ bowerpath('bootstrap/dist/css/bootstrap.min.css'),bowerpath('font-awesome/css/font-awesome.min.css')];
-		construct_style($css);
 		
 		require_once('header.php');	
 		

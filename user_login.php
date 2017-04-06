@@ -20,7 +20,7 @@
 						<h2>User Login</h2>
 						<div class="formlogin"><span>User ID</span><input class="txtField" id="usrname" name="login" type="text"></div>
 						<div class="formlogin"><span>Password</span><input class="txtField" id="usrpass" name="pass" type="password" >
-						<b id="sub"><a><button>Login:.</button></a></b></div>
+						<b id="sub"><a><button  style="text-decoration: none;">Login <i class="fa fa-sign-in" aria-hidden="true"></i></button></a></b></div>
 						<p class="loginfoot"><a href="#" id="loginFormForgotPassword" title="Please contact CBL System Administrator for Change in Password.">Forgot Password?</a> &nbsp; &bull; &nbsp; <a href="#">No User ID?</a> 
 				</form>
 				
