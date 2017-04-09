@@ -3,7 +3,7 @@
 	require_once("helper/utility_helper.php");
 		require_once('header.php');	
 		
-		$css = [bowerpath('toastr/toastr.min.css'),
+		$css = [
 				bowerpath('eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'),
 				bowerpath('chosen/chosen.css'),
 				stylessheet('customer_information.css')];

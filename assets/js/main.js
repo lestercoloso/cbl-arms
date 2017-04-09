@@ -26,6 +26,23 @@ function new_alert(msg,type=1){
 	
 }
 
+function SelectOption(select, option){
+	return option[select];
+}
+function CreateSelectOption(select, option, col){
+	content = "<select col='"+col+"'>";
+	$.each(option, function( index, value ) {
+		if(select==index){
+			var selected = 'selected';
+		}else{
+			var selected = '';
+		}
+		content +="<option value='"+index+"' "+selected+">"+value+"</option>";
+	});
+	content +="</select>";
+	return content;
+}
+
 function createPostData(classused){
 		var array = new Object();	
 		var array2 = new Object();	
@@ -33,7 +50,7 @@ function createPostData(classused){
 			$('.'+classused+' div').removeClass('has-error');	
 			$('.'+classused).removeClass('has-error');	
 		
-	$('.'+classused+' input[type="text"], .'+classused+' input[type="number"], .'+classused+' select, .'+classused+' input[type="hidden"], .'+classused+' input[type="date"]').each(function( data ) {
+	$('.'+classused+' input[type="text"], .'+classused+' input[type="number"], .'+classused+' select, .'+classused+' input[type="hidden"], .'+classused+' input[type="date"], .'+classused+' input[type="password"]').each(function( data ) {
 			var c = $(this).attr('col');
 			var v = $(this).val();
 			if(c!=undefined && c!=''){
@@ -124,15 +141,120 @@ function dpremove(){
 	$('.dropdown').removeClass('open');
 }
 
-// $('body').click(function(){
-// 	$('.dropdown').removeClass('open');
-// });
 $('.dropdown [dp]').click(function(){
-
+	$('.dropdown-menu .dropdown').removeClass('open');
 	if($(this).parent().hasClass('open')){
 		$(this).parent().removeClass('open');
 	}else{
 		$(this).parent().addClass('open');	
 	}
-	
 });
+$('.dropdown-open-backdrop').click(function(){
+	$(this).parent().removeClass('open');
+});
+
+
+//my account functions
+var myaccount = {
+
+	init: function(){
+
+		$('#myaccount').click(function(){
+			$('#myaccountmodal').modal();
+			myaccount.reset();
+		});
+
+		$('#changepwmyaccount').click(function(){
+			$('#mypasswordmodal').modal();
+		});
+
+		$('#updatemypassword').click(function(){
+			myaccount.changepassword();
+
+		});
+
+		$('#resetmyaccount').click(function(){
+			if(confirm("Are you sure you want to reset? \nThis will revert back all the changes.")){
+				myaccount.reset();				
+			}
+		});
+
+		$('#updatemyaccount').click(function(){
+			myaccount.update();
+		});
+
+	},
+
+	reset: function(){
+		$('#myaccount_first_name').val(myaccount_fname);
+		$('#myaccount_middle_name').val(myaccount_mname);
+		$('#myaccount_last_name').val(myaccount_lname);
+		$('#myaccount_mobile_no').val(myaccount_mobile);
+		$('#myaccount_email').val(myaccount_email);
+	},
+
+	changepassword: function(){
+		var arr = createPostData('myaccount_password');
+		if(arr['error']){
+	    	toastr["error"](arr['error']);
+	    }else if(arr['data']['npassword']!=arr['data']['cnpassword']){
+			toastr["error"]("The new password and confirmation password did not match.");
+	    }else{
+			$('#updatemypassword').addClass('disabled');
+			$('#updatemypassword i').removeClass('hide');
+	    	$.post("backstage/user/myaccount_changepassword/", {d:arr['data']},function(data){
+	    		if(data.status==200){
+	    			toastr["success"]('Successfully Changed.<br>Logging Out.');
+					$('#mypasswordmodal').modal('hide');
+					setTimeout(function(){ 
+						window.location.href="logout.php";
+					}, 3000);
+	    		}else{
+	    			toastr["error"](data.message);
+	    		}
+					$('#updatemypassword').removeClass('disabled');
+					$('#updatemypassword i').addClass('hide');
+	    	}).fail(function(){
+					toastr["error"]('Error.');
+			$('#updatemypassword').removeClass('disabled');
+			$('#updatemypassword i').addClass('hide');
+			});
+
+	    }
+
+	},
+
+	update: function(){
+		var arr = createPostData('myaccountupdate');
+			if(arr['error']){
+	    		toastr["error"](arr['error']);
+	    	}else{
+				$('#updatemyaccount').addClass('disabled');
+				$('#updatemyaccount i').removeClass('hide');
+	    		$.post("backstage/user/myaccount_update/", {d:arr['data']},function(data){
+	    			if(data.status==200){
+							toastr["success"]('Successfully updated.');
+
+							myaccount_fname = arr['data']['fname'];
+							myaccount_mname = arr['data']['mname'];
+							myaccount_lname = arr['data']['lname'];
+							myaccount_mobile = arr['data']['mobile'];
+							myaccount_email = arr['data']['email'];
+
+							$('#myaccountmodal').modal('hide');
+							$('#updatemyaccount').removeClass('disabled');
+							$('#updatemyaccount i').addClass('hide');
+					}else{
+						toastr["error"]('Network error!<br> Please try again.');	
+					}
+	    		}).fail(function(){
+					toastr["error"]('Error.');
+					$('#updatemyaccount').removeClass('disabled');
+					$('#updatemyaccount i').addClass('hide');
+				});
+	    	}	
+	}
+
+}
+
+myaccount.init();

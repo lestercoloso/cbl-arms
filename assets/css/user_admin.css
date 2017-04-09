@@ -1,0 +1,185 @@
+#create_modal .modal-dialog{
+	width: 850px;
+}
+
+
+
+ #create_additional .modal-content {
+    -webkit-box-shadow: 15px 15px 5px rgba(0,0,0,.5);
+    box-shadow:15px 15px 25px rgba(0,0,0,.5);
+}
+
+.bordered{
+	padding: 5px;
+	font-size: 11px;
+	margin: auto;
+    float: none;
+    height: 250px;
+}
+
+#create_modal input[type=text], #create_modal select, #create_modal input[type=number], #create_modal input[type=password] {
+    padding: 0px 2px;
+    border-radius: 2px;
+    height: 20px;
+    font-weight: 100;
+    font-size: 10px;
+    border: solid 1px #cccccc;
+ }
+ #create_modal label{
+ 	padding: 0px;
+ }
+
+
+.no-pad{
+	padding: 0px;
+	    padding-right: 10px;
+}
+.no-wrap{
+	white-space: nowrap;
+}
+.no-margin{
+	margin: 0px !important;
+}
+.create_customer .form-group{
+	margin-bottom: 15px;
+	height: 18px;
+}
+
+.create_customer label, .create_customer div{
+	padding-right: 5px;
+	padding-left: 0px;
+}
+#create_additional .form-group{
+	margin-bottom: 15px;
+	height: 18px;
+	padding-right: 5px;
+	padding-left: 0px;
+	font-size: 11px;
+}
+
+
+.create_customer .input-group-addon {
+    padding: 3px 8px;
+    font-size: 10px;
+}
+.create_customer .date {
+     margin: 0px; 
+}
+#create_modal .date input[type=text]{
+	    border-radius: 2px 0px 0px 2px;
+}
+#create_additional .input-group-addon {
+    padding: 3px 8px;
+    font-size: 10px;
+}
+#create_additional .date {
+     margin: 0px; 
+}
+#create_additional .date input[type=text]{
+	    border-radius: 2px 0px 0px 2px;
+}
+
+.bordered .selector{
+	padding-left: 3px;
+	padding-right: 0px;
+	width: 33%;
+	float: left;
+	margin-left: 2px;
+	cursor: pointer;
+}
+.bordered .selector img{
+	cursor: pointer;
+	width: 50%;
+}
+
+.border_container{
+	margin: auto;
+	float: left;
+	/*height: 20px;*/
+}
+
+.border_table{
+    width: 98%;
+    margin: 0px auto;
+    position: relative;
+    top: 5px;
+}
+
+.select_inactive .img_active{
+	display: none;
+}
+.select_inactive{
+	background: #e2e4e6;
+}
+
+.select_active .img_inactive{
+	display: none;
+}
+
+#create_modal th, #create_modal td {
+    padding: 5px;
+ }
+
+ #additional_table table{
+ 	display: none;
+ }
+ 
+ #additional_table tfoot td button{
+ 	float: right;
+ 	margin: 0px; 
+ 	width: auto;
+ }
+
+#additional_table .action{
+	text-align: center;
+}
+
+#additional_table .action .btn{
+	    padding: 2px 6px;
+	    font-size: 11px;
+}
+
+.reveal{
+	cursor: pointer;
+	 -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.revealed-detail tr td{
+	color: #333333;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 5px;
+}
+.second{
+	padding-left: 20px !important;
+}
+.last{
+	text-align: right;
+}
+.revealed-detail table{
+    margin-left: 3%;
+    width: 94%;
+}
+.revealed-detail .custombutton {
+     width: auto; 
+ }
+.revealed-detail tr td input[type="text"]{
+	padding: 5px 10px;
+	height: auto;
+}
+.revealed-detail tr td select{
+    padding: 5px 10px;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-weight: 100;
+    color: #55555a;
+    width: 100%;
+}

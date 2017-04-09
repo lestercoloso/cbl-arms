@@ -1,0 +1,3 @@
+ALTER TABLE `cblarms`.`user_account` 
+CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ,
+ADD UNIQUE INDEX `id_UNIQUE` (`id` ASC);

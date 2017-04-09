@@ -107,10 +107,13 @@ function construct_form($arr){
 						
 		}else if($data['type']=='input'){
 			$return .='<input name="'.$data['col'].'" '.$data['additionals'].' type="text"  col="'.$data['col'].'" id="'.$data['id'].'"  class="'.$data['form_class'].'" placeholder="'.$data['placeholder'].'">
-						<span id="'.$data['col'].'_error" class="text-danger"></span>';
+						<span id="'.$data['col'].'_error" class="text-danger">'.$data['note'].'</span>';
+		}else  if($data['type']=='password'){
+			$return .='<input name="'.$data['col'].'" '.$data['additionals'].' type="password"  col="'.$data['col'].'" id="'.$data['id'].'"  class="'.$data['form_class'].'" placeholder="'.$data['placeholder'].'">
+						<span id="'.$data['col'].'_error" class="text-danger">'.$data['note'].'</span>';
 		}else if($data['type']=='number'){
 		$return .='<input name="'.$data['col'].'" '.$data['additionals'].' type="number" min="1" col="'.$data['col'].'" id="'.$data['id'].'"  class="'.$data['form_class'].'" placeholder="'.$data['placeholder'].'">
-						<span id="'.$data['col'].'_error" class="text-danger"></span>';
+						<span id="'.$data['col'].'_error" class="text-danger">'.$data['note'].'</span>';
 		}else if($data['type']=='date'){
 		$return .='<div class="input-group date  col-sm-12  create-date">
 			<input type="text" class="'.$data['form_class'].'" name="'.$data['col'].'" col="'.$data['col'].'" id="'.$data['id'].'"  placeholder="'.$data['placeholder'].'">
