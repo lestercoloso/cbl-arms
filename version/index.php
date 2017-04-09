@@ -255,10 +255,10 @@ var devmode = "<?php echo $devmode?>";
 		$('#branch_container .loader').show();
 		$.post("backend/changeBranch",{branch:branch, path:path}, function(data){
 			
-			$('#host').val(data.config.host);
-			$('#database').val(data.config.database);
-			$('#usr-config').val(data.config.username);
-			$('#pss-config').val(data.config.password);
+			// $('#host').val(data.config.host);
+			// $('#database').val(data.config.database);
+			// $('#usr-config').val(data.config.username);
+			// $('#pss-config').val(data.config.password);
 
 			gitResult(data.data);
 			$('#application_version').html("<b>"+data.version+"</b>");
