@@ -26,9 +26,9 @@ var user_type = <?php echo $user_type; ?>;
 <div class="search-filter row">
 	<br>
 	<div class="col-sm-4 searchdata">	
-				<input name="searchloginid" id="searchloginid" placeholder="Login ID" col="booking_no" type="text" class="form-control search-text not_mandatory">
+				<input name="searchloginid" id="searchloginid" placeholder="Login ID" col="username" type="text" class="form-control search-text not_mandatory">
 
-				<input name="searchloginid" id="username" placeholder="User Name" col="username" type="text" class="form-control search-text not_mandatory">
+				<input name="searchloginid" id="searchname" placeholder="User Name" col="name" type="text" class="form-control search-text not_mandatory">
 
 	</div>
 	<div class="col-sm-4 searchdata">	
@@ -48,7 +48,7 @@ var user_type = <?php echo $user_type; ?>;
 	</div>
 	<div class="col-sm-4 searchdata">	
 
-					<select class="form-control not_mandatory" id="search_mode_of_shipping" col="mode_of_shipping">
+					<select class="form-control not_mandatory" id="searchusertype" col="user_type">
 				 		<option value="">Select User Type</option>
 				 		<?php
 				 			foreach($config['user_type'] as $key => $option){
@@ -57,7 +57,7 @@ var user_type = <?php echo $user_type; ?>;
 				 		?>
 					</select>
 
-					<select class="form-control not_mandatory" id="search_mode_of_shipping" col="mode_of_shipping">
+					<select class="form-control not_mandatory" id="searchstatus" col="status">
 				 		<option value="">Select Status</option>
 				 		<?php
 				 			foreach($config['user_status'] as $key => $option){
@@ -138,7 +138,6 @@ foreach($config['user_form'] as $forms){
 </form>
 		</div>
 		<div class="modal-footer">
-		<button type="button" class="btn btn-default" id="updatecreate"><i class="fa fa-circle-o-notch fa-spin hide" style=""></i> Update</button>
 		<button type="button" class="btn btn-default" id="savecreate"><i class="fa fa-circle-o-notch fa-spin hide" style=""></i> Save</button>
 		<button type="button" class="btn btn-default" id="clearecreate">Clear</button>
 		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

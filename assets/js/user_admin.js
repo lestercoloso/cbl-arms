@@ -65,27 +65,6 @@ var user = {
 		$('#new_user').click(function(){
 			user.createuser();
 		});				
-		$('#add_new_inventory').click(function(){
-			user.createinventory();
-		});				
-		$('#add_multiple_vehicle').click(function(){
-			user.createvehicle();
-		});				
-		$('#savevehicle').click(function(){
-			user.savevehicle();
-		});				
-		$('#saveinventory').click(function(){
-			user.saveinventory();
-		});					
-		$('#updateinventory').click(function(){
-			user.updateinventory();
-		});				
-		$('#updatevehicle').click(function(){
-			user.updatevehicle();
-		});				
-		$('#clearadditional').click(function(){
-			user.clearadditional();
-		});				
 
 		$('.selector').click(function(){
 			$('.selector').removeClass('select_active');
@@ -98,55 +77,21 @@ var user = {
 
 		//clear new bill of lading 
 		$('#clearecreate').click(function(){
-			if(confirm("Are you sure you want to proceed?\nThis will also clear the inventory/vehicle list.")){
+			if(confirm("Are you sure you want to proceed?.")){
 				user.clear();				
 			}
 
 		});			
 
-		$('#create_customer_name').change(function(){
-			var clientid = $(this).find(':selected').data('client_id');
-			$('#create_customer_id').val(clientid);
-			user.getcontacts(clientid);
-		});		
-
-		$('#create_contact_person').change(function(){
-			user.select_contacts();
-		});		
 
 		$('#savecreate').click(function(){
 			if(!$(this).hasClass('disabled')){
 				user.save();	
 			}
 		});
-		$('#updatecreate').click(function(){
-			if(!$(this).hasClass('disabled')){
-				user.update();	
-			}
-		});	
-
 		user.getuserlist();
 
-		$('#additional-vehicle_type').change(function(){
-			user.selectvehicle();
-		});
 
-	},
-
-	select_contacts: function(){
-			var department = $('#create_contact_person').find(':selected').data('department');
-			var contact_id = $('#create_contact_person').find(':selected').data('contact_id');
-			$('#create_department').val(department);
-			$('#create_contact_id').val(contact_id);
-	},
-	selectvehicle: function(selected){
-		var vehicle_type = $('#additional-vehicle_type').val();
-		var content = '<option value="">Select Plate No.</option>';
-		$.each(vehicle_data[vehicle_type], function( index, value ) {
-			content += '<option value="'+value+'">'+value+'</option>';
-		});
-		$('#additional-plate_no').html(content);
-		$('#additional-plate_no').val(selected);
 	},
 
 	createuser: function(){
@@ -155,234 +100,6 @@ var user = {
 		$('#clearecreate').show();
 		$('#updatecreate').hide();
 		user.clear();
-	},
-
-	createinventory: function(){
-		$('#create_additional').modal();
-		$('#create_additional .modal-title').html('Add Inventory');
-		$('#create_additional').addClass('inventory');
-		$('#create_additional').removeClass('vehicle');
-		$('.add_inventory').show();
-		$('.add_vehicle').hide();
-		user.clearadditional();
-		$('#clearadditional').show();
-		$('#saveinventory').show();
-		$('#savevehicle').hide();
-		$('#updateinventory').hide();
-		$('#updatevehicle').hide();
-
-	},
-	
-	createvehicle: function(){
-		$('#create_additional').modal();
-		$('#create_additional .modal-title').html('Add Vehicle');		
-		$('#create_additional').removeClass('inventory');
-		$('#create_additional').addClass('vehicle');
-		$('.add_inventory').hide();
-		$('.add_vehicle').show();
-		user.clearadditional();
-		$('#saveinventory').hide();
-		$('#clearadditional').show();
-		$('#savevehicle').show();
-		$('#updateinventory').hide();
-		$('#updatevehicle').hide();
-	},
-
-	vehicleedit: function(key){
-		$('#saveinventory').hide();
-		$('#savevehicle').hide();
-		$('#clearadditional').hide();
-		$('#updateinventory').hide();
-		$('#updatevehicle').show();
-		$('.add_inventory').hide();
-		$('.add_vehicle').show();
-		$('#create_additional').modal();
-		$('#create_additional').removeClass('inventory');
-		$('#create_additional').addClass('vehicle');
-		$('#create_additional .modal-title').html('Edit Vehicle');
-		$.each(vehicle[key], function( index, value ) {
-			$('#additional-'+index).val(value);
-		});
-		updatevehiclekey = key;
-		user.selectvehicle(vehicle[key].plate_no);
-	},
-	inventoryedit: function(key){
-		$('#saveinventory').hide();
-		$('#savevehicle').hide();
-		$('#clearadditional').hide();
-		$('#updateinventory').show();
-		$('#updatevehicle').hide();
-		$('#create_additional').modal();
-		$('.add_inventory').show();
-		$('.add_vehicle').hide();
-		$('#create_additional').addClass('inventory');
-		$('#create_additional').removeClass('vehicle');
-		$('#create_additional .modal-title').html('Edit Inventory');
-		$.each(inventory[key], function( index, value ) {
-			$('#additional-'+index).val(value);
-		});
-		updateinventorykey = key;
-	},
-
-	saveinventory: function(){
-
-		var arr = createPostData('add_inventory');
-		if(arr['error']){
-    		toastr["error"](arr['error']);
-    	}else{
-    		inventory.push(arr['data']);
-    		toastr["success"]('Successfully added.');
-    		$('#create_additional').modal('hide');
-    		user.constructinventory();
-    	}
-	},
-	updateinventory: function(){
-
-		var arr = createPostData('add_inventory');
-		if(arr['error']){
-    		toastr["error"](arr['error']);
-    	}else{
-    		toastr["success"]('Successfully updated.');
-    		$('#create_additional').modal('hide');
-    		inventory[updateinventorykey] = arr['data'];
-    		user.constructinventory();
-    	}
-	},
-	savevehicle: function(){
-
-		var arr = createPostData('add_vehicle');
-		if(arr['error']){
-    		toastr["error"](arr['error']);
-    	}else{
-    		vehicle.push(arr['data']);
-    		toastr["success"]('Successfully added.');
-    		$('#create_additional').modal('hide');
-    		user.constructvehicle();
-    	}
-	},	
-	updatevehicle: function(){
-
-		var arr = createPostData('add_vehicle');
-		if(arr['error']){
-    		toastr["error"](arr['error']);
-    	}else{
-    		vehicle[updatevehiclekey] = arr['data'];
-    		toastr["success"]('Successfully updated.');
-    		$('#create_additional').modal('hide');
-    		user.constructvehicle();
-    	}
-	},
-	constructvehicle: function(){
-		
-		var action = '<button type="button" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
-		action += ' <button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
-		content = '';
-		$.each(vehicle, function( index, value ) {
-			content +='<tr id="vehicle-'+index+'" data-key="'+index+'">';
-			content +='<td class="centered">'+value.vehicle_type+'</td>';
-			content +='<td class="centered">'+value.plate_no+'</td>';
-			content +='<td class="centered">'+value.driver+'</td>';
-			content +='<td class="centered">'+action+'</td></tr>';
-		});
-
-		$('#vehicle_selected tbody').html(content);
-		$('#vehicle_selected tbody tr .btn-success').click(function(){
-			user.vehicleedit($(this).parent().parent().data('key'));
-		});
-		$('#vehicle_selected tbody tr .btn-danger').click(function(){
-			if(confirm('Are you sure you want to remove this?')){
-					vehicle.remove($(this).parent().parent().data('key'));
-					toastr["success"]('Successfully removed.');
-					user.constructvehicle();					
-				
-			}
-		});
-	},
-	constructinventory: function(){
-		
-		var action = '<button type="button" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
-		action += ' <button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
-		content = '';
-		$.each(inventory, function( index, value ) {
-			content +='<tr id="inventory-'+index+'" data-key="'+index+'">';
-			content +='<td class="centered">'+pad(value.item_id,10,'0')+'</td>';
-			content +='<td class="centered">'+value.product_code+'</td>';
-			content +='<td class="centered">'+value.item_type+'</td>';
-			content +='<td class="centered">'+value.unit_of_measurement+'</td>';
-			content +='<td class="centered">'+value.packaging+'</td>';
-			content +='<td class="centered">'+value.length+'x'+value.width+'x'+value.height+'</td>';
-			content +='<td class="centered">'+value.storage_type+'</td>';
-			content +='<td class="centered">'+value.unit_cost+'</td>';
-			content +='<td class="centered">'+value.unit_price+'</td>';
-			content +='<td class="centered">'+action+'</td></tr>';	
-
-			lastitemid = parseInt(value.item_id);
-		});
-
-		$('#inventory_selected tbody').html(content);
-		$('#inventory_selected tbody tr .btn-success').click(function(){
-			user.inventoryedit($(this).parent().parent().data('key'));
-		});		
-		$('#inventory_selected tbody tr .btn-danger').click(function(){
-			if(confirm('Are you sure you want to remove this?')){
-					inventory.remove($(this).parent().parent().data('key'));
-					toastr["success"]('Successfully removed.');
-					user.constructinventory();					
-			}
-		});
-	},
-
-
-
-
-	getnewinventorynumber: function(){
-		var item_id = (lastitemid+1);
-		$('#additional-item_id').val(pad(item_id, 10, '0'));
-	},
-
-	clearadditional: function(){
-		$('#create_additional input, #create_additional select').val('');
-		user.getnewinventorynumber();
-		user.form('add_inventory');
-		user.form('add_vehicle');
-		user.getnewinventorynumber();
-		$('#additional-plate_no').html('');
-
-	},
-
-
-	edit: function(id){
-		user.form('create_shippment');
-		$('#create_modal').modal();
-		$('#savecreate').hide();
-		$('#clearecreate').hide();
-		$('#updatecreate').show();
-		$('#create_customer_name').chosen('destroy');
-		$.post("backstage/user/getuserdetails/"+id, {},function(data){	
-			$.each(data, function( index, value ) {
-				$('.create_shippment input[col="'+index+'"], .create_shippment select[col="'+index+'"]').val(value);
-			});
-			updateid = data.id;
-			$('#create_customer_name').html('<option value="'+data.customer_name+'" data-client_id="'+data.customer_id+'" "="">'+data.customer_name+'</option>');
-			$('#create_user_date').val(data.user_date);
-			user.getcontacts(data.customer_id, data.area, data.contact_person);
-			
-			if(data.vehicle){
-				vehicle = JSON.parse(data.vehicle);				
-			}else{
-				vehicle = [];
-			}
-
-			if(data.inventory){
-				inventory = JSON.parse(data.inventory);
-			}else{
-				inventory = [];
-			}
-
-			
-			user.constructvehicle();	
-			user.constructinventory();	
-		});
 	},
 
 
@@ -401,51 +118,14 @@ var user = {
 						$('#updatecreate i').addClass('hide');
 						user.getuserlist();
 				}else{
-					toastr["error"]('Network error!<br> Please try again.');	
+					toastr["error"](data.message);
+					$('#'+data.error_col).addClass('has-error');
+
 				}
     		}).fail(function(){
 				toastr["error"]('Error.');
 				$('#updatecreate').removeClass('disabled');
 				$('#updatecreate i').addClass('hide');
-			});
-    	}
-
-	},
-	save: function(){
-		var arr = createPostData('create_shippment');
-		// if(inventory.length<=0){
-		// 	arr['error'] = 'Complete the fields';
-		// 	$('#inventory_select').addClass('has-error');
-		// }else{
-		// 	$('#inventory_select').removeClass('has-error');
-		// }
-
-		// if(vehicle.length<=0){
-		// 	$('#vehicle_select').addClass('has-error');
-		// 	arr['error'] = 'Complete the fields';
-		// }else{
-		// 	$('#vehicle_select').removeClass('has-error');			
-		// }
-
-		if(arr['error']){
-    		toastr["error"](arr['error']);
-    	}else{
-			$('#savecreate').addClass('disabled');
-			$('#savecreate i').removeClass('hide');
-    		$.post("backstage/user/save/", {d:arr['data'], i:inventory, v:vehicle},function(data){
-    			if(data.status==200){
-						toastr["success"]('Successfully added.');
-						$('#create_modal').modal('hide');
-						$('#savecreate').removeClass('disabled');
-						$('#savecreate i').addClass('hide');
-						user.getuserlist();
-				}else{
-					toastr["error"]('Network error!<br> Please try again.');	
-				}
-    		}).fail(function(){
-				toastr["error"]('Error.');
-				$('#savecreate').removeClass('disabled');
-				$('#savecreate i').addClass('hide');
 			});
     	}
 
@@ -464,100 +144,19 @@ var user = {
 	},
 
 	clear: function(){
-		user.form('create_shippment');
-		user.getuser();
-		$('#create_user_date').val(datetoday);
-		$('#create_contact_person').html('');
-		$('#create_area').html('');
-		user.getcustomerlist();
-		setTimeout(function(){ 
-			resetchosen('create_customer_name');
-		}, 500);
-		$('#create_time_called').val(getClockTime());
-		$('#craete_transaction_type').val('Delivery');
-		inventory = [];
-		vehicle = [];
-		user.constructvehicle();	
-		user.constructinventory();	
-
-		$('#create_address_container').hide();
-		$('#create_area_container').hide();
-		$('#create_contact_person_container').hide();
-		$('#create_department_container').hide();
-
-	},
-	form: function(classused){
-		$('.'+classused+' div').removeClass('has-error');	
-		$('.'+classused).removeClass('has-error');	
-		$('.'+classused+' input, .'+classused+' select').val('');
-	},
-	getuser: function(){
-		$.post("backstage/user/getuserno/", {},function(data){
-			$('#create_user_no').val(data);
-		});
+		user.form('user_form');	
 	},
 
+form: function(classused){
+	$('.'+classused+' div').removeClass('has-error');	
+	$('.'+classused).removeClass('has-error');	
+	$('.'+classused+' input, .'+classused+' select').val('');
+},
 
-
-
-	getcontacts: function(id, t1='', t2=''){
-		var content1 = '<option value="">Select Area</option>';
-		var content1 = '';
-		var content2 = '<option value="">Select Contact Person</option>';
-		var content2 = '';
-		$.post("backstage/user/getcontacts/"+id, {},function(data){
-			$.each(data.area, function( index, value ) {
-				if(value.trim()!=''){
-					content1 +='<option value="'+value+'">'+value+'</option>';
-				}
-			});		
-
-			$.each(data.contact, function( index, value ) {
-					content2 +='<option value="'+value.name+'" data-department="'+value.department+'" data-contact_id="'+value.id+'">'+value.name+'</option>';
-			});
-			$('#create_area').html(content1);
-			$('#create_contact_person').html(content2);
-			$('#create_address').val(data.address);
-			if(t1!=''){
-				$('#create_area').val(t1);			
-			}
-
-			if(t2!=''){
-				$('#create_contact_person').val(t2);					
-			}
-
-
-			$('#create_address_container').show();
-			$('#create_area_container').show();
-			$('#create_contact_person_container').show();
-			$('#create_department_container').show();
-			user.select_contacts();
-
-		});
-	},
-
-	getcustomerlist: function(){
-		var d = $('#create_customer_name');
-		// if(d.html().trim()==''){
-			$.post("backstage/customer/getcustomername/", {},function(data){
-				var content = "<option></option>";
-				$.each(data.data, function( index, value ) {
-					content +='<option value="'+value.customer_name+'" data-client_id="'+value.id+'"">'+value.customer_name+'</option>';
-				});
-
-				d.html(content);
-				d.chosen('destroy');
-				setTimeout(function(){ 
-					d.chosen({search_contains: true});
-				}, 500);
-			});
-		// }		
-	},
 
 reveal: function(id){
 	var detail = $('#detail-'+id);
 	var revealbtn = $('#user-'+id+' .reveal i');
-	console.log(revealbtn);
 	if(detail.hasClass('hide')){
 		detail.removeClass('hide');
 		revealbtn.removeClass('fa-plus');
@@ -566,6 +165,84 @@ reveal: function(id){
 		detail.addClass('hide');
 		revealbtn.removeClass('fa-minus');
 		revealbtn.addClass('fa-plus');
+	}
+
+},
+
+activate: function(id, action=0){
+	
+		$('#detail-'+id+' .action-btn').addClass('disabled');
+		$('#detail-'+id+' .action-btn i').removeClass('hide');
+		$.post("backstage/user/activate/"+id+"/"+action, {},function(data){
+			if(data.status==200){
+					toastr["success"]('Successfully updated.');
+					$('#detail-'+id+' .action-btn').removeClass('disabled');
+					$('#detail-'+id+' .action-btn i').addClass('hide');
+					user.getuserlist();
+			}else{
+				toastr["error"]('Error');
+			}
+		}).fail(function(){
+			toastr["error"]('Error.');
+			$('#detail-'+id+' .action-btn').removeClass('disabled');
+			$('#detail-'+id+' .action-btn i').addClass('hide');
+		});
+	
+
+},
+update: function(id){
+	var arr = createPostData('user-detail-'+id);
+	if(arr['error']){
+		toastr["error"](arr['error']);
+	}else{
+		$('#detail-'+id+' .update_user_detail').addClass('disabled');
+		$('#detail-'+id+' .update_user_detail i').removeClass('hide');
+		$.post("backstage/user/update/"+id, {d:arr['data']},function(data){
+			if(data.status==200){
+					toastr["success"]('Successfully updated.');
+					$('#detail-'+id+' .update_user_detail').removeClass('disabled');
+					$('#detail-'+id+' .update_user_detail i').addClass('hide');
+					user.getuserlist();
+			}else{
+				toastr["error"](data.message);
+				$('#'+data.error_col).addClass('has-error');
+			}
+		}).fail(function(){
+			toastr["error"]('Error.');
+			$('#detail-'+id+' .update_user_detail').removeClass('disabled');
+			$('#detail-'+id+' .update_user_detail i').addClass('hide');
+		});
+	}
+
+},
+
+save: function(){
+	var arr2 = createPostData('user_profiles');
+	var arr1 = createPostData('user_account');
+
+	if(arr1['error'] || arr2['error']){
+		toastr["error"]('Complete the fields');
+	}else{
+		$('#savecreate').addClass('disabled');
+		$('#savecreate i').removeClass('hide');
+		$.post("backstage/user/save/", {user_profiles:arr2['data'], user_account:arr1['data'] },function(data){
+			if(data.status==200){
+					toastr["success"]('Successfully added.');
+					$('#create_modal').modal('hide');
+					$('#savecreate').removeClass('disabled');
+					$('#savecreate i').addClass('hide');
+					user.getuserlist();
+			}else{
+					toastr["error"](data.message);
+					$('#'+data.error_col).addClass('has-error');
+					$('#savecreate').removeClass('disabled');
+					$('#savecreate i').addClass('hide');
+			}
+		}).fail(function(){
+			toastr["error"]('Error.');
+			$('#savecreate').removeClass('disabled');
+			$('#savecreate i').addClass('hide');
+		});
 	}
 
 },
@@ -599,21 +276,31 @@ getuserlist: function(page=1){
 				}
 				
 				content +='</tr>';
-				content +="<tr id='detail-"+value.id+"' class='hide revealed-detail'><td colspan=6><table>";
+				content +="<tr id='detail-"+value.id+"' class='hide revealed-detail user-detail-"+value.id+"' data-id=\""+value.id+"\"><td colspan=6><table>";
 				content +="<tr>";
-				content +="<td>First Name</td><td><input type=\"text\" col=\"fname\" id=\"detailfname\" class=\"form-control\" value='"+value.fname+"'></td>";
-				content +="<td class='second'>Email Address</td><td><input type=\"text\" col=\"email\" id=\"detailemail\" class=\"form-control\" value='"+value.email+"'></td>";
-				content +="<td class='second'>User Type</td><td>"+CreateSelectOption(value.user_type, user_type, 'user_type')+"</td>";
+				content +="<td>First Name</td><td><input type=\"text\" col=\"fname\" class=\"detailfname form-control\" value='"+value.fname+"'></td>";
+				content +="<td class='second'>Email Address</td><td><input type=\"text\" col=\"email\" class=\"detailemail form-control\" value='"+value.email+"'></td>";
+				content +="<td class='second'>Postion</td><td><input type=\"text\" col=\"position\" class=\"detailposition form-control\" value='"+value.position+"'></td>";
 				content +="</tr>";
 				
 				content +="<tr>";
-				content +="<td>Middle Name</td><td><input type=\"text\" col=\"mname\" id=\"detailmname\" class=\"form-control\" value='"+value.mname+"'></td>";
-				content +="<td class='second'>Mobile Number</td><td><input type=\"text\" col=\"mobile\" id=\"detailmobile\" class=\"form-control\" value='"+value.mobile+"'></td>";
+				content +="<td>Middle Name</td><td><input type=\"text\" col=\"mname\" class=\"detailmname form-control not_mandatory\" value='"+value.mname+"'></td>";
+				content +="<td class='second'>Mobile Number</td><td><input type=\"text\" col=\"mobile\" class=\"detailmobile form-control\" value='"+value.mobile+"'></td>";
+				content +="<td class='second'>User Type</td><td>"+CreateSelectOption(value.user_type, user_type, 'user_type')+"</td>";
 				content +="</tr>";
 
 				content +="<tr>";
-				content +="<td>Last Name</td><td><input type=\"text\" col=\"lname\" id=\"detaillname\" class=\"form-control\" value='"+value.lname+"'></td>";
-				content +="<td colspan=4 class='last'> <button class=\"custombutton\">Update User</button> <button class=\"custombutton\">Reset</button> <button class=\"custombutton\">De-activate User</button></td>";
+				content +="<td>Last Name</td><td><input type=\"text\" col=\"lname\" class=\"detaillname form-control\" value='"+value.lname+"'></td>";
+				content +="<td class='second'>Department</td><td><input type=\"text\" col=\"dept\" class=\"detaildept form-control\" value='"+value.dept+"'></td>";
+				content +="<td colspan=2 class='last'> <button class=\"custombutton update_user_detail\"> <i class=\"fa fa-circle-o-notch fa-spin hide\"></i> Update User</button> <button class=\"custombutton\">Reset</button> ";
+				
+				if(value.status==1){
+					content +="<button class=\"custombutton deactivate action-btn\"><i class=\"fa fa-circle-o-notch fa-spin hide\"></i>De-activate User</button></td>";
+				}else{
+					content +="<button class=\"custombutton activate action-btn\"><i class=\"fa fa-circle-o-notch fa-spin hide\"></i>Activate User</button></td>";
+				}
+				
+				
 				content +="</tr>";
 				content +="</table></td></tr>";
 			});
@@ -627,6 +314,27 @@ getuserlist: function(page=1){
 
 			$('#search_result_list .reveal').click(function(){
 				user.reveal($(this).parent().data('id'));
+			});
+
+			$('.deactivate').click(function(){
+				if(!$(this).hasClass('disabled')){
+					var id = $(this).parent().parent().parent().parent().parent().parent().data('id'); 
+					user.activate(id, '0');
+				}
+			});
+
+			$('.activate').click(function(){
+				if(!$(this).hasClass('disabled')){
+					var id = $(this).parent().parent().parent().parent().parent().parent().data('id'); 
+					user.activate(id, '1');
+				}
+			});
+
+			$('.update_user_detail').click(function(){
+				if(!$(this).hasClass('disabled')){
+					var id = $(this).parent().parent().parent().parent().parent().parent().data('id'); 
+					user.update(id);
+				}
 			});
 
 		}).fail(function(){

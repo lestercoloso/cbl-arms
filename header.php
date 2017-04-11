@@ -217,7 +217,7 @@ session_start();
 			</div>
 			<div style="float: left;">
 			
-			Your session will expire in <span id="timerContent"></span>
+			<!-- Your session will expire in <span id="timerContent"></span> -->
 			
 			</div>
  		</div>

@@ -163,8 +163,8 @@
 	text-align: right;
 }
 .revealed-detail table{
-    margin-left: 3%;
-    width: 94%;
+    /*margin-left: 3%;*/
+    width: 100%;
 }
 .revealed-detail .custombutton {
      width: auto; 

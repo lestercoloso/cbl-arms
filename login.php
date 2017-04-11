@@ -60,7 +60,8 @@ class Login extends Database {
 							$this->valRet['feedstatus'] = "1";
 				}else{
 
-			$sql 			= "SELECT * from `user_profiles` WHERE `key_value`=(SELECT `id` FROM `user_account` WHERE `username`='{$this->usrname}' AND `password`='{$this->usrpass}' AND `status`=1) AND `status`=1";
+			$sql = "SELECT a.*, b.status, b.user_type from `user_profiles` a, `user_account` b WHERE a.`key_value`=b.`id` and b.`username`='{$this->usrname}' AND b.`password`='{$this->usrpass}' AND b.`status`=1";
+			// die($sql);
 			$result 	= $this->connection->query($sql);
 			$row			= $result->num_rows;
 			
@@ -73,12 +74,12 @@ class Login extends Database {
 							//GET DATAS
 									$data = $result->fetch_assoc();
 									$this->name 	= $data['fname']." ". $data['mname']." ". $data['lname'];
-									$this->statPos 	= $data['user_type'];
 									$this->key_value 	= $data['key_value'];
 
 							//SET SESSION 
 									$_SESSION['profilename']	= $this->name;
-									$_SESSION['profilestats']	= $this->statPos;
+									$_SESSION['profilestats']	= $data['status'];
+									$_SESSION['user_type']		= $data['user_type'];
 									$_SESSION['accusrname']		= $this->usrname;
 									$_SESSION['key_value']		= $this->key_value;
 									$_SESSION['accfname']		= $data['fname'];
@@ -88,6 +89,8 @@ class Login extends Database {
 									$_SESSION['accemail']		= $data['email'];
 									$_SESSION['userid']			= $data['id'];
 
+
+									// pdie($_SESSION);
 							//RETURN VALUE
 									$date_this = date("Y-m-d H:i:s");
 									$this->valRet['feeback'] 	= "Success";

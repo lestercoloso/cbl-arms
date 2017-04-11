@@ -379,3 +379,7 @@ input[type="number"]{
 .numeric{
     text-align: right;
 }
+
+.has-error .form-control {
+    border-color: #a94442 !important;
+}
