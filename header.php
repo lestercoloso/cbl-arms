@@ -98,19 +98,17 @@ session_start();
           <ul class="dropdown-menu">
        <?php
       	foreach ($config['links'] as $name => $value) {
-		  	$link = !empty($value['link']) ? $value['link'].'.php' : 'javascript:dpremove();';
-			if(count($value['options'])>0){
-				echo '<li class="dropdown"><a dp href="javascript:void(0);">'.$name.' <i class="fa fa-caret-right"></i></a>
-				 	<ul class="dropdown-menu sub-link">';
-
-			 	foreach($value['options'] as $subname => $subvalue){
-			 		$sublink = !empty($subvalue) ? $subvalue.'.php' : 'javascript:dpremove();';
-					echo '<li><a href="'.$sublink.'">'.$subname.'</a></li>';				 		
-			 	}
-				echo '</ul></li>';		
-			}else{
-					echo '<li><a href="'.$link.'">'.$name.'</a></li>';				        			
-			}
+		  	 $link = !empty($value['link']) ? $value['link'].'.php' : 'javascript:dpremove();';
+    			if(count($value['options'])>0){
+    				  echo '<li class="dropdown"><a dp href="javascript:void(0);">'.$name.' <i class="fa fa-caret-right"></i></a><ul class="dropdown-menu sub-link">';
+    			 	foreach($value['options'] as $subname => $subvalue){
+    			 		$sublink = !empty($subvalue) ? $subvalue.'.php' : 'javascript:dpremove();';
+    					echo '<li><a href="'.$sublink.'">'.$subname.'</a></li>';				 		
+    			 	}
+    				echo '</ul></li>';		
+    			}else{
+    				echo '<li><a href="'.$link.'">'.$name.'</a></li>';				        			
+    			}
 
       	}
        ?>
@@ -120,6 +118,13 @@ session_start();
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+         <?php 
+            foreach ($config['right_links'] as $name => $value) {
+              echo '<li><a href="'.$value['link'].'.php">'.$name.'</a></li>';
+            }
+         ?>
+         
+         
          <li logout><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> LOGOUT</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->

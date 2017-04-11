@@ -28,9 +28,18 @@ $config['links'] = [
 								'Outbound'=> 'outbound'
 								]
 					],
-					
 					'Report' => ['link'=>''],
 					];
+
+$config['right_links']	= 	[
+								'Inbound' 	=> ['link'=>'inbound'],
+								'IRR' 		=> ['link'=>'irr'],
+								'Put Away' 	=> ['link'=>'putaway'],
+								'Outbound' 	=> ['link'=>'outbound'],
+								'Pick List' => ['link'=>'picklist'],
+								'Gate Pass' => ['link'=>'gatepass'],
+						
+							];			
 
 $config['myaccount'] = 		[	
 								['type' 			=> 'input',

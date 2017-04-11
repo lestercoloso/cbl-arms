@@ -1,3 +1,12 @@
+//set active link
+function setactivelink(){
+	var pathname = window.location.pathname;
+	pathname = pathname.replace('/','');
+	$('li a[href="'+pathname+'"]').parent().addClass('active');
+
+}
+setactivelink();
+
 
 toastr.options = {
   "preventDuplicates": true,
@@ -258,3 +267,17 @@ var myaccount = {
 }
 
 myaccount.init();
+
+
+
+
+
+
+
+
+
+
+
+
+
+

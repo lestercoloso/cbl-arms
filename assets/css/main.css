@@ -17,6 +17,10 @@
     display: block;
 }
 
+.navbar li a:hover {
+    background: #e7e7e7 !important;
+}
+
 #myaccountmodal .modal-dialog{
     width: 450px;
 }
