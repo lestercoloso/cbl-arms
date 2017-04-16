@@ -133,7 +133,7 @@ class Database {
 	public function where_search($array = []){
 		if(is_array($array)){
 			foreach ($array as $key => $value) {
-				if(!empty($value)){
+				if($value!=""){
 					$data = " ".$key."='".mysqli_real_escape_string($this->_connection,$value)."'";
 					// $data = " `".$key."`='".mysql_real_escape_string($value)."'";
 					$this->where_search .= (!empty($this->where_search)) ? " and ".$data : " where ".$data;				

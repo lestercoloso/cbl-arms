@@ -6,27 +6,18 @@ $_SESSION['page']="view1";
 
 require_once('header.php');
 require_once("helper/utility_helper.php");
-// $db = new database();
-// $racks = $db->select('select * from rack_storage where status=1' );
-// $bays = $db->select('select * from bay_storage where status=1' );
 require_once('config/add_shipment_forms.php');
+
+		$css = [bowerpath('toastr/toastr.min.css'),
+				bowerpath('eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'),
+				bowerpath('chosen/chosen.css'),
+				stylessheet('warehouse.css')];
+		
+		construct_style($css);
+		require_once('config/warehouse.php');
+		$warehouselinks = CreateWarehouseLinks($config['warehouse_links']);
+
 ?>
-
-
-
-
-
-<head>
-<!-- <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" /> -->
-<link rel="stylesheet" href="/assets/css/warehouse.css?<?php echo rand();?>" type="text/css" />
-<link rel="stylesheet" href="/bower_components/toastr/toastr.min.css" />
-
-<!-- for inbound/outbound -->
-<link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
-<link rel="stylesheet" href="/bower_components/chosen/chosen.css" />
-<!-- end  -->
-
-</head>
 
 
 
@@ -37,16 +28,12 @@ require_once('config/add_shipment_forms.php');
 				<h1>CBL WAREHOUSE</h1>
 				</div>
 				<div id="tabs">
-				  <ul>
-				    <li><a href="warehouse.php">WAREHOUSE</a></li>
-				    <li><a href="inbound.php">INBOUND</a></li>
-				    <li><a href="#tabs-3">OUTBOUND</a></li>
-				    <li><a href="#tabs-4">LOCATION MANAGEMENT</a></li>
+				   <ul>
+					<?php echo $warehouselinks['menu']?>
 				  </ul>
-				  <div id="tabs-1" style="display: none;">				  	
-				  </div>
+				
 				  
-				  <div id="tabs-3">
+				   <div id="<?php echo $warehouselinks['selected']; ?>">
 
 <link rel="stylesheet" href="/assets/css/inbound.css?<?php echo rand();?>" type="text/css" />
 <h2>Outbound Shipment</h2>
@@ -155,24 +142,22 @@ require_once('config/add_shipment_forms.php');
 		</div>
 		</div>
 
+<?php
+	$js = [ bowerpath('toastr/toastr.min.js'),
+			bowerpath('bootstrap/dist/js/bootstrap.min.js'),
+			javascript('main.js'),
+			'/js/moment.js',
+			bowerpath('eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'),
+			bowerpath('chosen/chosen.jquery.js'),
+			javascript('outbound.js')
+			];
+	construct_js($js);
+	
+	require_once('warehouse_footer.php');
 
-<script src="/bower_components/toastr/toastr.min.js"></script>
-<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/assets/js/main.js?<?php echo rand();?>"></script>
-<script src="/assets/js/warehouse.js?<?php echo rand();?>"></script>
+?>
 
-
-<script type="text/javascript">
-	$( "#tabs" ).tabs({ active: 2 });
-</script>
-<!-- for inbound/outbound -->
-<script src="/js/moment.js"></script>
-<script src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-<script src="/bower_components/chosen/chosen.jquery.js"></script>
-<script src="/assets/js/outbound.js?<?php echo rand();?>"></script>
-<!-- end -->
 </body>
-
 
 
 

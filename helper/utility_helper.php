@@ -67,6 +67,24 @@ function save_date($date=''){
 	return (!empty($date)) ? date('Y-m-d', strtotime($date)) : '';
 }
 
+function CreateWarehouseLinks($links){
+
+	$return = [];
+	foreach($links as $key=>$link){
+		if($_SERVER['PHP_SELF']=='/'.$link['link'].'.php'){
+			$return['selected'] = "tabs-".$key;
+			$return['active'] = $key;
+			$return['menu'] .= '<li><a href="#'.$return['selected'].'">'.$link['name'].'</a></li>';	
+				
+		}else{
+			$return['menu'] .= '<li><a href="'.$link['link'].'.php'.'">'.$link['name'].'</a></li>';				
+		}
+	 	
+	}
+
+	return $return;
+}
+
 
 function construct_form($arr){
 	$return = '';

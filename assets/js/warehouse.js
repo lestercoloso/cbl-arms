@@ -3,24 +3,6 @@
 
 
 
-//alil js
-$(document).ready(function(){
-	
-		$('.ui-tab').click(function(e){
-
-			$(this).attr('aria-controls','');
-			window.location.href=$(this).find('.ui-tabs-anchor').attr('href');
-		});
-
-		$('.ui-tab').each(function(e){
-			$(this).attr('aria-controls','');
-		});
-	});
-//end of alil's js
-
-
-
-
 
 function addStorage(){
 	$( "#add_storage" ).modal();

@@ -3,27 +3,23 @@
 
 session_start();
 $_SESSION['page']="view1";
-
 require_once('header.php');
-// require_once("db_connect.php");
-// $db = new database();
-// $racks = $db->select('select * from rack_storage where status=1' );
-// $bays = $db->select('select * from bay_storage where status=1' );
-
 $version =rand();
+
+
+		require_once("helper/utility_helper.php");
+		require_once('header.php');	
+		
+		$css = [bowerpath('toastr/toastr.min.css'),
+				bowerpath('eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'),
+				bowerpath('chosen/chosen.css'),
+				stylessheet('warehouse.css')];
+		
+		construct_style($css);
+		require_once('config/warehouse.php');
+		$warehouselinks = CreateWarehouseLinks($config['warehouse_links']);
+
 ?>
-
-
-
-
-<head>
-<!-- <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" /> -->
-<link rel="stylesheet" href="/assets/css/warehouse.css?<?php echo $version;?>" type="text/css" />
-<link rel="stylesheet" href="/bower_components/toastr/toastr.min.css" />
-
-<!-- for inbound/outbound -->
-<link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
-<link rel="stylesheet" href="/bower_components/chosen/chosen.css" />
 <!-- end  -->
 <script type="text/javascript">
 	
@@ -35,20 +31,16 @@ $version =rand();
 
 
 		<div id="mainContainer">
-			<div id="sampleA">
-				<div style="margin-top:3%;margin-left:3%;color:#cc0000;">
-				
-				<h1>CBL WAREHOUSE</h1>
+
+				<div class="sub-container">
+					<h1>CBL WAREHOUSE</h1>
 				</div>
 				<div id="tabs">
 				  <ul>
-				    <li><a href="#tabs-1">WAREHOUSE</a></li>
-				    <li><a href="inbound.php">INBOUND</a></li>
-				    <li><a href="outbound.php">OUTBOUND</a></li>
-				    <li><a href="#tabs-4">LOCATION MANAGEMENT</a></li>
+					<?php echo $warehouselinks['menu']?>
 				  </ul>
-				  <div id="tabs-1" style="display: none;">
-				  	<div id="tab1-div1" style="margin-top: 3%;width: 25%;float:left">
+				  <div id="<?php echo $warehouselinks['selected']; ?>" style="display: none;">
+				  	<div style="margin-top: 3%;width: 25%;float:left">
 
 						<div id="shelfinfo">
 
@@ -370,7 +362,7 @@ $version =rand();
         </div>
 		</div>
 		</div>
-		</div>
+
 
 
 
@@ -380,12 +372,11 @@ $version =rand();
 <script src="/assets/js/warehouse.js?<?php echo $version;?>"></script>
 
 
-<script type="text/javascript">
-	$( "#tabs" ).tabs({ active: 0 });
-</script>
 <!-- for inbound/outbound -->
 <script src="/js/moment.js"></script>
 <script src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 <script src="/bower_components/chosen/chosen.jquery.js"></script>
 <!-- end -->
 </body>
+
+<?php require_once('warehouse_footer.php');?>

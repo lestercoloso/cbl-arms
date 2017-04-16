@@ -12,6 +12,12 @@
     margin: 5px auto;
 }
 
+.sub-container{
+    margin-top:3%;
+    margin-left:3%;
+    color:#cc0000;
+}
+
  #left-container{
  	display: none;
  } 
@@ -490,4 +496,9 @@ input{
     width: auto;
     height: auto;
     border: solid 1px black;
+}
+
+
+#tabs ul li a{
+text-transform: uppercase;
 }
