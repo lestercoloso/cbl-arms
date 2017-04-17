@@ -150,7 +150,7 @@ function construct_form($arr){
 			$return .='<div class="checkbox" id="'.$data['id'].'">';
 			if(!empty($data['options'])){
 				foreach ($data['options'] as $key => $option){
-					$return .='<label><input type="checkbox" value="'.$key.'" name="'.$data['col'].'"><span>'.$option.'</span></label> &nbsp;';
+					$return .='<label><input type="checkbox" col="'.$data['col'].'" value="'.$key.'" name="'.$data['col'].'"><span>'.$option.'</span></label> &nbsp;';
 				}
 			$return .= '</div>';	
 			}

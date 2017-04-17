@@ -2,6 +2,7 @@
 
 .navbar li{
     cursor: pointer !important;
+            text-transform: capitalize;
 }
 .dropdown .fa{
     float: right;
@@ -17,9 +18,11 @@
     display: block;
 }
 
-.navbar li a:hover {
+.navbar li a:hover, .dropdown-menu>.active>a {
     background: #e7e7e7 !important;
 }
+
+
 
 #myaccountmodal .modal-dialog{
     width: 450px;
@@ -382,4 +385,9 @@ input[type="number"]{
 
 .has-error .form-control {
     border-color: #a94442 !important;
+
+}
+
+.padding{
+    padding: 16px;
 }

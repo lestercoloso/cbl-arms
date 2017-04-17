@@ -45,7 +45,7 @@
 		float: left;
 		width: 70%;
 		margin-left: 3%;
-		height: 570px;
+		height: 615px;
 		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	}
 
@@ -479,13 +479,25 @@ border: solid 1px #d3d3d3;
 input{
     text-align: left !important;
 }
-
+input[type="checkbox"]{
+    margin: 0;
+    margin-left: -20px;
+}
+.checkbox span{
+    font-weight: bold;
+     -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently*/
+}
 #add_storage label{
     white-space: nowrap;
 }
 
 #add_storage .form-control {
-    height: 25px;
+    height: 27px;
 }
 
 .area table{
@@ -501,4 +513,68 @@ input{
 
 #tabs ul li a{
 text-transform: uppercase;
+}
+
+.legend-container label{
+    width: 100%;
+    float: left;
+    text-align: left;
+}
+.legend-container .legend{
+        float: left;
+        width: 20%;
+        height: 10px;
+                margin: 10px 0;
+        /*border: 1px solid black;*/
+}
+.legend-container .legend span{
+    border: 1px solid black;
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+.legend-container .legend_meaning{
+        float: left;
+        width: 80%;
+        white-space: nowrap;
+        text-align: left;
+        margin: 10px 0;
+}
+
+.wh_green{
+    background-color: green;
+}
+.wh_red{
+    background-color: red;
+}
+.wh_yellow{
+    background-color: yellow;
+}
+.wh_orange{
+    background-color: orange;
+}
+
+#warehouse, .wh_header_option{
+    float: left;
+    width: 100%;
+}
+.wh_header_option div{
+   padding: 10px;
+   font-weight: bold;
+}
+.wh_header_option select{
+   font-weight: normal;
+}
+.wh_select{
+    float: left;
+}
+.wh_storage_type{
+    float: right;
+}
+
+.wh_form_link{
+    padding: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
 }

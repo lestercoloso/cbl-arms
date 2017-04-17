@@ -10,7 +10,7 @@ $config['links'] = [
 								'General Settings'=>'genSetting',
 								'Driver Information'=>'driverProfile', 
 								'Vehicle Information'=> 'vehicle',
-								'Location Management'=> '',
+								'Location Management'=> 'location_management',
 								'Item Master File'=> 'item_master_file' 
 								]
 					],
@@ -23,9 +23,13 @@ $config['links'] = [
 					'Payment' => ['link'=>''],
 					'Warehouse' => ['link'=>'warehouse',
 						'options' => [
-								'Warehouse'=>'warehouse',
-								'Inbound'=>'inbound', 
-								'Outbound'=> 'outbound'
+									'Warehouse'				=>'warehouse', 
+									'book inbound shipment'	=>'inbound', 
+									'IRR'					=>'irr', 	
+									'Put Away'				=>'putaway', 
+									'book Outbound shipment'=>'outbound', 
+									'Pick List'				=>'picklist', 
+									'Gate Pass'				=>'gatepass'
 								]
 					],
 					'Report' => ['link'=>''],

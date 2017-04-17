@@ -69,9 +69,23 @@ $version =rand();
 
 						</div>
 
+
+				  		<div class="left-container legend-container">
+					  		<label>Legend :</label>
+					  		<div class="legend"><span class="wh_green"></span></div> <div class="legend_meaning"> - Vacant</div>
+					  		<div class="legend"><span class="wh_red"></span></div>	 <div class="legend_meaning"> - Occupied</div>
+					  		<div class="legend"><span class="wh_yellow"></span></div><div class="legend_meaning"> - Nearing for Expiration</div>	
+					  		<div class="legend"><span class="wh_orange"></span></div><div class="legend_meaning"> - No. Movement for 3 Months</div>	
+
+				  		</div>
+
+
 				  		<div style="float: left;width: 100%;">				  		
 				  			<button id="addStorage" class="button-class">ADD STORAGE</button>
 				  		</div>
+
+
+
 				  		<div class="left-container">
 					  		<label for="sbox"><b>Search Bill of Lading no.:</b></label>
 					  		<input type="text" id="sbox" name="sbox"><br/><br/>
@@ -85,8 +99,16 @@ $version =rand();
 
 				  	<div  class="ware-tab">
 
+				  		<div class="wh_header_option">
+				  			<div class="wh_select"> Warehouse Location : <select><option>Select Warehouse Location</option></select></div>
+				  			<div class="wh_storage_type"> Storage Type : <select><option>Select Storage Type</option></select></div>
+
+				  		</div>
 
 				  		<div id="warehouse">
+
+
+
 							<div class="warehouse_border">
 							<div class="warehouse_container">
 								
@@ -177,143 +199,18 @@ $version =rand();
         </div>
 		<div class="modal-body">
 			<form>
-			<fieldset>
-				<div class="form-group col-sm-12">
-				  <label for="stype" class="col-sm-4">Storage * </label>
-				  <div class="col-sm-8">
-					  <select class="form-control" id="stype">
-					    <option value="rack">Rack</option>
-					    <option value="bay">Bay</option>
-					  </select>
-				  </div>
-				</div>			
-
-			
-				
-				<div class="form-group col-sm-12 rack" id="rackcode_container">
-				    <label class="col-sm-4" for="textinput">Rack Code * </label>
-				    <div class="col-sm-8">
-				        <input name="name" type="text" id="rackcode" col="code" disabled="disabled" class="form-control">
-				        <span id="rackcode_error" class="text-danger"></span>
-				    </div>				    
+				<fieldset>
+				<?php
+					echo '<div>';
+					echo construct_form($config['warehouse_form']);				
+					echo '</div>';
+				?>
+				<div class="col-sm-12 wh_form_link">
+					<a style="float: left;">Assign Pallet Position</a>
+					<a style="float: right;">Assin Pallet Position Type</a>
 				</div>
-
-				<div class="form-group col-sm-12 rack" id="rack_storage_type_container">
-				  <label for="rack_storage_type" class="col-sm-4">Storage Type </label>
-				  <div class="col-sm-8">
-					  <select class="form-control" col="storage_type" id="rack_storage_type">
-					    <option value="">Select Storage Type</option>
-					    <option value="Drive-In">Drive-In</option>
-					    <option value="Selective">Selective</option>
-					  </select>
-				  </div>
-				</div>	
-
-
-				<div class="form-group col-sm-12 rack" id="rblock_container">
-				  <label for="stype" class="col-sm-4">Block * </label>
-				  <div class="col-sm-8">
-					  <select class="form-control" id="rblock"  col="block">
-					    <option value="">Select Block</option>
-					    <option value="A">Block A</option>
-					    <option value="B">Block B</option>
-					    <option value="C">Block C</option>
-					  </select>
-				  </div>
-				</div>
-
-
-				<div class="form-group col-sm-12 rack" id="racklength_container">
-				    <label class="col-sm-4" for="racklength">Rack Length * </label>
-				    <div class="col-sm-8">
-				        <input name="racklength" type="number" col="rack_length" min="1" id="racklength" placeholder="Enter the rack length" class="form-control">
-				        <span id="racklength_error" class="text-danger"></span>
-				    </div>
-				</div>
-
-				<div class="form-group col-sm-12 rack" id="rackwidth_container">
-				    <label class="col-sm-4" for="rackwidth">Rack Width * </label>
-				    <div class="col-sm-8">
-				        <input name="rackwidth" type="number" col="rack_width" min="1"  id="rackwidth" placeholder="Enter the rack width" class="form-control">
-				        <span id="rackwidth_error" class="text-danger"></span>
-				    </div>
-				</div>
-
-				<div class="form-group col-sm-12 rack"  id="noofracklevel_container">
-				  <label for="noofracklevel" class="col-sm-4">No. of Rack level * </label>
-				  <div class="col-sm-8">
-					  <select class="form-control" col="no_rack_level" id="noofracklevel">
-					    <option value="">Select No of Rack level</option>
-					    <option value="1">1</option>
-					    <option value="2">2</option>
-					    <option value="3">3</option>
-					    <option value="4">4</option>
-					    <option value="5">5</option>
-					    <option value="6">6</option>
-					  </select>
-				  </div>
-				</div>				
-
-				<div class="form-group col-sm-12 rack" id="racklevelheight_container">
-				    <label class="col-sm-4" for="textinput">Rack Height Level * </label>
-				    <div class="col-sm-8">
-				        <input name="racklevelheight" type="number"  min="1" col="rack_level_height"  id="racklevelheight" placeholder="Enter the rack height level" class="form-control">
-				        <span id="racklevelheight_error" class="text-danger"></span>
-				    </div>
-				</div>
-				<div class="form-group col-sm-12 rack" id="noracksection_container">
-				    <label class="col-sm-4" for="textinput">No. of Rack section * </label>
-				    <div class="col-sm-8">
-				        <input name="no_rack_section" type="number"  min="1" col="no_rack_section"  id="noracksection" placeholder="Enter No. of Rack section" class="form-control">
-				        <span id="noracksection_error" class="text-danger"></span>
-				    </div>
-				</div>
-				<div class="form-group col-sm-12 rack" id="nopalletposition_container">
-				    <label class="col-sm-4" for="textinput">No. of Pallet Position * </label>
-				    <div class="col-sm-8">
-				        <input name="no_pallet_position" type="number"  min="1" col="no_pallet_position"  id="nopalletposition" placeholder="Enter No. of Pallet position" class="form-control">
-				        <span id="nopalletposition_error" class="text-danger"></span>
-				    </div>
-				</div>
-
-
-
-				<div class="form-group col-sm-12 bay" id="baycode_container">
-				    <label class="col-sm-4" for="textinput">Bay Code * </label>
-				    <div class="col-sm-8">
-				        <input name="racklevelheight" col="code" type="text" id="baycode" disabled="disabled" class="form-control">
-				        <span id="baycode_error" class="text-danger"></span>
-				    </div>
-				</div>
-
-				<div class="form-group col-sm-12 bay" id="bblock_container">
-				  <label for="stype" class="col-sm-4">Block * </label>
-				  <div class="col-sm-8">
-					  <select class="form-control" id="bblock"  col="block">
-					    <option value="">Select Block</option>
-					    <option value="A">Block A</option>
-					    <option value="B">Block B</option>
-					    <option value="C">Block C</option>
-					  </select>
-				  </div>
-				</div>
-				<div class="form-group col-sm-12 bay" id="bay_length_container">
-				    <label class="col-sm-4" for="textinput">Bay Length * </label>
-				    <div class="col-sm-8">
-				        <input name="bay_length" type="number"  min="1" col="bay_length" id="bay_length" placeholder="Enter the bay length" class="form-control">
-				        <span id="bay_length_error" class="text-danger"></span>
-				    </div>
-				</div>
-
-				<div class="form-group col-sm-12 bay" id="bay_width_container">
-				    <label class="col-sm-4" for="textinput">Bay Width * </label>
-				    <div class="col-sm-8">
-				        <input name="bay_width" type="number"  min="1"  col="bay_width" id="bay_width" placeholder="Enter the bay width" class="form-control">
-				        <span id="bay_width_error" class="text-danger"></span>
-				    </div>
-				</div>
-		</fieldset>
-		</form>
+				</fieldset>
+			</form>
 		</div>
 
 		 <div class="modal-footer">
