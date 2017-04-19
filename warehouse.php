@@ -207,7 +207,7 @@ $version =rand();
 				?>
 				<div class="col-sm-12 wh_form_link">
 					<a style="float: left;">Assign Pallet Position</a>
-					<a style="float: right;">Assin Pallet Position Type</a>
+					<a style="float: right;">Assign Pallet Position Type</a>
 				</div>
 				</fieldset>
 			</form>

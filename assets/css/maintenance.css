@@ -50,3 +50,34 @@
     text-align: right;
     border-top: 1px solid #e5e5e5;
 }
+
+.general_list{
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.maintenance_table{
+	width: 100%;
+}
+.maintenance_table th{
+	text-align: center;
+	font-size: 11px;
+	padding: 5px;
+}
+.maintenance_table td{
+	font-size: 11px;
+	padding: 5px;
+}
+.maintenance_table .radio-maintenace{
+	text-align: center;
+}
+.table_button{
+	margin: 20px;
+	float: right;
+}
+.table_btn{
+    padding: 5px 12px;
+    font-size: 12px;
+    cursor: pointer;
+}

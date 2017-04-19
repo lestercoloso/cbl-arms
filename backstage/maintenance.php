@@ -16,6 +16,25 @@ class Maintenance{
 		}
 		jdie($return);
 	}
+
+	public function palletsave(){
+
+		$exp 	= $_POST['exp'];
+		$batch 	= $_POST['batch'];
+
+		
+		foreach($exp as $key=> $val){
+			$data['particulars'] = $key;
+			$data['batch'] = $batch[$key];
+			$data['exp'] = $val;
+			if($this->db->replace("maintenance_table",$data)){
+				$return['status'] = 200;
+			}
+		}
+		jdie($return);
+	}
+
+
 	public function delete($id){
 
 		if($this->db->delete("maintenance","id='$id'")){

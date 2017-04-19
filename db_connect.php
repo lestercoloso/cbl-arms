@@ -86,6 +86,17 @@ class Database {
 		return $this->CheckResult($sql);
 	}
 
+	public function replace($table='', $columns=[]){
+		foreach($columns as $col => $val){
+			$column[] = "`".$col."`";
+			$value[] = "'".$val."'";
+
+		}
+
+		$sql = "replace into `$table` (".implode(',',$column).") values (".implode(',',$value).")";
+		return $this->CheckResult($sql);
+	}
+
 	public function last_query(){
 		echo PHP_EOL.$this->last_query.PHP_EOL;
 	}
@@ -179,6 +190,29 @@ class Database {
 
 		}
 		return $array;
+	}
+
+
+	public function radio_maintenance_html($particulars=''){
+		$sql = "select `exp`, `batch` from `maintenance_table` where particulars='$particulars' and status=1 limit 1";
+		// die($sql);
+		$return = $this->select_one($sql);
+
+
+		$expyes 	= ($return['exp']) 	? 'checked' : '';
+		$expno 		= (!$return['exp']) ? 'checked' : '';
+		$batchyes 	= ($return['batch']) 	? 'checked' : '';
+		$batchno 	= (!$return['batch']) 	? 'checked' : '';
+
+		$html = '<td class="radio-maintenace">
+						<div class="radioexp"> <input type="radio" name="'.$particulars.'-exp" col="'.$particulars.'" value="1" '.$expyes.'> Yes 
+						<input type="radio" name="'.$particulars.'-exp" col="'.$particulars.'" value="0" '.$expno.'> No </div>
+					</td>
+					<td class="radio-maintenace">
+						<div class="radiobatch"> <input type="radio" name="'.$particulars.'-btch" col="'.$particulars.'" value="1" '.$batchyes.'> Yes 
+						<input type="radio" name="'.$particulars.'-btch" col="'.$particulars.'" value="0" '.$batchno.'> No </div>
+					</td> ';
+		return $html;
 	}
 
 	public function pagination($page=1, $total=0, $limit=5){

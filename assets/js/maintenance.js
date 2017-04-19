@@ -67,6 +67,10 @@ var maintenance = {
 			maintenance.update();
 		});
 
+		$('.add-pallet').click(function(){
+			maintenance.save_pallet_postion();
+		});
+
 
 
 	},
@@ -160,6 +164,25 @@ var maintenance = {
 				});
 			}
 		}
+	},
+
+	save_pallet_postion: function(){
+
+	var exp 	= createPostData('radioexp');
+	var btch 	= createPostData('radiobatch');
+
+
+			$.post("backstage/maintenance/palletsave/", { exp:exp['data'], batch:btch['data'] },function(data){
+				if(data.status==200){
+					toastr["success"]('Successfully added.');
+				}else{
+					toastr["error"]('Internal Error!<br>Please try again.');
+				}
+			}).fail(function(){
+					toastr["error"]('Network Error!<br>Please try again.');
+			});
+		
+
 	}
 
 

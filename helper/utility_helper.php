@@ -213,6 +213,31 @@ function construct_maintenance($array=[],$db){
 			</div>'.PHP_EOL;
 	}
 
+}
+
+
+function construct_maintenance_pallet($array=[],$db){
+	echo '<form><table  border="1" class="maintenance_table"> <thead><tr><th>Description</th><th>Expiration Tracking</th><th>Batch Tracking</th></tr></thead><tbody>';	
+
+	foreach($array as $key=>$arr){
+
+		echo '<tr id="'.$key.'"> 
+					<td>'.$arr.'</td> 
+					'.$db->radio_maintenance_html($key).'
+			  </tr>';
+		}
+
+
+		echo	'</table>
+				<div class="table_button">
+				<span class="custombutton add-pallet table_btn" >Save</span>
+				<button class="custombutton reset-pallet table_btn" type="reset" value="Reset">Reset</button>
+				</div></form>'.PHP_EOL;
+
+}
+
+function buttonchecked(){
+
 
 
 }

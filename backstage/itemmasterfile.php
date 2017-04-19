@@ -51,7 +51,7 @@ class ItemMasterFile{
 	
 		$sql = "select id,
 			LPAD(`item_id`, 10, '0') as item_id, 
-			product_code, 
+			stock_no, 
 			item_type, 
 			concat(`uom_1`, '-', `uom_qty_1`, '/', `uom_2`, '-', `uom_qty_2`, '/', `uom_3`, '-', `uom_qty_3`) as uom,
 			packaging,
@@ -70,7 +70,7 @@ class ItemMasterFile{
 	public function itemdetails($id){
 			$sql = "select id,
 			LPAD(`item_id`, 10, '0') as item_id, 
-			product_code, 
+			stock_no, 
 			item_type, 
 			bar_code, 
 			case_bar_code, 
@@ -88,7 +88,8 @@ class ItemMasterFile{
 			unit_cost,			
 			unit_price,
 			floor_level,
-			ceiling_level
+			ceiling_level,
+			replenish_level
 			from item_master_file where id=$id";
 			$data = $this->db->select_one($sql);
 			jdie($data);

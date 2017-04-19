@@ -27,26 +27,57 @@
 <div class="subContainer">
 		
 <div class="set">
-	<div class="col-sm-6">
+<!-- 	<div class="col-sm-6">
 		<h3>Customer Information</h3>
 		<?php construct_maintenance($config['customer_info'], $db);?>
 		<div class="col-sm-12 optionlist" style="font-size: 13px;">PRICE LIST</div>
 		<?php construct_maintenance($config['price_list'], $db);?>
+	</div> -->
+
+	<div class="col-sm-6 general_container">
+		<div class="general_list">
+			<h3>Warehouse View</h3>
+			<?php echo construct_maintenance($config['warehouse_view'], $db);?>
+		</div>
+
+		<div class="general_list">
+			<h3>Location Management</h3>
+			<?php echo construct_maintenance($config['location_management'], $db);?>	
+		</div>
+
+		<div class="general_list">
+			<h3>Vehicle Information</h3>
+			<?php echo construct_maintenance($config['vehicle_information'], $db);?>				
+		</div>
+
+		<div class="general_list">
+			<h3>Pallet Position Type</h3>
+			<?php echo construct_maintenance_pallet($config['pallet_position_type'], $db);?>
+		</div>		
+	
 	</div>
 
 	<div class="col-sm-6">
-		<h3>Booking</h3>
-		<?php echo construct_maintenance($config['booking'], $db);?>
+		<div class="general_list">
+			<h3>Item Master File</h3>
+			<?php echo construct_maintenance($config['item_master_file'], $db);?>
+		</div>
+
+		<div class="general_list">
+			<h3>Employee Information</h3>
+			<?php echo construct_maintenance($config['employee_information'], $db);?>
+		</div>
+
+		<div class="general_list">
+			<h3>Stock Transfer</h3>
+			<?php echo construct_maintenance($config['stock_transfer'], $db);?>
+		</div>
+
+
+
 	</div>
 
-	<div class="col-sm-6">
-		<h3>Inbound</h3>
-		<?php echo construct_maintenance($config['inbound'], $db);?>
-	</div>
-	<div class="col-sm-6">
-		<h3>Bill of Lading</h3>
-		<?php echo construct_maintenance($config['bol'], $db);?>
-	</div>
+
 </div>
  		
 </div>

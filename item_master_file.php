@@ -9,7 +9,7 @@
 				stylessheet('item_master_file.css')];
 		
 		construct_style($css);
-		require_once('config/booking.php');
+		require_once('config/item_master_file.php');
 ?>
 
 <div id="mainContainer">
@@ -22,15 +22,15 @@
 	<br>
 	<div class="col-sm-4 searchdata">	
 
-				<input name="searchproductcode" id="searchproductcode" placeholder="Product Code" type="text" col="product_code" class="form-control search-text not_mandatory">
+				<input name="searchitemid" id="searchitemid" placeholder="Item ID" type="text" col="product_code" class="form-control search-text not_mandatory">
 
-				<input name="searchbarcode" id="searchbarcode" placeholder="Bar Code" type="text" col="bar_code" class="form-control search-text not_mandatory">
+				<input name="searchstockno" id="searchstockno" placeholder="Stock No." type="text" col="bar_code" class="form-control search-text not_mandatory">
 
 
 
 	</div>
 	<div class="col-sm-4 searchdata">	
-					<input name="searchcasebarcode" id="searchcasebarcode" placeholder="Case Bar Code" type="text" col="case_bar_code" class="form-control search-text not_mandatory">
+					<input name="searchcasebarcode" id="searchcasebarcode" placeholder="Bar Code" type="text" col="bar_code" class="form-control search-text not_mandatory">
 
 					<select class="form-control not_mandatory" id="searchvehicletype" col="vehicle_type">
 						<option value="">Select Item Type</option>
@@ -80,7 +80,7 @@
 <table class="table table-bordered table-striped table-list" id="search_result_list">
   <thead>
 		<th>Item ID</th>
-		<th>Product Code</th>
+		<th>Stock No.</th>
 		<th>Item Type</th>
 		<th>UOM</th>
 		<th>Packaging (pcs)</th>
@@ -122,11 +122,22 @@
 
 
 <?php
+echo '<div class="col-sm-12">';
 foreach($config['inventory'] as $forms){
 	echo '<div class="col-sm-6 createform" id="">';
 	echo construct_form($forms);				
 	echo '</div>';
 }
+echo '</div>';
+
+
+echo '<div class="col-sm-12 bordered packaging_details">';
+foreach($config['packaging_details'] as $forms){
+	echo '<div class="col-sm-6 createform" id="">';
+	echo construct_form($forms);				
+	echo '</div>';
+}
+echo '</div>';
 ?>	
 </fieldset>
 </form>
