@@ -22,9 +22,9 @@
 	<br>
 	<div class="col-sm-4 searchdata">	
 
-				<input name="searchitemid" id="searchitemid" placeholder="Item ID" type="text" col="product_code" class="form-control search-text not_mandatory">
+				<input name="searchitemid" id="searchitemid" placeholder="Item ID" type="text" col="item_id" class="form-control search-text not_mandatory">
 
-				<input name="searchstockno" id="searchstockno" placeholder="Stock No." type="text" col="bar_code" class="form-control search-text not_mandatory">
+				<input name="searchstockno" id="searchstockno" placeholder="Stock No." type="text" col="stock_no" class="form-control search-text not_mandatory">
 
 
 
@@ -32,12 +32,10 @@
 	<div class="col-sm-4 searchdata">	
 					<input name="searchcasebarcode" id="searchcasebarcode" placeholder="Bar Code" type="text" col="bar_code" class="form-control search-text not_mandatory">
 
-					<select class="form-control not_mandatory" id="searchvehicletype" col="vehicle_type">
+					<select class="form-control not_mandatory" id="searchstoragetype" col="storage_type">
 						<option value="">Select Item Type</option>
 				 		<?php
-				 			foreach($config['vehicle_type'] as $key => $option){
-				 				echo "<option value='$key'> - </option>";		
-				 			}
+				 			echo htmloption($config['storage_type']);
 				 		?>
 					</select>
 
@@ -47,12 +45,10 @@
 	<div class="col-sm-4 searchdata">	
 
 
-					<select class="form-control not_mandatory" id="searchvehicletype" col="vehicle_type">
+					<select class="form-control not_mandatory" id="searchvehicletype" col="item_type">
 						<option value="">Select Storage Type</option>
 				 		<?php
-				 			foreach($config['vehicle_type'] as $key => $option){
-				 				echo "<option value='$key'> - </option>";		
-				 			}
+				 			echo htmloption($config['item_type']);
 				 		?>
 					</select>
 
@@ -81,11 +77,11 @@
   <thead>
 		<th>Item ID</th>
 		<th>Stock No.</th>
-		<th>Item Type</th>
-		<th>UOM</th>
-		<th>Packaging (pcs)</th>
-		<th>Dimension</th>
+		<th>Barcode</th>
 		<th>Storage Type</th>
+		<th>Item Type</th>
+		<th>Item Description</th>
+		<th>UOM - Quantity</th>
 		<th>Unit Cost</th>
 		<th>Unit Price</th>
 		<th>Action</th>
@@ -131,7 +127,8 @@ foreach($config['inventory'] as $forms){
 echo '</div>';
 
 
-echo '<div class="col-sm-12 bordered packaging_details">';
+echo '<div class="col-sm-12 bordered packaging_details_container">';
+echo '<div class="packaging_details_title">packaging details</div>';
 foreach($config['packaging_details'] as $forms){
 	echo '<div class="col-sm-6 createform" id="">';
 	echo construct_form($forms);				

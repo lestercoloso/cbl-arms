@@ -21,3 +21,7 @@ CHANGE COLUMN `product_code` `stock_no` VARCHAR(20) NULL DEFAULT NULL ;
 ALTER TABLE `item_master_file` 
 ADD COLUMN `item_master_filecol` VARCHAR(45) NULL AFTER `replenish_level`,
 ADD COLUMN `item_description` VARCHAR(45) NULL AFTER `item_master_filecol`;
+
+
+ALTER TABLE `item_master_file` 
+ADD COLUMN `weight` DOUBLE NULL DEFAULT 0 AFTER `height`;

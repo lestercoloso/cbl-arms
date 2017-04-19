@@ -45,16 +45,25 @@ class ItemMasterFile{
 
 		$searchdata = (!empty($_POST['searchdata'])) ? json_decode($_POST['searchdata'], TRUE) : [];
 	
+		if(!empty($searchdata)){
 
-	// $this->db->where_search(['b.status'=>1]);
-	$where = $this->db->where_search($searchdata);
+			$this->db->where_like(['LPAD(`item_id`, 10, \'0\')'=>$searchdata['item_id']]);
+			$this->db->where_like(['stock_no'=>$searchdata['stock_no']]);
+			$this->db->where_like(['bar_code'=>$searchdata['bar_code']]);
+			$this->db->where_search(['item_type'=>$searchdata['item_type']]);
+			$this->db->where_search(['storage_type'=>$searchdata['storage_type']]);
+
+		}	
+
+	$where = $this->db->where_search(['status'=>1]);
 	
 		$sql = "select id,
 			LPAD(`item_id`, 10, '0') as item_id, 
 			stock_no, 
+			bar_code, 
 			item_type, 
 			concat(`uom_1`, '-', `uom_qty_1`, '/', `uom_2`, '-', `uom_qty_2`, '/', `uom_3`, '-', `uom_qty_3`) as uom,
-			packaging,
+			item_description,
 			concat(`length`,' x ', `width`, ' x ', `height`) as dimension,
 			storage_type,			
 			unit_cost,			
@@ -84,7 +93,9 @@ class ItemMasterFile{
 			length,
 			width,
 			height,
+			weight,
 			storage_type,			
+			item_description,			
 			unit_cost,			
 			unit_price,
 			floor_level,

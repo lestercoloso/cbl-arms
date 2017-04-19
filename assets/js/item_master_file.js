@@ -184,11 +184,11 @@ getlist: function(page=1){
 				content +='<tr id="list-'+value.id+'" data-id="'+value.id+'">';
 				content +='<td class="centered">'+value.item_id+'</td>';
 				content +='<td>'+value.stock_no+'</td>';
-				content +='<td>'+value.item_type+'</td>';
-				content +='<td>'+value.uom+'</td>';
-				content +='<td>'+value.packaging+'</td>';
-				content +='<td>'+value.dimension+'</td>';
+				content +='<td>'+value.bar_code+'</td>';
 				content +='<td>'+value.storage_type+'</td>';
+				content +='<td>'+value.item_type+'</td>';
+				content +='<td>'+value.item_description+'</td>';
+				content +='<td>'+value.uom+'</td>';
 				content +='<td>'+value.unit_cost+'</td>';
 				content +='<td>'+value.unit_price+'</td>';
 				content +='<th>'+action+'</th>';
