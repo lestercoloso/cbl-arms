@@ -8,7 +8,7 @@ $config['links'] = [
 					'Maintenance' => ['link'=>'',
 						'options' => [
 								'General Settings'=>'genSetting',
-								'Driver Information'=>'driverProfile', 
+								'Employee Information'=>'employee_information', 
 								'Vehicle Information'=> 'vehicle',
 								'Location Management'=> 'location_management',
 								'Item Master File'=> 'item_master_file' 

@@ -25,3 +25,14 @@ ADD COLUMN `item_description` VARCHAR(45) NULL AFTER `item_master_filecol`;
 
 ALTER TABLE `item_master_file` 
 ADD COLUMN `weight` DOUBLE NULL DEFAULT 0 AFTER `height`;
+
+
+CREATE TABLE `location_management` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` int(10) DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `storage_type` varchar(225) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;

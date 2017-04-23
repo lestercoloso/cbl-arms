@@ -87,8 +87,21 @@ function createPostData(classused){
 	$('.'+classused+' input[type="checkbox"]').each(function( data ) {
 			var c = $(this).attr('col');
 			var v = $(this).val();
+
+			var is_checkbox = true;
+
 			if(c!=undefined){
-				array2[c] = $(this).is(':checked');					
+
+				if($(this).hasClass('multiple')){
+					if(!array2[c]){
+						 array2[c] = [];
+					}
+					if($(this).is(':checked')){
+						array2[c].push($(this).val());					
+					}
+				}else{
+					array2[c] = $(this).is(':checked');							
+				}
 			}
 	});
 	array['data'] = array2;

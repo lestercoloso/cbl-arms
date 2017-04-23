@@ -5,12 +5,29 @@
 <link rel="stylesheet" href="/bower_components/jquery-ui/themes/ui-lightness/jquery-ui.css" />
 <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css" />
 <link rel="stylesheet" href="/bower_components/toastr/toastr.min.css" />
-<link rel="stylesheet" href="/assets/css/login.css?23131ss22" type="text/css" />
+<link rel="stylesheet" href="/assets/css/login.css?lester" type="text/css" />
 </head>
 <body style="background-color: #cccccc;">
+
+
 	<div id="mainBody">
-		<div id="subBody">
-			<div id="log-Body">
+<div class="login_container">
+	<div class="login_top">
+	<div class="login_img_container login_logo"> 
+		<img src="img/img-first.png">
+		<div>CBL Warehouse Management System</div>
+	</div>
+	<div class="login_img_container"> <img src="img/img-second.png"></div>
+	</div>
+	<div class="login_bottom">
+		<div class="login_img_container symbol">
+			<img src="img/img-third.png">
+		</div>
+		<div class="login_img_container slant"></div>
+
+		<div class="login_img_container" id="log-Body">
+			
+
 
 				<div class="loader">
 					<i class="fa fa-spinner fa-spin" style="font-size:24px"></i><em>Loading...</em>
@@ -24,16 +41,24 @@
 						<p class="loginfoot"><a href="#" id="loginFormForgotPassword" title="Please contact CBL System Administrator for Change in Password.">Forgot Password?</a> &nbsp; &bull; &nbsp; <a href="#">No User ID?</a> 
 				</form>
 				
-			</div> 
+			
+
 
 		</div>
+	</div>
+</div>
 		<br>
-			<p style="text-align: center;width: 100%;    font-family: cursive;"> 
+		<div>
+			<p class="footer"> 
 			© Copyright <b>CBL WMS</b> All rights reserved.<br>
 			Powered by <b>ARM Solutions</b>
-			</p>		
+			</p>	
+		</div>	
 
 	</div>
+
+
+
 
 
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
