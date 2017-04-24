@@ -6,6 +6,7 @@
 		$css = [bowerpath('toastr/toastr.min.css'),
 				bowerpath('eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'),
 				bowerpath('chosen/chosen.css'),
+				bowerpath('bootstrap_toggle/css/boostrap-toggle.min.css'),
 				stylessheet('location_management.css')];
 		
 		construct_style($css);
@@ -14,7 +15,6 @@
 		$lcoation_status = json_encode($config['wh_status']);
 
 ?>
-
 <div id="mainContainer">
 
 <!-- Start of page -->
@@ -47,7 +47,6 @@ var lcoation_status = <?php echo $lcoation_status; ?>;
 				 		?>
 					</select>
 	</div>	
-
 
 
 	<div class="col-sm-3 col-md-offset-9 search-btn">	
@@ -139,6 +138,7 @@ foreach($config['warehouse_location'] as $forms){
 			'/js/moment.js',
 			bowerpath('eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'),
 			bowerpath('chosen/chosen.jquery.js'),
+			// bowerpath('bootstrap_toggle/js/boostrap-toggle.min.js'),
 			javascript('location_management.js')
 			];
 	construct_js($js);

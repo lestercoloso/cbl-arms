@@ -202,10 +202,15 @@ getlist: function(page=1){
 				action += ' <button type="button" class="btn btn-success edit"><i class="fa fa-pencil" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
 				action += ' <button type="button" class="btn btn-danger delete"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
 				
+
+
+
 				if(value.status==1){
-					action += ' <button type="button" class="btn btn-danger status"> <span> Activate </span></button>';	
+					// action += ' <button type="button" class="btn btn-danger status"> <span> Activate </span></button>';		
+					action += ' <div class="toggle btn btn-primary on" data-toggle="toggle"><div class="toggle-group"><label class="btn btn-primary toggle-on">Active</label><span class="toggle-handle btn btn-default"></span></div></div>';						
 				}else{
-					action += ' <button type="button" class="btn btn-success status"> <span> Deactivate </span> </button>';					
+					// action += ' <button type="button" class="btn btn-success status"> <span> Deactivate </span> </button>';					
+					action += ' <div class="toggle btn btn-default off" data-toggle="toggle"><div class="toggle-group"><label class="btn btn-default active toggle-off">Inactive</label><span class="toggle-handle btn btn-default"></span></div></div>';
 				}
 
 				content +='<tr id="list-'+value.id+'" data-id="'+value.id+'">';
@@ -241,11 +246,17 @@ getlist: function(page=1){
 				location_management.delete($(this).parent().parent().data('id'));
 			});
 
-			$('#search_result_list .btn-success.status').click(function(){
+			// $('#search_result_list .btn-success.status').click(function(){
+			// 	location_management.changestatus($(this).parent().parent().data('id'), '1');
+			// });
+			$('#search_result_list .off').click(function(){
 				location_management.changestatus($(this).parent().parent().data('id'), '1');
 			});
 
-			$('#search_result_list .btn-danger.status').click(function(){
+			// $('#search_result_list .btn-danger.status').click(function(){
+			// 	location_management.changestatus($(this).parent().parent().data('id'), '0');
+			// });
+			$('#search_result_list .on').click(function(){
 				location_management.changestatus($(this).parent().parent().data('id'), '0');
 			});
 
