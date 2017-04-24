@@ -10,12 +10,17 @@
 		
 		construct_style($css);
 		require_once('config/location_management.php');
+
+		$lcoation_status = json_encode($config['wh_status']);
+
 ?>
 
 <div id="mainContainer">
 
 <!-- Start of page -->
-
+<script>
+var lcoation_status = <?php echo $lcoation_status; ?>;
+</script>
 
 <h2>Location Management</h2>
 <div class="search-filter row">
@@ -69,12 +74,15 @@
       <th>Warehouse Location</th>
       <th>Address</th>
       <th>Storage Type</th>
+      <th>Status</th>
       <th>Action</th>
       </tr>
   </thead>
   <tbody>
     <tr>
       <td scope="row" class="centered">1</td>
+      <td>-</td>
+      <td>-</td>
       <td>-</td>
       <td>-</td>
       <td>-</td>

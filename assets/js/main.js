@@ -55,6 +55,8 @@ function CreateSelectOption(select, option, col){
 function createPostData(classused){
 		var array = new Object();	
 		var array2 = new Object();	
+		var allcheckbox = new Object();	
+
 			array['error'] = '';
 			$('.'+classused+' div').removeClass('has-error');	
 			$('.'+classused).removeClass('has-error');	
@@ -88,22 +90,34 @@ function createPostData(classused){
 			var c = $(this).attr('col');
 			var v = $(this).val();
 
-			var is_checkbox = true;
+
 
 			if(c!=undefined){
 
 				if($(this).hasClass('multiple')){
 					if(!array2[c]){
 						 array2[c] = [];
+						 allcheckbox[c] = 0;
 					}
 					if($(this).is(':checked')){
 						array2[c].push($(this).val());					
+						allcheckbox[c] = 1;
 					}
 				}else{
 					array2[c] = $(this).is(':checked');							
 				}
 			}
 	});
+
+	$.each(allcheckbox, function( index, value ) {
+		if(value==0){
+			$('.'+classused+' input[type="checkbox"][col="'+index+'"]').parent().parent().parent().parent().addClass('has-error');
+			array['error'] = 'Complete the fields';
+		}
+	});
+	
+	
+
 	array['data'] = array2;
 	return array;
 // 

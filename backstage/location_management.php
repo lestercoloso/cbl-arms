@@ -14,6 +14,19 @@ class Location_management{
 	}
 
 
+	public function detail($id){
+			$sql = "select id,
+			LPAD(`code`, 10, '0') as code, 
+			location, 
+			address, 
+			storage_type
+			from location_management where id=$id";
+			$data = $this->db->select_one($sql);
+			$data['storage_type'] = json_decode($data['storage_type']);
+			jdie($data);
+	}
+
+
 	public function save(){
 
 		$data = $_POST['d'];
@@ -26,6 +39,36 @@ class Location_management{
 		jdie($return);
 	}
 
+	public function update($id){
+
+		$data = $_POST['d'];
+		$data['storage_type'] = (!empty($data['storage_type'])) ? json_encode($data['storage_type']) : "";
+
+		if($this->db->update("location_management",$data, "id=$id")){
+			$return['status'] = 200;
+			// $return['id'] = $this->db->insert_id();
+		}
+		jdie($return);
+	}
+
+	public function changestatus($id, $status){
+
+		
+		if($this->db->update("location_management",['status'=>$status], "id=$id")){
+			// $this->db->last_query();
+			$return['status'] = 200;
+		}
+		jdie($return);
+	}
+
+
+	public function delete($id=''){
+		$data['status'] = 100;
+		if($this->db->delete("location_management", "id=$id" )){
+			$data['status'] = 200;
+		}
+		jdie($data);
+	}
 
 
 	public function getlist($page=1){
@@ -53,19 +96,18 @@ class Location_management{
 			storage_type,
 			status
 			from location_management $where  $additional";
+
+
 		$data = $this->db->select($sql);
+		$datatotal = $this->db->select_one("select count(id) as total from location_management $where limit 1" )['total'];
+		$data['pagination'] = $this->db->pagination($page, $datatotal, $limit);
 
-
-		
 		foreach($data['data'] as $k=>$d){
 			if(!empty($d['storage_type'])){
 				$dst = json_decode($d['storage_type']);
 				$data['data'][$k]['storage_type'] = implode(',', $dst);
 			}
-		} 
-
-		$datatotal = $this->db->select_one("select count(id) as total from item_master_file $where limit 1" )['total'];
-		$data['pagination'] = $this->db->pagination($page, $datatotal, $limit);
+		} 		
 		jdie($data);
 
 	}
