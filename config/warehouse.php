@@ -3,11 +3,19 @@ $config['block']  = ['A'=>'Block A', 'B'=>'Block B', 'C'=>'Block C'];
 $config['storage_type_select']  = ['rack'=>'Rack', 'bay'=>'Bay'];
 $config['rack_storage_type']  	= ['Drive-In'=>'Drive-In', 'Selective'=>'Selective'];
 $config['storage_type'] 	 	= $db->getconfig('storage_type');
-$config['warehouse_location'] 	 = $db->getconfig('warehouse_location');
+// $config['warehouse_location'] 	 = $db->getconfig('warehouse_location');
+$config['rack_level'] 	 = $db->getconfig('rack_level');
+$config['rack_type'] 	 = $db->getconfig('rack_type');
+$config['pallet_position_type'] 	 = $db->getconfig('pallet_position_type');
 $config['no_rack_level'] 	 	= [1=>1, 2=>2, 3=>3, 4=>4, 5=>5, 6=>6];
 
 
 
+$result = $db->select('select id, code, location from location_management where status=1');
+// $config['warehouse_location'] = [];
+foreach ($result['data'] as $key => $value) {
+	$config['warehouse_location_option'][$value['id']] = $value['location'];	
+}
 
 
 
@@ -35,7 +43,7 @@ $config['warehouse_form'] = [
 								'id'				=> 'create_wh_location',
 								'col'				=> 'warehouse_location',
 								'form_class'		=> 'form-control',
-								'options' 			=> [''=>'Select Warehouse Location']+$config['warehouse_location']
+								'options' 			=> [''=>'Select Warehouse Location']+$config['warehouse_location_option']
 								],	
 								['type' 			=> 'select',
 								'label'				=> 'Storage type',
@@ -61,7 +69,7 @@ $config['warehouse_form'] = [
 								'parent_class' 		=> 'form-group col-sm-12 rack',
 								'label'				=> ' ',								
 								'subparent_class' 	=> 'col-sm-8',
-								'form_class'		=> 'form-control not_mandatory',
+								'form_class'		=> 'not_mandatory',
 								'id'				=> 'create-larwing',
 								'col'				=> 'larwing',
 								'options'			=> [''=>'Left and Right Wing']
@@ -92,7 +100,7 @@ $config['warehouse_form'] = [
 								'id'				=> 'rack_storage_type',
 								'col'				=> 'storage_type',
 								'form_class'		=> 'form-control',
-								'options' 			=> [''=>'Select Rack type']+$config['rack_storage_type']
+								'options' 			=> [''=>'Select Rack type']+$config['rack_type']
 								],	
 
 								['type' 			=> 'select',
@@ -102,18 +110,101 @@ $config['warehouse_form'] = [
 								'id'				=> 'noofracklevel',
 								'col'				=> 'no_rack_level',
 								'form_class'		=> 'form-control',
-								'options' 			=> [''=>'Select No. of Rack level']+$config['no_rack_level']
+								'options' 			=> [''=>'Select No. of Rack level']+$config['rack_level']
 								],	
 
 
 								['type' 		=> 'number',
-								'label'				=> 'Location Name',
+								'label'				=> 'No. of Rack section',
 								'parent_class' 		=> 'form-group col-sm-12 rack',
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'noracksection',
 								'col'				=> 'no_rack_section',
 								'form_class'		=> 'form-control',
 								'placeholder' 		=> 'Enter No. of Rack section']
+					]; 	
+
+
+
+$config['assign_pallet_position'] = [ 
+			
+								['type' 			=> 'select',
+								'label'				=> 'Rack Section',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'additional-rack_section',
+								'col'				=> 'rack_section',
+								'form_class'		=> 'form-control',
+								'options' 			=> [''=>'Select Rack Section']+$config['warehouse_location_option']
+								],	
+								['type' 			=> 'select',
+								'label'				=> 'Rack Level',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'additional-rack_level',
+								'col'				=> 'rack_level',
+								'form_class'		=> 'form-control',
+								'options' 			=> [''=>'Select Rack Level']+$config['rack_level']
+								],	
+
+								['type' 		=> 'number',
+								'label'				=> 'No. of Pallet Position',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'additional-pallet_position',
+								'col'				=> 'pallet_position',
+								'form_class'		=> 'form-control',
+								'placeholder' 		=> 'Enter No. of Pallet position']
+					]; 	
+
+$config['assign_pallet_position_type'] = [ 
+			
+								['type' 			=> 'select',
+								'label'				=> 'Rack Section',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'additional-rack_section',
+								'col'				=> 'rack_section',
+								'form_class'		=> 'form-control',
+								'options' 			=> [''=>'Select Rack Section']+$config['warehouse_location_option']
+								],	
+								['type' 			=> 'select',
+								'label'				=> 'Rack Level',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'additional-rack_level',
+								'col'				=> 'rack_level',
+								'form_class'		=> 'form-control',
+								'options' 			=> [''=>'Select Rack Level']+$config['rack_level']
+								],	
+
+								['type' 		=> 'number',
+								'label'				=> ' Pallet Position',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'additional-pallet_position',
+								'col'				=> 'pallet_position',
+								'form_class'		=> 'form-control',
+								'placeholder' 		=> 'Enter Pallet position'],
+
+								['type' 		=> 'normal',
+								'label'				=> 'Location Code',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'additional-location_code',
+								'col'				=> 'location_code',
+								'form_class'		=> 'form-control',
+								'placeholder' 		=> 'Auto Generated'],
+
+								['type' 			=> 'checkbox',
+								'label'				=> 'PALLET POSITION TYPE',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'create-pallet_position_type',
+								'col'				=> 'pallet_position_type',
+								'form_class'		=> 'multiple',
+								'options'			=> $config['pallet_position_type']
+								],
 					]; 	
 					
 

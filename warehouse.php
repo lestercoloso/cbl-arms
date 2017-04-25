@@ -17,6 +17,7 @@ $version =rand();
 		
 		construct_style($css);
 		require_once('config/warehouse.php');
+		require_once('config/location_management.php');
 		$warehouselinks = CreateWarehouseLinks($config['warehouse_links']);
 
 ?>
@@ -100,8 +101,18 @@ $version =rand();
 				  	<div  class="ware-tab">
 
 				  		<div class="wh_header_option">
-				  			<div class="wh_select"> Warehouse Location : <select><option>Select Warehouse Location</option></select></div>
-				  			<div class="wh_storage_type"> Storage Type : <select><option>Select Storage Type</option></select></div>
+				  			<div class="wh_select"> 
+				  			<span>Warehouse Location :</span> 
+				  			<select class="form-control">
+				  				<option>Select Warehouse Location</option>
+								<?php echo htmloption($config['warehouse_location_option']); ?>
+				  			</select></div>
+				  			<div class="wh_storage_type"> 
+				  			<span>Storage Type :</span> 
+				  			<select class="form-control" >
+				  				<option>Select Storage Type</option>
+				  				<?php echo htmloption($config['storage_type']); ?>
+				  			</select></div>
 
 				  		</div>
 
@@ -206,8 +217,8 @@ $version =rand();
 					echo '</div>';
 				?>
 				<div class="col-sm-12 wh_form_link">
-					<a style="float: left;">Assign Pallet Position</a>
-					<a style="float: right;">Assign Pallet Position Type</a>
+					<a style="float: left;" 	onclick="openpalletposition('assign');">Assign Pallet Position</a>
+					<a style="float: right;" 	onclick="openpalletposition('type');">Assign Pallet Position Type</a>
 				</div>
 				</fieldset>
 			</form>
@@ -225,6 +236,39 @@ $version =rand();
 
 		</div>
 
+
+
+		<div class="modal fade" id="additional_modal" role="dialog">
+    	<div class="modal-dialog custom-class2">
+		<div class="modal-content">
+		
+		<div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Assign Pallet Position</h4>
+        </div>
+		<div class="modal-body">
+			<form>
+				<fieldset>
+				<?php
+					echo '<div class="app">';
+					echo construct_form($config['assign_pallet_position']);				
+					echo '</div>';
+					echo '<div class="appt">';
+					echo construct_form($config['assign_pallet_position_type']);				
+					echo '</div>';
+				?>
+				</fieldset>
+			</form>
+		</div>
+		 <div class="modal-footer">
+          <button type="button" class="btn btn-default" onclick="saveStorage();">Save</button>
+          <button type="button" class="btn btn-default" onclick="cleardata();">Clear</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+
+        </div>
+        </div>
+		</div>
 
 
 

@@ -562,14 +562,31 @@ text-transform: uppercase;
    padding: 10px;
    font-weight: bold;
 }
+.wh_header_option span{
+  float: left;
+  width: 150px;
+  padding: 3px;
+}
 .wh_header_option select{
    font-weight: normal;
+   float: left;
 }
 .wh_select{
     float: left;
+    width: 60%;
+}
+.wh_select select{
+    max-width: 190px;
 }
 .wh_storage_type{
-    float: right;
+    float: left;
+    width: 40%;
+}
+.wh_storage_type select{
+    max-width: 150px;
+}
+.wh_storage_type span{
+    width: 100px;
 }
 
 .wh_form_link{
@@ -577,4 +594,27 @@ text-transform: uppercase;
     cursor: pointer;
     font-weight: bold;
     text-decoration: none;
+}
+
+select{
+    padding: 3px !important;
+    height: 25px !important;
+}
+
+.form-control {
+    height: 25px;
+}
+
+#additional_modal{
+    background: rgba(0, 0, 0, 0.68);
+}
+
+
+/** pallet position type custom style **/
+#create-pallet_position_type_container .col-sm-4{
+    white-space: nowrap;
+}
+#create-pallet_position_type_container .checkbox label{
+    width: 90%;
+    float: left;
 }

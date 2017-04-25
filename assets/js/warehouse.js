@@ -73,6 +73,7 @@ function addStorage(){
 
 	function cleardata(){
 		$('#add_storage input[type="number"]').val('');
+		$('#add_storage input[type="checkbox"]').prop('checked', false); 
 		$('#add_storage .bay select, #add_storage .rack select').val('');
 		$('div').removeClass('has-error');
 	}
@@ -393,6 +394,21 @@ function addFunctionToStorage2(){
 		selectStorage();
 	});
 
+}
+
+
+function openpalletposition(t){
+	$('#additional_modal').modal();
+
+	if(t=='assign'){
+		$('.app').show();
+		$('.appt').hide();
+		$('#additional_modal .modal-title').html('Assign Pallet Position');
+	}else{
+		$('.appt').show();
+		$('.app').hide();
+		$('#additional_modal .modal-title').html('Assign Pallet Position Type');
+	}
 }
 
 
