@@ -216,7 +216,7 @@ $version =rand();
 					echo construct_form($config['warehouse_form']);				
 					echo '</div>';
 				?>
-				<div class="col-sm-12 wh_form_link">
+				<div class="col-sm-12 wh_form_link rack">
 					<a style="float: left;" 	onclick="openpalletposition('assign');">Assign Pallet Position</a>
 					<a style="float: right;" 	onclick="openpalletposition('type');">Assign Pallet Position Type</a>
 				</div>

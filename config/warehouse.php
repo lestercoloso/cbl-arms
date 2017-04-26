@@ -10,9 +10,9 @@ $config['pallet_position_type'] 	 = $db->getconfig('pallet_position_type');
 $config['no_rack_level'] 	 	= [1=>1, 2=>2, 3=>3, 4=>4, 5=>5, 6=>6];
 
 
-
-$result = $db->select('select id, code, location from location_management where status=1');
-// $config['warehouse_location'] = [];
+$sql = 'select id, code, location from location_management where status=1';
+$result = $db->select($sql);
+$config['warehouse_location_option'] = array();
 foreach ($result['data'] as $key => $value) {
 	$config['warehouse_location_option'][$value['id']] = $value['location'];	
 }
@@ -45,6 +45,7 @@ $config['warehouse_form'] = [
 								'form_class'		=> 'form-control',
 								'options' 			=> [''=>'Select Warehouse Location']+$config['warehouse_location_option']
 								],	
+
 								['type' 			=> 'select',
 								'label'				=> 'Storage type',
 								'parent_class' 		=> 'form-group col-sm-12 rack',
@@ -134,8 +135,7 @@ $config['assign_pallet_position'] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'additional-rack_section',
 								'col'				=> 'rack_section',
-								'form_class'		=> 'form-control',
-								'options' 			=> [''=>'Select Rack Section']+$config['warehouse_location_option']
+								'form_class'		=> 'form-control'
 								],	
 								['type' 			=> 'select',
 								'label'				=> 'Rack Level',
@@ -165,8 +165,7 @@ $config['assign_pallet_position_type'] = [
 								'subparent_class' 	=> 'col-sm-8',
 								'id'				=> 'additional-rack_section',
 								'col'				=> 'rack_section',
-								'form_class'		=> 'form-control',
-								'options' 			=> [''=>'Select Rack Section']+$config['warehouse_location_option']
+								'form_class'		=> 'form-control'
 								],	
 								['type' 			=> 'select',
 								'label'				=> 'Rack Level',
@@ -178,7 +177,7 @@ $config['assign_pallet_position_type'] = [
 								'options' 			=> [''=>'Select Rack Level']+$config['rack_level']
 								],	
 
-								['type' 		=> 'number',
+								['type' 		=> 'input',
 								'label'				=> ' Pallet Position',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',

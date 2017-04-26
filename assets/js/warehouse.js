@@ -398,18 +398,59 @@ function addFunctionToStorage2(){
 
 
 function openpalletposition(t){
-	$('#additional_modal').modal();
 
-	if(t=='assign'){
-		$('.app').show();
-		$('.appt').hide();
-		$('#additional_modal .modal-title').html('Assign Pallet Position');
-	}else{
-		$('.appt').show();
-		$('.app').hide();
-		$('#additional_modal .modal-title').html('Assign Pallet Position Type');
+
+	var data = createPostData('rack');
+	var noracksection = data['data']['no_rack_section'];
+	var option_content = "<option value=''>Select Rack Section</option>";
+	for (i = 1; i <= noracksection; i++) { 
+	    option_content += "<option value='"+i+"'>"+i+"</option>";
 	}
+	$('#additional_modal [col="rack_section"]').html(option_content);
+
+	var noofracklevel = data['data']['no_rack_level'];
+	var option_content2 = "<option value=''>Select Rack Level</option>";
+	for (i = 1; i <= noofracklevel; i++) { 
+	    option_content2 += "<option value='"+i+"'>"+i+"</option>";
+	}
+	$('#additional_modal [col="rack_level"]').html(option_content2);
+
+	if(data['error']){
+		toastr["error"](data['error']+"<br>Before proceeding to next step.");
+	}else{
+		$('#additional_modal').modal();
+		if(t=='assign'){
+			$('.app').show();
+			$('.appt').hide();
+			$('#additional_modal .modal-title').html('Assign Pallet Position');
+		}else{
+			$('.appt').show();
+			$('.app').hide();
+			$('#additional_modal .modal-title').html('Assign Pallet Position Type');
+			generatelocationcode();
+		}
+
+	}
+
 }
+
+function generatelocationcode(){
+	var first 	= 'B'+$('#rblock').val();
+	var second 	= 'L'+pad($('.appt [col="rack_level"]').val(), 2, '0');
+	var third 	= 'S'+$('.appt [col="rack_section"]').val();
+	var fourth 	= 'P'+$('.appt [col="pallet_position"]').val();
+	var fifth 	= '-W';
+	$('#additional-location_code').val(first+second+third+fourth+fifth);
+}
+
+$('.appt select').change(function(){
+	generatelocationcode();
+});
+
+$('.appt input[type="text"]').bind('keyup keydown',function(){
+	generatelocationcode();
+});
+
 
 
 $(".view_storage").click(function(){
