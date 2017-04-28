@@ -217,15 +217,15 @@ $version =rand();
 					echo '</div>';
 				?>
 				<div class="col-sm-12 wh_form_link rack">
-					<a style="float: left;" 	onclick="openpalletposition('assign');">Assign Pallet Position</a>
-					<a style="float: right;" 	onclick="openpalletposition('type');">Assign Pallet Position Type</a>
+					<a style="float: left;"   class="no_access" 	id="appbtn">Assign Pallet Position</a>
+					<a style="float: right;"  class="no_access"	id="apptbtn">Assign Pallet Position Type</a>
 				</div>
 				</fieldset>
 			</form>
 		</div>
 
 		 <div class="modal-footer">
-          <button type="button" class="btn btn-default" onclick="saveStorage();">Save</button>
+          <button type="button" class="btn btn-default" id="savestorage" ><i class="fa fa-circle-o-notch fa-spin hide"></i> Save</button>
           <button type="button" class="btn btn-default" onclick="cleardata();">Clear</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
@@ -258,11 +258,27 @@ $version =rand();
 					echo '</div>';
 				?>
 				</fieldset>
+
+
+			<div id="pallet_position_container">
+			<table class="table table-bordered table-striped table-list" id="pallet_position_table">
+				<thead><tr>
+					<td>Rack Section</td>
+					<td>Rack Level</td>
+					<td>No. of Pallet Positon</td>
+					<td class="lrw">Wing Side</td>
+					<td>Action</td>
+				</tr></thead>
+				<tbody>
+					<tr><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+				</tbody>
+			</table>	
+			</div>			
 			</form>
 		</div>
 		 <div class="modal-footer">
-          <button type="button" class="btn btn-default" onclick="saveStorage();">Save</button>
-          <button type="button" class="btn btn-default" onclick="cleardata();">Clear</button>
+          <button type="button" class="btn btn-default" id="saveadditional" >Save</button>
+          <button type="button" class="btn btn-default" id="clearadditional">Clear</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
 

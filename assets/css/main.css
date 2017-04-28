@@ -391,3 +391,19 @@ input[type="number"]{
 .padding{
     padding: 16px;
 }
+
+.no_access{
+    color: #9E9E9E;
+    cursor: context-menu;
+}
+.no_access:hover{
+    color: #9E9E9E;
+    text-decoration: none;
+}
+
+.capitalize{
+    text-transform: capitalize;
+}
+.uppercase{
+    text-transform: uppercase;
+}

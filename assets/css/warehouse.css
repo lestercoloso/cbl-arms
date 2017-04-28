@@ -591,9 +591,12 @@ text-transform: uppercase;
 
 .wh_form_link{
     padding: 16px;
-    cursor: pointer;
+    /*cursor: pointer;*/
     font-weight: bold;
     text-decoration: none;
+}
+.wh_form_link a{
+    cursor: pointer;
 }
 
 select{
@@ -611,10 +614,30 @@ select{
 
 
 /** pallet position type custom style **/
-#create-pallet_position_type_container .col-sm-4{
+/*#create-pallet_position_type_container .col-sm-4{
     white-space: nowrap;
 }
 #create-pallet_position_type_container .checkbox label{
     width: 90%;
     float: left;
+}
+*/
+#pallet_position_table{
+    margin-top: 20px;
+}
+#pallet_position_table td{
+    text-align: center;
+}
+#pallet_position_table i{
+    font-size: 15px;
+    color: rgba(206, 0, 0, 0.94);
+    cursor: pointer;
+}
+#pallet_position_table th{
+    font-weight: bold;
+    text-align: center;
+}
+#pallet_position_container{
+    height: 160px;
+    overflow-y: auto;
 }

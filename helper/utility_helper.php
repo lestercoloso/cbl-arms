@@ -94,6 +94,12 @@ function construct_form($arr){
 			continue;
 		}
 
+		$add_attr = '';
+		if($data['attr']){
+			foreach ($data['attr'] as $attr => $attr_val) {
+				$add_attr .= " $attr='$attr_val' ";
+			}
+		}
 
 		$return .='<div class="'.$data['parent_class'].'" id="'.$data['id'].'_container"  title="'.$data['title'].'">';
 
@@ -124,13 +130,13 @@ function construct_form($arr){
 			$return .='</select><div class="hide" id="'.$data['id'].'_loader"><i class="fa fa-circle-o-notch fa-spin" style=""></i> Loading...</div>';
 						
 		}else if($data['type']=='input'){
-			$return .='<input name="'.$data['col'].'" '.$data['additionals'].' type="text"  col="'.$data['col'].'" id="'.$data['id'].'"  class="'.$data['form_class'].'" placeholder="'.$data['placeholder'].'">
+			$return .='<input name="'.$data['col'].'" '.$add_attr.' '.$data['additionals'].' type="text"  col="'.$data['col'].'" id="'.$data['id'].'"  class="'.$data['form_class'].'" placeholder="'.$data['placeholder'].'">
 						<span id="'.$data['col'].'_error" class="text-danger">'.$data['note'].'</span>';
 		}else  if($data['type']=='password'){
-			$return .='<input name="'.$data['col'].'" '.$data['additionals'].' type="password"  col="'.$data['col'].'" id="'.$data['id'].'"  class="'.$data['form_class'].'" placeholder="'.$data['placeholder'].'">
+			$return .='<input name="'.$data['col'].'"  '.$add_attr.' '.$data['additionals'].' type="password"  col="'.$data['col'].'" id="'.$data['id'].'"  class="'.$data['form_class'].'" placeholder="'.$data['placeholder'].'">
 						<span id="'.$data['col'].'_error" class="text-danger">'.$data['note'].'</span>';
 		}else if($data['type']=='number'){
-		$return .='<input name="'.$data['col'].'" '.$data['additionals'].' type="number" min="1" col="'.$data['col'].'" id="'.$data['id'].'"  class="'.$data['form_class'].'" placeholder="'.$data['placeholder'].'">
+		$return .='<input name="'.$data['col'].'"  '.$add_attr.' '.$data['additionals'].' type="number" min="1" col="'.$data['col'].'" id="'.$data['id'].'"  class="'.$data['form_class'].'" placeholder="'.$data['placeholder'].'">
 						<span id="'.$data['col'].'_error" class="text-danger">'.$data['note'].'</span>';
 		}else if($data['type']=='date'){
 		$return .='<div class="input-group date  col-sm-12  create-date">

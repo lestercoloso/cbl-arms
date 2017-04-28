@@ -19,8 +19,32 @@ class Warehouse{
 		jdie($return);
 	}
 
+	public function save(){
+
+		$data = $_POST['d'];
+		$data['storage'] = $_POST['t'];
+
+		if($this->db->insert("storage",$data)){
+			$return['status'] = 200;
+			$storage_id = $this->db->insert_id();
+			$return['id'] = $storage_id;
+
+			$this->db->delete("storage","storage_id=$storage_id");
+			foreach ($_POST['p'] as $pval) {
+				$pval['storage_id'] = $storage_id;
+				$this->db->insert("pallet_position",$pval);
+			}			
+
+			foreach ($_POST['pt'] as $ptval) {
+				$ptval['storage_id'] = $storage_id;
+				$this->db->insert("pallet_position_type",$ptval);
+			}
+		}
+		jdie($return);
+	}	
+
 	public function getcode($type){
-		$select = $this->db->select_one('select max(code) as newcode from '.$type.'_storage limit 1' );
+		$select = $this->db->select_one('select max(code) as newcode from storage where storage=\''.$type.'\' limit 1' );
 		$newcode = !empty($select['newcode']) ? $select['newcode'] : 0;
 		jdie(str_pad($newcode+1,10,"0",STR_PAD_LEFT));
 	}

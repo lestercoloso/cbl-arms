@@ -55,6 +55,7 @@ var location_management = {
 
 	},
 
+
 create: function(){
 	$('#create_modal').modal();
 	$('#updatecreate').hide();
@@ -180,6 +181,7 @@ expand: function(id, obj){
 		obj.addClass('fa-minus');
 
 		$('#expand-'+id).show();
+		location_management.storagelist(id);
 
 	}else{
 		obj.removeClass('fa-minus');
@@ -187,6 +189,56 @@ expand: function(id, obj){
 		$('#expand-'+id).hide();
 	}
 
+},
+
+
+storagelist: function(whid){
+
+	var content = '';
+	
+	$.post("backstage/location_management/storagelist/"+whid, {},function(data){
+		
+		$.each(data.data, function( index, value ) {
+			console.log(value);
+			var action = '';
+
+			if(value.status==1){
+				action += ' <div class="toggle btn btn-primary on" data-toggle="toggle"><div class="toggle-group"><label class="btn btn-primary toggle-on">Active</label><span class="toggle-handle btn btn-default"></span></div></div>';						
+			}else{
+				action += ' <div class="toggle btn btn-default off" data-toggle="toggle"><div class="toggle-group"><label class="btn btn-default active toggle-off">Inactive</label><span class="toggle-handle btn btn-default"></span></div></div>';
+			}		
+			content +='<tr data-id="'+value.id+'">';
+			content +='<td>BLOCK '+value.block+'</td>';
+			content +='<td class="capitalize">'+value.storage+'</td>';
+			content +='<td class="uppercase">'+value.storage+' '+pad(value.code, 3, '0')+'</td>';
+			content +='<td class="capitalize">'+value.sections+'</td>';
+			content +='<td class="capitalize">'+value.levels+'</td>';
+			content +='<td class="capitalize">'+action+'</td>';
+			content +='</tr>';
+		});
+
+	$('#expand-'+whid+' tbody').html(content);
+
+			$('#expand-'+whid+' .off').click(function(){
+				location_management.changestatusstorage($(this).parent().parent().data('id'), whid, '1');
+			});
+			$('#expand-'+whid+' .on').click(function(){
+				location_management.changestatusstorage($(this).parent().parent().data('id'), whid, '0');
+			});	
+	});
+
+},
+
+changestatusstorage: function(id, whid, status){
+	// alert(id);
+
+		$.post("backstage/location_management/changestatusstorage/"+id+"/"+status, {},function(data){
+			toastr["success"]('Successfully changed.');
+			location_management.storagelist(whid);
+		}).fail(function(){
+			toastr["error"]('Network error!<br> Please try again.');	
+		});		
+	
 },
 
 getlist: function(page=1){
@@ -223,7 +275,7 @@ getlist: function(page=1){
 				content +='<th>'+action+'</th>';
 				content +='</tr>';
 
-				content +='<tr id="expand-'+value.id+'" class="expandable"> <td colspan="7"> <table  class="table table-bordered table-striped table-list storage-list"> <thead><tr><th>Block Code</th><th>Storage</th><th>Storage Code</th><th>Section</th><th>Level</th><th>Action</th></tr></thead></table></td></tr>'
+				content +='<tr id="expand-'+value.id+'" class="expandable"> <td colspan="7"> <table  class="table table-bordered table-striped table-list storage-list"> <thead><tr><th>Block Code</th><th>Storage</th><th>Storage Code</th><th>Section</th><th>Level</th><th>Action</th></tr></thead><tbody></tbody></table></td></tr>'
 			});
 
 			$('#pagination-container').html(data.pagination);

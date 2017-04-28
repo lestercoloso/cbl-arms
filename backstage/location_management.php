@@ -27,6 +27,20 @@ class Location_management{
 	}
 
 
+	public function storagelist($whid=''){
+		$sql = "select id, block, code, storage, sections, levels, status from storage where location=$whid ";
+		$data = $this->db->select($sql);
+		jdie($data);
+	}
+
+	public function changestatusstorage($id, $status){
+		if($this->db->update("storage",['status'=>$status], "id=$id")){
+			$return['status'] = 200;
+		}
+		jdie($return);
+	}
+
+
 	public function save(){
 
 		$data = $_POST['d'];
@@ -60,6 +74,7 @@ class Location_management{
 		}
 		jdie($return);
 	}
+
 
 
 	public function delete($id=''){

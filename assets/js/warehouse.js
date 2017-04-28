@@ -1,8 +1,9 @@
 	var adjust = 3;
 	var adjust2 = 3;
 
-
-
+var rack_type 				= 'selective';
+var pallet_position 		= [];
+var pallet_position_type 	= [];
 
 function addStorage(){
 	$( "#add_storage" ).modal();
@@ -67,7 +68,7 @@ function addStorage(){
 
 	function getcode(type){
 		$.get("backstage/warehouse/getcode/"+type,function(data){
-			$('#'+type+'code').val(data);
+			$('#create-code').val(data);
 		});
 	}
 
@@ -399,21 +400,36 @@ function addFunctionToStorage2(){
 
 function openpalletposition(t){
 
+	clearadditional();
+	constructpalletposition();
+
 
 	var data = createPostData('rack');
-	var noracksection = data['data']['no_rack_section'];
+	var noracksection = data['data']['sections'];
 	var option_content = "<option value=''>Select Rack Section</option>";
 	for (i = 1; i <= noracksection; i++) { 
 	    option_content += "<option value='"+i+"'>"+i+"</option>";
 	}
 	$('#additional_modal [col="rack_section"]').html(option_content);
 
-	var noofracklevel = data['data']['no_rack_level'];
+	var noofracklevel = data['data']['levels'];
 	var option_content2 = "<option value=''>Select Rack Level</option>";
 	for (i = 1; i <= noofracklevel; i++) { 
 	    option_content2 += "<option value='"+i+"'>"+i+"</option>";
 	}
 	$('#additional_modal [col="rack_level"]').html(option_content2);
+
+
+	if($('#create-wing [col="wing"]').is(':checked')){
+		$('#additional_modal [col="wing"]').parent().parent().show();
+		$('.lrw').removeClass('hide');
+		$('#additional_modal [col="wing"]').removeClass('not_mandatory');
+	}else{
+		$('#additional_modal [col="wing"]').parent().parent().hide();
+		$('.lrw').addClass('hide');
+		$('#additional_modal [col="wing"]').addClass('not_mandatory');
+	}
+
 
 	if(data['error']){
 		toastr["error"](data['error']+"<br>Before proceeding to next step.");
@@ -435,19 +451,213 @@ function openpalletposition(t){
 }
 
 function generatelocationcode(){
-	var first 	= 'B'+$('#rblock').val();
+	var first 	= 'B'+$('#create-block').val();
 	var second 	= 'L'+pad($('.appt [col="rack_level"]').val(), 2, '0');
 	var third 	= 'S'+$('.appt [col="rack_section"]').val();
-	var fourth 	= 'P'+$('.appt [col="pallet_position"]').val();
-	var fifth 	= '-W';
-	$('#additional-location_code').val(first+second+third+fourth+fifth);
+	
+	var fourth = '';
+	if($('.appt [col="pallet_position"]').val()){
+		var fourth 	= 'P'+$('.appt [col="pallet_position"]').val();		
+	}
+
+	var fifth = '';
+	if($('.appt [col="wing"]').val()){
+		var fifth 	= '-'+$('.appt [col="wing"]').val()+'W';		
+	}
+
+	$('#appt-location_code').val(first+second+third+fourth+fifth);
 }
+
+function racktype(){
+	var selected_rack_type = $('#rack-rack_type').val();
+ 	 if(rack_type==selected_rack_type.toLowerCase()){
+ 	 	$('#appbtn').removeClass('no_access');
+ 	 }else{
+ 	 	$('#appbtn').addClass('no_access');
+ 	 }
+}
+
+
+function clearadditional(){
+	$('#additional_modal input, #additional_modal select').val('');
+}
+
+function constructpalletposition(){
+	var content = '';
+	var num = 0;
+	for (v in pallet_position) {
+		if(pallet_position[v].rack_section){
+			num +=1;
+			content += '<tr data-key="'+v+'"><td>'+pallet_position[v].rack_section+'</td>';
+			content += '<td>'+pallet_position[v].rack_level+'</td>';
+			content += '<td>'+pallet_position[v].pallet_position+'</td>';
+
+			if($('#create-wing [col="wing"]').is(':checked')){
+			content += '<td>'+pallet_position[v].wing+'</td>';
+			}
+			content += '<td><i class="fa fa-times-circle"></i></td></tr>';	
+		}
+	};
+
+	if(num==0){
+		$('#apptbtn').addClass('no_access');
+	}
+
+	$('#pallet_position_table tbody').html(content);
+	$('#pallet_position_table i').click(function(){
+		removepalletposition($(this).parent().parent().data('key'));
+	});
+}
+
+function saveadditional(){
+	// $('#additional_modal').modal('close');
+
+	if($('.app').is(':visible')){
+		var err = createPostData('app');	
+		if(!err['error']){
+			var data = err['data'];
+			var tosave = data['rack_level']+'-'+data['rack_section']+'-'+data['wing'];
+
+			if(pallet_position[tosave]){
+				if(confirm("Already exist.\nDo you want to overwrite it?")){
+					pallet_position[tosave] = data;
+					$('#additional_modal').modal('hide');
+					toastr["success"]('Successfully Added.');
+					$('#apptbtn').removeClass('no_access');
+
+				}
+			}else{
+					pallet_position[tosave] = data;
+					$('#additional_modal').modal('hide');
+					toastr["success"]('Successfully Added.');
+					$('#apptbtn').removeClass('no_access');
+			}
+
+		}else{
+			toastr["error"](err['error']);
+		}
+	}else{
+		var err = createPostData('appt');	
+		if(!err['error']){
+			var data = err['data'];
+			var tosave = data['rack_level']+'-'+data['rack_section']+'-'+data['wing']+'-'+data['pallet_position'];
+
+			if(pallet_position_type[tosave]){
+				if(confirm("Already exist.\nDo you want to overwrite it?")){
+					pallet_position_type[tosave] = data;
+					$('#additional_modal').modal('hide');
+					toastr["success"]('Successfully Added.');
+
+				}
+			}else{
+					pallet_position_type[tosave] = data;
+					$('#additional_modal').modal('hide');
+					toastr["success"]('Successfully Added.');
+			}
+
+		}else{
+			toastr["error"](err['error']);
+		}
+	}
+}
+
+function removepalletposition(key){
+	if(confirm('Are you sure you want to remove this?')){
+		delete pallet_position[key];
+		constructpalletposition();	
+	}
+}
+
+
+function save(){
+		var t = $('#stype').val();
+		var psave = [];
+		var ptsave = [];
+		for (v in pallet_position) {if(pallet_position[v].rack_section){ psave.push(pallet_position[v]); }};
+		for (v in pallet_position_type) {if(pallet_position_type[v].rack_section){ ptsave.push(pallet_position_type[v]); }};
+		var arr = createPostData(t);
+		if(arr['error']){
+    		toastr["error"](arr['error']);
+    	}else{
+			$('#savestorage').addClass('disabled');
+			$('#savestorage i').removeClass('hide');
+    		$.post("backstage/warehouse/save/", {d:arr['data'], t:t, p:psave, pt: ptsave},function(data){
+    			if(data.status==200){
+						toastr["success"]('Successfully added.');
+						$('#create_modal').modal('hide');
+						$('#savestorage').removeClass('disabled');
+						$('#savestorage i').addClass('hide');
+						
+				}else{
+					toastr["error"]('Network error!<br> Please try again.');	
+				}
+    		}).fail(function(){
+				toastr["error"]('Error.');
+				$('#savestorage').removeClass('disabled');
+				$('#savestorage i').addClass('hide');
+			});
+    	}
+}
+
+
+
+function generatepositiontype(){
+
+var l = $('.appt [col="rack_level"]').val();
+var s = $('.appt [col="rack_section"]').val();
+var w = $('.appt [col="wing"]').val();
+
+
+
+	if(pallet_position[l+'-'+s+'-'+w]){
+		var no_position = pallet_position[l+'-'+s+'-'+w].pallet_position;
+		var content = '<option value="">Select Pallet Position</option>';
+		
+		if(no_position>=1){
+			content +='<option value="a">a</option>';
+		}
+		if(no_position>=2){
+			content +='<option value="b">b</option>';
+		}
+		if(no_position>=3){
+			content +='<option value="c">c</option>';
+		}		
+	}else{
+		content = '';
+	}
+	$('#appt-pallet_position').html(content);
+}
+
+$('.appt [col="rack_level"], .appt [col="rack_section"], .appt [col="wing"]').change(function(){
+	generatepositiontype();
+});
+
+
+$("#savestorage").click(function(){
+	// if(!$(this).hasClass('disabled')){
+	// 	save();	
+	// }
+	save();
+});
+
+
+$("#saveadditional").click(function(){
+	saveadditional();
+});
+
+$("#clearadditional").click(function(){
+	clearadditional();
+})
+
+$('#rack-rack_type').change(function(){
+	racktype();
+});
 
 $('.appt select').change(function(){
 	generatelocationcode();
 });
 
-$('.appt input[type="text"]').bind('keyup keydown',function(){
+$('.appt select').bind('keyup keydown',function(){
 	generatelocationcode();
 });
 
@@ -514,6 +724,24 @@ $('#rotate_shelves .rr').mousedown(function(){
 
 $('#shelf_container').keydown(function(e){
 	alert(e);
+});
+
+
+
+
+
+$('#appbtn').click(function(e){
+	if(!$(this).hasClass('no_access')){
+		openpalletposition('assign');
+	}
+	
+});
+
+
+$('#apptbtn').click(function(e){
+	if(!$(this).hasClass('no_access')){
+		openpalletposition('type', this);
+	}
 });
 
 

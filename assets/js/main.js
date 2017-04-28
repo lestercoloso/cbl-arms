@@ -293,6 +293,21 @@ var myaccount = {
 
 }
 
+
+$('input[type="number"]').bind('keydown keyup', function(){
+	var maxinput = $(this).attr('max'); 
+	var inputval = $(this).val(); 
+	
+	if(maxinput){
+		if(maxinput<parseInt(inputval)){
+			$(this).val(maxinput);
+			toastr["error"]("You exceed the maximum allowed number.");
+		}
+	}
+
+});
+
+
 myaccount.init();
 
 
