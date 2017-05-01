@@ -181,7 +181,7 @@ input[type=number]::-webkit-outer-spin-button {
 	width: 35%;
     padding: 10px;
     position: relative;
-    bottom: 50px;
+    bottom: 25px;
 }
 #saveshelf{
     float: right;
@@ -511,9 +511,7 @@ input[type="checkbox"]{
 }
 
 
-#tabs ul li a{
-text-transform: uppercase;
-}
+
 
 .legend-container label{
     width: 100%;
@@ -557,6 +555,13 @@ text-transform: uppercase;
 #warehouse, .wh_header_option{
     float: left;
     width: 100%;
+}
+#warehouse{
+    height: 500px;
+    overflow: auto;
+}
+.wh_header_option{
+    height: 46px;
 }
 .wh_header_option div{
    padding: 10px;
@@ -640,4 +645,20 @@ select{
 #pallet_position_container{
     height: 160px;
     overflow-y: auto;
+}
+
+.wh_free_roam{
+    width: 100%;
+    height: 535px;
+}
+.wh_free_roam table{
+    cursor: move;
+}
+.wh_free_roam td{
+    padding: 3px;
+    font-size: 6px;
+    background: green;
+    border-color: white;
+    font-weight: bold;
+    color: white;
 }

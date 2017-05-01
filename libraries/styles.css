@@ -263,7 +263,7 @@ Definition of the text DIVs
 	left: 0px;
 	width: 100%;
 	height: 100%;
-	overflow-x: hidden;
+	/*overflow-x: hidden;*/
 	overflow-y: scroll;
 	/* padding-top: 40px; */
 	}

@@ -34,6 +34,13 @@ function new_alert(msg,type=1){
 	}	
 	
 }
+var abc = (function(){var output = []; for(var i='A'.charCodeAt(0); i <= 'Z'.charCodeAt(0); i++) output.push(String.fromCharCode(i)); return output;})().join('');
+
+
+function remove_error_tag(classused){
+	$('.'+classused+' div').removeClass('has-error');	
+	$('.'+classused).removeClass('has-error');	
+}
 
 function SelectOption(select, option){
 	return option[select];

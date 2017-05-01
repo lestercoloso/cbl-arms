@@ -5,6 +5,10 @@ $config['subinventory_type'] = $db->getconfig('sub_inventory_type');
 $config['pullouttype'] 		 = $db->getconfig('pullout_shipment');
 $config['unit_of_measurement']  = $db->getconfig('unit_of_measurement');
 
+$config['inbound_status'] = [1=>'For Posting', 2=>'Posted', 3=>'Acknowledged by CBL', 4=>'Received by CBL', 5=>'Cancelled'];
+$config['cbl_status'] = [1=>'New Booking', 2=>'Acknowledged', 3=>'Received', 4=>'Cancelled'];
+
+
 $config['pullout'] = [ 
 								['type' 			=> 'select',
 								'label'				=> 'Pull-out Shipment',
@@ -212,57 +216,39 @@ $config['add_shipment'][] = [
 
 
 	$config['inventory'][] = [
-								['type' 		=> 'number',
-								'label'				=> 'IRR #',
+								['type' 		=> 'input',
+								'label'				=> 'Inbound Ref No.',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'inventory_irr_number',
-								'col'				=> 'irr_number',
+								'id'				=> 'inventory_inbound_no',
+								'col'				=> 'inbound_no',
 								'form_class'		=> 'form-control'
 								],
 
-								['type' 		=> 'date',
-								'label'				=> 'IRR Date',
+								['type' 		=> 'input',
+								'label'				=> 'Estimated Date/<br>Time of Arrival',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'inventory_irr_date',
-								'col'				=> 'irr_date',
+								'id'				=> 'inventory_estimated_arrival',
+								'col'				=> 'estimated_arrival',
 								'form_class'		=> 'form-control'],
 							];		
 
 $config['inventory'][] = [
-								['type' 		=> 'input',
-								'label'				=> 'DR Ref #',
+								['type' 		=> 'normal',
+								'label'				=> 'Request Date',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'inventory_drref_no',
-								'col'				=> 'drref_no',
+								'id'				=> 'inventory_request_date',
+								'col'				=> 'request_date',
 								'form_class'		=> 'form-control'
 								],
-								['type' 		=> 'input',
-								'label'				=> 'SI Ref #',
+								['type' 		=> 'normal',
+								'label'				=> 'Booked by',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'inventory_siref_no',
-								'col'				=> 'siref_no',
-								'form_class'		=> 'form-control'
-								]
-							];	
-$config['inventory'][] = [
-								['type' 		=> 'input',
-								'label'				=> 'Unit Type',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'inventory_unit_type',
-								'col'				=> 'unit_type',
-								'form_class'		=> 'form-control'
-								],
-								['type' 		=> 'input',
-								'label'				=> 'Client Name',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
-								'id'				=> 'inventory_client_name',
-								'col'				=> 'client_name',
+								'id'				=> 'inventory_booked_by',
+								'col'				=> 'booked_by',
 								'form_class'		=> 'form-control'
 								]
 							];	

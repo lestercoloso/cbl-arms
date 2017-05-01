@@ -9,7 +9,7 @@ CREATE TABLE `storage` (
   `levels` int(20) DEFAULT NULL,
   `sections` int(20) DEFAULT NULL,
   `wing` varchar(20) DEFAULT NULL,
-  `style` varchar(255) DEFAULT NULL,
+  `style` varchar(2555) DEFAULT NULL,
   `block` varchar(45) NOT NULL DEFAULT 'A',
   `status` tinyint(1) DEFAULT '1',
   `date_created` datetime DEFAULT CURRENT_TIMESTAMP,

@@ -15,6 +15,12 @@ class Inbound{
 		$select = $this->db->select($sql);
 		jdie($select);
 	}
+	public function getrefno(){
+		$sql = 'select max(inbound_no) as newnumber from inbound_shipment limit 1';
+		$select = $this->db->select_one($sql);
+		$newnumber = !empty($select['newnumber']) ? $select['newnumber'] : 0;
+		jdie(str_pad($newnumber+1,8,"0",STR_PAD_LEFT));
+	}
 
 	public function getpallet(){
 		$select = $this->db->select_one('select max(pallet_code) as newnumber from inbound_list where status=1 limit 1' );
@@ -59,6 +65,51 @@ class Inbound{
 
 	}
 
+
+	public function getinboundlist($page=1){
+		$limit = 5;
+		$start = ($page - 1) * $limit; //first item to display on this page
+		$additional = "limit $start, $limit";
+
+		$searchdata = (!empty($_POST['searchdata'])) ? json_decode($_POST['searchdata'], TRUE) : [];
+	
+		if(!empty($searchdata)){
+
+			$this->db->where_like(['concat(\'IB\',LPAD(`inbound_no`, 8, \'0\'))' => $searchdata['inbound_no']]);
+			$this->db->where_like(['booked_by'=>$searchdata['booked_by']]);
+			$this->db->where_search(['status'=>$searchdata['status']]);
+
+			$requestfrom = !empty($searchdata['req_date_from']) ? date('Y-m-d', strtotime($searchdata['req_date_from'])) : '';
+			$requesto = !empty($searchdata['req_date_to']) ? date('Y-m-d', strtotime($searchdata['req_date_to'])) : '';
+
+			$this->db->where_search(['request_date>'=>$requestfrom]);
+			$this->db->where_search(['request_date<'=>$requesto]);			
+
+		}	
+
+	$where = $this->db->where_search();
+	
+		$sql = "select id,
+			concat('IB',LPAD(`inbound_no`, 8, '0')) as inbound_no, 
+			DATE_FORMAT(`request_date`,'%m/%d/%Y') as request_date, 
+			DATE_FORMAT(`estimated_arrival`,'%m/%d/%Y %h:%i%p') as eta, 
+			booked_by, 
+			status
+			from inbound_shipment $where  $additional";
+		$data = $this->db->select($sql);
+		$datatotal = $this->db->select_one("select count(id) as total from inbound_shipment $where limit 1" )['total'];
+		$data['pagination'] = $this->db->pagination($page, $datatotal, $limit);
+
+		foreach($data['data'] as $k=>$d){
+			if(!empty($d['storage_type'])){
+				$dst = json_decode($d['storage_type']);
+				$data['data'][$k]['storage_type'] = implode(',', $dst);
+			}
+		} 		
+		jdie($data);
+
+	}	
+
 	public function getcode($type){
 		$additional = '';
 		if($type=='rack'){
@@ -85,23 +136,24 @@ class Inbound{
 		jdie($return);
 	}
 
-	public function save(){
-		$data = json_decode($_POST['d'], TRUE);
-		$data['bill_of_lading'] = (int) $data['bill_of_lading'];
-		$data['ex_date'] = save_date($data['ex_date']);
-		$data['en_date'] = save_date($data['en_date']);
-		$data['pu_date'] = save_date($data['pu_date']);
-		$data['irr'] 	 = $_POST['i'];
+	public function save($posted=1){
 
-
+		session_start();
+		$data = $_POST['d'];
+		$data['inbound_no'] 		= substr($data['inbound_no'],2);
+		$data['booked_by_id'] 		= $_SESSION['userid'];
+		$data['status'] 			= $posted;
+		$data['estimated_arrival'] 	= date('Y-m-d G:i:s', strtotime($data['estimated_arrival']));
+		$data['request_date'] 		= date('Y-m-d', strtotime($data['request_date']));
+		
 		$return['status'] = 100;
-		if($this->db->insert("inbound_list",$data)){
+		if($this->db->insert("inbound_shipment",$data)){
 			$insert_id = $this->db->insert_id();
 
-			foreach ($_POST['inv'] as $value) {
+			foreach ($_POST['inventory'] as $value) {
 				$value['inbound_id'] = $insert_id;
 				$value['exp_date'] = save_date($value['exp_date']);
-				$this->db->insert("irr_list",$value);
+				$this->db->insert("inbound_shipment_list",$value);
 			}
 
 			$return['status'] = 200;
@@ -138,10 +190,8 @@ class Inbound{
 	}
 
 	public function delete($inboundid=''){
-		$inboundid = explode('-', $inboundid);
-		$id = $inboundid[1];
 		$data['status'] = 100;
-		if($this->db->CheckResult("delete from inbound_list where id=$id" )){
+		if($this->db->CheckResult("delete from inbound_shipment where id=$inboundid" )){
 			$data['status'] = 200;
 		}
 		jdie($data);
@@ -150,36 +200,67 @@ class Inbound{
 	public function edit($inboundid=''){
 		$inboundid = explode('-', $inboundid);
 		$id = $inboundid[1];
-		$data = $this->db->select_one("select * from inbound_list a where status=1 and id=$id limit 1" );
-		$data['ex_date'] = get_date($data['ex_date']);
-		$data['en_date'] = get_date($data['en_date']);
-		$data['pu_date'] = get_date($data['pu_date']);
+
+		$sql = "select 
+				id, 
+				concat('IB',LPAD(`inbound_no`, 8, '0')) as inbound_no,
+				estimated_arrival,
+				request_date,
+				booked_by
+				from inbound_shipment where id=$id limit 1";
+				// die($sql);
+		$data = $this->db->select_one($sql);
+		$data['request_date'] = get_date($data['request_date']);
+		$data['estimated_arrival'] = date('m/d/Y G:i A', strtotime($data['estimated_arrival']));
 
 		
 		$sql = "select 
-				pcid,
-				item_no,
-				batch_code,
-				material_desc,
-				uom,
+				stock_no,
+				box,
+				carton,
+				description,
 				cbm,
-				qty,
+				pieces,
+				total_cbm,
+				batch_code,
 				DATE_FORMAT(`exp_date`,'%m/%d/%Y') as exp_date
-				from irr_list where status=1 and inbound_id=$id";
+				from inbound_shipment_list where status=1 and inbound_id=$id";
 		$data['inventory'] = $this->db->select($sql)['data'];
 		jdie($data);
 	}
 
 	public function getitemmasterfile(){
-
+		// ((length*0.01)*(width*0.01)*(height*0.01)*(uom_qty_1*uom_qty_2*uom_qty_3)) as cbm,
 		$sql = "select 
 		LPAD(`item_id`, 10, '0') as item_id,
-		((length*0.01)*(width*0.01)*(height*0.01)*(uom_qty_1*uom_qty_2*uom_qty_3)) as cbm,
-		concat(`uom_1`, '-', `uom_qty_1`, '/', `uom_2`, '-', `uom_qty_2`, '/', `uom_3`, '-', `uom_qty_3`) as uom
+		cbm,
+		item_description,
+		stock_no,
+		uom_qty_2 as box,
+		carton_per_pallet as carton,
+		
+		(
+		CASE WHEN uom_qty_1 > '0' THEN `uom_qty_1` ELSE '1' END * 
+		CASE WHEN uom_qty_2 > '0' THEN `uom_qty_2` ELSE '1' END *
+		CASE WHEN uom_qty_3 > '0' THEN `uom_qty_3` ELSE '1' END 
+		) as pieces,
+
+		concat(
+	    CASE WHEN uom_qty_1 > '0' THEN concat(`uom_1`, '-', `uom_qty_1`) ELSE '' END,
+	    CASE WHEN uom_qty_2 > '0' THEN concat('/',`uom_2`, '-', `uom_qty_2`) ELSE '' END,
+	    CASE WHEN uom_qty_3 > '0' THEN concat('/',`uom_3`, '-', `uom_qty_3`) ELSE '' END) as uom
+
 		from item_master_file where status=1";
 		$data = $this->db->select($sql);
 		jdie($data);	
 
+	}
+
+	public function changestatus($id='', $status=''){
+		if($this->db->update('inbound_shipment', ['status'=>$status], "id=$id")){
+			$result['status'] = 200;
+		}
+		jdie($result);
 	}
 	
 }

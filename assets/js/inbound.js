@@ -1,7 +1,7 @@
 var inventory = [];       
 var updateit = '';
             $(function () {
-               $('#exdate_group, #endate_group, #pudate_group, .create-date, #inventory_irr_date').datetimepicker({
+               $('#exdate_group, #endate_group, #pudate_group, .create-date').datetimepicker({
                  format: 'MM/DD/YYYY',
                  useCurrent: false
            		});               
@@ -10,6 +10,12 @@ var updateit = '';
                  format: 'MM/DD/YYYY',
                  useCurrent: false
            		});
+
+				$('#inventory_estimated_arrival').datetimepicker({
+					format: 'MM/DD/YYYY LT',
+					useCurrent: false
+		        });
+
 
                 $('#s-type, #si-type').chosen({
                 	no_results_text: "Oops, nothing found!"
@@ -28,23 +34,41 @@ var searchdata = "";
 function getInbound(page=1){
 
 
-$.post("backstage/inbound/getInbound/"+page, {searchdata: searchdata},function(data){
+$.post("backstage/inbound/getinboundlist/"+page, {searchdata: searchdata},function(data){
 	var content = '';
 	// console.log(data);
 	$.each(data.data, function( index, value ) {
 
-		var action = '<button type="button" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
-		action += ' <button type="button" class="btn btn-info"><i class="fa fa-sign-out" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
-		action += ' <button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
+		var action = '';
+		//cbl view
+		if(user_type==10){
+			action += '<button type="button" class="btn btn-success"><i class="fa fa-pencil"></i><span class="hidden-xs"> </span> </button>';
+			
+			if(value.status==1){
+				action += ' <button type="button" class="btn btn-info"><i class="fa fa-envelope-o"></i><span class="hidden-xs"> </span> </button>';				
+			}
+			
+			action += ' <button type="button" class="btn btn-danger"><i class="fa fa-times-circle"></i><span class="hidden-xs"> </span> </button>';
+		}else{
+			action += '<button type="button" class="btn btn-success"><i class="fa fa-list-alt"></i><span class="hidden-xs"> </span> </button>';
+			action += ' <button type="button" class="btn btn-info"><i class="fa fa-upload"></i><span class="hidden-xs"> </span> </button>';			
+		}
+			
+		// var action = '<button type="button" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
+		// action += ' <button type="button" class="btn btn-info"><i class="fa fa-sign-out" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
+		// action += ' <button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
 		
 		content +='<tr id="inbound-'+value.id+'" data-id="'+value.id+'" data-qty="'+value.quantity+'">';
-		content +='<td class="centered">'+value.bill_of_lading+'</td>';
-		content +='<td>'+value.customer_name+'</td>';
-		content +='<td>'+value.delivery_receipt+'</td>';
-		content +='<td>'+value.pallet_code+'</td>';
-		content +='<td>'+value.quantity+'</td>';
-		content +='<td>'+value.storage_type+'</td>';
-		content +='<td>'+value.inventory_type+'</td>';
+		
+		if(user_type==10){
+			content +='<td class="centered"><input type="checkbox" value="'+value.id+'"></td>';	
+		}
+		
+		content +='<td class="centered">'+value.inbound_no+'</td>';
+		content +='<td>'+value.booked_by+'</td>';
+		content +='<td>'+value.eta+'</td>';
+		content +='<td>'+value.request_date+'</td>';
+		content +='<td>'+SelectOption(value.status,inbound_status)+'</td>';
 		content +='<th>'+action+'</th>';
 		content +='</tr>';
 	});
@@ -55,18 +79,22 @@ $.post("backstage/inbound/getInbound/"+page, {searchdata: searchdata},function(d
 		getInbound($(this).data('page'));
 	});
 	
-	$('#inbound-list .btn-success').click(function(){
+	$('#inbound-list .btn-success .fa-pencil').parent().click(function(){
 		shipment.edit($(this).parent().parent().attr('id'));
 	});
 
-	$('#inbound-list .btn-danger').click(function(){
-		shipment.delete($(this).parent().parent().attr('id'));
+	$('#inbound-list .fa-envelope-o').parent().click(function(){
+		shipment.changestatus($(this).parent().parent().data('id'), '2');
 	});
 
-	$('#inbound-list .btn-info').click(function(){
-		var o = $(this).parent().parent()
-		shipment.pullout(o.data('id'), o.data('qty'));
+	$('#inbound-list .btn-danger').click(function(){
+		shipment.delete($(this).parent().parent().data('id'));
 	});
+
+	// $('#inbound-list .btn-info').click(function(){
+	// 	var o = $(this).parent().parent()
+	// 	shipment.pullout(o.data('id'), o.data('qty'));
+	// });
 
 
 }).fail(function(){
@@ -97,7 +125,7 @@ var search = {
     init: function() {
 		$('#clearInbound').click( function(){
 			search.cleardata();
-			search.execute();
+			// search.execute();
 		});
 
 		$('#searchInbound').click( function(){
@@ -178,6 +206,9 @@ var shipment = {
 		$('#saveinventory').click( function(){
 			shipment.saveInventory();
 		});
+		$('#postinventory').click( function(){
+			shipment.saveInventory(2);
+		});
 		$('#viewinventory').click( function(){
 			shipment.viewInventory();
 		});
@@ -195,8 +226,22 @@ var shipment = {
 			var cbm = $('select[col="material_desc"] :selected').attr('cbm');
 			$('input[col="cbm"]').val(($(this).val()*cbm)+'m³');
 		});		
-    },
 
+		$('#checkall').change(function () {
+		    var checked = (this.checked) ? true : false;
+		    $('#inbound-list tbody input[type="checkbox"]').prop('checked', checked);
+		});
+
+    },
+    changestatus: function(id, status=''){
+	
+		$.post("backstage/inbound/changestatus/"+id+"/"+status, {},function(data){
+			getInbound();
+		}).fail(function(){
+			toastr["error"]('Network error!<br> Please try again.');
+		}); 
+
+    },
     pullout: function(id, qty){
     	$('#pullout_shipment').modal();
     	$('#pulloutbutton').hide();
@@ -235,45 +280,20 @@ var shipment = {
     }, 
 
     edit: function(id){
-    	$('#clearnewshipment').hide();
+
 	$.post("backstage/inbound/edit/"+id, {},function(data){
-		// $('#addnew_billoflading').val(data);
-		$('#savenewshipment').hide();
-		$('#updateshipment').show();
-		$('#add_shipment').modal();
-		$('#add_shipment .modal-title').html('Edit Shipment');
-
-    	$('#rack_code').chosen('destroy');
-		$('#rack_code').html('');
-		$('#bay_code').chosen('destroy');
-		$('#bay_code').html('');
-
 		$.each(data, function( index, value ) {
-			$('#add_shipment [col="'+index+'"]').val(value);
-		});
-		shipment.getstoragecode(data.storage, pad(data.code, 10, '0'));
-		// shipment.changestorage();
-
-		$('.addshipment_bay, .addshipment_rack').hide();
-		$('.addshipment_'+data.storage).show();
-
-		updateid = data.id;
-		$('#addnew_billoflading').chosen('destroy');
-		$('#addnew_billoflading').html('<option value="'+data.bill_of_lading+'">'+pad(data.bill_of_lading,10, '0')+'</option>');
-
-		shipment.rack_level(data.rack_level);
-		inventory = data.inventory;
-
-		var irr = JSON.parse(data.irr);
-		
-		$('input[type="checkbox"][col="maintain"]').prop('checked', irr.maintain);
-		$.each(irr, function( index, value ) {
 			$('#inventory_modal [col="'+index+'"]').val(value);
 		});
-		// $('#rack_code').change(function(){
-		// 	var rack_level = $('#'+this.id+' :selected').data('racklevel');
-		// 	shipment.rack_level(rack_level);
-		// });
+		
+		updateid = data.id;
+		inventory = data.inventory;
+		$('#inventory_modal').modal();
+		shipment.constructInventory();
+
+		$('#clearinventory').hide();
+		$('#saveinventory').hide();
+		$('#updateinventory').show();
 
 	}).fail(function(){
 	    toastr["error"]('Error occured!<br>Please try again.');		
@@ -428,40 +448,41 @@ var shipment = {
          format: 'MM/DD/YYYY',
          useCurrent: false
    		});
-   		$('select[col="material_desc"]').trigger('chosen:updated');		
-		$('input[col="pcid"]').focus();
+		$('[col="stock_no"]').val('');
+		$('[col="stock_no"]').trigger("chosen:updated");
+		$('input[col="stock_no"]').focus();
 	},
 	addInventory: function(){
 		shipment.clearInventory();
-		shipment.getitemmasterfile();
+		// shipment.getitemmasterfile();
 		$('#inventory_modal').modal();
 		$('#updateinventory').hide();
 		$('#backinventory').hide();
 		$('#clearinventory').show();
 		$('#saveinventory').show();
-
-
 	},
 	constructInventory: function(){
 		var content = '';
-		var action 	= '<button type="button" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i><span class="hidden-xs"> </span> </button> ';
-      		action += '<button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
+
+		// var action 	= '<button type="button" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i><span class="hidden-xs"> </span> </button> ';
+      	var action = '<button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
    		
-   		var irr = $('#inventory_irr_number').val();
-   		if(irr.trim()!=""){
-   			irr +="-";
-   		}
+   		// var irr = $('#inventory_irr_number').val();
+   		// if(irr.trim()!=""){
+   		// 	irr +="-";
+   		// }
 
 		$.each(inventory, function( index, value ) {
 			content +='<tr data-key="'+index+'">';
-				content +='<td>'+irr+value.pcid+'</td>';
-				content +='<td>'+value.item_no+'</td>';
-				content +='<td>'+value.material_desc+'</td>';
-				content +='<td class="numeric">'+value.qty+'</td>';
-				content +='<td>'+value.uom+'</td>';
+				content +='<td>'+value.stock_no+'</td>';
+				content +='<td>'+value.description+'</td>';
+				content +='<td class="numeric">'+value.pieces+'</td>';
+				content +='<td class="numeric">'+value.box+'</td>';
+				content +='<td class="numeric">'+value.carton+'</td>';
+				content +='<td class="numeric">'+value.cbm+'</td>';
+				content +='<td class="numeric">'+value.total_cbm+'</td>';
 				content +='<td>'+value.batch_code+'</td>';
 				content +='<td>'+value.exp_date+'</td>';
-				content +='<td class="numeric">'+value.cbm+'</td>';
 				content +='<td>'+action+'</td>';
 			content +='</tr>';
 		});
@@ -476,13 +497,21 @@ var shipment = {
 	},
 	clearInventory: function(){
 			$('.inv_form input[type="text"], .inv_form input[type="number"]').val('');
-			$('.inv_form input[type="checkbox"]').prop('checked', false);
+			// $('.inv_form input[type="checkbox"]').prop('checked', false);
 			$('.inv_form .has-error').removeClass('has-error');
 			$('.inventory_table_container').removeClass('has-error-container');
+			$('#inventory-list input').val('');			
 			inventory = [];
 			shipment.constructInventory();
+			shipment.getrefno();
+			shipment.getitemmasterfile();
+			$('#inventory_request_date').val(datetoday);
+			$('#inventory_booked_by').val(userfullname);
+			$('[col="stock_no"]').val('');
+			$('[col="stock_no"]').trigger("chosen:updated");
+
 	},
-	saveInventory: function(){
+	saveInventory: function(posted=1){
 
 		var inv = createPostData('inv_form');
 
@@ -493,10 +522,25 @@ var shipment = {
 			$('.inventory_table_container').removeClass('has-error-container');
 			toastr["error"](inv['error']);
 		}else{
-			$('.inventory_table_container').removeClass('has-error-container');
-			$('#inventory_modal').modal('hide');
-			shipment.addShipment();			
-		}
+
+			$('#saveinventory').addClass('disabled');
+			$('#saveinventory i').removeClass('hide');
+    		$.post("backstage/inbound/save/"+posted, {d:inv['data'], inventory:inventory},function(data){
+    			if(data.status==200){
+						toastr["success"]('Successfully added.');
+						$('#inventory_modal').modal('hide');
+						$('#saveinventory').removeClass('disabled');
+						$('#saveinventory i').addClass('hide');
+						getInbound();
+				}else{
+					toastr["error"]('Network error!<br> Please try again.');	
+				}
+    		}).fail(function(){
+				toastr["error"]('Error.');
+				$('#saveinventory').removeClass('disabled');
+				$('#saveinventory i').addClass('hide');
+			});
+    	}
 
 	},
 	addShipment: function(){
@@ -550,29 +594,40 @@ var shipment = {
 			});
 		}
 	},
-	getpalletcode: function(t){
+	getpalletcode: function(){
 			$.post("backstage/inbound/getpallet/", {},function(data){
-				
 					$('#pallet_code_shipment').val(data);
-				
+			});
+	},
+	getrefno: function(t){
+			$.post("backstage/inbound/getrefno/", {},function(data){
+					$('#inventory_inbound_no').val('IB'+data);
 			});
 	},
 	getitemmasterfile: function(t){
 			$.post("backstage/inbound/getitemmasterfile/", {},function(data){
 				var content = "<option></option>";
 				$.each(data.data, function( index, value ) {
-					content += "<option value='"+value.item_id+"' cbm=\""+value.cbm+"\" uom=\""+value.uom+"\">"+value.item_id+"</option>";
+					content += "<option value='"+value.item_id+"' item_description=\""+value.item_description+"\" cbm=\""+value.cbm+"\" uom=\""+value.uom+"\" pieces=\""+value.pieces+"\" carton=\""+value.carton+"\" box=\""+value.box+"\">"+value.stock_no+"</option>";
 				});
-				$('select[col="material_desc"]').html(content);
-				$('select[col="material_desc"]').change(function(){
+				$('select[col="stock_no"]').html(content);
+				$('select[col="stock_no"]').change(function(){
 					var cbm = $(this).find(':selected').attr('cbm'); 
 					var uom = $(this).find(':selected').attr('uom'); 
+					var box = $(this).find(':selected').attr('box'); 
+					var carton = $(this).find(':selected').attr('carton'); 
+					var pieces = $(this).find(':selected').attr('pieces'); 
+					var item_description = $(this).find(':selected').attr('item_description'); 
 					$('input[col="uom"]').val(uom);
+					$('input[col="pieces"]').val(pieces);
+					$('input[col="description"]').val(item_description);
+					$('input[col="box"]').val(item_description);
+					$('input[col="carton"]').val(item_description);
+					$('input[col="total_cbm"]').val(cbm*pieces);
 					$('input[col="cbm"]').val(cbm+'m³');
-					$('input[col="qty"]').val(1);
 				});
 
-				$('select[col="material_desc"]').chosen({search_contains: true});
+				$('select[col="stock_no"]').chosen({search_contains: true});
 				
 			});
 	},
@@ -584,8 +639,7 @@ var shipment = {
 	}
 
 
-
 }
-
 shipment.init();
 search.init();
+shipment.getitemmasterfile();

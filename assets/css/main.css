@@ -23,7 +23,9 @@
 }
 
 
-
+#tabs ul li a{
+text-transform: uppercase;
+}
 #myaccountmodal .modal-dialog{
     width: 450px;
 }
@@ -406,4 +408,8 @@ input[type="number"]{
 }
 .uppercase{
     text-transform: uppercase;
+}
+
+.number_form{
+   text-align: right; 
 }

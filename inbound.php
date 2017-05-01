@@ -11,7 +11,7 @@ require_once('config/add_shipment_forms.php');
 		$css = [bowerpath('toastr/toastr.min.css'),
 				bowerpath('eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'),
 				bowerpath('chosen/chosen.css'),
-				stylessheet('warehouse.css'),
+				// stylessheet('warehouse.css'),
 				stylessheet('inbound.css'),
 				];
 		
@@ -19,8 +19,16 @@ require_once('config/add_shipment_forms.php');
 		require_once('config/warehouse.php');
 		$warehouselinks = CreateWarehouseLinks($config['warehouse_links']);
 
+
+		$inbound_status = json_encode($config['inbound_status']);
+		$cbl_status = json_encode($config['cbl_status']);
+
 ?>
 
+<script>
+var inbound_status 	= <?php echo $inbound_status; ?>;
+var cbl_status 		= <?php echo $cbl_status; ?>;
+</script>
 
 
 
@@ -39,68 +47,40 @@ require_once('config/add_shipment_forms.php');
 				  <div id="<?php echo $warehouselinks['selected']; ?>">
 
 
-<h2>Inbound Shipment</h2>
+<h2>Book Inbound Shipment</h2>
 <div class="search-filter row" >
 	<br>
 	<div class="col-sm-4 searchdata">	
 
-			<input name="billoflandingno" id="search_bill_of_lading" placeholder="Bill of Lading No." col="bill_of_lading" type="text" class="form-control search-text not_mandatory">
-			<input name="customername"  id="search_customer_name"  placeholder="Customer Name" type="text"  col="customer_name" class="form-control search-text not_mandatory">
-			<input name="deliveryreceipt"  id="search_delivery_receipt"  col="delivery_receipt" placeholder="Delivery Receipt" type="text" class="form-control search-text not_mandatory">
+			<input name="billoflandingno" id="search_inbound_ref_no" placeholder="Inbound Ref No." col="inbound_no" type="text" class="form-control search-text not_mandatory">
+			<input name="customername"  id="search_booked_by"  placeholder="Booked By" type="text"  col="booked_by" class="form-control search-text not_mandatory">
 
 	</div>
 	<div class="col-sm-4 searchdata">	
-
-				<input name="search_pallet_code"  id="search_pallet_code"  col="pallet_code" placeholder="Pallet Code" type="text" class="form-control search-text not_mandatory">
-				
-				<select class="form-control chosen-select not_mandatory" id="s-type" col="storage_type" data-placeholder="Storage Type">
-							<option><option>
-						<?php
-							foreach($config['storage_type'] as $key=>$tos){
-								if($key!=''){
-									echo "<option value='$key'>$tos<option>";									
-								}
-							}
-						?>
-				</select>
-
-				<select class="form-control chosen-select not_mandatory" id="si-type" col="inventory_type" data-placeholder="Sub-inventory Location Type">
-				 		<option><option>
-						<?php
-							foreach($config['subinventory_type'] as $key=>$tos){
-								if($key!=''){
-									echo "<option value='$key'>$tos<option>";									
-								}
-							}
-						?>
-				</select>
-
-		
-
-	</div>
-	<div class="col-sm-4 searchdata">	
-
 
 			    <div class='input-group date' id='exdate_group'>
-			        <input type='text' class="form-control not_mandatory" col="ex_date" name="exdate" id="exdate" placeholder="Expiration Date"/>
+			        <input type='text' class="form-control not_mandatory" col="req_date_from" name="req_date_from" id="req_date_from" placeholder="Request Date From"/>
 			        <span class="input-group-addon">
 			            <span class="fa fa-calendar"></span>
 			        </span>
 			    </div>
 
 			    <div class='input-group date' id='endate_group'>
-			        <input type='text' class="form-control not_mandatory" col="en_date" name="endate" id="endate" placeholder="Entry Date"/>
+			        <input type='text' class="form-control not_mandatory" col="req_date_to" name="req_date_to" id="req_date_to" placeholder="Request Date To"/>
 			        <span class="input-group-addon">
 			            <span class="fa fa-calendar"></span>
 			        </span>
 			    </div>
-	
-			    <div class='input-group date' id='pudate_group'>
-			        <input type='text' class="form-control not_mandatory" col="pu_date" name="pudate" id="pudate" placeholder="Pickup Date" />
-			        <span class="input-group-addon">
-			            <span class="fa fa-calendar"></span>
-			        </span>
-			    </div>
+
+		
+
+	</div>
+	<div class="col-sm-4 searchdata">	
+
+		<select class="form-control chosen-select not_mandatory" id="search-status" col="status">
+					<option value="">Select Status</option>
+					<?php echo htmloption($config['inbound_status']);?>
+		</select>
 	
 
 	</div>
@@ -120,24 +100,19 @@ require_once('config/add_shipment_forms.php');
 </div>
 	<div>
 		<!-- <button id="addnewshipment" class="button-class custombutton"  data-toggle="modal" data-target="#add_shipment" >Add Shipment</button> -->
-		<button id="addnewshipment" class="button-class custombutton" >Add Shipment</button>
+		<button id="addnewshipment" class="button-class custombutton" >Book Inbound Shipment</button>
 	</div>
 
 
 <table class="table table-bordered  table-striped" id="inbound-list">
   <thead>
     <tr>
-      <th>Bill of<br>Landing No.</th>
-      <th>Customer Name</th>
-      <th>Deliver Receipt</th>
-      <th>Pallet Code</th>
-      <th>Quantity</th>
-      <!-- <th>Description</th> -->
-      <th>Storage<br>Type</th>
-      <th>Sub-inventory<br>Location Type</th>
-      <!-- <th>Expiration<br>Date</th>
-      <th>Entry<br>Date</th>
-      <th>Pick Up<br>Date</th> -->
+      <?php if($user_type==10) {?><th><input type="checkbox" value="all" id="checkall"></th><?php }?>
+      <th>Inbound Ref No.</th>
+      <th>Booked by</th>
+      <th>Estimated Date/Time of Arrival</th>
+      <th>Request Date</th>
+      <th>Status</th>
       <th>Action</th>
     </tr>
   </thead>
@@ -212,32 +187,35 @@ require_once('config/add_shipment_forms.php');
 	
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h4 class="modal-title">Inbound/Receiving Report</h4>
+			<h4 class="modal-title">Book Inbound Shipment</h4>
 		</div>
 
 		<div class="modal-body">
 <?php
 			foreach($config['inventory'] as $forms){
-				echo '<div class="col-sm-4 inv_form" id="" style="padding-left: 0px;">';
+				echo '<div class="col-sm-6 inv_form" id="" style="padding-left: 0px;">';
 				echo construct_form($forms);				
 				echo '</div>';
 			}
 
 ?>
-		<div class="inventory_label">Inbound/Receiving Report</div>
+		<div class="links"><a>Download Template</a> <a>Upload File</a></div>
+
+		<div class="inventory_label hide">Inbound/Receiving Report</div>
 
 <div class="inventory_table_container">
 <table class="table table-bordered  table-striped" id="inventory-list">
   <thead>
     <tr>
-      <th>PC ID #</th>
-      <th>Item No.</th>
-      <th>Material Description</th>
-      <th>QTY</th>
-      <th>UOM</th>
-      <th>Batch Code</th>
-      <th>Expiry Date</th>
+      <th>Stock No.</th>
+      <th>Description</th>
+      <th>Pieces</th>
+      <th>Boxes</th>
+      <th>Cartons</th>
       <th>CBM</th>
+      <th>Total CBM</th>
+      <th>Batch Code</th>
+      <th>Expiration Date</th>
       <th>Action</th>
     </tr>
   </thead>
@@ -246,25 +224,15 @@ require_once('config/add_shipment_forms.php');
   </tbody>
   <tfoot class="add_inventory">
     <tr>
-      <td><input type="number" col="pcid"></td>
-      <td><input type="number" col="item_no"></td>
-      <td>
-      <!-- <input type="text" col="material_desc"> -->
-		<select col="material_desc">
-		</select> 
-
-      </td>
-      <td><input type="number" col="qty" min="1"></td>
-      <td><input type="text" col="uom" disabled="disabled">
-      	<!-- <select col="uom">
-      		<?php
-      			// echo htmloption(array_merge([''=>'Select UOM'],$config['unit_of_measurement']));
-      		?>
-      	</select> -->
-      </td>
-      <td><input type="number" col="batch_code"></td>
+      <td><select col="stock_no"></select> </td>
+      <td><input type="text" col="description" style="text-align:center;" disabled="disabled"></td>
+      <td><input type="number" col="pieces"  disabled="disabled"></td>
+      <td><input type="number" col="box"  disabled="disabled"></td>
+      <td><input type="number" col="carton"  disabled="disabled"></td>
+      <td><input type="text" col="cbm" style="text-align:right;" disabled="disabled"></td>
+      <td><input type="number" col="total_cbm" min="1"  disabled="disabled"></td>
+      <td><input type="text" col="batch_code"></td>
       <td><input type="text" col="exp_date" ></td>
-      <td><input type="text" col="cbm" disabled="disabled"></td>
       <td>
       	<button type="button" class="btn btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>
       	<button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>
@@ -276,11 +244,14 @@ require_once('config/add_shipment_forms.php');
 
 		</div>
 		<div class="modal-footer">
-		<div class="inv_form" style="float: left;"><input type="checkbox" col="maintain" value="1"> Maintain some item Batch Code and Expiry Date</div>
+		<!-- <div class="inv_form" style="float: left;"><input type="checkbox" col="maintain" value="1"> Maintain some item Batch Code and Expiry Date</div> -->
 		
-          <button type="button" class="btn btn-default" id="saveinventory">Save</button>
-          <!-- <button type="button" class="btn btn-default" id="updateinventory">Update</button> -->
-          <button type="button" class="btn btn-default" id="backinventory">Back</button>
+          <button type="button" class="btn btn-default" id="saveinventory"><i class="fa fa-circle-o-notch fa-spin hide"></i> Save</button>
+
+          <button type="button" class="btn btn-default" id="updateinventory"><i class="fa fa-circle-o-notch fa-spin hide"></i>Update</button>
+
+          <button type="button" class="btn btn-default" id="postinventory"><i class="fa fa-circle-o-notch fa-spin hide"></i> Post</button>
+
           <button type="button" class="btn btn-default" id="clearinventory">Clear</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>

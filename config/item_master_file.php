@@ -11,11 +11,12 @@ $config['inventory'][] = [
 								['type' 			=> 'normal',
 								'label'				=> 'Item ID',
 								'parent_class' 		=> 'form-group col-sm-12',
-								'subparent_class' 	=> 'col-sm-8',
+								'subparent_class' 	=> 'col-sm-6',
 								'form_class'		=> 'form-control',
 								'col'				=> 'item_id',
 								'id'				=> 'additional-item_id',
-								],
+								'extra'				=> '<label class="extra-checkbox"><input type="checkbox"  col="non_sku" id="add-non_sku" class="form-control">Non-SKU</label>'
+								],					
 
 								['type' 			=> 'input',
 								'label'				=> 'Stock No.',
@@ -26,7 +27,7 @@ $config['inventory'][] = [
 								'form_class'		=> 'form-control',
 								],
 
-								['type' 			=> 'number',
+								['type' 			=> 'input',
 								'label'				=> 'Bar Code',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -36,7 +37,7 @@ $config['inventory'][] = [
 								],
 
 
-								['type' 			=> 'number',
+								['type' 			=> 'input',
 								'label'				=> 'Case Bar Code',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -117,9 +118,9 @@ $config['packaging_details'][] = [
 								'subparent_class' 	=> 'col-sm-6',
 								'id'				=> 'additional-uom1',
 								'col'				=> 'uom_1',
-								'form_class'		=> 'form-control uom-select',
+								'form_class'		=> 'form-control uom-select not_mandatory',
 								'options'			=> array_merge([''=>'Select UOM 1'],$config['unit_of_measurement']),
-								'extra'				=> '<input type="number" min=1 col="uom_qty_1" id="add-uom_1" class="form-control extra uom_1" placeholder="Qty">' 
+								'extra'				=> '<input type="number" min=1 col="uom_qty_1" id="add-uom_1" class="form-control extra uom_1 not_mandatory" placeholder="Qty">' 
 								],
 
 								['type' 			=> 'select',
@@ -128,9 +129,9 @@ $config['packaging_details'][] = [
 								'subparent_class' 	=> 'col-sm-6',
 								'id'				=> 'additional-uom2',
 								'col'				=> 'uom_2',
-								'form_class'		=> 'form-control uom-select',
+								'form_class'		=> 'form-control uom-select not_mandatory',
 								'options'			=> array_merge([''=>'Select UOM 2'],$config['unit_of_measurement_2']),
-								'extra'				=> '<input type="number" min=1 col="uom_qty_2" id="add-uom_2" class="form-control extra uom_2" placeholder="Qty">' 
+								'extra'				=> '<input type="number" min=1 col="uom_qty_2" id="add-uom_2" class="form-control extra uom_2 not_mandatory" placeholder="Qty">' 
 								],
 
 								['type' 			=> 'select',
@@ -139,9 +140,26 @@ $config['packaging_details'][] = [
 								'subparent_class' 	=> 'col-sm-6',
 								'id'				=> 'additional-uom3',
 								'col'				=> 'uom_3',
-								'form_class'		=> 'form-control uom-select',
+								'form_class'		=> 'form-control uom-select not_mandatory',
 								'options'			=> array_merge([''=>'Select UOM 3'],$config['unit_of_measurement_3']),
-								'extra'				=> '<input type="number" min=1 col="uom_qty_3" id="add-uom_3" class="form-control extra uom_3" placeholder="Qty">' 
+								'extra'				=> '<input type="number" min=1 col="uom_qty_3" id="add-uom_3" class="form-control extra uom_3 not_mandatory" placeholder="Qty">' 
+								],
+
+
+								['type'		 		=> 'number',
+								'label'				=> 'Carton per Pallet',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'id'				=> 'additional-carton_per_pallet',
+								'col'				=> 'carton_per_pallet',
+								'form_class'		=> 'form-control',
+								],
+
+								['type'		 		=> 'number',
+								'label'				=> 'Share Pallet Group',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'id'				=> 'additional-share_pallet_group',
+								'col'				=> 'share_pallet_group',
+								'form_class'		=> 'form-control',
 								],
 
 								['type'		 		=> 'number',
@@ -149,14 +167,6 @@ $config['packaging_details'][] = [
 								'parent_class' 		=> 'form-group col-sm-12',
 								'id'				=> 'additional-unit_cost',
 								'col'				=> 'unit_cost',
-								'form_class'		=> 'form-control',
-								],
-
-								['type'		 		=> 'number',
-								'label'				=> 'Unit Price',
-								'parent_class' 		=> 'form-group col-sm-12',
-								'id'				=> 'additional-unit_price',
-								'col'				=> 'unit_price',
 								'form_class'		=> 'form-control',
 								],
 
@@ -204,7 +214,24 @@ $config['packaging_details'][] = [
 								'col'				=> 'weight',
 								'extra'				=> 'Kg.',
 								'form_class'		=> 'form-control',
-								]
+								],
+
+								['type'		 		=> 'normal',
+								'label'				=> 'CBM',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-6',
+								'id'				=> 'additional-cbm',
+								'col'				=> 'cbm',
+								'form_class'		=> 'form-control number_form',
+								],
+
+								['type'		 		=> 'number',
+								'label'				=> 'Unit Price',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'id'				=> 'additional-unit_price',
+								'col'				=> 'unit_price',
+								'form_class'		=> 'form-control',
+								],								
 
 							];
 

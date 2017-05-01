@@ -62,3 +62,22 @@ input[type="number"].extra{
     text-transform: uppercase;
     margin: 17px;   
 }
+
+.extra-checkbox{
+    white-space: nowrap;
+    margin-top: 5px;
+    cursor: pointer;
+     -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+}
+.extra-checkbox input[type="checkbox"]{
+    height: 15px;
+    float: left;
+    margin: 0px;
+    width: 12px;
+    padding: 0px;
+}

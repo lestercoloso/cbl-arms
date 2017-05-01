@@ -345,6 +345,17 @@ input[col="cbm"], input[col="qty"]{
 }
 
 #inventory-list .chosen-container{
-    width: 100% !important;
+    width: 100px !important;
     font-size: 11px;
+}
+
+.links a{
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 20px;
+}
+.links{
+    margin-bottom: 20px;
+        float: left;
+    width: 100%;
 }

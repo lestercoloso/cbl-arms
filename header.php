@@ -33,7 +33,9 @@ session_start();
  $lname			= $_SESSION['acclname'];
  $mobile		= $_SESSION['accmobile'];
  $email		    = $_SESSION['accemail'];
- $usrname		= $_SESSION['accusrname'];
+ $usrname   = $_SESSION['accusrname'];
+ $fullname    = $_SESSION['profilename'];
+ $user_type		= $_SESSION['user_type'];
 
  require_once('config/main.php');
  require_once('config/links.php');
@@ -41,6 +43,8 @@ session_start();
 ?>
 
 <script>
+  var user_type = '<?php echo $user_type;?>';
+  var userfullname = '<?php echo $fullname;?>';
 	var datetoday = '<?php echo date('m/d/Y');?>';
 	var timenow = '<?php echo date('h:i A');?>';
 

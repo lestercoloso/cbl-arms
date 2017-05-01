@@ -62,12 +62,50 @@ var item = {
 				$('.'+un).val(1);	
 			}
 			
-		});					
+		});			
+
+
+		$("#add-non_sku").change(function() {
+		        item.checknonsku();	    
+		});
+
+		$("#additional-length, #additional-width, #additional-height").bind('keyup',function() {
+		        item.cbmcomputation();	    
+		});
+
 
 		item.getlist();
 
 
 	},
+
+cbmcomputation: function(){
+	var l = $('#additional-length').val();
+	var w = $('#additional-width').val();
+	var h = $('#additional-height').val();
+	var cbm = (l*w*h)/1000000;
+	$('#additional-cbm').val(cbm);
+},
+
+checknonsku: function(){
+	var nonsku = $('#additional-item_id').val();
+	var key = $('#add-non_sku').is(':checked');
+	if(key) {
+		$('#additional-stock_no').val(nonsku);
+		$('#additional-bar_code').val(nonsku);
+		$('#additional-casebar_code').val(nonsku);
+		$('#additional-bar_code').attr('disabled', 'disabled');
+		$('#additional-casebar_code').attr('disabled', 'disabled');
+		$('#additional-stock_no').attr('disabled', 'disabled');
+	}else{
+		$('#additional-bar_code').attr('disabled', false);
+		$('#additional-casebar_code').attr('disabled', false);
+		$('#additional-stock_no').attr('disabled', false);
+	}
+
+	
+
+},
 
 uomsettings: function(){
 	$('#create_additional').modal();
@@ -100,18 +138,26 @@ edit: function(id){
 	$('#updatecreate').show();
 	$('#savecreate').hide();
 	$('#clearecreate').hide();
+	$('#add-non_sku').prop('checked', false);
 	$.post("backstage/itemmasterfile/itemdetails/"+id, {},function(data){
 		updateid = data.id;
 		$.each(data, function( index, value ) {
 			$('#create_modal [col="'+index+'"]').val(value);
 		});
+		if(data.non_sku){
+			$('#add-non_sku').prop('checked', true);
+		}
+		 item.checknonsku();
 	});
 
 
 },
 
 clear: function(){
-	$('#create_modal input, #create_modal select').val('');
+	$('#create_modal input[type="text"], #create_modal input[type="number"], #create_modal select').val('');
+	$('#add-non_sku').prop('checked', false);
+	remove_error_tag('createform');
+	item.checknonsku();
 	item.itemno();
 },
 

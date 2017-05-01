@@ -23,22 +23,20 @@ class Warehouse{
 
 		$data = $_POST['d'];
 		$data['storage'] = $_POST['t'];
-
+		$_POST['p'] = !empty($_POST['p']) ? $_POST['p'] : [];
 		if($this->db->insert("storage",$data)){
 			$return['status'] = 200;
 			$storage_id = $this->db->insert_id();
 			$return['id'] = $storage_id;
 
-			$this->db->delete("storage","storage_id=$storage_id");
-			foreach ($_POST['p'] as $pval) {
-				$pval['storage_id'] = $storage_id;
-				$this->db->insert("pallet_position",$pval);
-			}			
-
-			foreach ($_POST['pt'] as $ptval) {
-				$ptval['storage_id'] = $storage_id;
-				$this->db->insert("pallet_position_type",$ptval);
+			if($_POST['p']){
+				$this->db->delete("pallet_position","storage_id=$storage_id");
+				foreach ($_POST['p'] as $pval) {
+					$pval['storage_id'] = $storage_id;
+					$this->db->insert("pallet_position",$pval);
+				}					
 			}
+		
 		}
 		jdie($return);
 	}	
@@ -63,13 +61,18 @@ class Warehouse{
 
 	}
 	public function saveOrder(){
-		$data = json_decode($_POST['d'], TRUE);
-		// pdie($data);
-		$return['status'] = 100;
+		$data = $_POST['d'];
+		$newdata = [];
+		foreach ($data as $v) {
+			$id = explode('-', $v['id']);
+			$newdata[$id[0].'-'.$id[1]][$id[2]]['style'] = $v['style']; 
+		}
 
-		foreach($data as $key=>$d){
+		$return['status'] = 100;
+		foreach($newdata as $key=>$d){
 			$key = explode('-', $key);
-			if($this->db->update($key[0].'_storage', ['style'=>$d], 'id='.$key[1])){
+			$style = json_encode($d);
+			if($this->db->update('storage', ['style'=>$style], 'id='.$key[1])){
 				$return['status'] = 200;
 			}
 		}
@@ -77,6 +80,16 @@ class Warehouse{
 
 		jdie($return);
 
+	}
+
+	public function selectstorage($s, $st){
+
+		$this->db->where_search(['location'=>$s]);
+		$this->db->where_search(['storage_type'=>$st]);
+		$where = $this->db->where_search(['status'=>1]);
+		$sql = "select * from storage $where";
+		$result = $this->db->select($sql);
+		jdie($result);
 	}
 
 	public function getBoxes($code='', $type='', $level='', $wscale = 1, $scale = 1){

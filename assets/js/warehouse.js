@@ -1,9 +1,10 @@
 	var adjust = 3;
 	var adjust2 = 3;
 
-var rack_type 				= 'selective';
+var rack_type 				= 'drive-in';
 var pallet_position 		= [];
 var pallet_position_type 	= [];
+var storage = [];
 
 function addStorage(){
 	$( "#add_storage" ).modal();
@@ -73,10 +74,12 @@ function addStorage(){
 	}
 
 	function cleardata(){
+		pallet_position = [];
 		$('#add_storage input[type="number"]').val('');
 		$('#add_storage input[type="checkbox"]').prop('checked', false); 
 		$('#add_storage .bay select, #add_storage .rack select').val('');
 		$('div').removeClass('has-error');
+		racktype();
 	}
 
 	function checkifexist(type){
@@ -263,19 +266,28 @@ function cancelShelves(){
 function saveOrder(){
 		var array = new Object();	
 		
-		$('.rackStorage, .bayStorage').each(function( data ) {
-			var style = $(this).attr('style');
-			style = style.replace(' ', "");
-			style = style.replace(/(height:([0-9]+)px;)/i, "");
-			style = style.replace(/(width:([0-9]+)px;)/i, "");
-			style = style.replace(/(height: ([0-9]+)px;)|(width: ([0-9]+)px;)/i, "");
-			array[this.id] = style;
+		// $('.rackStorage, .bayStorage').each(function( data ) {
+		// 	var style = $(this).attr('style');
+		// 	style = style.replace(' ', "");
+		// 	style = style.replace(/(height:([0-9]+)px;)/i, "");
+		// 	style = style.replace(/(width:([0-9]+)px;)/i, "");
+		// 	style = style.replace(/(height: ([0-9]+)px;)|(width: ([0-9]+)px;)/i, "");
+		// 	array[this.id] = style;
+		// });
+
+		var d = [];
+
+		$('.wh_free_roam table').each(function( index ) {
+		  d.push({ id: this.id, style: $(this).attr('style')});
 		});
-		var data = JSON.stringify(array);
-		$.post("backstage/warehouse/saveOrder/", {d:data},function(data){
+
+		// console.log(d);
+		
+		// var data = JSON.stringify(array);
+		$.post("backstage/warehouse/saveOrder/", {d:d},function(data){
 			if(data.status==200){
 				toastr["success"]("Successfully saved.");	
-				getStorage();
+				selectstorage();
 			}else{
 				toastr["error"]("Failed to save.");	
 			}
@@ -420,15 +432,15 @@ function openpalletposition(t){
 	$('#additional_modal [col="rack_level"]').html(option_content2);
 
 
-	if($('#create-wing [col="wing"]').is(':checked')){
-		$('#additional_modal [col="wing"]').parent().parent().show();
-		$('.lrw').removeClass('hide');
-		$('#additional_modal [col="wing"]').removeClass('not_mandatory');
-	}else{
-		$('#additional_modal [col="wing"]').parent().parent().hide();
-		$('.lrw').addClass('hide');
-		$('#additional_modal [col="wing"]').addClass('not_mandatory');
-	}
+	// if($('#create-wing [col="wing"]').is(':checked')){
+	// 	$('#additional_modal [col="wing"]').parent().parent().show();
+	// 	$('.lrw').removeClass('hide');
+	// 	$('#additional_modal [col="wing"]').removeClass('not_mandatory');
+	// }else{
+	// 	$('#additional_modal [col="wing"]').parent().parent().hide();
+	// 	$('.lrw').addClass('hide');
+	// 	$('#additional_modal [col="wing"]').addClass('not_mandatory');
+	// }
 
 
 	if(data['error']){
@@ -452,28 +464,18 @@ function openpalletposition(t){
 
 function generatelocationcode(){
 	var first 	= 'B'+$('#create-block').val();
-	var second 	= 'L'+pad($('.appt [col="rack_level"]').val(), 2, '0');
-	var third 	= 'S'+$('.appt [col="rack_section"]').val();
-	
-	var fourth = '';
-	if($('.appt [col="pallet_position"]').val()){
-		var fourth 	= 'P'+$('.appt [col="pallet_position"]').val();		
-	}
-
-	var fifth = '';
-	if($('.appt [col="wing"]').val()){
-		var fifth 	= '-'+$('.appt [col="wing"]').val()+'W';		
-	}
-
-	$('#appt-location_code').val(first+second+third+fourth+fifth);
+	var second 	= $('.appt [col="rack_location"]').val().toUpperCase();
+	var third 	= pad($('.appt [col="rack_section"]').val(), 2, '0');
+	var fourth 	= pad($('.appt [col="rack_level"]').val(), 2, '0');
+	$('#appt-bin_location').val(first+second+third+fourth);
 }
 
 function racktype(){
 	var selected_rack_type = $('#rack-rack_type').val();
  	 if(rack_type==selected_rack_type.toLowerCase()){
- 	 	$('#appbtn').removeClass('no_access');
+ 	 	$('#apptbtn').removeClass('no_access');
  	 }else{
- 	 	$('#appbtn').addClass('no_access');
+ 	 	$('#apptbtn').addClass('no_access');
  	 }
 }
 
@@ -488,20 +490,19 @@ function constructpalletposition(){
 	for (v in pallet_position) {
 		if(pallet_position[v].rack_section){
 			num +=1;
-			content += '<tr data-key="'+v+'"><td>'+pallet_position[v].rack_section+'</td>';
+			content += '<tr data-key="'+v+'">';
+			content += '<td>'+pallet_position[v].bin_location+'</td>';
+			content += '<td>'+pallet_position[v].rack_location+'</td>';
+			content += '<td>'+pallet_position[v].rack_section+'</td>';
 			content += '<td>'+pallet_position[v].rack_level+'</td>';
-			content += '<td>'+pallet_position[v].pallet_position+'</td>';
-
-			if($('#create-wing [col="wing"]').is(':checked')){
-			content += '<td>'+pallet_position[v].wing+'</td>';
-			}
+			content += '<td>'+pallet_position[v].type+'</td>';
 			content += '<td><i class="fa fa-times-circle"></i></td></tr>';	
 		}
 	};
 
-	if(num==0){
-		$('#apptbtn').addClass('no_access');
-	}
+	// if(num==0){
+	// 	$('#apptbtn').addClass('no_access');
+	// }
 
 	$('#pallet_position_table tbody').html(content);
 	$('#pallet_position_table i').click(function(){
@@ -512,54 +513,60 @@ function constructpalletposition(){
 function saveadditional(){
 	// $('#additional_modal').modal('close');
 
-	if($('.app').is(':visible')){
-		var err = createPostData('app');	
+	// if($('.appt').is(':visible')){
+		var err = createPostData('appt');	
 		if(!err['error']){
 			var data = err['data'];
-			var tosave = data['rack_level']+'-'+data['rack_section']+'-'+data['wing'];
+			var tosave = data['rack_level']+'-'+data['rack_section']+'-'+data['rack_location'];
 
 			if(pallet_position[tosave]){
 				if(confirm("Already exist.\nDo you want to overwrite it?")){
 					pallet_position[tosave] = data;
-					$('#additional_modal').modal('hide');
-					toastr["success"]('Successfully Added.');
-					$('#apptbtn').removeClass('no_access');
+					// $('#additional_modal').modal('hide');
+					toastr["success"]('Successfully Overwrited.');
+					clearadditional();
+					constructpalletposition();
+					// $('#apptbtn').removeClass('no_access');
 
 				}
 			}else{
 					pallet_position[tosave] = data;
-					$('#additional_modal').modal('hide');
+					// $('#additional_modal').modal('hide');
 					toastr["success"]('Successfully Added.');
-					$('#apptbtn').removeClass('no_access');
+					clearadditional();
+					constructpalletposition();					
+					// $('#apptbtn').removeClass('no_access');
 			}
+
 
 		}else{
 			toastr["error"](err['error']);
 		}
-	}else{
-		var err = createPostData('appt');	
-		if(!err['error']){
-			var data = err['data'];
-			var tosave = data['rack_level']+'-'+data['rack_section']+'-'+data['wing']+'-'+data['pallet_position'];
+	// }else{
+	// 	var err = createPostData('appt');	
+	// 	if(!err['error']){
+	// 		var data = err['data'];
+	// 		var tosave = data['rack_level']+'-'+data['rack_section']+'-'+data['wing']+'-'+data['pallet_position'];
 
-			if(pallet_position_type[tosave]){
-				if(confirm("Already exist.\nDo you want to overwrite it?")){
-					pallet_position_type[tosave] = data;
-					$('#additional_modal').modal('hide');
-					toastr["success"]('Successfully Added.');
+	// 		if(pallet_position_type[tosave]){
+	// 			if(confirm("Already exist.\nDo you want to overwrite it?")){
+	// 				pallet_position_type[tosave] = data;
+	// 				$('#additional_modal').modal('hide');
+	// 				toastr["success"]('Successfully Added.');
 
-				}
-			}else{
-					pallet_position_type[tosave] = data;
-					$('#additional_modal').modal('hide');
-					toastr["success"]('Successfully Added.');
-			}
+	// 			}
+	// 		}else{
+	// 				pallet_position_type[tosave] = data;
+	// 				$('#additional_modal').modal('hide');
+	// 				toastr["success"]('Successfully Added.');
+	// 		}
 
-		}else{
-			toastr["error"](err['error']);
-		}
-	}
+	// 	}else{
+	// 		toastr["error"](err['error']);
+	// 	}
+	// }
 }
+
 
 function removepalletposition(key){
 	if(confirm('Are you sure you want to remove this?')){
@@ -584,10 +591,10 @@ function save(){
     		$.post("backstage/warehouse/save/", {d:arr['data'], t:t, p:psave, pt: ptsave},function(data){
     			if(data.status==200){
 						toastr["success"]('Successfully added.');
-						$('#create_modal').modal('hide');
+						$('#add_storage').modal('hide');
 						$('#savestorage').removeClass('disabled');
 						$('#savestorage i').addClass('hide');
-						
+						selectstorage();
 				}else{
 					toastr["error"]('Network error!<br> Please try again.');	
 				}
@@ -628,6 +635,65 @@ var w = $('.appt [col="wing"]').val();
 	$('#appt-pallet_position').html(content);
 }
 
+
+function selectstorage(){
+	var s = $('#selectstorage').val();
+	var st = $('#selectstoragetype').val();
+	if(s!=''){
+		$.post("backstage/warehouse/selectstorage/"+s+"/"+st, {},function(data){
+			storage = data.data;
+			constructnewstorage();
+		});		
+	}else{
+		toastr["error"]('Please Select Warehouse Location.');
+	}
+
+}
+
+
+function constructnewstorage(){
+
+	var content = '';
+	var l = 0;
+	$.each(storage, function( index, v ) {
+		
+	if(v.style!=null){
+		var style = JSON.parse(v.style);			
+	}else{
+		var style = [];
+	}
+		
+		for (h = 1; h <= v.locations; h++) {
+			l++;
+			if(style[h]){
+				var styling = style[h].style;	
+			}else{
+				var styling = '';	
+			}
+			content +='<table border="1" id="'+v.location+'-'+v.id+'-'+h+'" style="'+styling+'">';
+			
+			  for (i = v.levels; i >= 1; i--) {
+				  content += '<tr>';
+					for (j = 1; j <= v.sections; j++) {
+				  		content += '<td>'+abc[l-1]+pad(j, 2, '0')+pad(i, 2, '0')+'</td>'; 	
+				  	}
+				  content += '</tr>';
+				}
+		  	content +='</table>';
+		}
+
+	});		
+
+	$('.wh_free_roam').html(content);
+	$( ".wh_free_roam table" ).draggable({ containment: "parent" });
+}
+
+
+$('#selectstorage, #selectstoragetype').change(function(){
+	selectstorage();
+});
+
+
 $('.appt [col="rack_level"], .appt [col="rack_section"], .appt [col="wing"]').change(function(){
 	generatepositiontype();
 });
@@ -640,6 +706,13 @@ $("#savestorage").click(function(){
 	save();
 });
 
+
+$("#cleardata").click(function(){
+	if(confirm('Are you sure you want to clear this data?')){
+		cleardata();		
+	}
+
+});
 
 $("#saveadditional").click(function(){
 	saveadditional();
@@ -657,7 +730,7 @@ $('.appt select').change(function(){
 	generatelocationcode();
 });
 
-$('.appt select').bind('keyup keydown',function(){
+$('.appt input').bind('keyup keydown',function(){
 	generatelocationcode();
 });
 
@@ -703,7 +776,7 @@ $('#saveOrder').click(function(){
 });
 
 $('#cancelOrderStorage').click(function(){
-	rearrangeshelves();
+	constructnewstorage();
 });
 
 

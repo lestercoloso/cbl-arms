@@ -103,14 +103,14 @@ $version =rand();
 				  		<div class="wh_header_option">
 				  			<div class="wh_select"> 
 				  			<span>Warehouse Location :</span> 
-				  			<select class="form-control">
-				  				<option>Select Warehouse Location</option>
+				  			<select class="form-control" id="selectstorage">
+				  				<option value="">Select Warehouse Location</option>
 								<?php echo htmloption($config['warehouse_location_option']); ?>
 				  			</select></div>
 				  			<div class="wh_storage_type"> 
 				  			<span>Storage Type :</span> 
-				  			<select class="form-control" >
-				  				<option>Select Storage Type</option>
+				  			<select class="form-control" id="selectstoragetype">
+				  				<option value="">Select Storage Type</option>
 				  				<?php echo htmloption($config['storage_type']); ?>
 				  			</select></div>
 
@@ -120,8 +120,8 @@ $version =rand();
 
 
 
-							<div class="warehouse_border">
-							<div class="warehouse_container">
+							<div class="wh_free_roam">
+<!-- 							<div class="warehouse_container">
 								
 								<div class="warehouse_gate">
 								</div>
@@ -131,14 +131,14 @@ $version =rand();
 								<div class="area block_C"><em>Block C</em><div class="container"></div></div>
 								<div class="freezer"></div>
 
+							</div> -->
 							</div>
-							</div>
-							<div id="savewarehouse">
-								<button id="saveOrder" class="button-class custombutton" >Save</button>
-								<button id="cancelOrderStorage" class="button-class custombutton" >Cancel</button>
-							</div>
+							
 						</div>
-
+	<div id="savewarehouse">
+		<button id="saveOrder" class="button-class custombutton" >Save</button>
+		<button id="cancelOrderStorage" class="button-class custombutton" >Cancel</button>
+	</div>
 
 						<div id="shelves">
 							<div class="shelves-text">
@@ -217,8 +217,8 @@ $version =rand();
 					echo '</div>';
 				?>
 				<div class="col-sm-12 wh_form_link rack">
-					<a style="float: left;"   class="no_access" 	id="appbtn">Assign Pallet Position</a>
-					<a style="float: right;"  class="no_access"	id="apptbtn">Assign Pallet Position Type</a>
+					<a style="float: left;"   class="no_access" 	id="apptbtn">Assign Pallet Position Type</a>
+					<!-- <a style="float: right;"  class="no_access"	id="apptbtn">Assign Pallet Position Type</a> -->
 				</div>
 				</fieldset>
 			</form>
@@ -226,7 +226,7 @@ $version =rand();
 
 		 <div class="modal-footer">
           <button type="button" class="btn btn-default" id="savestorage" ><i class="fa fa-circle-o-notch fa-spin hide"></i> Save</button>
-          <button type="button" class="btn btn-default" onclick="cleardata();">Clear</button>
+          <button type="button" class="btn btn-default" id="cleardata">Clear</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
 
@@ -263,10 +263,11 @@ $version =rand();
 			<div id="pallet_position_container">
 			<table class="table table-bordered table-striped table-list" id="pallet_position_table">
 				<thead><tr>
+					<td>Bin Location</td>
+					<td>Rack Location</td>
 					<td>Rack Section</td>
 					<td>Rack Level</td>
-					<td>No. of Pallet Positon</td>
-					<td class="lrw">Wing Side</td>
+					<td>Pallet Position Type</td>
 					<td>Action</td>
 				</tr></thead>
 				<tbody>
@@ -277,7 +278,7 @@ $version =rand();
 			</form>
 		</div>
 		 <div class="modal-footer">
-          <button type="button" class="btn btn-default" id="saveadditional" >Save</button>
+          <button type="button" class="btn btn-default" id="saveadditional" >Add</button>
           <button type="button" class="btn btn-default" id="clearadditional">Clear</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>

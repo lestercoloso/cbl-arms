@@ -16,6 +16,11 @@ class ItemMasterFile{
 
 	public function save(){
 		$data = $_POST['d'];
+		if($data['non_sku']=='true'){
+			$data['non_sku'] = 1;
+		}else{
+			$data['non_sku'] = 0;
+		}
 		if($this->db->insert("item_master_file",$data)){
 			$return['status'] = 200;
 		}
@@ -62,7 +67,10 @@ class ItemMasterFile{
 			stock_no, 
 			bar_code, 
 			item_type, 
-			concat(`uom_1`, '-', `uom_qty_1`, '/', `uom_2`, '-', `uom_qty_2`, '/', `uom_3`, '-', `uom_qty_3`) as uom,
+			concat(
+		    CASE WHEN uom_qty_1 > '0' THEN concat(`uom_1`, '-', `uom_qty_1`) ELSE '' END,
+		    CASE WHEN uom_qty_2 > '0' THEN concat('/',`uom_2`, '-', `uom_qty_2`) ELSE '' END,
+		    CASE WHEN uom_qty_3 > '0' THEN concat('/',`uom_3`, '-', `uom_qty_3`) ELSE '' END) as uom,
 			item_description,
 			concat(`length`,' x ', `width`, ' x ', `height`) as dimension,
 			storage_type,			
@@ -96,7 +104,11 @@ class ItemMasterFile{
 			weight,
 			storage_type,			
 			item_description,			
+			share_pallet_group,			
+			carton_per_pallet,			
+			cbm,			
 			unit_cost,			
+			non_sku,			
 			unit_price,
 			floor_level,
 			ceiling_level,
