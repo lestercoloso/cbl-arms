@@ -46,3 +46,33 @@ CREATE TABLE `inbound_shipment_list` (
   `status` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`)
   ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+  
+  CREATE TABLE `outbound_shipment` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `outbound_no` int(10) DEFAULT NULL,
+  `estimated_arrival` datetime DEFAULT NULL,
+  `request_date` date DEFAULT NULL,
+  `booked_by` varchar(355) DEFAULT NULL,
+  `booked_by_id` int(10) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '1',
+  `cbl_status` tinyint(1) DEFAULT '1',
+  `date_created` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+  
+  
+CREATE TABLE `outbound_shipment_list` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `outbound_id` int(10) DEFAULT NULL,
+  `pieces` int(10) DEFAULT NULL,
+  `box` int(10) DEFAULT NULL,
+  `carton` int(10) DEFAULT NULL,
+  `stock_no` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `cbm` varchar(255) DEFAULT NULL,
+  `total_cbm` varchar(255) DEFAULT NULL,
+  `batch_code` varchar(255) DEFAULT NULL,
+  `exp_date` date DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '1',
+  PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;

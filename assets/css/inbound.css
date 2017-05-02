@@ -170,16 +170,29 @@ input[type="text"]{
 #add_shipment .chosen-container{margin: 0px 0 0px 0;}
 
 .inbound-search-btn{
-	    position: relative;
+        position: relative;
     bottom: 25px;
     left: 14px;
     height: 48px;
 }
 
 #inbound-list th{
-	text-align: center;
+    text-align: center;
 }
 #inbound-list{
+    font-size: 11px;
+}
+.outbound-search-btn{
+	    position: relative;
+    bottom: 25px;
+    left: 14px;
+    height: 48px;
+}
+
+#outbound-list th{
+	text-align: center;
+}
+#outbound-list{
 	font-size: 11px;
 }
 #addnewshipment{

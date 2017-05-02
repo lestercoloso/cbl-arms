@@ -164,22 +164,22 @@ class Inbound{
 	}
 
 	public function update($updateid=""){
-		$data = json_decode($_POST['d'], TRUE);
-		$data['bill_of_lading'] = (int) $data['bill_of_lading'];
-		$data['ex_date'] = save_date($data['ex_date']);
-		$data['en_date'] = save_date($data['en_date']);
-		$data['pu_date'] = save_date($data['pu_date']);
-		$data['irr'] 	 = $_POST['i'];
-
-
+		session_start();
+		$data = $_POST['d'];
+		$data['inbound_no'] 		= substr($data['inbound_no'],2);
+		$data['booked_by_id'] 		= $_SESSION['userid'];
+		// $data['status'] 			= $posted;
+		$data['estimated_arrival'] 	= date('Y-m-d G:i:s', strtotime($data['estimated_arrival']));
+		$data['request_date'] 		= date('Y-m-d', strtotime($data['request_date']));
+		
 		$return['status'] = 100;
-		if($this->db->update("inbound_list",$data, "id=$updateid")){
-	
-			$this->db->delete('irr_list', "inbound_id=$updateid");
-			foreach ($_POST['inv'] as $value) {
+		if($this->db->update("inbound_shipment",$data, "id=$updateid")){
+
+			$this->db->delete('inbound_shipment_list',"inbound_id=$updateid");
+			foreach ($_POST['inventory'] as $value) {
 				$value['inbound_id'] = $updateid;
 				$value['exp_date'] = save_date($value['exp_date']);
-				$this->db->insert("irr_list",$value);
+				$this->db->insert("inbound_shipment_list",$value);
 			}
 
 			$return['status'] = 200;
@@ -237,7 +237,7 @@ class Inbound{
 		item_description,
 		stock_no,
 		uom_qty_2 as box,
-		carton_per_pallet as carton,
+		uom_qty_1 as carton,
 		
 		(
 		CASE WHEN uom_qty_1 > '0' THEN `uom_qty_1` ELSE '1' END * 
@@ -260,6 +260,19 @@ class Inbound{
 		if($this->db->update('inbound_shipment', ['status'=>$status], "id=$id")){
 			$result['status'] = 200;
 		}
+		jdie($result);
+	}	
+
+	public function masschangestatus($status=''){
+
+		$ids = $_POST['ids'];
+		$result['status'] = 100;
+		foreach($ids  as $id){
+			if($this->db->update('inbound_shipment', ['status'=>$status], "id=$id")){
+				$result['status'] = 200;
+			}
+		}
+		
 		jdie($result);
 	}
 	

@@ -95,9 +95,7 @@ var cbl_status 		= <?php echo $cbl_status; ?>;
 
 </div>
 
-<div id="pagination-container">
-<ul class="pagination"><li class="active"><a href="#">1</a></li><li><a href="/wilson/?&amp;page=2" data-ci-pagination-page="2">2</a></li><li><a href="/wilson/?&amp;page=3" data-ci-pagination-page="3">3</a></li><li><a href="/wilson/?&amp;page=2" data-ci-pagination-page="2" rel="next">»</a></li></ul>
-</div>
+<div id="pagination-container"></div>
 	<div>
 		<!-- <button id="addnewshipment" class="button-class custombutton"  data-toggle="modal" data-target="#add_shipment" >Add Shipment</button> -->
 		<button id="addnewshipment" class="button-class custombutton" >Book Inbound Shipment</button>
@@ -124,13 +122,13 @@ var cbl_status 		= <?php echo $cbl_status; ?>;
       <td>test</td>
       <td>test</td>
       <td>test</td>
-      <td>test</td>
-      <td>test</td>
     </tr>
   </tbody>
 </table>
 
-
+<?php if($user_type==10) {?>
+<button type="button" id="masspost" class="btn btn-info"><i class="fa fa-envelope-o"></i><span class="hidden-xs"> </span> </button>
+<?php }?>
 <div id="add_shipment" class="modal fade" role="dialog">
 	<div class="modal-dialog custom-class">
 	 <div class="modal-content">

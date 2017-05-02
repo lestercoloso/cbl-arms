@@ -1,4 +1,5 @@
-var inventory = [];       
+var inventory = [];    
+var pageno = 1;  
 var updateit = '';
             $(function () {
                $('#exdate_group, #endate_group, #pudate_group, .create-date').datetimepicker({
@@ -33,7 +34,7 @@ var searchdata = "";
 
 function getInbound(page=1){
 
-
+pageno = page;
 $.post("backstage/inbound/getinboundlist/"+page, {searchdata: searchdata},function(data){
 	var content = '';
 	// console.log(data);
@@ -201,8 +202,12 @@ var shipment = {
 		$('#inventory_modal tfoot .btn-danger').click(function(){
 			$(this).parent().parent().find('input').val('');
 			$(this).parent().parent().find('select').val('');
+			$('[col="stock_no"]').trigger("chosen:updated");
 		});
 
+		$('#updateinventory').click( function(){
+			shipment.update();
+		});
 		$('#saveinventory').click( function(){
 			shipment.saveInventory();
 		});
@@ -232,6 +237,29 @@ var shipment = {
 		    $('#inbound-list tbody input[type="checkbox"]').prop('checked', checked);
 		});
 
+		$('#masspost').click(function(){
+			shipment.masschangestatus(2);
+		});
+
+    },
+    masschangestatus: function(status){
+    	var checked = 0;
+    	var ids = [];
+		$('#inbound-list tbody input[type="checkbox"]').each(function(){
+			if($(this).is(':checked')){
+		    	ids.push($(this).val());
+		    	checked = 1;
+			}
+		});
+		if(checked==0){
+			toastr["error"]('Please select at least One.');
+		}else{
+			$.post("backstage/inbound/masschangestatus/"+status, {ids:ids},function(data){
+				getInbound(pageno);
+			}).fail(function(){
+				toastr["error"]('Network error!<br> Please try again.');
+			}); 	
+		}
     },
     changestatus: function(id, status=''){
 	
@@ -320,28 +348,33 @@ var shipment = {
     },
 
     update: function(){
-		var arr = createPostData('addship');
-    	var irr = createPostData('inv_form');
-    	console.log(arr);
-    	if(arr['error']){
-    		toastr["error"](arr['error']);
-    	}else{
-    		var arr = JSON.stringify(arr['data']);
-    		var irr = JSON.stringify(irr['data']);
-    		$('#updateshipment').addClass('disabled');
-    		$('#updateshipment i').removeClass('hide');
-			$.post("backstage/inbound/update/"+updateid, {d:arr, i: irr, inv: inventory},function(data){
-				if(data.status==200){
-					toastr["success"]('Successfully updated.');
-					$('#add_shipment').modal('hide');
-					$('#updateshipment').removeClass('disabled');
-					$('#updateshipment i').addClass('hide');
-					getInbound();
+		
+		var inv = createPostData('inv_form');
+
+		if(inventory.length==0){
+			toastr["error"]('Complete the fields');
+			$('.inventory_table_container').addClass('has-error-container');
+		}else if(inv['error']!=""){
+			$('.inventory_table_container').removeClass('has-error-container');
+			toastr["error"](inv['error']);
+		}else{
+
+			$('#updateinventory').addClass('disabled');
+			$('#updateinventory i').removeClass('hide');
+    		$.post("backstage/inbound/update/"+updateid, {d:inv['data'], inventory:inventory},function(data){
+    			if(data.status==200){
+						toastr["success"]('Successfully Updated.');
+						$('#inventory_modal').modal('hide');
+						$('#updateinventory').removeClass('disabled');
+						$('#updateinventory i').addClass('hide');
+						getInbound();
+				}else{
+					toastr["error"]('Network error!<br> Please try again.');	
 				}
-			}).fail(function(){
-				toastr["error"]('Network error!<br> Please try again.');
-				$('#updateshipment').removeClass('disabled');
-				$('#updateshipment i').addClass('hide');
+    		}).fail(function(){
+				toastr["error"]('Error.');
+				$('#updateinventory').removeClass('disabled');
+				$('#updateinventory i').addClass('hide');
 			});
     	}
     },
@@ -621,8 +654,8 @@ var shipment = {
 					$('input[col="uom"]').val(uom);
 					$('input[col="pieces"]').val(pieces);
 					$('input[col="description"]').val(item_description);
-					$('input[col="box"]').val(item_description);
-					$('input[col="carton"]').val(item_description);
+					$('input[col="box"]').val(box);
+					$('input[col="carton"]').val(carton);
 					$('input[col="total_cbm"]').val(cbm*pieces);
 					$('input[col="cbm"]').val(cbm+'m³');
 				});

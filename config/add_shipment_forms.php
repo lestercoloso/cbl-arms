@@ -216,7 +216,7 @@ $config['add_shipment'][] = [
 
 
 	$config['inventory'][] = [
-								['type' 		=> 'input',
+								['type' 		=> 'normal',
 								'label'				=> 'Inbound Ref No.',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'subparent_class' 	=> 'col-sm-8',
@@ -235,6 +235,52 @@ $config['add_shipment'][] = [
 							];		
 
 $config['inventory'][] = [
+								['type' 		=> 'normal',
+								'label'				=> 'Request Date',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'inventory_request_date',
+								'col'				=> 'request_date',
+								'form_class'		=> 'form-control'
+								],
+								['type' 		=> 'normal',
+								'label'				=> 'Booked by',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'inventory_booked_by',
+								'col'				=> 'booked_by',
+								'form_class'		=> 'form-control'
+								]
+							];	
+
+	$config['outbound_inventory'][] = [
+								['type' 		=> 'normal',
+								'label'				=> 'Outbound Ref No.',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'inventory_outbound_no',
+								'col'				=> 'outbound_no',
+								'form_class'		=> 'form-control'
+								],
+
+								['type' 		=> 'input',
+								'label'				=> 'Estimated Date/<br>Time of Arrival',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'inventory_estimated_arrival',
+								'col'				=> 'estimated_arrival',
+								'form_class'		=> 'form-control'],
+							];		
+
+$config['outbound_inventory'][] = [
+								['type' 		=> 'input',
+								'label'				=> 'Shipped to',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'inventory_shipped_to',
+								'col'				=> 'shipped_to',
+								'form_class'		=> 'form-control'
+								],
 								['type' 		=> 'normal',
 								'label'				=> 'Request Date',
 								'parent_class' 		=> 'form-group col-sm-12',
