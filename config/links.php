@@ -35,15 +35,24 @@ $config['links'] = [
 					'Report' => ['link'=>''],
 					];
 
-$config['right_links']	= 	[
+
+if($user_type==10){
+	$config['right_links']	= 	[
+									'Inbound' 	=> ['link'=>'inbound'],
+									'Outbound' 	=> ['link'=>'outbound'],							
+								];
+
+}else{
+	$config['right_links']	= 	[
 								'Inbound' 	=> ['link'=>'inbound'],
-								// 'IRR' 		=> ['link'=>'irr'],
-								// 'Put Away' 	=> ['link'=>'putaway'],
+								'IRR' 		=> ['link'=>'irr'],
+								'Put Away' 	=> ['link'=>'putaway'],
 								'Outbound' 	=> ['link'=>'outbound'],
-								// 'Pick List' => ['link'=>'picklist'],
-								// 'Gate Pass' => ['link'=>'gatepass'],
-						
+								'Pick List' => ['link'=>'picklist'],
+								'Gate Pass' => ['link'=>'gatepass'],				
 							];			
+}
+
 
 $config['myaccount'] = 		[	
 								['type' 			=> 'input',

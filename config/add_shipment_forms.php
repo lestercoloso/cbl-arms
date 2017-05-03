@@ -253,6 +253,29 @@ $config['inventory'][] = [
 								]
 							];	
 
+if($user_type!=10){
+$config['inventory'][] = [
+								['type' 		=> 'input',
+								'label'				=> 'Shipped To',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'inventory_shipped_to',
+								'col'				=> 'shipped_to',
+								'form_class'		=> 'form-control'
+								],
+								['type' 		=> 'date',
+								'label'				=> 'Entry Date',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'inventory_entry_date',
+								'col'				=> 'entry_date',
+								'form_class'		=> 'form-control'
+								]
+							];	
+
+}
+
+
 	$config['outbound_inventory'][] = [
 								['type' 		=> 'normal',
 								'label'				=> 'Outbound Ref No.',

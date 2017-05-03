@@ -413,3 +413,7 @@ input[type="number"]{
 .number_form{
    text-align: right; 
 }
+
+.btn-txt{
+    font-size: 9px !important;
+}

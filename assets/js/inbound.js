@@ -24,6 +24,10 @@ var updateit = '';
             });
 
 
+if(user_type!=10){
+	$('.add_inventory').hide();
+}
+
 
 function addShipment(){
 	$('#add_shipment').modal();
@@ -43,18 +47,33 @@ $.post("backstage/inbound/getinboundlist/"+page, {searchdata: searchdata},functi
 		var action = '';
 		//cbl view
 		if(user_type==10){
-			action += '<button type="button" class="btn btn-success"><i class="fa fa-pencil"></i><span class="hidden-xs"> </span> </button>';
-			
+		
+
+			if(value.status!=5){
+				action += '<button type="button" class="btn btn-success"><i class="fa fa-pencil"></i><span class="hidden-xs"> </span> </button>';
+			}
+					
 			if(value.status==1){
 				action += ' <button type="button" class="btn btn-info"><i class="fa fa-envelope-o"></i><span class="hidden-xs"> </span> </button>';				
 			}
 			
 			action += ' <button type="button" class="btn btn-danger"><i class="fa fa-times-circle"></i><span class="hidden-xs"> </span> </button>';
 		}else{
-			action += '<button type="button" class="btn btn-success"><i class="fa fa-list-alt"></i><span class="hidden-xs"> </span> </button>';
-			action += ' <button type="button" class="btn btn-info"><i class="fa fa-upload"></i><span class="hidden-xs"> </span> </button>';			
+			// action += '<button type="button" class="btn btn-success"><i class="fa fa-list-alt"></i><span class="hidden-xs"> </span> </button>';
+		
+			if(value.status==2){
+				action += ' <button type="button" class="btn btn-info acknowledge btn-txt"> <span class="hidden-xs"> Acknowledge </span> </button>';				
+			}
+
+			if(value.status==3){
+				action += ' <button type="button" class="btn btn-info receive btn-txt"> <span class="hidden-xs"> Receive </span> </button>';				
+			}
+
+			// action += ' <button type="button" class="btn btn-info"><i class="fa fa-upload"></i><span class="hidden-xs"> </span> </button>';			
 		}
-			
+		if(value.status!=5){
+			action += ' <button type="button" class="btn btn-danger btn-txt cancel"><span class="hidden-xs"> Cancel </span> </button>';			
+		}
 		// var action = '<button type="button" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
 		// action += ' <button type="button" class="btn btn-info"><i class="fa fa-sign-out" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
 		// action += ' <button type="button" class="btn btn-danger"><i class="fa fa-times-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>';
@@ -88,7 +107,20 @@ $.post("backstage/inbound/getinboundlist/"+page, {searchdata: searchdata},functi
 		shipment.changestatus($(this).parent().parent().data('id'), '2');
 	});
 
-	$('#inbound-list .btn-danger').click(function(){
+	$('#inbound-list .acknowledge').click(function(){
+		shipment.changestatus($(this).parent().parent().data('id'), '3');
+	});
+
+	$('#inbound-list .receive').click(function(){
+		// shipment.changestatus($(this).parent().parent().data('id'), '4');
+		shipment.edit($(this).parent().parent().attr('id'));
+	});
+
+	$('#inbound-list .cancel').click(function(){
+		shipment.changestatus($(this).parent().parent().data('id'), '5');
+	});
+
+	$('#inbound-list .btn-danger .fa-times-circle').parent().click(function(){
 		shipment.delete($(this).parent().parent().data('id'));
 	});
 
@@ -264,7 +296,7 @@ var shipment = {
     changestatus: function(id, status=''){
 	
 		$.post("backstage/inbound/changestatus/"+id+"/"+status, {},function(data){
-			getInbound();
+			getInbound(pageno);
 		}).fail(function(){
 			toastr["error"]('Network error!<br> Please try again.');
 		}); 
@@ -320,6 +352,7 @@ var shipment = {
 		shipment.constructInventory();
 
 		$('#clearinventory').hide();
+		$('#postinventory').hide();
 		$('#saveinventory').hide();
 		$('#updateinventory').show();
 
@@ -492,6 +525,7 @@ var shipment = {
 		$('#updateinventory').hide();
 		$('#backinventory').hide();
 		$('#clearinventory').show();
+		$('#postinventory').show();
 		$('#saveinventory').show();
 	},
 	constructInventory: function(){
@@ -516,7 +550,17 @@ var shipment = {
 				content +='<td class="numeric">'+value.total_cbm+'</td>';
 				content +='<td>'+value.batch_code+'</td>';
 				content +='<td>'+value.exp_date+'</td>';
-				content +='<td>'+action+'</td>';
+
+				if(user_type==10){
+					content +='<td>'+action+'</td>';
+				}else{
+					content +='<td> </td>';
+					content +='<td> </td>';
+					content +='<td> </td>';
+					content +='<td> </td>';
+				}
+
+
 			content +='</tr>';
 		});
 

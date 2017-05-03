@@ -98,7 +98,8 @@ var cbl_status 		= <?php echo $cbl_status; ?>;
 <div id="pagination-container"></div>
 	<div>
 		<!-- <button id="addnewshipment" class="button-class custombutton"  data-toggle="modal" data-target="#add_shipment" >Add Shipment</button> -->
-		<button id="addnewshipment" class="button-class custombutton" >Book Inbound Shipment</button>
+		
+      <?php if($user_type==10) {?><button id="addnewshipment" class="button-class custombutton" >Book Inbound Shipment</button><?php }else{ echo "<div style='height:85px;'></div>";}?>
 	</div>
 
 
@@ -191,14 +192,21 @@ var cbl_status 		= <?php echo $cbl_status; ?>;
 		<div class="modal-body">
 <?php
 			foreach($config['inventory'] as $forms){
-				echo '<div class="col-sm-6 inv_form" id="" style="padding-left: 0px;">';
-				echo construct_form($forms);				
-				echo '</div>';
+				if($user_type!=10){
+					echo '<div class="col-sm-4 inv_form" id="" style="padding-left: 0px;">';
+					echo construct_form($forms);				
+					echo '</div>';
+				}else{
+					echo '<div class="col-sm-6 inv_form" id="" style="padding-left: 0px;">';
+					echo construct_form($forms);				
+					echo '</div>';
+				}
 			}
 
 ?>
+      <?php if($user_type==10) {?>
 		<div class="links"><a>Download Template</a> <a>Upload File</a></div>
-
+      <?php }?>
 		<div class="inventory_label hide">Inbound/Receiving Report</div>
 
 <div class="inventory_table_container">
@@ -214,7 +222,15 @@ var cbl_status 		= <?php echo $cbl_status; ?>;
       <th>Total CBM</th>
       <th>Batch Code</th>
       <th>Expiration Date</th>
+
+      <?php if($user_type!=10) {?>
+		<th>Warehouse Status</th>      
+		<th>Warehouse Storage</th>      
+		<th>Storage Type</th>        
+		<th>Pallet Position Code</th>        
+      <?php }else{?>
       <th>Action</th>
+      <?php }?>
     </tr>
   </thead>
   <tbody>
@@ -223,13 +239,13 @@ var cbl_status 		= <?php echo $cbl_status; ?>;
   <tfoot class="add_inventory">
     <tr>
       <td><select col="stock_no"></select> </td>
-      <td><input type="text" col="description" style="text-align:center;" disabled="disabled"></td>
-      <td><input type="number" col="pieces"  disabled="disabled"></td>
-      <td><input type="number" col="box"  disabled="disabled"></td>
-      <td><input type="number" col="carton"  disabled="disabled"></td>
+      <td><input type="text" col="description" style="text-align:center;" ></td>
+      <td><input type="number" col="pieces" ></td>
+      <td><input type="number" col="box" ></td>
+      <td><input type="number" col="carton" ></td>
       <td><input type="text" col="cbm" style="text-align:right;" disabled="disabled"></td>
-      <td><input type="number" col="total_cbm" min="1"  disabled="disabled"></td>
-      <td><input type="text" col="batch_code"></td>
+      <td><input type="number" col="total_cbm" min="1" disabled="disabled"></td>
+      <td><input type="number" col="batch_code"></td>
       <td><input type="text" col="exp_date" ></td>
       <td>
       	<button type="button" class="btn btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i><span class="hidden-xs"> </span> </button>
