@@ -650,6 +650,7 @@ select{
 .wh_free_roam{
     width: 100%;
     height: 535px;
+    overflow: auto;
 }
 .wh_free_roam table{
     cursor: move;
