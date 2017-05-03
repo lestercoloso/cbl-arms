@@ -7,6 +7,37 @@ function setactivelink(){
 }
 setactivelink();
 
+function setnumeric(classes){
+	$('.'+classes).bind('keypress', function(e){
+		if(e.keyCode < 48 || e.keyCode > 57){return false;}
+		
+
+	});
+
+	$('.'+classes).bind('keydown', function(e){
+		var obj = $(this); 
+		if(e.keyCode==38){
+			obj.html(parseInt(obj.html()*1)+1);
+			obj.val(parseInt(obj.val()*1)+1);
+		}
+
+		if(e.keyCode==40){
+			if(parseInt(obj.html())*1==0){
+				
+			}else if(parseInt(obj.val())*1==0){
+
+			}else{
+			obj.html(parseInt(obj.html()*1)-1);
+			obj.val(parseInt(obj.val()*1)-1);		
+			}
+
+		}
+
+	});	
+
+}
+
+
 
 toastr.options = {
   "preventDuplicates": true,
