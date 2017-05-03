@@ -76,3 +76,7 @@ CREATE TABLE `outbound_shipment_list` (
   `status` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`)
   ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+
+ALTER TABLE `item_master_file` 
+CHANGE COLUMN `share_pallet_group` `share_pallet_group` VARCHAR(255) NULL DEFAULT NULL;

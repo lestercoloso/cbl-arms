@@ -154,7 +154,7 @@ $config['packaging_details'][] = [
 								'form_class'		=> 'form-control',
 								],
 
-								['type'		 		=> 'number',
+								['type'		 		=> 'input',
 								'label'				=> 'Share Pallet Group',
 								'parent_class' 		=> 'form-group col-sm-12',
 								'id'				=> 'additional-share_pallet_group',
