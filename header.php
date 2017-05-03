@@ -4,7 +4,7 @@ error_reporting("E_ALL");
 error_reporting( E_ERROR );
 
 ini_set( 'display_errors' , 'On' );
-mysql_free_result($timezone_query);
+// mysql_free_result($timezone_query);
 // set the default timezone
 date_default_timezone_set($timezone_name);
 
