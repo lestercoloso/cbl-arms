@@ -24,7 +24,7 @@ class ItemMasterFile{
 		if($this->db->insert("item_master_file",$data)){
 			$return['status'] = 200;
 		
-			$this->db->last_query();
+			// $this->db->last_query();
 		}
 		jdie($return);
 	}

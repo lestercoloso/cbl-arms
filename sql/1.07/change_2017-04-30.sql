@@ -79,4 +79,7 @@ CREATE TABLE `outbound_shipment_list` (
 
 
 ALTER TABLE `item_master_file` 
-CHANGE COLUMN `share_pallet_group` `share_pallet_group` VARCHAR(255) NULL DEFAULT NULL;
+CHANGE COLUMN `share_pallet_group` `share_pallet_group` VARCHAR(255) NULL DEFAULT NULL,
+CHANGE COLUMN `uom_qty_1` `uom_qty_1` VARCHAR(255) NULL DEFAULT NULL,
+CHANGE COLUMN `uom_qty_2` `uom_qty_2` VARCHAR(255) NULL DEFAULT NULL,
+CHANGE COLUMN `uom_qty_3` `uom_qty_3` VARCHAR(255) NULL DEFAULT NULL;
