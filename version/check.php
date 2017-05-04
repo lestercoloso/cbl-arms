@@ -1,5 +1,7 @@
 <pre>
 <?php
+$alphas = range('A', 'Z');
+print_r($alphas);
 session_start();
 print_r($_SESSION);
 print_r($_COOKIE);

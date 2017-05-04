@@ -20,12 +20,16 @@ require_once('config/add_shipment_forms.php');
 		$warehouselinks = CreateWarehouseLinks($config['warehouse_links']);
 
 
+		$wh_location = json_encode($config['warehouse_location_option']);
+		$storage_type = json_encode($config['storage_type']);
 		$inbound_status = json_encode($config['inbound_status']);
 		$cbl_status = json_encode($config['cbl_status']);
 
 ?>
 
 <script>
+var storage_type 	= <?php echo $storage_type; ?>;
+var wh_location 	= <?php echo $wh_location; ?>;
 var inbound_status 	= <?php echo $inbound_status; ?>;
 var cbl_status 		= <?php echo $cbl_status; ?>;
 </script>
@@ -260,6 +264,8 @@ var cbl_status 		= <?php echo $cbl_status; ?>;
 		<div class="modal-footer">
 		<!-- <div class="inv_form" style="float: left;"><input type="checkbox" col="maintain" value="1"> Maintain some item Batch Code and Expiry Date</div> -->
 		
+          <button type="button" class="btn btn-default" id="receiveinventory"><i class="fa fa-circle-o-notch fa-spin hide" style=""></i> Receive</button>
+
           <button type="button" class="btn btn-default" id="saveinventory"><i class="fa fa-circle-o-notch fa-spin hide"></i> Save</button>
 
           <button type="button" class="btn btn-default" id="updateinventory"><i class="fa fa-circle-o-notch fa-spin hide"></i>Update</button>

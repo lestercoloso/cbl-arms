@@ -189,6 +189,34 @@ class Inbound{
 
 	}
 
+	public function receive($updateid=""){
+		session_start();
+		// pdie($_POST);
+		$data = $_POST['d'];
+		$data['inbound_no'] 		= substr($data['inbound_no'],2);
+		$data['booked_by_id'] 		= $_SESSION['userid'];
+		$data['status'] 			= 4;
+		$data['estimated_arrival'] 	= date('Y-m-d G:i:s', strtotime($data['estimated_arrival']));
+		$data['request_date'] 		= date('Y-m-d', strtotime($data['request_date']));
+		$data['entry_date'] 		= date('Y-m-d', strtotime($data['entry_date']));
+		
+		$return['status'] = 100;
+		if($this->db->update("inbound_shipment",$data, "id=$updateid")){
+
+			foreach ($_POST['inventory'] as $value) {
+
+				$inventoryid = $value['updateid'];
+				unset($value['updateid']);
+				$this->db->update("inbound_shipment_list",$value, "id=$inventoryid");
+			}
+
+			$return['status'] = 200;
+		}
+		jdie($return);
+
+
+	}
+
 	public function delete($inboundid=''){
 		$data['status'] = 100;
 		if($this->db->CheckResult("delete from inbound_shipment where id=$inboundid" )){
@@ -215,6 +243,7 @@ class Inbound{
 
 		
 		$sql = "select 
+				id,
 				stock_no,
 				box,
 				carton,
@@ -223,6 +252,10 @@ class Inbound{
 				pieces,
 				total_cbm,
 				batch_code,
+				wh_storage,
+				storage_type,
+				wh_status,
+				pallet_position_code,
 				DATE_FORMAT(`exp_date`,'%m/%d/%Y') as exp_date
 				from inbound_shipment_list where status=1 and inbound_id=$id";
 		$data['inventory'] = $this->db->select($sql)['data'];

@@ -162,6 +162,35 @@ function createPostData(classused){
 }
 
 
+function createPostData2(classused){
+		var array = new Object();	
+		var array2 = new Object();	
+		
+		array['error'] = '';		
+	
+	$('.'+classused+' input[type="text"], .'+classused+' input[type="number"], .'+classused+' select, .'+classused+' input[type="hidden"], .'+classused+' input[type="date"], .'+classused+' input[type="password"]').each(function( data ) {
+			$(this).removeClass('has-error');
+			var c = $(this).attr('col');
+			var v = $(this).val();
+			if(c!=undefined && c!=''){
+				array2[c] = v;
+
+				if($(this).hasClass('not_mandatory')){
+
+				}else if((!v || v=='')){
+					$(this).addClass('has-error');
+					array['error'] = 'Complete the fields';
+				}
+			}
+	});	
+	
+
+	array['data'] = array2;
+	return array;
+// 
+}
+
+
 function resetchosen(id){	
 	$('#'+id).chosen('destroy');
 	$('#'+id).val('');

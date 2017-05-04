@@ -373,3 +373,19 @@ input[col="cbm"], input[col="qty"]{
         float: left;
     width: 100%;
 }
+
+.contenteditable{
+    padding: 0 !important;
+}
+
+.contenteditable select, .contenteditable input{
+    padding: 5;
+    width: 100%;
+    margin: 0px;
+    border: none;
+    border-radius: 0px;
+    padding: 5px;
+}
+select.has-error, input.has-error{
+    border: 1px solid red;
+}

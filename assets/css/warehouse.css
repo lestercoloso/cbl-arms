@@ -663,3 +663,7 @@ select{
     font-weight: bold;
     color: white;
 }
+
+.wh_free_roam td.occupied{
+    background: red;
+}

@@ -36,6 +36,10 @@ class Database {
 		}
 	}
 
+	public function whereclean(){
+		$this->where_search = "";
+	}
+
 	// Magic method clone is empty to prevent duplication of connection
 	public function __clone() { }
 

@@ -1,5 +1,5 @@
 <?php
-$config['block']  = ['A'=>'Block A', 'B'=>'Block B', 'C'=>'Block C'];
+$config['block']  = ['A'=>'Block A', 'B'=>'Block B', 'C'=>'Block C', 'D'=>'Block D', 'E'=>'Block E'];
 $config['storage_type_select']  = ['rack'=>'Rack', 'bay'=>'Bay'];
 $config['rack_storage_type']  	= ['Drive-In'=>'Drive-In', 'Selective'=>'Selective'];
 $config['storage_type'] 	 	= $db->getconfig('storage_type');

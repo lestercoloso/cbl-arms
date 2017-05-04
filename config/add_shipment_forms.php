@@ -214,6 +214,7 @@ $config['add_shipment'][] = [
 							];		
 
 
+if($user_type==10){
 
 	$config['inventory'][] = [
 								['type' 		=> 'normal',
@@ -233,6 +234,29 @@ $config['add_shipment'][] = [
 								'col'				=> 'estimated_arrival',
 								'form_class'		=> 'form-control'],
 							];		
+
+
+}else{
+	$config['inventory'][] = [
+								['type' 		=> 'normal',
+								'label'				=> 'Inbound Ref No.',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'inventory_inbound_no',
+								'col'				=> 'inbound_no',
+								'form_class'		=> 'form-control'
+								],
+
+								['type' 			=> 'normal',
+								'label'				=> 'Estimated Date/<br>Time of Arrival',
+								'parent_class' 		=> 'form-group col-sm-12',
+								'subparent_class' 	=> 'col-sm-8',
+								'id'				=> 'inventory_estimated_arrival',
+								'col'				=> 'estimated_arrival',
+								'form_class'		=> 'form-control'],
+							];		
+
+}
 
 $config['inventory'][] = [
 								['type' 		=> 'normal',
@@ -254,7 +278,7 @@ $config['inventory'][] = [
 							];	
 
 if($user_type!=10){
-$config['inventory'][] = [
+	$config['inventory'][] = [
 								['type' 		=> 'input',
 								'label'				=> 'Shipped To',
 								'parent_class' 		=> 'form-group col-sm-12',

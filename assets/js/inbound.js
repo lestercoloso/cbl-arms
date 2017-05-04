@@ -52,7 +52,7 @@ $.post("backstage/inbound/getinboundlist/"+page, {searchdata: searchdata},functi
 			if(value.status!=5){
 				action += '<button type="button" class="btn btn-success"><i class="fa fa-pencil"></i><span class="hidden-xs"> </span> </button>';
 			}
-					
+
 			if(value.status==1){
 				action += ' <button type="button" class="btn btn-info"><i class="fa fa-envelope-o"></i><span class="hidden-xs"> </span> </button>';				
 			}
@@ -113,7 +113,7 @@ $.post("backstage/inbound/getinboundlist/"+page, {searchdata: searchdata},functi
 
 	$('#inbound-list .receive').click(function(){
 		// shipment.changestatus($(this).parent().parent().data('id'), '4');
-		shipment.edit($(this).parent().parent().attr('id'));
+		shipment.edit($(this).parent().parent().attr('id'), 'receive');
 	});
 
 	$('#inbound-list .cancel').click(function(){
@@ -237,6 +237,9 @@ var shipment = {
 			$('[col="stock_no"]').trigger("chosen:updated");
 		});
 
+		$('#receiveinventory').click( function(){
+			shipment.receive();
+		});
 		$('#updateinventory').click( function(){
 			shipment.update();
 		});
@@ -339,7 +342,7 @@ var shipment = {
     	}
     }, 
 
-    edit: function(id){
+    edit: function(id, type='edit'){
 
 	$.post("backstage/inbound/edit/"+id, {},function(data){
 		$.each(data, function( index, value ) {
@@ -355,6 +358,12 @@ var shipment = {
 		$('#postinventory').hide();
 		$('#saveinventory').hide();
 		$('#updateinventory').show();
+
+		if(type=='receive'){
+			$('#updateinventory').hide();
+			$('#receiveinventory').show();			
+		}
+
 
 	}).fail(function(){
 	    toastr["error"]('Error occured!<br>Please try again.');		
@@ -408,6 +417,50 @@ var shipment = {
 				toastr["error"]('Error.');
 				$('#updateinventory').removeClass('disabled');
 				$('#updateinventory i').addClass('hide');
+			});
+    	}
+    },
+    cleanerrors: function(){
+    		$('#inventory-list tbody tr td input, #inventory-list tbody tr td select').removeClass('has-error');
+    },
+    receive: function(){
+		
+		var inv = createPostData('inv_form');
+		var error = '';
+		var listinv = [];
+		shipment.cleanerrors();
+		$('#inventory-list tbody tr').each(function(){
+			var list = createPostData2($(this).attr('class'));
+			listinv.push(list['data']);
+			if(list['error']!=""){
+				error = list['error'];
+			}
+		});
+
+		if(inventory.length==0){
+			toastr["error"]('Complete the fields');
+			$('.inventory_table_container').addClass('has-error-container');
+		}else if(inv['error']!="" || error!=''){
+			$('.inventory_table_container').removeClass('has-error-container');
+			toastr["error"]('Complete the fields');
+		}else{
+
+			$('#receiveinventory').addClass('disabled');
+			$('#receiveinventory i').removeClass('hide');
+    		$.post("backstage/inbound/receive/"+updateid, {d:inv['data'], inventory:listinv},function(data){
+    			if(data.status==200){
+						toastr["success"]('Successfully Updated.');
+						$('#inventory_modal').modal('hide');
+						$('#receiveinventory').removeClass('disabled');
+						$('#receiveinventory i').addClass('hide');
+						getInbound();
+				}else{
+					toastr["error"]('Network error!<br> Please try again.');	
+				}
+    		}).fail(function(){
+				toastr["error"]('Error.');
+				$('#receiveinventory').removeClass('disabled');
+				$('#receiveinventory i').addClass('hide');
 			});
     	}
     },
@@ -523,10 +576,12 @@ var shipment = {
 		// shipment.getitemmasterfile();
 		$('#inventory_modal').modal();
 		$('#updateinventory').hide();
+		$('#receiveinventory').hide();
 		$('#backinventory').hide();
 		$('#clearinventory').show();
 		$('#postinventory').show();
 		$('#saveinventory').show();
+		$('#receiveinventory').hide();
 	},
 	constructInventory: function(){
 		var content = '';
@@ -540,7 +595,7 @@ var shipment = {
    		// }
 
 		$.each(inventory, function( index, value ) {
-			content +='<tr data-key="'+index+'">';
+			content +='<tr data-key="'+index+'" class="inbound'+index+'">';
 				content +='<td>'+value.stock_no+'</td>';
 				content +='<td>'+value.description+'</td>';
 				content +='<td class="numeric">'+value.pieces+'</td>';
@@ -554,10 +609,24 @@ var shipment = {
 				if(user_type==10){
 					content +='<td>'+action+'</td>';
 				}else{
-					content +='<td> </td>';
-					content +='<td> </td>';
-					content +='<td> </td>';
-					content +='<td> </td>';
+
+					if(value.wh_status!=null){
+						var wh_status = value.wh_status;
+					}else{
+						var wh_status = 'can accommodate';
+					}
+
+					if(value.pallet_position_code!=null){
+						var pallet_position_code = value.pallet_position_code;
+					}else{
+						var pallet_position_code = '';
+					}
+
+					content +='<td class="hide"><input type="text" col="updateid" value="'+value.id+'"></td>';
+					content +='<td class="contenteditable"><input type="text" col="wh_status" value="'+wh_status+'"></td>';
+					content +='<td class="contenteditable">'+CreateSelectOption(value.wh_storage,wh_location, 'wh_storage')+'</td>';
+					content +='<td class="contenteditable">'+CreateSelectOption(value.storage_type,storage_type, 'storage_type')+'</td>';
+					content +='<td class="contenteditable"><input type="text" col="pallet_position_code" value="'+pallet_position_code+'"></td>';
 				}
 
 

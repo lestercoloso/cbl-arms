@@ -5,6 +5,8 @@ var rack_type 				= 'drive-in';
 var pallet_position 		= [];
 var pallet_position_type 	= [];
 var storage = [];
+var pallets = [];
+
 
 function addStorage(){
 	$( "#add_storage" ).modal();
@@ -642,6 +644,7 @@ function selectstorage(){
 	if(s!=''){
 		$.post("backstage/warehouse/selectstorage/"+s+"/"+st, {},function(data){
 			storage = data.data;
+			pallets = data.pallets;
 			constructnewstorage();
 		});		
 	}else{
@@ -675,7 +678,7 @@ function constructnewstorage(){
 			  for (i = v.levels; i >= 1; i--) {
 				  content += '<tr>';
 					for (j = 1; j <= v.sections; j++) {
-				  		content += '<td>'+abc[l-1]+pad(j, 2, '0')+pad(i, 2, '0')+'</td>'; 	
+				  		content += '<td class="'+pallets[abc[l-1]+pad(j, 2, '0')+pad(i, 2, '0')]+'">'+abc[l-1]+pad(j, 2, '0')+pad(i, 2, '0')+'</td>'; 	
 				  	}
 				  content += '</tr>';
 				}
