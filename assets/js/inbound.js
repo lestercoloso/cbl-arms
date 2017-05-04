@@ -356,6 +356,7 @@ var shipment = {
 
 		$('#clearinventory').hide();
 		$('#postinventory').hide();
+		$('#receiveinventory').hide();
 		$('#saveinventory').hide();
 		$('#updateinventory').show();
 

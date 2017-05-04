@@ -98,7 +98,7 @@ class Warehouse{
 		$sql2 = "select pallet_position_code, exp_date from inbound_shipment_list $where and inbound_id IN (select id from inbound_shipment where status=4)";
 		$result2 = $this->db->select($sql2);
 		$pallets = [];
-
+		
 		foreach ($result2['data'] as $value) {
 			$pallets[strtoupper($value['pallet_position_code'])] = 'occupied';
 		}
